@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            height: 2px;
+            background-color: #b20112;
+            transition: all 0.3s ease;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ebf5ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#5c403d",
+                        "surface-bright": "#fff8f7",
+                        "primary-fixed": "#ffdad6",
+                        "on-background": "#281716",
+                        "secondary-container": "#ffbe39",
+                        "surface": "#fff8f7",
+                        "on-surface": "#281716",
+                        "on-secondary-container": "#6f4e00",
+                        "on-primary-fixed": "#410002",
+                        "outline-variant": "#e5bdb9",
+                        "background": "#fff8f7",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "inverse-surface": "#3f2c2a",
+                        "tertiary-container": "#0077a6",
+                        "on-tertiary-fixed": "#001e2e",
+                        "secondary": "#7c5800",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#005d83",
+                        "surface-tint": "#bd1119",
+                        "surface-dim": "#f2d3cf",
+                        "primary-container": "#d62828",
+                        "surface-container-high": "#ffe2de",
+                        "on-secondary-fixed": "#271900",
+                        "outline": "#906f6b",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#ffedea",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#fbdbd8",
+                        "primary": "#b20112",
+                        "surface-variant": "#fbdbd8",
+                        "inverse-primary": "#ffb4ab",
+                        "secondary-fixed": "#ffdea8",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-container-low": "#fff0ee",
+                        "tertiary-fixed": "#c7e7ff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "error": "#ba1a1a",
+                        "surface-container": "#ffe9e6",
+                        "on-primary-container": "#fff1ef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "data-table": ["Inter"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "data-table": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-regular": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-light": ["14px", {"lineHeight": "1.5", "fontWeight": "300"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-regular text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6">
+<h1 class="text-lg font-black text-red-500 mb-8">Rahimo Admin</h1>
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-700">
+<img alt="Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDCoknbUAgcYGIhjZKW02FTKJEut1fHmkrS7AD8mTdjH8RLMyq_My2PlhL30j-XSdpE2BuWYgaiam0KX_Ud6bYxlqgnFiaHmg_FJGscUuufB4KThCcTeeqCp8ju07Bu-urNj8M9heAinvewJUKg8tKF-Cecf8c_o10DXjXPCbZFraqqHKLTXr-tC-VWzp5mf2tZk4mjs41VRZZkez12o7cXe0np33KfyeaCl31d8xzONj58Sno3wdmc-XZhg65zbWnxZt3TnlBELuL"/>
+</div>
+<div>
+<p class="font-plus-jakarta-sans text-sm font-semibold text-white">Rahimo Admin</p>
+<p class="font-plus-jakarta-sans text-[11px] text-slate-400">Superviseur Général</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-plus-jakarta-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-plus-jakarta-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span>
+                Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-plus-jakarta-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-plus-jakarta-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+                Colis
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-plus-jakarta-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+                Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-plus-jakarta-sans text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+                Comptabilité
+            </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-6 h-16 bg-red-700 dark:bg-red-900 text-white sticky top-0 z-40 border-b border-red-800 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<h2 class="font-plus-jakarta-sans font-bold text-lg">Gare de Ouagadougou</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">schedule</span></button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">settings</span></button>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white/20 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi2I0I_bJi856nyOp5JMG16SB3c4X7ZdxVyODuTUTuV5UbGiuaNANsWlfeEJcx-VlKhBNjcqEDH1L42qtzm8axEHJJjuTKfcPsI4WXJNa-mlnq0WPqMOm11Nua16JU5VOG4ysEEBx-ZCouUfmu3jbhBx7ArSrff4sZSrSUNFHq0r4sBwvl3l13T-Z83pSTLs-fvjl6iiiRHG7nySfhpNrymnFYKAG6WOJt-8FnP9hy6J_aZoPmKLr7_-QVNxTQPHcfHq7N7LImHaSy"/>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-[1280px] mx-auto">
+<!-- Breadcrumbs & Actions -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<div class="flex items-center gap-2 text-outline text-label-caps mb-2">
+<span>FLOTTE</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-bold">DÉTAIL VÉHICULE</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-background flex items-center gap-4">
+                        Bus BF-2345
+                        <span class="px-3 py-1 bg-green-100 text-green-700 text-sm font-bold rounded-full border border-green-200">En Service</span>
+</h1>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary hover:bg-primary-container text-on-primary px-6 py-3 rounded-lg flex items-center gap-2 font-semibold shadow-md transition-all active:scale-95" onclick="document.getElementById('failure-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined">report_problem</span>
+                        Déclarer une panne
+                    </button>
+</div>
+</div>
+<!-- Urgent Alerts -->
+<div class="bg-orange-50 border-l-4 border-orange-500 p-4 mb-8 rounded-r-xl flex items-start gap-4 shadow-sm animate-pulse">
+<span class="material-symbols-outlined text-orange-600 mt-1">warning</span>
+<div>
+<p class="font-bold text-orange-900">Alerte Maintenance</p>
+<p class="text-orange-800 text-body-light">La visite technique de ce véhicule expire dans <span class="font-bold underline">4 jours</span> (15 Mai 2024). Veuillez planifier le renouvellement immédiatement pour éviter toute immobilisation.</p>
+</div>
+</div>
+<!-- Dynamic Tabs Container -->
+<div class="bg-white rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<div class="flex border-b border-outline-variant px-6 relative">
+<button class="px-6 py-4 font-semibold text-primary border-b-2 border-primary transition-all flex items-center gap-2" onclick="switchTab('tech-info', this)">
+<span class="material-symbols-outlined">engineering</span>
+                        Infos techniques
+                    </button>
+<button class="px-6 py-4 font-semibold text-outline hover:text-primary transition-all flex items-center gap-2" onclick="switchTab('gps-history', this)">
+<span class="material-symbols-outlined">map</span>
+                        Historique GPS
+                    </button>
+<button class="px-6 py-4 font-semibold text-outline hover:text-primary transition-all flex items-center gap-2" onclick="switchTab('maintenance', this)">
+<span class="material-symbols-outlined">calendar_month</span>
+                        Calendrier Maintenance
+                    </button>
+</div>
+<div class="p-8">
+<!-- Tab: Technical Info -->
+<div class="tab-content grid grid-cols-1 md:grid-cols-3 gap-8" id="tech-info">
+<div class="md:col-span-1 space-y-6">
+<div class="rounded-xl overflow-hidden border border-outline-variant aspect-video">
+<img class="w-full h-full object-cover" data-alt="A high-resolution side view of a modern red and white long-distance luxury coach bus parked in a clean, industrial garage setting. The lighting is crisp and professional, highlighting the aerodynamic curves and glossy finish. The overall aesthetic is corporate and high-trust, with a focus on reliability and advanced logistics. Deep red accents dominate the vehicle's livery against a bright, neutral environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFdxxgdNWuVnzLc02GnDE6fUAW0xXxggLWai4FDSq2mNRmb806jmovHStBp7bHmOOVjXxSYvxV0t5VGbXF68lzgCZwcx5PttzvdXg1iIqSCdtVXBNHbeBQVF1_AmODFs3QZJBEDRt4XEhGPGaTYxEvr2EZFQ3BQoOkyB-qhlq7zT0_AYniPU_qykpEObUG7FTP6bJ_tYd_R72V-hbwUleXVIfK2kvIF7KvWFOOzRW0YZd6ibLCB2LmUHEG03wtrtXdMbsJJ67Dr9If"/>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl space-y-4">
+<h3 class="font-h3 text-lg text-primary">Spécifications Clés</h3>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-caps text-outline">MARQUE / MODÈLE</p>
+<p class="font-bold">Scania Touring HD</p>
+</div>
+<div>
+<p class="text-label-caps text-outline">ANNÉE</p>
+<p class="font-bold">2022</p>
+</div>
+<div>
+<p class="text-label-caps text-outline">PLACES</p>
+<p class="font-bold">65 Sièges</p>
+</div>
+<div>
+<p class="text-label-caps text-outline">CARBURANT</p>
+<p class="font-bold">Diesel (Euro 6)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="p-6 border border-outline-variant rounded-xl hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-red-50 text-red-600 rounded-lg group-hover:bg-red-600 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<span class="text-label-caps text-outline">Kilométrage total</span>
+</div>
+<p class="text-3xl font-black text-on-background">142,560 km</p>
+<div class="mt-4 w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-red-600 h-full w-[75%]"></div>
+</div>
+<p class="mt-2 text-xs text-outline">75% avant la prochaine révision majeure</p>
+</div>
+<div class="p-6 border border-outline-variant rounded-xl hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-yellow-50 text-yellow-600 rounded-lg group-hover:bg-yellow-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">local_gas_station</span>
+</div>
+<span class="text-label-caps text-outline">Consommation Moy.</span>
+</div>
+<p class="text-3xl font-black text-on-background">28.4 L/100</p>
+<p class="mt-2 text-xs text-green-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+                                        -2.1% par rapport au mois dernier
+                                    </p>
+</div>
+</div>
+<div class="mt-8 bg-white p-6 border border-outline-variant rounded-xl">
+<h3 class="font-h3 text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">description</span>
+                                    Documents du véhicule
+                                </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">picture_as_pdf</span>
+<div>
+<p class="font-semibold text-sm">Carte Grise - BF-2345</p>
+<p class="text-[11px] text-outline">Mis à jour le 12/01/2024</p>
+</div>
+</div>
+<button class="text-primary hover:underline text-sm font-bold">Consulter</button>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface rounded-lg border-2 border-red-100">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-red-600">verified_user</span>
+<div>
+<p class="font-semibold text-sm">Assurance AXA Transport</p>
+<p class="text-[11px] text-red-600 font-medium">Expire dans 12 jours</p>
+</div>
+</div>
+<button class="bg-primary text-white px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest">Renouveler</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tab: GPS History -->
+<div class="tab-content hidden space-y-6" id="gps-history">
+<div class="flex items-center justify-between">
+<h3 class="font-h3 text-lg">Dernier trajet : Ouagadougou ↔ Bobo-Dioulasso</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">Date: 10 Mai 2024</span>
+<span class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">Conducteur: Moussa Diallo</span>
+</div>
+</div>
+<div class="w-full h-[400px] rounded-2xl bg-slate-200 border border-outline-variant overflow-hidden relative">
+<!-- Map Placeholder -->
+<img class="w-full h-full object-cover" data-alt="A stylized digital map interface showing a GPS tracking route across a West African landscape between two major cities. The map uses a sophisticated dark-mode aesthetic with neon glowing lines representing the path of the bus. High-contrast labels and iconography indicate waypoints and stops. The lighting is focused on the digital elements, creating a tech-centric, high-precision mood that emphasizes safety and monitoring." data-location="Burkina Faso" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS08pdMcRTFvnb44e3wX6IYaNmnGSUB5T9YiC3NhSJVitF1BEGiIJrHwxMqy4_AONtLIoEtO7xZOMOipU8w3Edu7EUFjgTBOYJlYMCh5eDGk6wSVuEpWJ0C5EQ7CnSTaRIo8hxcvOR3HuHv_SQSiU1nb7kWIBtrZUKnyAj5-ZLCLZ9T9MDQNfH6TcGY62kaE5wp5o0xk87wa9fq2RgPX3aVhoxDSBygg37pRcY-57mSUicRndb6u6cmhl9RiA7--HukTa0DC_Jhgyv"/>
+<div class="absolute inset-0 bg-black/10"></div>
+<div class="absolute bottom-6 left-6 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 w-64">
+<div class="space-y-3">
+<div class="flex justify-between items-center text-xs">
+<span class="text-outline">VITESSE ACTUELLE</span>
+<span class="font-bold text-primary">0 km/h</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-outline">ARRÊTÉ DEPUIS</span>
+<span class="font-bold">45 min</span>
+</div>
+<div class="pt-2 border-t border-slate-200">
+<p class="text-[10px] text-outline mb-1 uppercase font-bold">Localisation Précise</p>
+<p class="text-xs font-medium truncate">Gare Centrale Rahimo, Ouagadougou</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="p-4 bg-surface rounded-xl border border-outline-variant">
+<p class="text-label-caps text-outline mb-1">DISTANCE</p>
+<p class="text-xl font-bold">365 km</p>
+</div>
+<div class="p-4 bg-surface rounded-xl border border-outline-variant">
+<p class="text-label-caps text-outline mb-1">DURÉE TOTALE</p>
+<p class="text-xl font-bold">5h 15m</p>
+</div>
+<div class="p-4 bg-surface rounded-xl border border-outline-variant">
+<p class="text-label-caps text-outline mb-1">VITESSE MAX</p>
+<p class="text-xl font-bold text-red-600">115 km/h</p>
+</div>
+<div class="p-4 bg-surface rounded-xl border border-outline-variant">
+<p class="text-label-caps text-outline mb-1">ALERTES</p>
+<p class="text-xl font-bold text-orange-500">2 Freinages Brusques</p>
+</div>
+</div>
+</div>
+<!-- Tab: Maintenance Calendar -->
+<div class="tab-content hidden" id="maintenance">
+<div class="flex flex-col md:flex-row gap-8">
+<!-- Upcoming/History List -->
+<div class="md:w-1/3 space-y-6">
+<h3 class="font-h3 text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">event_note</span>
+                                    Planification
+                                </h3>
+<div class="space-y-4">
+<div class="p-4 border-l-4 border-red-600 bg-red-50 rounded-r-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded">URGENT</span>
+<span class="text-xs text-outline">15 Mai 2024</span>
+</div>
+<p class="font-bold text-on-background">Visite Technique</p>
+<p class="text-xs text-on-surface-variant mt-1">Centre de contrôle CT2, Bobo.</p>
+</div>
+<div class="p-4 border-l-4 border-primary-container bg-surface-container-low rounded-r-xl">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-primary bg-primary-fixed px-2 py-0.5 rounded">RÉVISION</span>
+<span class="text-xs text-outline">28 Mai 2024</span>
+</div>
+<p class="font-bold text-on-background">Vidange &amp; Filtres</p>
+<p class="text-xs text-on-surface-variant mt-1">Estimé à 145,000 km.</p>
+</div>
+<div class="p-4 border-l-4 border-slate-300 bg-slate-50 rounded-r-xl opacity-60">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-slate-600 bg-slate-200 px-2 py-0.5 rounded">TERMINÉ</span>
+<span class="text-xs text-outline">05 Avr 2024</span>
+</div>
+<p class="font-bold text-on-background">Changement Pneumatiques</p>
+<p class="text-xs text-on-surface-variant mt-1">4 pneus Michelin X Coach.</p>
+</div>
+</div>
+</div>
+<!-- Calendar Visual -->
+<div class="md:w-2/3">
+<div class="bg-surface rounded-xl border border-outline-variant p-6">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-bold text-lg">Mai 2024</h4>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-2 hover:bg-slate-100 rounded-full transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center mb-2">
+<span class="text-[10px] font-bold text-outline">LUN</span>
+<span class="text-[10px] font-bold text-outline">MAR</span>
+<span class="text-[10px] font-bold text-outline">MER</span>
+<span class="text-[10px] font-bold text-outline">JEU</span>
+<span class="text-[10px] font-bold text-outline">VEN</span>
+<span class="text-[10px] font-bold text-outline">SAM</span>
+<span class="text-[10px] font-bold text-outline">DIM</span>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Mock Days -->
+<div class="aspect-square flex items-center justify-center text-slate-300">29</div>
+<div class="aspect-square flex items-center justify-center text-slate-300">30</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">1</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">2</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">3</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">4</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">5</div>
+<!-- Week 2 -->
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">6</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">7</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">8</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">9</div>
+<div class="aspect-square flex items-center justify-center bg-red-600 text-white font-bold rounded-lg cursor-pointer ring-4 ring-red-100">10</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">11</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">12</div>
+<!-- Week 3 with Event -->
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">13</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">14</div>
+<div class="aspect-square flex flex-col items-center justify-center bg-orange-100 text-orange-700 font-bold rounded-lg cursor-pointer relative">
+                                            15
+                                            <span class="absolute bottom-1 w-1 h-1 bg-orange-700 rounded-full"></span>
+</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">16</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">17</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">18</div>
+<div class="aspect-square flex items-center justify-center hover:bg-red-50 rounded-lg cursor-pointer">19</div>
+</div>
+<div class="mt-8 flex items-center gap-6">
+<div class="flex items-center gap-2 text-xs text-outline">
+<span class="w-3 h-3 bg-red-600 rounded-sm"></span> Aujourd'hui
+                                        </div>
+<div class="flex items-center gap-2 text-xs text-outline">
+<span class="w-3 h-3 bg-orange-400 rounded-sm"></span> Alerte Expiration
+                                        </div>
+<div class="flex items-center gap-2 text-xs text-outline">
+<span class="w-3 h-3 bg-primary-container rounded-sm"></span> Planifié
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full bg-slate-900 border-t-4 border-red-600 mt-12 py-16 px-8">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="font-plus-jakarta-sans text-sm leading-relaxed text-slate-400">Expert en transport interurbain et logistique à travers le Burkina Faso depuis plus de 20 ans.</p>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6 text-label-caps">LIENS UTILES</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block text-sm" href="#">Gestion Flotte</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block text-sm" href="#">Planning Conducteurs</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block text-sm" href="#">Maintenance Préventive</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6 text-label-caps">SERVICES</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block text-sm" href="#">Messagerie Express</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block text-sm" href="#">Location Bus</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block text-sm" href="#">Support 24/7</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6 text-label-caps">APPLICATIONS</h4>
+<div class="flex flex-col gap-3">
+<button class="bg-slate-800 p-3 rounded-lg flex items-center gap-3 hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-white">stay_primary_portrait</span>
+<div class="text-left">
+<p class="text-[10px] text-slate-400 uppercase leading-none">Disponible sur</p>
+<p class="text-white font-bold leading-none">Play Store</p>
+</div>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1280px] mx-auto mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+<p class="font-plus-jakarta-sans text-sm text-slate-500">© 2024 Rahimo Transport. Tous droits réservés.</p>
+<div class="flex gap-4">
+<span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer transition-colors"><span class="material-symbols-outlined text-sm">share</span></span>
+<span class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white cursor-pointer transition-colors"><span class="material-symbols-outlined text-sm">rss_feed</span></span>
+</div>
+</div>
+</footer>
+</main>
+<!-- Modal: Declare Failure -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center px-4" id="failure-modal">
+<div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="document.getElementById('failure-modal').classList.add('hidden')"></div>
+<div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
+<div class="bg-red-700 p-6 text-white flex justify-between items-center">
+<h3 class="font-h3 text-xl">Signaler une Panne</h3>
+<button class="hover:bg-red-600 rounded-full p-1" onclick="document.getElementById('failure-modal').classList.add('hidden')"><span class="material-symbols-outlined">close</span></button>
+</div>
+<form class="p-8 space-y-6">
+<div>
+<label class="block font-plus-jakarta-sans font-semibold text-sm mb-2 text-on-surface">Type d'incident</label>
+<select class="w-full border-outline-variant rounded-lg focus:ring-primary focus:border-primary">
+<option>Moteur / Transmission</option>
+<option>Système de Freinage</option>
+<option>Électrique / Éclairage</option>
+<option>Pneumatiques</option>
+<option>Climatisation</option>
+<option>Autre (préciser)</option>
+</select>
+</div>
+<div>
+<label class="block font-plus-jakarta-sans font-semibold text-sm mb-2 text-on-surface">Localisation actuelle</label>
+<input class="w-full border-outline-variant rounded-lg focus:ring-primary focus:border-primary" placeholder="Ex: 50km de Boromo vers Ouaga" type="text"/>
+</div>
+<div>
+<label class="block font-plus-jakarta-sans font-semibold text-sm mb-2 text-on-surface">Description détaillée</label>
+<textarea class="w-full border-outline-variant rounded-lg focus:ring-primary focus:border-primary" placeholder="Décrivez les symptômes observés..." rows="4"></textarea>
+</div>
+<div class="flex gap-4 pt-4">
+<button class="flex-1 px-6 py-3 border border-outline-variant rounded-lg font-bold text-outline hover:bg-slate-50 transition-colors" onclick="document.getElementById('failure-modal').classList.add('hidden')" type="button">Annuler</button>
+<button class="flex-1 px-6 py-3 bg-primary text-white rounded-lg font-bold shadow-lg hover:bg-red-800 transition-all" type="submit">Envoyer l'Alerte</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+        function switchTab(tabId, el) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            // Show target content
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            // Reset button styles
+            const buttons = el.parentElement.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.classList.remove('text-primary', 'border-b-2', 'border-primary');
+                btn.classList.add('text-outline');
+            });
+            
+            // Set active button style
+            el.classList.add('text-primary', 'border-b-2', 'border-primary');
+            el.classList.remove('text-outline');
+        }
+
+        // Simple scale effect for interactive elements
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

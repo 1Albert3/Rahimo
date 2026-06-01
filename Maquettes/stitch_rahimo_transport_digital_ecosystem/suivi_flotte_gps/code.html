@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Admin - Suivi GPS Temps Réel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#fff0ee",
+                    "on-secondary-fixed": "#271900",
+                    "outline": "#906f6b",
+                    "inverse-primary": "#ffb4ab",
+                    "on-tertiary-fixed": "#001e2e",
+                    "surface-dim": "#f2d3cf",
+                    "primary": "#b20112",
+                    "on-primary-fixed-variant": "#93000d",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#005d83",
+                    "on-surface-variant": "#5c403d",
+                    "on-surface": "#281716",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "primary-fixed": "#ffdad6",
+                    "on-primary-container": "#fff1ef",
+                    "primary-container": "#d62828",
+                    "background": "#fff8f7",
+                    "surface-container-highest": "#fbdbd8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#004c6c",
+                    "on-secondary-container": "#6f4e00",
+                    "outline-variant": "#e5bdb9",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#c7e7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#ffe2de",
+                    "surface-container": "#ffe9e6",
+                    "on-secondary-fixed-variant": "#5e4200",
+                    "inverse-on-surface": "#ffedea",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#fbdbd8",
+                    "secondary": "#7c5800",
+                    "on-tertiary-container": "#ebf5ff",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#bd1119",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#83cfff",
+                    "tertiary-container": "#0077a6",
+                    "surface-bright": "#fff8f7",
+                    "secondary-fixed-dim": "#fcbb36",
+                    "secondary-fixed": "#ffdea8",
+                    "secondary-container": "#ffbe39",
+                    "on-primary-fixed": "#410002",
+                    "inverse-surface": "#3f2c2a",
+                    "on-background": "#281716",
+                    "surface": "#fff8f7"
+            },
+            "fontFamily": {
+                    "body-light": ["Plus Jakarta Sans"],
+                    "h3": ["Plus Jakarta Sans"],
+                    "data-table": ["Inter"],
+                    "body-regular": ["Plus Jakarta Sans"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Plus Jakarta Sans"],
+                    "h1": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "body-light": ["14px", {"lineHeight": "1.5", "fontWeight": "300"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "data-table": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-regular": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .marker-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        .speed-alert-hover:hover .alert-popup {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-regular text-on-surface overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6 mb-8">
+<h1 class="text-lg font-black text-red-500">Rahimo Admin</h1>
+<p class="text-xs text-slate-400 font-medium">Superviseur Général</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Tableau de bord</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Billetterie</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="package">package</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Colis</span>
+</a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 shadow-lg" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="directions_bus">directions_bus</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Flotte</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Personnel</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Comptabilité</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<div class="flex items-center p-3 bg-slate-800/50 rounded-xl">
+<img alt="Admin Profile" class="w-10 h-10 rounded-full border-2 border-red-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFhwBERF-1YC3AL5vMmz92e1uCz5nyTkBiR3zd2Ix-1kzmt2pOM-x9LuzOyUyJVbwFGU-TX7PVMeHzzZrmRyeactmIa-KWY38jzIoxRcNVAaEAbEIwzv6nXNd5blOaNRzUi8TUcHqkHVvSs19ISV_PnDv2lpNxfHaBlF5tL8_e-REC9t8THaoF23-1s7HtfjRbRLgNnNjK6oGmTWB5K2BOo-d_Ac0zkIsxnmH5BLJaP5ZTSHSik1021ro9TZxHme80vlSwlrCPAn-V"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-sm font-bold text-white truncate">Admin Rahimo</p>
+<p class="text-xs text-slate-400 truncate">Connecté</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col h-screen relative">
+<!-- Header -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-red-700 dark:bg-red-900 text-white shadow-sm z-40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white" data-icon="location_on">location_on</span>
+<h2 class="font-plus-jakarta-sans font-bold text-lg">Gare de Ouagadougou • Monitoring Temps Réel</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-red-800/50 px-3 py-1.5 rounded-full text-xs font-semibold">
+<span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                    SYSTÈME OPÉRATIONNEL
+                </div>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- Dynamic Map Section -->
+<div class="flex-1 relative bg-slate-100 overflow-hidden">
+<!-- Simulated Map Image -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-80" data-alt="A high-resolution satellite-style map of West Africa focused on Burkina Faso with stylized geometric data overlays. The map features a minimalist palette of soft earth tones and muted greens, accented by glowing white lines representing major highways. Digital UI elements like coordinate grids and soft ambient glows create a high-tech logistics command center aesthetic. The lighting is clean and professional, characteristic of a premium fleet management dashboard." data-location="Burkina Faso" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBwAeRZcPRX4VpfTcd99gjEEpkweTlhQU_0XKT5JU_Tk1WZk5atnUkvPCmMz2KPUWb6es4U-CV9ACH-6AvwI0K7Fcg3w7bADDjBlRVOJzzAed_rHiOBuFD8uVYpbPuXTUsX6_48hp9fhwLhBv6kbZ4K9gkzs6xtMAyAQwLGV_mNAmOKjUqBMLWCx-_ZqVn9TtKtqWMrwezoPd_lwQAFJ2UoglA90PGrK-bCm0a0Dbx2aptQV1ni7j03ppYWja1SCQphc7IpvKa4rfa"/>
+</div>
+<!-- Map Overlay Controls -->
+<div class="absolute top-6 left-6 z-20 space-y-2">
+<div class="bg-white/90 backdrop-blur shadow-lg rounded-xl p-2 flex flex-col gap-1 border border-outline-variant">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-all"><span class="material-symbols-outlined" data-icon="add">add</span></button>
+<div class="h-px bg-outline-variant mx-2"></div>
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-all"><span class="material-symbols-outlined" data-icon="remove">remove</span></button>
+</div>
+<div class="bg-white/90 backdrop-blur shadow-lg rounded-xl p-2 flex flex-col gap-1 border border-outline-variant">
+<button class="p-2 hover:bg-surface-container-high rounded-lg text-primary transition-all"><span class="material-symbols-outlined" data-icon="layers">layers</span></button>
+</div>
+</div>
+<!-- Simulated Markers -->
+<!-- Ouagadougou Marker -->
+<div class="absolute top-1/2 left-1/3 z-10 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="bg-white px-3 py-1 rounded-full shadow-lg border-2 border-primary text-[10px] font-bold text-primary mb-1">OUAGADOUGOU</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<!-- Bobo-Dioulasso Marker -->
+<div class="absolute bottom-1/4 left-1/4 z-10 flex flex-col items-center">
+<div class="bg-white px-3 py-1 rounded-full shadow-lg border-2 border-primary text-[10px] font-bold text-primary mb-1">BOBO-DIOULASSO</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<!-- Bus Markers (Active) -->
+<!-- Bus Green (OK) -->
+<div class="absolute top-[45%] left-[40%] z-20 cursor-pointer group">
+<div class="bg-green-600 p-2 rounded-full shadow-xl marker-pulse border-2 border-white">
+<span class="material-symbols-outlined text-white text-sm" data-icon="directions_bus" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+</div>
+<div class="hidden group-hover:block absolute top-12 left-1/2 -translate-x-1/2 bg-white p-3 rounded-xl shadow-2xl border border-slate-200 min-w-[200px]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-slate-800">CAR #7742-BF</span>
+<span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">NORMAL</span>
+</div>
+<p class="text-xs text-slate-500 mb-1">Chauffeur: Idrissa Traoré</p>
+<p class="text-xs font-semibold text-slate-700">Vitesse: 82 km/h</p>
+</div>
+</div>
+<!-- Bus Orange (Late) -->
+<div class="absolute top-[30%] left-[55%] z-20 cursor-pointer group">
+<div class="bg-amber-500 p-2 rounded-full shadow-xl border-2 border-white">
+<span class="material-symbols-outlined text-white text-sm" data-icon="directions_bus" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+</div>
+<div class="hidden group-hover:block absolute top-12 left-1/2 -translate-x-1/2 bg-white p-3 rounded-xl shadow-2xl border border-slate-200 min-w-[200px]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-slate-800">CAR #1029-BF</span>
+<span class="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">RETARD (+20m)</span>
+</div>
+<p class="text-xs text-slate-500 mb-1">Chauffeur: Moussa Sanou</p>
+<p class="text-xs font-semibold text-slate-700">Vitesse: 65 km/h</p>
+</div>
+</div>
+<!-- Bus Red (Alert - Speeding) -->
+<div class="absolute top-[60%] left-[28%] z-30 cursor-pointer speed-alert-hover">
+<div class="bg-red-600 p-2 rounded-full shadow-xl border-2 border-white animate-bounce">
+<span class="material-symbols-outlined text-white text-sm" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<!-- Alert Popup for Speeding -->
+<div class="alert-popup hidden absolute -top-32 left-1/2 -translate-x-1/2 bg-red-50 p-4 rounded-xl shadow-2xl border-2 border-red-500 min-w-[240px] z-50">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-red-600 text-xl" data-icon="bolt">bolt</span>
+<h4 class="text-red-700 font-bold text-sm">ALERTE VITESSE</h4>
+</div>
+<div class="space-y-1">
+<p class="text-xs font-bold text-slate-900">Bus: #9931-BF (Ouaga - Bobo)</p>
+<p class="text-lg font-black text-red-600">114 km/h <span class="text-xs font-normal text-slate-500">/ Limit 90</span></p>
+<p class="text-[10px] text-slate-600 italic">Chauffeur: Alassane Barro</p>
+</div>
+<div class="mt-3 flex gap-2">
+<button class="flex-1 py-1.5 bg-red-600 text-white text-[10px] font-bold rounded-lg uppercase tracking-wider">Contacter</button>
+<button class="flex-1 py-1.5 bg-white border border-red-200 text-red-600 text-[10px] font-bold rounded-lg uppercase tracking-wider">Log Alert</button>
+</div>
+</div>
+</div>
+<!-- Right Fleet Panel -->
+<div class="absolute top-6 right-6 bottom-6 w-80 bg-white/95 backdrop-blur shadow-2xl rounded-2xl border border-slate-200 flex flex-col overflow-hidden z-40">
+<div class="p-5 border-b border-slate-100">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-h3 text-lg text-slate-900">Flotte Active</h3>
+<span class="bg-red-50 text-red-700 text-xs font-bold px-3 py-1 rounded-full">12 En route</span>
+</div>
+<div class="relative">
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-red-500/20" placeholder="Rechercher un bus, chauffeur..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-sm" data-icon="search">search</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-2">
+<!-- Bus Card 1 -->
+<div class="p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100 cursor-pointer group">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined" data-icon="directions_bus" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">#7742-BF</h4>
+<p class="text-[11px] text-slate-500 font-medium">I. Traoré • <span class="text-green-600">En règle</span></p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900">82 km/h</p>
+<p class="text-[10px] text-slate-400">Arrivée 14:30</p>
+</div>
+</div>
+</div>
+<!-- Bus Card 2 (Alert) -->
+<div class="p-3 bg-red-50 rounded-xl border-2 border-red-200 cursor-pointer animate-pulse-slow">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="speed" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-red-900">#9931-BF</h4>
+<p class="text-[11px] text-red-700 font-bold uppercase tracking-tighter">EXCÈS DE VITESSE</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-black text-red-600">114 km/h</p>
+<p class="text-[10px] text-red-500">Borne 242</p>
+</div>
+</div>
+</div>
+<!-- Bus Card 3 -->
+<div class="p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100 cursor-pointer group">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined" data-icon="directions_bus" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">#1029-BF</h4>
+<p class="text-[11px] text-slate-500 font-medium">M. Sanou • <span class="text-amber-600">Retard</span></p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900">65 km/h</p>
+<p class="text-[10px] text-slate-400">Retard +20m</p>
+</div>
+</div>
+</div>
+<!-- Bus Card 4 -->
+<div class="p-3 hover:bg-slate-50 rounded-xl transition-all border border-transparent hover:border-slate-100 cursor-pointer group">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-600">
+<span class="material-symbols-outlined" data-icon="directions_bus" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-slate-900">#4451-BF</h4>
+<p class="text-[11px] text-slate-500 font-medium">S. Kaboré • <span class="text-slate-600">En pause</span></p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900">0 km/h</p>
+<p class="text-[10px] text-slate-400">Station Boromo</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 border-t border-slate-100">
+<button class="w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-black transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+                        Exporter le Rapport Journalier
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Success/Notification Toast (Implicit for interactions) -->
+<div class="fixed bottom-8 right-8 bg-red-600 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 translate-y-32 transition-transform duration-500 z-[100]" id="alert-toast">
+<span class="material-symbols-outlined text-2xl" data-icon="error">error</span>
+<div>
+<p class="font-bold text-sm">Alerte Critique</p>
+<p class="text-xs text-red-100">Véhicule #9931-BF dépasse 110 km/h.</p>
+</div>
+</div>
+<script>
+        // Micro-interactions and effects
+        window.addEventListener('load', () => {
+            // Simulated real-time toast
+            setTimeout(() => {
+                const toast = document.getElementById('alert-toast');
+                toast.classList.remove('translate-y-32');
+                
+                setTimeout(() => {
+                    toast.classList.add('translate-y-32');
+                }, 5000);
+            }, 3000);
+
+            // Add subtle ripple-like effect on map clicks
+            document.querySelector('.relative.bg-slate-100').addEventListener('click', (e) => {
+                const ripple = document.createElement('div');
+                ripple.className = 'absolute w-12 h-12 border-2 border-primary/30 rounded-full animate-ping pointer-events-none';
+                ripple.style.left = `${e.clientX - 256 - 24}px`; // Accounting for sidebar
+                ripple.style.top = `${e.clientY - 64 - 24}px`; // Accounting for header
+                e.currentTarget.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 1000);
+            });
+        });
+    </script>
+</body></html>

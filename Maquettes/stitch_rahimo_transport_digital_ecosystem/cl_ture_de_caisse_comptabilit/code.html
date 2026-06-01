@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Gestion des Caisses</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ripple-effect:active {
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background 0.1s;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5bdb9;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#fff0ee",
+                        "on-secondary-fixed": "#271900",
+                        "outline": "#906f6b",
+                        "inverse-primary": "#ffb4ab",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-dim": "#f2d3cf",
+                        "primary": "#b20112",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#005d83",
+                        "on-surface-variant": "#5c403d",
+                        "on-surface": "#281716",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#fff1ef",
+                        "primary-container": "#d62828",
+                        "background": "#fff8f7",
+                        "surface-container-highest": "#fbdbd8",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-secondary-container": "#6f4e00",
+                        "outline-variant": "#e5bdb9",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container": "#ffe9e6",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "inverse-on-surface": "#ffedea",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#fbdbd8",
+                        "secondary": "#7c5800",
+                        "on-tertiary-container": "#ebf5ff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#bd1119",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "tertiary-container": "#0077a6",
+                        "surface-bright": "#fff8f7",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "secondary-fixed": "#ffdea8",
+                        "secondary-container": "#ffbe39",
+                        "on-primary-fixed": "#410002",
+                        "inverse-surface": "#3f2c2a",
+                        "on-background": "#281716",
+                        "surface": "#fff8f7"
+                    },
+                    "fontFamily": {
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-light": ["14px", {"lineHeight": "1.5", "fontWeight": "300"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "data-table": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-regular": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-regular text-on-surface">
+<!-- Sidebar - Back-office (Admin) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-slate-900 dark:bg-slate-950 flex flex-col py-6 shadow-xl z-50">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500 uppercase tracking-wider">Rahimo Admin</span>
+<p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">Superviseur Général</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-medium text-sm">Tableau de bord</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+<span class="font-medium text-sm">Billetterie</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+<span class="font-medium text-sm">Colis</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span>
+<span class="font-medium text-sm">Flotte</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-medium text-sm">Personnel</span>
+</a>
+<!-- Active State: Comptabilité -->
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-medium text-sm">Comptabilité</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-slate-800">
+<div class="flex items-center gap-3 p-2 bg-slate-800/50 rounded-xl">
+<img alt="Admin Profile" class="w-10 h-10 rounded-full border-2 border-red-500/30 object-cover" data-alt="A professional close-up portrait of a West African male executive in his 40s wearing a sharp charcoal suit and white shirt. He has a confident and friendly expression, set against a blurred high-end office background with warm ambient lighting. The visual style is premium and sharp, reflecting a corporate leadership role in a logistics firm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ2VQlKm7MkQJariVRMJnSez76O2MVwrhvp1Gz9WFeBSjeUajoe-pqALavvt7pJFEyGY17cuMFYwrbhDRnTC6ptTSOcPlyKxvWM9e85Uqk2Y2xOh8YC59J7BKDijc0eO1uZzBKPBacsyS_gLXHmuQWXp6YZiKcdd2Qfhahm2yLpAvUwmuQ-0jCTO3oMVip1p8jpVaeFdrT9ijxIwQg5OQweFAu9rDJxC26_O2v7uh0C4Te5XNBHuufdYsKlngDhlHYHXtPSN0YMeVn"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-white truncate">Moussa Traoré</p>
+<p class="text-[10px] text-slate-400 truncate">Gestionnaire de Caisse</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Top AppBar -->
+<header class="fixed left-64 top-0 right-0 h-16 bg-red-700 dark:bg-red-900 text-white flex justify-between items-center px-6 z-40 border-b border-red-800 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white">location_on</span>
+<h1 class="font-h3 text-lg font-bold">Gare de Ouagadougou</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all ripple-effect">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all ripple-effect relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all ripple-effect">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<div class="max-w-[1280px] mx-auto space-y-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Gestion des Caisses</h2>
+<p class="font-body-light text-body-light text-on-surface-variant">Clôture journalière et vérification des recettes par guichet.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-white border border-outline-variant px-4 py-2 rounded-lg text-on-surface font-medium hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg">print</span>
+                        Imprimer rapport
+                    </button>
+<button class="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:opacity-90 transition-all shadow-md active:scale-95" id="validateClosureBtn">
+<span class="material-symbols-outlined text-lg">verified</span>
+                        Valider la clôture
+                    </button>
+</div>
+</div>
+<!-- Bento Summary Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Total Recettes Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-full">+12.5%</span>
+</div>
+<div class="mt-4">
+<p class="font-label-caps text-on-surface-variant uppercase">Total Recettes</p>
+<p class="font-h2 text-2xl mt-1">2,450,000 <span class="text-sm font-normal text-on-surface-variant">FCFA</span></p>
+</div>
+</div>
+<!-- Tickets Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-tertiary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">confirmation_number</span>
+</div>
+</div>
+<div class="mt-4">
+<p class="font-label-caps text-on-surface-variant uppercase">Billets Vendus</p>
+<p class="font-h3 text-xl mt-1">1,820,000 <span class="text-sm font-normal text-on-surface-variant">FCFA</span></p>
+</div>
+</div>
+<!-- Colis Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-secondary-container rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">package_2</span>
+</div>
+</div>
+<div class="mt-4">
+<p class="font-label-caps text-on-surface-variant uppercase">Expéditions Colis</p>
+<p class="font-h3 text-xl mt-1">540,000 <span class="text-sm font-normal text-on-surface-variant">FCFA</span></p>
+</div>
+</div>
+<!-- Autres Frais Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 bg-surface-container-highest rounded-lg flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">add_card</span>
+</div>
+</div>
+<div class="mt-4">
+<p class="font-label-caps text-on-surface-variant uppercase">Frais Divers</p>
+<p class="font-h3 text-xl mt-1">90,000 <span class="text-sm font-normal text-on-surface-variant">FCFA</span></p>
+</div>
+</div>
+</div>
+<!-- Detailed Settlement Section -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Counter List (Left 2/3) -->
+<div class="xl:col-span-2 space-y-6">
+<div class="bg-white rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-h3 text-lg">Détails par Guichet</h3>
+<span class="text-sm text-on-surface-variant">4 guichets actifs aujourd'hui</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-data-table">
+<thead class="bg-surface-container text-on-surface-variant text-xs uppercase tracking-wider">
+<tr>
+<th class="px-6 py-4 font-semibold">Guichetier</th>
+<th class="px-6 py-4 font-semibold">Tickets</th>
+<th class="px-6 py-4 font-semibold">Colis</th>
+<th class="px-6 py-4 font-semibold">Total Système</th>
+<th class="px-6 py-4 font-semibold">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-primary font-bold text-xs">AI</div>
+<div>
+<p class="font-medium">Abdoulaye I.</p>
+<p class="text-xs text-on-surface-variant">Guichet 01</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium">450,000</td>
+<td class="px-6 py-4 font-medium">120,000</td>
+<td class="px-6 py-4 font-bold text-primary">570,000</td>
+<td class="px-6 py-4">
+<button class="text-tertiary hover:underline text-sm font-medium">Voir détails</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-tertiary font-bold text-xs">SO</div>
+<div>
+<p class="font-medium">Salif O.</p>
+<p class="text-xs text-on-surface-variant">Guichet 02</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium">620,000</td>
+<td class="px-6 py-4 font-medium">85,000</td>
+<td class="px-6 py-4 font-bold text-primary">705,000</td>
+<td class="px-6 py-4">
+<button class="text-tertiary hover:underline text-sm font-medium">Voir détails</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-secondary font-bold text-xs">FT</div>
+<div>
+<p class="font-medium">Fatima T.</p>
+<p class="text-xs text-on-surface-variant">Guichet 03</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium">380,000</td>
+<td class="px-6 py-4 font-medium">210,000</td>
+<td class="px-6 py-4 font-bold text-primary">590,000</td>
+<td class="px-6 py-4">
+<button class="text-tertiary hover:underline text-sm font-medium">Voir détails</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700 font-bold text-xs">BK</div>
+<div>
+<p class="font-medium">Bakary K.</p>
+<p class="text-xs text-on-surface-variant">Guichet 04</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-medium">370,000</td>
+<td class="px-6 py-4 font-medium">125,000</td>
+<td class="px-6 py-4 font-bold text-primary">495,000</td>
+<td class="px-6 py-4">
+<button class="text-tertiary hover:underline text-sm font-medium">Voir détails</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Cash Counting Form (Right 1/3) -->
+<div class="xl:col-span-1">
+<div class="bg-white rounded-xl border border-outline-variant shadow-lg sticky top-24">
+<div class="p-6 border-b border-outline-variant">
+<h3 class="font-h3 text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calculate</span>
+                                Saisie du Comptage
+                            </h3>
+<p class="text-xs text-on-surface-variant mt-1">Saisir le montant réel en caisse pour calculer l'écart.</p>
+</div>
+<div class="p-6 space-y-6">
+<!-- Input Field -->
+<div>
+<label class="block font-label-caps text-on-surface-variant uppercase mb-2">Montant Réel Compté (FCFA)</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-h3 outline-none" id="realAmountInput" placeholder="Ex: 2450000" type="number"/>
+</div>
+<!-- Automatic Calculation Display -->
+<div class="bg-surface-container-low rounded-xl p-4 space-y-3">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Montant Système:</span>
+<span class="font-bold">2,450,000 FCFA</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Montant Saisi:</span>
+<span class="font-bold" id="displaySaisi">0 FCFA</span>
+</div>
+<div class="pt-3 border-t border-outline-variant flex justify-between items-center">
+<span class="font-bold">Écart:</span>
+<span class="text-lg font-black text-on-surface" id="calcEcart">0 FCFA</span>
+</div>
+</div>
+<div class="hidden rounded-lg p-3 text-xs font-medium flex items-center gap-2" id="statusAlert">
+<span class="material-symbols-outlined text-sm">info</span>
+<span id="statusMsg"></span>
+</div>
+<div class="space-y-3">
+<label class="block font-label-caps text-on-surface-variant uppercase">Observations / Justificatifs</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm outline-none" placeholder="Notes optionnelles sur les écarts..." rows="3"></textarea>
+</div>
+<div class="pt-2">
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-primary/90 transition-all shadow-md active:scale-95 disabled:bg-slate-300 disabled:cursor-not-allowed" id="submitClosure">
+                                    Confirmer la Clôture du Jour
+                                </button>
+<p class="text-[10px] text-center text-on-surface-variant mt-3 italic">L'action de validation est définitive et sera tracée dans le journal d'audit.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal (Hidden by default) -->
+<div class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" id="successModal">
+<div class="bg-white rounded-2xl max-w-sm w-full p-8 text-center shadow-2xl scale-95 transition-transform">
+<div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-5xl">check_circle</span>
+</div>
+<h3 class="font-h3 text-2xl text-on-surface mb-2">Clôture Validée</h3>
+<p class="text-on-surface-variant mb-8">La journée comptable a été clôturée avec succès. Le rapport de synthèse est prêt.</p>
+<div class="space-y-3">
+<button class="w-full bg-primary text-white py-3 rounded-lg font-bold" onclick="window.location.reload()">Imprimer le Rapport Final</button>
+<button class="w-full bg-surface-container-highest text-on-surface py-3 rounded-lg font-bold" onclick="document.getElementById('successModal').classList.add('hidden')">Retour au Tableau de Bord</button>
+</div>
+</div>
+</div>
+<script>
+        const systemAmount = 2450000;
+        const realAmountInput = document.getElementById('realAmountInput');
+        const displaySaisi = document.getElementById('displaySaisi');
+        const calcEcart = document.getElementById('calcEcart');
+        const statusAlert = document.getElementById('statusAlert');
+        const statusMsg = document.getElementById('statusMsg');
+        const submitClosure = document.getElementById('submitClosure');
+        const successModal = document.getElementById('successModal');
+
+        realAmountInput.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value) || 0;
+            const ecart = val - systemAmount;
+            
+            displaySaisi.innerText = val.toLocaleString() + ' FCFA';
+            calcEcart.innerText = (ecart > 0 ? '+' : '') + ecart.toLocaleString() + ' FCFA';
+            
+            statusAlert.classList.remove('hidden');
+            if (ecart === 0) {
+                calcEcart.className = 'text-lg font-black text-green-600';
+                statusAlert.className = 'rounded-lg p-3 text-xs font-medium flex items-center gap-2 bg-green-50 text-green-700';
+                statusMsg.innerText = "La caisse est parfaitement équilibrée.";
+            } else if (ecart < 0) {
+                calcEcart.className = 'text-lg font-black text-red-600';
+                statusAlert.className = 'rounded-lg p-3 text-xs font-medium flex items-center gap-2 bg-red-50 text-red-700';
+                statusMsg.innerText = "Déficit de caisse détecté. Veuillez justifier l'écart.";
+            } else {
+                calcEcart.className = 'text-lg font-black text-blue-600';
+                statusAlert.className = 'rounded-lg p-3 text-xs font-medium flex items-center gap-2 bg-blue-50 text-blue-700';
+                statusMsg.innerText = "Surplus de caisse détecté. Veuillez vérifier les entrées.";
+            }
+        });
+
+        submitClosure.addEventListener('click', () => {
+            submitClosure.innerHTML = '<span class="animate-spin material-symbols-outlined">sync</span> Traitement...';
+            setTimeout(() => {
+                successModal.classList.remove('hidden');
+                submitClosure.innerHTML = 'Confirmer la Clôture du Jour';
+            }, 1500);
+        });
+    </script>
+</body></html>

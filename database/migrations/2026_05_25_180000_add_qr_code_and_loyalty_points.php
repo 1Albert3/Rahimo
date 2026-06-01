@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->string('qr_code', 64)->nullable()->after('notes');
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('loyalty_points')->default(0)->after('role');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('bookings', function (Blueprint $table) {
+            $table->dropColumn('qr_code');
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('loyalty_points');
+        });
+    }
+};

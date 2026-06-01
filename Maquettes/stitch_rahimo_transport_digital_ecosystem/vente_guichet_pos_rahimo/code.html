@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Vente Guichet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Framer Motion via script for interactions -->
+<script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#93000b",
+                        "tertiary-container": "#5c5f61",
+                        "surface-container-low": "#eff4ff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#93000b", // Rouge adouci
+                        "on-tertiary-container": "#d7d9db",
+                        "surface-container-highest": "#d3e4fe",
+                        "background": "#f8f9ff",
+                        "surface-tint": "#b91c1c",
+                        "on-secondary-container": "#586377",
+                        "on-primary-container": "#ffcdc7",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-surface-variant": "#5b403d",
+                        "on-surface": "#0b1c30",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "surface": "#f8f9ff",
+                        "secondary-container": "#d5e0f8",
+                        "primary-container": "#b91c1c",
+                        "outline-variant": "#e4beb9",
+                        "on-secondary-fixed": "#111c2d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed": "#191c1e",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-fixed": "#410002",
+                        "error-container": "#ffdad6",
+                        "secondary": "#545f73",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "inverse-primary": "#ffb4ab",
+                        "outline": "#8f6f6c",
+                        "on-error": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "inverse-surface": "#213145",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary": "#444749",
+                        "on-background": "#0b1c30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "code-sm": ["JetBrains Mono"],
+                        "code-md": ["JetBrains Mono"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .mono-nums { font-family: 'JetBrains Mono', monospace; }
+        .btn-hover-scale { transition: transform 0.1s ease; }
+        .btn-hover-scale:active { transform: scale(0.96); }
+        .seat-btn { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface overflow-hidden h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 text-on-primary font-body-sm w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6">
+<span class="text-xl font-extrabold text-primary mb-8 block tracking-tight">Rahimo Admin</span>
+<div class="flex items-center gap-3 mb-10 pb-6 border-b border-slate-800">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-700">
+<img alt="Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAkZ2EiWqAifmmSexSl7gjJkiL-0CGDB5k1kvkXUjBEPk9P_j_58qp-k3Boh5wt0xX60T-S_0rtzrJqguSVyyqKJw4Wr8So9QHkyox5aPLRgitDvg2dNjRskcUl-ILv9Et3pHGfNuTCeLE7F--5eAC0z8esWYWnr4jBYPsq-E4B6QA8cXDXAMT98K2NG94yk5TuWEIRFT7SqiDAg71Sv-5Y2IupvSv3NPTfM7qCAQoY8FQ87wE-qjM-hcG4zlsY9kQ_9rWW5bdfVMN"/>
+</div>
+<div>
+<p class="text-white font-bold block leading-none">Superviseur Général</p>
+<p class="text-slate-500 text-xs mt-1">Gare de Ouaga</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg flex items-center px-4 py-3 transition-colors group" href="#">
+<i class="w-5 h-5 mr-3" data-lucide="layout-dashboard"></i>
+                Tableau de bord
+            </a>
+<a class="bg-primary text-white rounded-lg flex items-center px-4 py-3 shadow-md" href="#">
+<i class="w-5 h-5 mr-3" data-lucide="ticket"></i>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg flex items-center px-4 py-3 transition-colors" href="#">
+<i class="w-5 h-5 mr-3" data-lucide="package"></i>
+                Colis
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg flex items-center px-4 py-3 transition-colors" href="#">
+<i class="w-5 h-5 mr-3" data-lucide="bus"></i>
+                Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg flex items-center px-4 py-3 transition-colors" href="#">
+<i class="w-5 h-5 mr-3" data-lucide="users"></i>
+                Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg flex items-center px-4 py-3 transition-colors" href="#">
+<i class="w-5 h-5 mr-3" data-lucide="wallet"></i>
+                Comptabilité
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center px-8 h-16 w-full bg-primary text-white font-title-md z-40 shadow-md">
+<div class="flex items-center gap-3">
+<i class="w-5 h-5" data-lucide="map-pin"></i>
+<span class="text-lg">Gare de Ouagadougou</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-white/10 rounded-full p-2 transition-all btn-hover-scale">
+<i class="w-5 h-5" data-lucide="clock"></i>
+</button>
+<button class="hover:bg-white/10 rounded-full p-2 transition-all btn-hover-scale relative">
+<i class="w-5 h-5" data-lucide="bell"></i>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full border border-primary"></span>
+</button>
+<button class="hover:bg-white/10 rounded-full p-2 transition-all btn-hover-scale">
+<i class="w-5 h-5" data-lucide="settings"></i>
+</button>
+<div class="ml-4 w-9 h-9 rounded-full border-2 border-white/30 overflow-hidden shadow-inner">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC65iQrLcgy8z592_hJbgkF3UTOd4wBTrMjw75NrY450an4K2FRWMVWdc5za4T8x08qKokZ_QC4OBm6oXx54Y8Hy-Et0udoW6p_fUHkpvs2YYgracEz4dWVe2Z56d9aZJ1I_WscALDehOKVd2BPNl-jSqDfS7asntOhPYGb3RTZSnlKpYe3DHUOa2K83kwYp8fXouQGAGrsV6mVtVY-RqZn-_8dc8rPqxLr1tAbIClYMjVIl0dPJan8AgEbeXVBMJ13Aydc8ldU69zP"/>
+</div>
+</div>
+</header>
+<!-- POS Interface Content -->
+<div class="flex-1 p-6 grid grid-cols-12 gap-6 overflow-hidden">
+<!-- Left Panel: Trip & Seat Selection -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6 overflow-hidden">
+<!-- Selection trajet -->
+<section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-title-md text-on-surface flex items-center gap-2">
+<i class="w-5 h-5 text-primary" data-lucide="route"></i>
+                            Sélection du trajet
+                        </h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container text-[11px] font-bold tracking-wider rounded-full text-secondary">AUJOURD'HUI</span>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[11px] font-bold tracking-wider rounded-full">DIRECT</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<button class="p-4 border-2 border-primary bg-primary/5 rounded-xl text-left flex flex-col transition-all btn-hover-scale shadow-sm">
+<span class="text-[10px] text-primary font-bold tracking-widest uppercase mono-nums">08:30 • LIGNE 01</span>
+<span class="font-title-md text-lg mt-1 text-on-surface">Bobo-Dioulasso</span>
+<div class="flex justify-between items-center mt-3">
+<span class="text-xs font-medium text-slate-500">14 places dispo</span>
+<span class="font-bold text-primary mono-nums">7 000 CFA</span>
+</div>
+</button>
+<button class="p-4 border border-slate-200 hover:border-primary/50 bg-white rounded-xl text-left flex flex-col transition-all group btn-hover-scale">
+<span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase mono-nums">10:00 • LIGNE 04</span>
+<span class="font-title-md text-lg mt-1 group-hover:text-primary transition-colors">Koudougou</span>
+<div class="flex justify-between items-center mt-3">
+<span class="text-xs font-medium text-slate-500">28 places dispo</span>
+<span class="font-bold text-on-surface mono-nums">3 000 CFA</span>
+</div>
+</button>
+<button class="p-4 border border-slate-200 hover:border-primary/50 bg-white rounded-xl text-left flex flex-col transition-all group btn-hover-scale">
+<span class="text-[10px] text-slate-400 font-bold tracking-widest uppercase mono-nums">12:30 • LIGNE 02</span>
+<span class="font-title-md text-lg mt-1 group-hover:text-primary transition-colors">Banfora</span>
+<div class="flex justify-between items-center mt-3">
+<span class="text-xs font-medium text-slate-500">05 places dispo</span>
+<span class="font-bold text-on-surface mono-nums">10 000 CFA</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Plan de bus interactif -->
+<section class="flex-1 bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col min-h-0">
+<div class="flex items-center justify-between mb-5">
+<h2 class="font-title-md text-on-surface flex items-center gap-2">
+<i class="w-5 h-5 text-primary" data-lucide="armchair"></i>
+                            Plan du bus (Bus 45 - 55 Places)
+                        </h2>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 text-xs font-medium text-slate-500">
+<div class="w-3 h-3 rounded-sm border border-green-500 bg-green-50"></div> Libre
+                            </div>
+<div class="flex items-center gap-2 text-xs font-medium text-slate-500">
+<div class="w-3 h-3 rounded-sm bg-primary shadow-sm"></div> Sélectionné
+                            </div>
+<div class="flex items-center gap-2 text-xs font-medium text-slate-500">
+<div class="w-3 h-3 rounded-sm bg-slate-300"></div> Occupé
+                            </div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 scroll-hide bg-slate-50/50 rounded-2xl py-8">
+<div class="max-w-xs mx-auto bg-white rounded-[2.5rem] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-slate-100 relative">
+<!-- Bus Cockpit Area -->
+<div class="flex justify-between items-center mb-10 px-4">
+<div class="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400">
+<i class="w-6 h-6" data-lucide="navigation-2"></i>
+</div>
+<div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-400">
+<i class="w-5 h-5" data-lucide="log-in"></i>
+</div>
+</div>
+<!-- Bus Seats Grid -->
+<div class="grid grid-cols-5 gap-y-4 gap-x-2" id="bus-grid">
+<!-- Generated by JS for cleaner code -->
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Panel: Passenger & Payment -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6 overflow-hidden">
+<!-- Formulaire passager -->
+<section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+<h2 class="font-title-md text-lg text-on-surface mb-5 flex items-center gap-2">
+<i class="w-5 h-5 text-primary" data-lucide="user-plus"></i>
+                        Détails du passager
+                    </h2>
+<div class="space-y-4">
+<div>
+<label class="block text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-1.5">NOM COMPLET</label>
+<input class="w-full border-slate-200 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary transition-all text-sm" placeholder="Entrez le nom" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-1.5">TÉLÉPHONE</label>
+<input class="w-full border-slate-200 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary transition-all text-sm mono-nums" placeholder="00 00 00 00" type="tel"/>
+</div>
+<div>
+<label class="block text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-1.5">TYPE</label>
+<select class="w-full border-slate-200 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary transition-all text-sm appearance-none bg-no-repeat bg-[right_0.75rem_center] bg-[length:1em_1em]">
+<option>Adulte</option>
+<option>Enfant (-12 ans)</option>
+<option>Sénior (+65 ans)</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Module de paiement -->
+<section class="flex-1 bg-slate-900 rounded-xl p-6 flex flex-col shadow-lg border border-slate-800">
+<h2 class="font-title-md text-lg text-white mb-6 flex items-center gap-2">
+<i class="w-5 h-5 text-primary" data-lucide="credit-card"></i>
+                        Paiement
+                    </h2>
+<div class="flex-1 space-y-6">
+<!-- Mode de paiement -->
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center p-3 bg-primary border-2 border-primary rounded-xl shadow-md transition-all btn-hover-scale">
+<i class="w-6 h-6 text-white mb-1" data-lucide="banknote"></i>
+<span class="text-[9px] font-bold text-white tracking-widest uppercase">ESPÈCES</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-slate-800 border border-slate-700 rounded-xl opacity-60 hover:opacity-100 transition-all btn-hover-scale">
+<img alt="Orange Money" class="w-6 h-6 rounded-md mb-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO5swipH17R67w_SUP8kUMofdw39Ct0z4l_LybnEQqDOe77jKBq02brGjH2ZoIruMyLQrDq4IQZYuuijR82fjDfK3y2j6D_i0WIUMpE_N3aC4sn7kBGBmto6zNwtv9d9yFQXyVqFGURAqyyhXRryHEbtEcmT2-5IlGI8ojVlHf-coW4GSDc8U5FEi2LfcsSqgc82qys-XOmGxkx5ipmFrC0NVlOiyH0m8spsuVxRpvS3vTlfHpmutYnpH5GShgOALEqns3kfcfSAmI"/>
+<span class="text-[9px] font-bold text-slate-400 tracking-widest uppercase">ORANGE</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-slate-800 border border-slate-700 rounded-xl opacity-60 hover:opacity-100 transition-all btn-hover-scale">
+<img alt="Moov Money" class="w-6 h-6 rounded-md mb-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4wMdGLbeYU0OP-DYFEITX93m7jSvzpNmrCmh686MfN-7yW9oV5U58aNwoSaLeTuCQTpU4bvEoO8Jxhn-8bQozLTa5y-bNa-PjNMK0yomrMgQQrJaNQRVRYK0QmIxx82wFIHFxirScIXmFdssFUPgmUVjy54oDPQFvssVcmaQIdPRyMTQjXt5PToNPNVKgh6yNnDwVc4qgxDpDyhZBSo4bXWazsUEVor-qz50S3a-RpOe_qUFmjK_BDVtOBDYYJHwRhBDWBb79PGpN"/>
+<span class="text-[9px] font-bold text-slate-400 tracking-widest uppercase">MOOV</span>
+</button>
+</div>
+<!-- Amounts -->
+<div class="space-y-3 bg-slate-800/50 p-5 rounded-2xl border border-slate-700/50">
+<div class="flex justify-between items-center text-slate-400 text-sm">
+<span>Ticket (Siège 15)</span>
+<span class="font-bold text-white mono-nums">7 000 CFA</span>
+</div>
+<div class="flex justify-between items-center text-slate-400 text-sm">
+<span>Frais service</span>
+<span class="font-bold text-white mono-nums">0 CFA</span>
+</div>
+<div class="border-t border-slate-700 pt-3 mt-1 flex justify-between items-center">
+<span class="text-slate-400 font-bold text-sm">TOTAL</span>
+<span class="text-2xl font-extrabold text-primary mono-nums">7 000 CFA</span>
+</div>
+</div>
+<!-- Change Calculator -->
+<div class="space-y-4">
+<div>
+<label class="block text-[11px] font-extrabold text-slate-500 uppercase tracking-widest mb-1.5">MONTANT REÇU</label>
+<div class="relative">
+<input class="w-full text-2xl font-bold bg-slate-800 border-slate-700 text-white rounded-xl py-3 pl-4 pr-16 focus:ring-primary focus:border-primary transition-all mono-nums" id="received" type="number" value="10000"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-slate-500 text-sm">CFA</span>
+</div>
+</div>
+<div class="p-5 bg-primary/10 border border-primary/20 rounded-2xl flex justify-between items-center" id="change-container">
+<div class="flex flex-col">
+<span class="text-[10px] font-extrabold text-primary tracking-widest uppercase mb-1">MONNAIE À RENDRE</span>
+<span class="text-2xl font-black text-white mono-nums" id="change">3 000 CFA</span>
+</div>
+<div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+<i class="w-5 h-5" data-lucide="refresh-cw"></i>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-8 w-full bg-primary text-white py-4 rounded-2xl font-title-md text-base shadow-lg shadow-primary/20 hover:bg-red-800 hover:shadow-primary/40 active:scale-[0.98] transition-all flex items-center justify-center gap-3 btn-hover-scale">
+<i class="w-5 h-5" data-lucide="printer"></i>
+                        ENCAISSER ET IMPRIMER
+                    </button>
+</section>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="mt-auto bg-slate-900 border-t border-slate-800 px-8 py-4 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+<span class="text-slate-400 font-bold text-[10px] tracking-widest uppercase mono-nums">RAHIMO POS v2.4.0</span>
+</div>
+<div class="flex gap-8">
+<span class="text-slate-500 text-[10px] font-medium uppercase tracking-widest flex items-center gap-1.5">
+<i class="w-3.5 h-3.5" data-lucide="user-check"></i>
+                    Session: Agent-402 (M. Sylla)
+                </span>
+<span class="text-slate-600 text-[10px] font-medium uppercase tracking-widest">© 2024 Rahimo Transport</span>
+</div>
+</footer>
+</main>
+<script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Generate Seats
+        const busGrid = document.getElementById('bus-grid');
+        for (let i = 1; i <= 55; i++) {
+            // Aisle logic
+            if (i % 5 === 3) {
+                const aisle = document.createElement('div');
+                aisle.className = 'w-6';
+                busGrid.appendChild(aisle);
+            }
+
+            const seat = document.createElement('button');
+            let status = 'free';
+            if ([2, 5, 8, 12, 13, 14, 25, 26, 40].includes(i)) status = 'occupied';
+            if (i === 15) status = 'selected';
+
+            seat.className = `h-9 w-9 rounded-lg border flex items-center justify-center text-[11px] font-bold transition-all seat-btn mono-nums ${
+                status === 'free' ? 'border-green-200 bg-green-50/50 text-green-700 hover:border-primary hover:bg-primary/5 hover:scale-110' :
+                status === 'occupied' ? 'bg-slate-200 border-slate-200 text-slate-400 cursor-not-allowed' :
+                'bg-primary border-primary text-white scale-110 shadow-lg shadow-primary/30 z-10'
+            }`;
+
+            if (status === 'selected') {
+                seat.innerHTML = '<i data-lucide="user" class="w-4 h-4"></i>';
+            } else {
+                seat.innerText = i;
+            }
+            
+            busGrid.appendChild(seat);
+        }
+        lucide.createIcons();
+
+        // Payment Logic
+        const receivedInput = document.getElementById('received');
+        const changeDisplay = document.getElementById('change');
+        const changeContainer = document.getElementById('change-container');
+        const total = 7000;
+
+        receivedInput.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value) || 0;
+            const diff = val - total;
+            
+            if (diff >= 0) {
+                changeDisplay.textContent = diff.toLocaleString() + ' CFA';
+                changeContainer.classList.remove('bg-red-500/10', 'border-red-500/20');
+                changeContainer.classList.add('bg-primary/10', 'border-primary/20');
+                changeDisplay.classList.remove('text-red-500');
+                changeDisplay.classList.add('text-white');
+            } else {
+                changeDisplay.textContent = 'Insuffisant';
+                changeContainer.classList.remove('bg-primary/10', 'border-primary/20');
+                changeContainer.classList.add('bg-red-500/10', 'border-red-500/20');
+                changeDisplay.classList.add('text-red-500');
+            }
+        });
+    </script>
+</body></html>

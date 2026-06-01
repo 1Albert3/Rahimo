@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registre des Incidents &amp; Sécurité - Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: #b91c1c;
+            color: white;
+            border-radius: 0.5rem;
+        }
+        body {
+            background-color: #f8f9ff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #E2E8F0;
+        }
+        /* Custom scrollbar for data density */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#5b403d",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-surface": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "secondary-container": "#d5e0f8",
+                        "on-tertiary-container": "#d7d9db",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-fixed": "#410002",
+                        "primary": "#93000b",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-primary-container": "#ffcdc7",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "surface-tint": "#b91c1c",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-container": "#586377",
+                        "surface-dim": "#cbdbf5",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#b91c1c",
+                        "tertiary": "#444749",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "secondary": "#545f73",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#e4beb9",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-primary-fixed-variant": "#93000b",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#5c5f61",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-surface": "#213145",
+                        "outline": "#8f6f6c",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "code-md": ["JetBrains Mono"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- Navigation Shell (BackOffice Layout) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-slate-900 dark:bg-slate-950 flex flex-col py-6 shadow-xl z-50">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500 block">Rahimo Admin</span>
+<span class="text-slate-400 text-xs font-medium font-body-sm">Superviseur Général</span>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-sm" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-sm" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-sm" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+                Colis
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-sm" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span>
+                Flotte
+            </a>
+<!-- Active Tab: Sécurité/Incidents mapping to a generic need for this view -->
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 font-body-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-weight="fill" style="font-variation-settings: 'FILL' 1;">security</span>
+                Sécurité
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-sm" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+                Comptabilité
+            </a>
+</nav>
+<div class="px-6 pt-6 border-t border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-white">account_circle</span>
+</div>
+<div>
+<p class="text-sm font-bold text-white leading-none">Admin Profile</p>
+<p class="text-xs text-slate-500 mt-1">Déconnexion</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-red-700 dark:bg-red-900 sticky top-0 z-40 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white">location_on</span>
+<h1 class="font-headline-lg text-lg text-white font-bold">Gare de Ouagadougou</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all text-white">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all text-white relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all text-white">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- View Content -->
+<div class="p-8 max-w-[1400px] mx-auto">
+<!-- Hero Header with Stats -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Registre des Incidents</h2>
+<p class="text-secondary font-body-md mt-1">Surveillance en temps réel et archivage sécurisé de la flotte Rahimo.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-red-800 transition-colors shadow-md transform active:scale-95 duration-150" onclick="toggleModal('incidentModal')">
+<span class="material-symbols-outlined">add_circle</span>
+                        Nouveau Rapport
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-red-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-red-600">emergency</span>
+</div>
+<span class="text-green-600 text-xs font-bold font-label-caps">-12% vs mois dernier</span>
+</div>
+<p class="text-secondary font-label-caps uppercase">Incidents Ouverts</p>
+<p class="text-3xl font-extrabold text-on-background mt-1">08</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-blue-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-blue-600">build</span>
+</div>
+<span class="text-secondary text-xs font-bold font-label-caps">Moyenne 4.2h</span>
+</div>
+<p class="text-secondary font-label-caps uppercase">Pannes Majeures</p>
+<p class="text-3xl font-extrabold text-on-background mt-1">24</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-amber-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-amber-600">policy</span>
+</div>
+<span class="text-red-600 text-xs font-bold font-label-caps">+5% vs mois dernier</span>
+</div>
+<p class="text-secondary font-label-caps uppercase">Contrôles Routiers</p>
+<p class="text-3xl font-extrabold text-on-background mt-1">112</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-green-50 p-2 rounded-lg">
+<span class="material-symbols-outlined text-green-600">check_circle</span>
+</div>
+<span class="text-green-600 text-xs font-bold font-label-caps">98.2%</span>
+</div>
+<p class="text-secondary font-label-caps uppercase">Taux de Résolution</p>
+<p class="text-3xl font-extrabold text-on-background mt-1">142</p>
+</div>
+</div>
+<!-- Filters & Search Bar -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant mb-6 flex flex-wrap items-center gap-4">
+<div class="flex-grow relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface rounded-lg border-outline-variant focus:ring-2 focus:ring-primary/15 focus:border-primary outline-none transition-all font-body-sm" placeholder="Rechercher par ID, chauffeur ou plaque..." type="text"/>
+</div>
+<div class="flex gap-2">
+<select class="bg-surface border-outline-variant rounded-lg px-4 py-2 font-body-sm text-secondary outline-none focus:border-primary">
+<option>Type d'incident</option>
+<option>Accident</option>
+<option>Panne</option>
+<option>Contrôle Police</option>
+</select>
+<select class="bg-surface border-outline-variant rounded-lg px-4 py-2 font-body-sm text-secondary outline-none focus:border-primary">
+<option>Statut</option>
+<option>Ouvert</option>
+<option>Fermé</option>
+</select>
+<button class="bg-surface border border-outline-variant p-2 rounded-lg hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-secondary">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Data Table / Registry List -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50 border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-label-caps text-secondary uppercase tracking-wider">ID Rapport</th>
+<th class="px-6 py-4 font-label-caps text-secondary uppercase tracking-wider">Date &amp; Heure</th>
+<th class="px-6 py-4 font-label-caps text-secondary uppercase tracking-wider">Type</th>
+<th class="px-6 py-4 font-label-caps text-secondary uppercase tracking-wider">Véhicule / Chauffeur</th>
+<th class="px-6 py-4 font-label-caps text-secondary uppercase tracking-wider">Statut</th>
+<th class="px-6 py-4 font-label-caps text-secondary uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-4">
+<span class="font-code-md text-primary font-medium">#INC-2024-0892</span>
+</td>
+<td class="px-6 py-4 font-code-sm text-secondary">
+                                22/10/2024 14:35
+                            </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-red-600"></span>
+<span class="font-body-sm font-semibold">Panne Moteur</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-sm font-bold text-on-background">RAH-9022-BF</p>
+<p class="text-xs text-secondary font-body-sm">Ibrahim Sawadogo</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold uppercase tracking-tighter">Ouvert</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-4">
+<span class="font-code-md text-primary font-medium">#INC-2024-0891</span>
+</td>
+<td class="px-6 py-4 font-code-sm text-secondary">
+                                22/10/2024 09:12
+                            </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="font-body-sm font-semibold">Contrôle Police</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-sm font-bold text-on-background">RAH-1244-BF</p>
+<p class="text-xs text-secondary font-body-sm">Moussa Traoré</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-tighter">Fermé</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-4">
+<span class="font-code-md text-primary font-medium">#INC-2024-0888</span>
+</td>
+<td class="px-6 py-4 font-code-sm text-secondary">
+                                21/10/2024 18:45
+                            </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+<span class="font-body-sm font-semibold">Accrochage Mineur</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-sm font-bold text-on-background">RAH-0081-BF</p>
+<p class="text-xs text-secondary font-body-sm">Amadou Diallo</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-tighter">Fermé</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 transition-colors group">
+<td class="px-6 py-4">
+<span class="font-code-md text-primary font-medium">#INC-2024-0887</span>
+</td>
+<td class="px-6 py-4 font-code-sm text-secondary">
+                                21/10/2024 02:20
+                            </td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-red-600"></span>
+<span class="font-body-sm font-semibold">Crevaison multiple</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="font-body-sm font-bold text-on-background">RAH-9821-BF</p>
+<p class="text-xs text-secondary font-body-sm">Seydou Koné</p>
+</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-tighter">Fermé</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="text-secondary hover:text-primary transition-colors ml-2">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-6 bg-slate-50 flex justify-between items-center border-t border-outline-variant">
+<p class="text-secondary font-body-sm">Affichage de 1-4 sur 1,248 incidents répertoriés</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-outline-variant text-secondary hover:bg-white transition-all disabled:opacity-50" disabled="">Précédent</button>
+<button class="px-3 py-1 rounded bg-primary text-white font-bold transition-all shadow-sm">1</button>
+<button class="px-3 py-1 rounded border border-outline-variant text-secondary hover:bg-white transition-all">2</button>
+<button class="px-3 py-1 rounded border border-outline-variant text-secondary hover:bg-white transition-all">3</button>
+<button class="px-3 py-1 rounded border border-outline-variant text-secondary hover:bg-white transition-all">Suivant</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal Form (Hidden by default) -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300" id="incidentModal">
+<div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300">
+<div class="bg-red-700 p-6 flex justify-between items-center">
+<h3 class="text-white font-headline-lg text-xl font-bold">Signaler un Incident</h3>
+<button class="text-white/80 hover:text-white transition-colors" onclick="toggleModal('incidentModal')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form class="p-8 grid grid-cols-2 gap-6">
+<div class="col-span-1">
+<label class="block text-sm font-bold text-on-background mb-2">Type d'incident</label>
+<select class="w-full bg-slate-50 border-outline-variant rounded-lg p-3 font-body-sm focus:border-primary outline-none focus:ring-2 focus:ring-primary/15 transition-all">
+<option>Accident</option>
+<option>Panne Majeure</option>
+<option>Contrôle Police</option>
+<option>Retard Critique</option>
+</select>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-bold text-on-background mb-2">Date &amp; Heure</label>
+<input class="w-full bg-slate-50 border-outline-variant rounded-lg p-3 font-body-sm focus:border-primary outline-none focus:ring-2 focus:ring-primary/15 transition-all" type="datetime-local"/>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-bold text-on-background mb-2">Véhicule (Immatriculation)</label>
+<input class="w-full bg-slate-50 border-outline-variant rounded-lg p-3 font-body-sm focus:border-primary outline-none focus:ring-2 focus:ring-primary/15 transition-all" placeholder="ex: RAH-2000-BF" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-sm font-bold text-on-background mb-2">Chauffeur</label>
+<input class="w-full bg-slate-50 border-outline-variant rounded-lg p-3 font-body-sm focus:border-primary outline-none focus:ring-2 focus:ring-primary/15 transition-all" placeholder="Nom complet" type="text"/>
+</div>
+<div class="col-span-2">
+<label class="block text-sm font-bold text-on-background mb-2">Description des faits</label>
+<textarea class="w-full bg-slate-50 border-outline-variant rounded-lg p-3 font-body-sm focus:border-primary outline-none focus:ring-2 focus:ring-primary/15 transition-all" placeholder="Détaillez l'incident..." rows="4"></textarea>
+</div>
+<div class="col-span-2 flex justify-end gap-4 pt-4 border-t border-slate-100">
+<button class="px-6 py-2 border border-outline-variant rounded-lg font-bold text-secondary hover:bg-slate-50 transition-all" onclick="toggleModal('incidentModal')" type="button">Annuler</button>
+<button class="px-6 py-2 bg-primary text-white rounded-lg font-bold hover:bg-red-800 transition-all shadow-md" type="submit">Enregistrer le Rapport</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Footer -->
+<footer class="ml-64 bg-slate-900 text-white py-16 px-8 border-t-4 border-red-600">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400 font-body-sm leading-relaxed">Leader du transport interurbain au Burkina Faso. Sécurité, ponctualité, confort.</p>
+</div>
+<div>
+<h4 class="font-bold text-red-600 mb-6 uppercase text-xs tracking-widest">Liens Utiles</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 font-body-sm hover:translate-x-1 transition-transform inline-block" href="#">Tableau de bord</a></li>
+<li><a class="text-slate-400 hover:text-red-400 font-body-sm hover:translate-x-1 transition-transform inline-block" href="#">Historique</a></li>
+<li><a class="text-slate-400 hover:text-red-400 font-body-sm hover:translate-x-1 transition-transform inline-block" href="#">Paramètres Sécurité</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-red-600 mb-6 uppercase text-xs tracking-widest">Applications</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 font-body-sm hover:translate-x-1 transition-transform inline-block" href="#">Rahimo Driver App</a></li>
+<li><a class="text-slate-400 hover:text-red-400 font-body-sm hover:translate-x-1 transition-transform inline-block" href="#">Rahimo Client</a></li>
+<li><a class="text-slate-400 hover:text-red-400 font-body-sm hover:translate-x-1 transition-transform inline-block" href="#">Portail Agent</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-red-600 mb-6 uppercase text-xs tracking-widest">Support Technique</h4>
+<p class="text-slate-400 font-body-sm mb-4">Besoin d'aide pour une saisie ?</p>
+<a class="bg-slate-800 px-4 py-2 rounded-lg text-sm border border-slate-700 hover:border-red-500 transition-colors inline-block" href="mailto:support@rahimo.bf">Contacter IT</a>
+</div>
+</div>
+<div class="max-w-[1280px] mx-auto mt-12 pt-8 border-t border-slate-800 flex justify-between items-center">
+<p class="text-slate-500 text-xs">© 2024 Rahimo Transport. Tous droits réservés.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-500 hover:text-white cursor-pointer transition-colors">social_leaderboard</span>
+<span class="material-symbols-outlined text-slate-500 hover:text-white cursor-pointer transition-colors">share</span>
+</div>
+</div>
+</footer>
+<script>
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('opacity-0')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.remove('scale-95');
+                modal.querySelector('div').classList.add('scale-100');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.add('scale-95');
+                modal.querySelector('div').classList.remove('scale-100');
+            }
+        }
+
+        // Atmospheric micro-interaction for rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mousedown', () => {
+                row.style.transform = 'scale(0.995)';
+                row.style.transition = 'transform 0.1s ease';
+            });
+            row.addEventListener('mouseup', () => {
+                row.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

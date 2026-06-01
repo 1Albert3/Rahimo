@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Rapport Financier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#fbdbd8",
+                        "tertiary-fixed": "#c7e7ff",
+                        "on-tertiary-fixed": "#001e2e",
+                        "background": "#fff8f7",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#281716",
+                        "secondary-container": "#ffbe39",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-container-low": "#fff0ee",
+                        "inverse-on-surface": "#ffedea",
+                        "surface": "#fff8f7",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fff8f7",
+                        "inverse-surface": "#3f2c2a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-surface": "#281716",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "on-secondary-container": "#6f4e00",
+                        "on-primary-fixed": "#410002",
+                        "secondary": "#7c5800",
+                        "on-primary-container": "#fff1ef",
+                        "on-secondary-fixed": "#271900",
+                        "surface-tint": "#bd1119",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "surface-container": "#ffe9e6",
+                        "on-tertiary-container": "#ebf5ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "secondary-fixed": "#ffdea8",
+                        "surface-container-highest": "#fbdbd8",
+                        "outline-variant": "#e5bdb9",
+                        "primary-fixed": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#5c403d",
+                        "primary": "#b20112",
+                        "tertiary-container": "#0077a6",
+                        "tertiary": "#005d83",
+                        "surface-dim": "#f2d3cf",
+                        "surface-container-high": "#ffe2de",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#d62828",
+                        "outline": "#906f6b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "grid-columns": "12"
+                    },
+                    "fontFamily": {
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-regular": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-light": ["14px", {"lineHeight": "1.5", "fontWeight": "300"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "data-table": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body-regular text-on-surface">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500 block">Rahimo Admin</span>
+<p class="text-slate-400 text-xs font-body-light mt-1">Superviseur Général</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="confirmation_number">confirmation_number</span>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="package">package</span>
+                Colis
+            </a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 font-body-regular text-sm font-medium shadow-lg shadow-red-900/20" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+                Comptabilité
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="directions_bus">directions_bus</span>
+                Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm font-medium" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="group">group</span>
+                Personnel
+            </a>
+</nav>
+<div class="px-4 mt-auto pt-6 border-t border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="w-10 h-10 rounded-full bg-slate-700 overflow-hidden ring-2 ring-red-600/30">
+<img alt="Admin Profile" data-alt="Professional portrait of a male corporate supervisor wearing a modern dark suit and a crisp white shirt. The background is a blurred high-end office interior with warm ambient lighting. The style is sharp, authoritative, and clean, reflecting a professional business identity for Rahimo Transport management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo29UDqlh06Hn3GjfJI__g6X-NyzvPzAngg278Lb6XSsuiMArkThETFRp6TKDUzHyZrbd50hU4NTZglY5PN4v6sYHxSwjVftkQQrEtu_uu1mAPsB8EqVsK9MglPYfmYCxepY43bn1TKkPvLsMr0A5ugRS_phUwBTrZR1qbcGYoLqZhEpUmuerLEgzoeQE2F96SRA0LWSabml1XVc0sTsDjpJym0aDL5nUa4LhWk8zQMBn8EQtj5HPv8lpiyNQF2N6Xz9pKNj6mLFNV"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-white">M. Koulibaly</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">Déconnexion</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 w-full sticky top-0 bg-red-700 text-white z-40 shadow-sm border-b border-red-800">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined p-2 hover:bg-red-600 rounded-full transition-all cursor-pointer" data-icon="location_on">location_on</span>
+<h1 class="font-h3 text-lg font-bold">Gare de Ouagadougou</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined hover:bg-red-600 rounded-full p-2 transition-all" data-icon="schedule" title="Horaires">schedule</button>
+<button class="material-symbols-outlined hover:bg-red-600 rounded-full p-2 transition-all relative" data-icon="notifications" title="Notifications">
+                    notifications
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</button>
+<button class="material-symbols-outlined hover:bg-red-600 rounded-full p-2 transition-all" data-icon="settings" title="Paramètres">settings</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-[1400px] mx-auto space-y-8">
+<!-- Header & Filters Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Rapport Financier Journalier</h2>
+<p class="text-on-surface-variant font-body-light mt-1">Analyse détaillée des recettes et flux de trésorerie pour la comptabilité.</p>
+</div>
+<div class="flex flex-wrap items-center gap-4 bg-white p-4 rounded-xl shadow-sm border border-outline-variant">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-1">Période</label>
+<div class="flex items-center bg-surface-container-low px-3 py-2 rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-sm mr-2" data-icon="calendar_today">calendar_today</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-medium text-on-surface p-0" type="date" value="2024-05-24"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant px-1">Gare</label>
+<select class="bg-surface-container-low border border-outline-variant rounded-lg text-sm font-medium focus:border-primary focus:ring-1 focus:ring-primary px-3 py-2 min-w-[180px]">
+<option>Gare de Ouagadougou</option>
+<option>Gare de Bobo-Dioulasso</option>
+<option>Gare de Koudougou</option>
+</select>
+</div>
+<div class="flex items-center gap-2 mt-auto pb-1">
+<button class="bg-primary hover:bg-primary-container text-white px-5 py-2 rounded-lg font-medium text-sm flex items-center gap-2 transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="refresh">refresh</span>
+                            Actualiser
+                        </button>
+</div>
+</div>
+</div>
+<!-- Visual Totals Summary -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Total Global -->
+<div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-primary">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<span class="text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded">+12% vs hier</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Total Recettes</p>
+<h3 class="text-2xl font-black text-on-surface">2,450,000 FCFA</h3>
+</div>
+<!-- Espèces -->
+<div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-secondary-container">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-fixed rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+</div>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Espèces</p>
+<h3 class="text-2xl font-black text-on-surface">1,120,500 FCFA</h3>
+<div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary-container h-full w-[45%]"></div>
+</div>
+</div>
+<!-- Mobile Money -->
+<div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-tertiary-container">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="smartphone">smartphone</span>
+</div>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Mobile Money</p>
+<h3 class="text-2xl font-black text-on-surface">980,250 FCFA</h3>
+<div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-tertiary-container h-full w-[40%]"></div>
+</div>
+</div>
+<!-- Carte -->
+<div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-slate-400">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-slate-100 rounded-lg">
+<span class="material-symbols-outlined text-slate-600" data-icon="credit_card">credit_card</span>
+</div>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Cartes Bancaires</p>
+<h3 class="text-2xl font-black text-on-surface">349,250 FCFA</h3>
+<div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-slate-400 h-full w-[15%]"></div>
+</div>
+</div>
+</div>
+<!-- Detailed Transactions Table -->
+<div class="bg-white rounded-xl shadow-md border border-outline-variant overflow-hidden">
+<div class="px-6 py-5 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="list_alt">list_alt</span>
+<h3 class="font-h3 text-xl font-bold">Détails des Recettes</h3>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-red-600" data-icon="picture_as_pdf">picture_as_pdf</span>
+                            Exporter PDF
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline rounded-lg text-sm font-semibold hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-green-700" data-icon="table_chart">table_chart</span>
+                            Exporter Excel
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-data-table text-data-table border-collapse">
+<thead>
+<tr class="bg-slate-50 text-on-surface-variant border-b border-outline-variant">
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Référence</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Type</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Guichet / Agent</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Mode de Paiement</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider">Heure</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider text-right">Montant</th>
+<th class="px-6 py-4 font-semibold uppercase tracking-wider text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">TKT-884210</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="confirmation_number">confirmation_number</span>
+                                        Ticket
+                                    </span>
+</td>
+<td class="px-6 py-4">Guichet A - Amadou B.</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-secondary-fixed text-secondary-fixed-variant rounded-full text-xs font-bold">Espèces</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">08:42</td>
+<td class="px-6 py-4 text-right font-bold">7,500 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">COL-129334</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="package">package</span>
+                                        Colis
+                                    </span>
+</td>
+<td class="px-6 py-4">Service Fret - Aminata D.</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold">Orange Money</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">09:15</td>
+<td class="px-6 py-4 text-right font-bold">12,400 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">TKT-884215</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="confirmation_number">confirmation_number</span>
+                                        Ticket
+                                    </span>
+</td>
+<td class="px-6 py-4">Guichet B - Oumar K.</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-slate-200 text-slate-700 rounded-full text-xs font-bold">Carte VISA</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">10:05</td>
+<td class="px-6 py-4 text-right font-bold">15,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">TKT-884221</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="confirmation_number">confirmation_number</span>
+                                        Ticket
+                                    </span>
+</td>
+<td class="px-6 py-4">Guichet A - Amadou B.</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold">Moov Money</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">10:48</td>
+<td class="px-6 py-4 text-right font-bold">7,500 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">COL-129340</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="package">package</span>
+                                        Colis
+                                    </span>
+</td>
+<td class="px-6 py-4">Service Fret - Aminata D.</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-secondary-fixed text-secondary-fixed-variant rounded-full text-xs font-bold">Espèces</span>
+</td>
+<td class="px-6 py-4 text-on-surface-variant">11:12</td>
+<td class="px-6 py-4 text-right font-bold">45,000 FCFA</td>
+<td class="px-6 py-4 text-center">
+<span class="material-symbols-outlined text-green-600" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 bg-slate-50 border-t border-outline-variant flex justify-between items-center">
+<p class="text-on-surface-variant text-sm">Affichage de 5 sur 124 transactions</p>
+<div class="flex gap-2">
+<button class="p-2 border border-outline rounded-lg hover:bg-white disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold">1</button>
+<button class="px-4 py-2 border border-outline rounded-lg text-sm font-bold hover:bg-white">2</button>
+<button class="px-4 py-2 border border-outline rounded-lg text-sm font-bold hover:bg-white">3</button>
+<button class="p-2 border border-outline rounded-lg hover:bg-white">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Secondary Analytics / Information -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Distribution by Type -->
+<div class="lg:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-outline-variant">
+<h4 class="font-h3 text-lg font-bold mb-6">Répartition par Type</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-medium flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+                                    Billetterie (Tickets)
+                                </span>
+<span class="text-sm font-bold">78%</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full">
+<div class="bg-primary h-full w-[78%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm font-medium flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+                                    Fret &amp; Colis
+                                </span>
+<span class="text-sm font-bold">22%</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full">
+<div class="bg-secondary-container h-full w-[22%] rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container-low rounded-lg border border-primary/10">
+<p class="text-xs text-on-surface-variant italic">
+                            * Les données incluent les réservations en ligne et les ventes directes en gare.
+                        </p>
+</div>
+</div>
+<!-- Station Location Context -->
+<div class="lg:col-span-2 relative rounded-xl overflow-hidden shadow-sm h-[300px] group border border-outline-variant">
+<img alt="Terminal de Ouagadougou" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A wide-angle landscape shot of a modern, bustling bus terminal in West Africa during sunset. The architecture features clean lines and a vibrant red facade matching the Rahimo Transport brand. In the foreground, several large, well-maintained white buses are parked in their bays. The atmosphere is professional, energetic, and organized with warm golden-hour lighting casting long shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANCzhxurbn_deXSUFCrFZXaOzzhkoJRnozzBXSKHPvWNn2gfojbVFEgLcnQpmAGjOpm4t2OEijrnr_EHwcYu4HCAiVyP-F9k47ENyUTCo6hq_zcyESaRD78x948EQhKSLb50Z857r-427Xedau9-_gcIeNQkkjcDk0wIyeG_TOTGw89CXq9GJGO3OuJoQA_a_sBmbc34d8UtOf8XHFdWK8rlKc-Tl-WiDhfB2U8ShPgkFCKlX3xbAsiQoqWI4HE8YVDiabi8l8XiRo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
+<div class="flex items-center gap-2 text-white/80 mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="pin_drop">pin_drop</span>
+<span class="text-xs font-bold uppercase tracking-widest">Localisation</span>
+</div>
+<h4 class="text-white font-h2 text-2xl font-bold">Terminal Central de Ouagadougou</h4>
+<p class="text-white/70 text-sm mt-2 max-w-md">Point névralgique reliant la capitale aux régions de l'Ouest et du Nord. Opérations 24/7 avec sécurité renforcée.</p>
+</div>
+<div class="absolute top-4 right-4 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+<span class="text-white text-xs font-bold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            Opérationnel
+                        </span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="ml-64 bg-slate-900 text-white border-t-4 border-red-600">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400 font-body-light text-sm leading-relaxed">
+                    Leader du transport interurbain au Burkina Faso. Excellence, Ponctualité et Sécurité depuis 2005.
+                </p>
+</div>
+<div>
+<h5 class="font-bold text-red-600 mb-6 uppercase text-xs tracking-widest">Liens Utiles</h5>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block text-sm" href="#">Accueil</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block text-sm" href="#">À propos</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block text-sm" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-red-600 mb-6 uppercase text-xs tracking-widest">Services</h5>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block text-sm" href="#">Transport Passagers</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block text-sm" href="#">Livraison Colis Express</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block text-sm" href="#">Location de Bus</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold text-red-600 mb-6 uppercase text-xs tracking-widest">Réseaux Sociaux</h5>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-white" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-white" data-icon="group">group</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-700 transition-colors" href="#">
+<span class="material-symbols-outlined text-white" data-icon="share">share</span>
+</a>
+</div>
+<div class="mt-8">
+<p class="text-xs text-slate-500 italic">Support technique 24h/24 : 00 226 25 30 XX XX</p>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-800 py-6 px-8 text-center">
+<p class="text-slate-500 text-xs font-body-light">© 2024 Rahimo Transport. Tous droits réservés. Design Système Enterprise.</p>
+</div>
+</footer>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.classList.add('scale-95');
+                setTimeout(() => el.classList.remove('scale-95'), 150);
+            });
+        });
+    </script>
+</body></html>

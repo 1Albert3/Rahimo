@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centre d'Aide | Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#d7d9db",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-secondary-fixed": "#111c2d",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "surface-tint": "#b91c1c",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-container": "#5c5f61",
+                        "surface-container": "#e5eeff",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-secondary-container": "#586377",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#5b403d",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-background": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "primary-container": "#b91c1c",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary-fixed": "#191c1e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-primary-container": "#ffcdc7",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#e4beb9",
+                        "tertiary-fixed": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#93000b",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#545f73",
+                        "tertiary": "#444749",
+                        "outline": "#8f6f6c",
+                        "on-surface": "#0b1c30",
+                        "inverse-primary": "#ffb4ab",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "primary": "#93000b",
+                        "on-primary-fixed": "#410002",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d5e0f8",
+                        "surface-variant": "#d3e4fe",
+                        "surface-dim": "#cbdbf5",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "code-sm": ["JetBrains Mono"],
+                        "code-md": ["JetBrains Mono"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-active .accordion-content {
+            max-height: 500px;
+        }
+        .accordion-active .chevron {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-red-700 dark:bg-red-800 text-white font-plus-jakarta-sans text-sm font-semibold tracking-tight docked full-width top-0 sticky z-50 border-b border-red-800 shadow-md">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-[1280px] mx-auto">
+<div class="text-2xl font-black text-white">Rahimo Transport</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="text-red-100 hover:text-white transition-colors" href="#">Accueil</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Réserver</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Colis</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Services</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Suivi</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all p-2 scale-95 active:scale-90 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all p-2 scale-95 active:scale-90 duration-150">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<button class="bg-yellow-400 text-primary font-bold px-6 py-2 rounded-lg hover:bg-yellow-300 transition-all scale-95 active:scale-90 duration-150">
+                    Acheter un ticket
+                </button>
+</div>
+</div>
+</header>
+<main class="min-h-screen pb-20">
+<!-- Hero Search Section -->
+<section class="relative bg-primary py-20 px-6 overflow-hidden">
+<div class="absolute inset-0 opacity-10">
+<img alt="" class="w-full h-full object-cover" data-alt="A cinematic wide shot of a modern transport terminal during the golden hour, featuring sleek buses and architectural glass structures. The lighting is warm and reassuring, casting soft glows across a clean, organized logistical environment. The color palette emphasizes professional deep reds and crisp whites, evoking a sense of reliability and modern momentum." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPSKvqDKkgLybsMDPXO5F-FgnJ6r9uO-KTRLZXaAEQdDJVDSG80iYFzXlnc_z0CxKCiII_J_3fQztgTLevjF8qDt76nm6jNx4eyBvS-6dGgugryZLXRNrwjVI321xirOxavmhJGEIFnzide0iHwaLbi3btAiCLS8eiN23O4kIH5_rnyXit08ufooq4ircq5eea6X7eOMI35pEm4j_pGNJBAxJCXp7si8JnHw3tEsWKQdqKwnz6g92at8vvU00dkBqZg5P03fOwWyh5"/>
+</div>
+<div class="relative z-10 max-w-4xl mx-auto text-center">
+<h1 class="font-display-lg text-white mb-6">Comment pouvons-nous vous aider ?</h1>
+<div class="relative max-w-2xl mx-auto">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-secondary text-2xl">search</span>
+<input class="w-full pl-14 pr-6 py-5 rounded-xl border-none shadow-xl text-lg focus:ring-4 focus:ring-primary/20 transition-all font-body-md" placeholder="Rechercher une réponse (ex: Remboursement ticket, taille bagages...)" type="text"/>
+</div>
+<div class="mt-6 flex flex-wrap justify-center gap-3">
+<span class="text-white/80 text-body-sm">Recherches fréquentes :</span>
+<a class="text-white text-body-sm font-semibold hover:underline" href="#">Modifier ma réservation</a>
+<a class="text-white text-body-sm font-semibold hover:underline" href="#">Tarifs Colis</a>
+<a class="text-white text-body-sm font-semibold hover:underline" href="#">Points Rahimo Plus</a>
+</div>
+</div>
+</section>
+<!-- Category Grid -->
+<section class="max-w-[1280px] mx-auto px-8 -mt-10 relative z-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Category Card 1 -->
+<button class="bg-white p-8 rounded-xl border border-outline-variant shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all text-left group" onclick="scrollToSection('reservations')">
+<div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">confirmation_number</span>
+</div>
+<h3 class="font-title-md text-on-surface mb-2">Réservations</h3>
+<p class="text-body-sm text-secondary">Modifier, annuler ou consulter vos billets de voyage.</p>
+</button>
+<!-- Category Card 2 -->
+<button class="bg-white p-8 rounded-xl border border-outline-variant shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all text-left group" onclick="scrollToSection('bagages')">
+<div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">package_2</span>
+</div>
+<h3 class="font-title-md text-on-surface mb-2">Bagages &amp; Colis</h3>
+<p class="text-body-sm text-secondary">Poids autorisés, tarifs d'envoi et suivi de vos marchandises.</p>
+</button>
+<!-- Category Card 3 -->
+<button class="bg-white p-8 rounded-xl border border-outline-variant shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all text-left group" onclick="scrollToSection('remboursements')">
+<div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<h3 class="font-title-md text-on-surface mb-2">Remboursements</h3>
+<p class="text-body-sm text-secondary">Politiques de retour et délais de traitement monétaire.</p>
+</button>
+<!-- Category Card 4 -->
+<button class="bg-white p-8 rounded-xl border border-outline-variant shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all text-left group" onclick="scrollToSection('fidelite')">
+<div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">loyalty</span>
+</div>
+<h3 class="font-title-md text-on-surface mb-2">Rahimo Plus</h3>
+<p class="text-body-sm text-secondary">Avantages fidélité, cumul de points et offres privilèges.</p>
+</button>
+</div>
+</section>
+<!-- FAQ Content -->
+<section class="max-w-[800px] mx-auto px-8 mt-24">
+<!-- Reservations Section -->
+<div class="mb-16" id="reservations">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">confirmation_number</span>
+<h2 class="font-headline-lg">Réservations</h2>
+</div>
+<div class="space-y-4">
+<div class="accordion-item bg-white border border-outline-variant rounded-lg overflow-hidden transition-all">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)">
+<span class="font-title-md">Comment puis-je modifier la date de mon voyage ?</span>
+<span class="material-symbols-outlined chevron transition-transform">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-white">
+<p class="pb-6 text-body-md text-secondary leading-relaxed">
+                                Vous pouvez modifier la date de votre voyage jusqu'à 24 heures avant le départ prévu. Connectez-vous à votre compte, allez dans la section "Mes Réservations" et sélectionnez "Modifier". Des frais de modification de 1 000 FCFA peuvent s'appliquer selon le type de ticket.
+                            </p>
+</div>
+</div>
+<div class="accordion-item bg-white border border-outline-variant rounded-lg overflow-hidden transition-all">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)">
+<span class="font-title-md">Est-il possible de choisir mon siège à l'avance ?</span>
+<span class="material-symbols-outlined chevron transition-transform">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-white">
+<p class="pb-6 text-body-md text-secondary leading-relaxed">
+                                Oui, lors de votre réservation en ligne ou en gare, vous pouvez visualiser le plan du bus et sélectionner votre siège préféré sans frais supplémentaires.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bagages & Colis -->
+<div class="mb-16" id="bagages">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">package_2</span>
+<h2 class="font-headline-lg">Bagages &amp; Colis</h2>
+</div>
+<div class="space-y-4">
+<div class="accordion-item bg-white border border-outline-variant rounded-lg overflow-hidden transition-all">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)">
+<span class="font-title-md">Quel est le poids maximal autorisé pour les bagages ?</span>
+<span class="material-symbols-outlined chevron transition-transform">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-white">
+<p class="pb-6 text-body-md text-secondary leading-relaxed">
+                                Chaque passager a droit à un bagage à main de 5kg et un bagage en soute de 20kg gratuitement. Au-delà, un tarif excédentaire de 200 FCFA par kilo supplémentaire sera appliqué.
+                            </p>
+</div>
+</div>
+<div class="accordion-item bg-white border border-outline-variant rounded-lg overflow-hidden transition-all">
+<button class="w-full flex items-center justify-between p-6 text-left hover:bg-surface-container-low transition-colors" onclick="toggleAccordion(this)">
+<span class="font-title-md">Comment suivre l'expédition d'un colis ?</span>
+<span class="material-symbols-outlined chevron transition-transform">expand_more</span>
+</button>
+<div class="accordion-content px-6 bg-white">
+<p class="pb-6 text-body-md text-secondary leading-relaxed">
+                                Utilisez le numéro de bordereau fourni lors de l'envoi sur notre page "Suivi de Colis". Vous recevrez également un SMS automatique dès que le colis est arrivé à destination et prêt à être récupéré.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Urgent Contact Section -->
+<div class="bg-slate-900 rounded-2xl p-10 text-white shadow-2xl relative overflow-hidden">
+<div class="absolute right-0 top-0 opacity-10">
+<span class="material-symbols-outlined text-[120px]">headset_mic</span>
+</div>
+<h3 class="font-headline-lg mb-6">Besoin d'une assistance immédiate ?</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<p class="text-slate-400 text-body-sm uppercase tracking-wider mb-2 font-bold">Support Client 24/7</p>
+<p class="font-code-md text-2xl text-yellow-400">+226 25 30 00 00</p>
+<p class="text-slate-400 text-body-sm mt-4">Disponible pour toutes vos questions générales et réservations.</p>
+</div>
+<div>
+<p class="text-red-400 text-body-sm uppercase tracking-wider mb-2 font-bold">Urgence Logistique</p>
+<p class="font-code-md text-2xl text-red-500">+226 25 31 11 11</p>
+<p class="text-slate-400 text-body-sm mt-4">Numéro réservé exclusivement aux incidents critiques en cours de voyage.</p>
+</div>
+</div>
+<div class="mt-10 pt-8 border-t border-slate-800 flex flex-wrap gap-6">
+<a class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors" href="mailto:support@rahimo.bf">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-body-md">support@rahimo.bf</span>
+</a>
+<a class="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-body-md">Chat en direct</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 dark:bg-black w-full rounded-none border-t-4 border-red-600">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<div class="md:col-span-1">
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400 font-body-sm leading-relaxed">Leader du transport interurbain et de la logistique, garantissant confort et ponctualité à travers toute la sous-région.</p>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6">Liens Utiles</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">À propos</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Nos Gares</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Recrutement</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6">Services</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Location de Bus</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Messagerie Express</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Voyages Organisés</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6">Réseaux Sociaux</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-red-600 transition-all" href="#">
+<span class="material-symbols-outlined">social_leaderboard</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-red-600 transition-all" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-red-600 transition-all" href="#">
+<span class="material-symbols-outlined">campaign</span>
+</a>
+</div>
+<p class="mt-8 text-slate-500 text-xs font-body-sm">© 2024 Rahimo Transport. Tous droits réservés.</p>
+</div>
+</div>
+</footer>
+<script>
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('accordion-active');
+            
+            // Close all others
+            document.querySelectorAll('.accordion-item').forEach(el => {
+                el.classList.remove('accordion-active');
+            });
+
+            if (!isActive) {
+                item.classList.add('accordion-active');
+            }
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const offset = 100;
+                const bodyRect = document.body.getBoundingClientRect().top;
+                const elementRect = element.getBoundingClientRect().top;
+                const elementPosition = elementRect - bodyRect;
+                const offsetPosition = elementPosition - offset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Search highlight micro-interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.style.transform = 'scale(1.02)';
+            searchInput.parentElement.style.transition = 'transform 0.3s ease';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.style.transform = 'scale(1)';
+        });
+    </script>
+</body></html>

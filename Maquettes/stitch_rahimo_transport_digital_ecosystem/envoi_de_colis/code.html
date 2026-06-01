@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Envoi de Colis - Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #b20112; /* primary */
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e5bdb9; /* outline-variant */
+            border-radius: 2px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#bd1119",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container-low": "#fff0ee",
+                        "on-tertiary-container": "#ebf5ff",
+                        "surface-container": "#ffe9e6",
+                        "surface-container-highest": "#fbdbd8",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "surface": "#fff8f7",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#e5bdb9",
+                        "surface-dim": "#f2d3cf",
+                        "secondary-fixed": "#ffdea8",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-surface-variant": "#5c403d",
+                        "primary": "#b20112",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "primary-container": "#d62828",
+                        "tertiary-fixed": "#c7e7ff",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-bright": "#fff8f7",
+                        "surface-variant": "#fbdbd8",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "on-primary-container": "#fff1ef",
+                        "secondary": "#7c5800",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001e2e",
+                        "on-secondary-container": "#6f4e00",
+                        "tertiary": "#005d83",
+                        "inverse-on-surface": "#ffedea",
+                        "secondary-container": "#ffbe39",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "inverse-primary": "#ffb4ab",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#281716",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#271900",
+                        "on-background": "#281716",
+                        "tertiary-container": "#0077a6",
+                        "background": "#fff8f7",
+                        "outline": "#906f6b",
+                        "inverse-surface": "#3f2c2a",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-fixed": "#410002"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-columns": "12",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "container-max": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-regular": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "data-table": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-light": ["14px", { "lineHeight": "1.5", "fontWeight": "300" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-regular": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-regular min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<nav class="bg-red-700 dark:bg-red-800 docked full-width top-0 sticky z-50 border-b border-red-800 shadow-md">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-[1280px] mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-black text-white font-plus-jakarta-sans tracking-tight" href="#">Rahimo Transport</a>
+<div class="hidden md:flex items-center gap-2 font-plus-jakarta-sans text-sm font-semibold tracking-tight">
+<a class="px-4 py-2 text-red-100 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all scale-95 active:scale-90 duration-150" href="#">Accueil</a>
+<a class="px-4 py-2 text-red-100 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all scale-95 active:scale-90 duration-150" href="#">Réserver</a>
+<a class="px-4 py-2 border-b-2 border-yellow-400 text-white pb-1 transition-all scale-95 active:scale-90 duration-150" href="#">Colis</a>
+<a class="px-4 py-2 text-red-100 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all scale-95 active:scale-90 duration-150" href="#">Services</a>
+<a class="px-4 py-2 text-red-100 hover:text-white hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all scale-95 active:scale-90 duration-150" href="#">Suivi</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block bg-yellow-400 text-slate-900 px-6 py-2 rounded-md font-plus-jakarta-sans text-sm font-semibold tracking-tight hover:bg-yellow-300 transition-colors scale-95 active:scale-90 duration-150">
+                    Acheter un ticket
+                </button>
+<button class="text-white hover:bg-red-600 dark:hover:bg-red-700 p-2 rounded-md transition-all scale-95 active:scale-90 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-white hover:bg-red-600 dark:hover:bg-red-700 p-2 rounded-md transition-all scale-95 active:scale-90 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-6 py-8 md:px-8 md:py-12">
+<!-- Page Header & Stepper -->
+<div class="mb-10">
+<h1 class="font-h1 text-h1 text-on-background mb-8">Envoi de Colis</h1>
+<!-- Stepper -->
+<div class="flex items-center justify-between max-w-3xl mx-auto relative">
+<!-- Line background -->
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-surface-variant z-0 rounded-full"></div>
+<!-- Line active progress -->
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-[15%] h-1 bg-primary z-0 rounded-full transition-all duration-300"></div>
+<!-- Step 1: Active -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-caps text-label-caps shadow-md ring-4 ring-background">
+                        1
+                    </div>
+<span class="font-label-caps text-label-caps text-primary uppercase">Infos colis</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps ring-4 ring-background">
+                        2
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tarif</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps ring-4 ring-background">
+                        3
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Paiement</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps ring-4 ring-background">
+                        4
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Confirmation</span>
+</div>
+</div>
+</div>
+<!-- Form Layout Grid -->
+<form class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Form Sections -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Section: Itinéraire & Contacts -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant overflow-hidden">
+<div class="bg-surface-container px-6 py-4 border-b border-surface-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<h2 class="font-h3 text-h3 text-on-background m-0 text-xl">Expédition &amp; Destination</h2>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+<!-- Decorative connector line for desktop -->
+<div class="hidden md:block absolute left-1/2 top-10 bottom-6 w-[1px] bg-outline-variant -translate-x-1/2"></div>
+<div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-surface-container-lowest border border-outline-variant rounded-full items-center justify-center text-outline-variant z-10">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+<!-- Expéditeur -->
+<div class="flex flex-col gap-5">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">trip_origin</span>
+                                Expéditeur
+                            </h3>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Ville de départ *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_city</span>
+<select class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none transition-colors">
+<option disabled="" selected="" value="">Sélectionner une ville</option>
+<option value="ouaga">Ouagadougou</option>
+<option value="bobo">Bobo-Dioulasso</option>
+<option value="koudougou">Koudougou</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Nom &amp; Prénom *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Ex: Jean Dupont" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Téléphone *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">phone</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="+226 XX XX XX XX" type="tel"/>
+</div>
+</div>
+</div>
+<!-- Destinataire -->
+<div class="flex flex-col gap-5">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+                                Destinataire
+                            </h3>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Ville d'arrivée *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_city</span>
+<select class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none transition-colors">
+<option disabled="" selected="" value="">Sélectionner une ville</option>
+<option value="ouaga">Ouagadougou</option>
+<option value="bobo">Bobo-Dioulasso</option>
+<option value="abidjan">Abidjan (CI)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Nom &amp; Prénom *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">person</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Ex: Marie Claire" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Téléphone *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">phone</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="+226 XX XX XX XX" type="tel"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Détails du Colis -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant overflow-hidden">
+<div class="bg-surface-container px-6 py-4 border-b border-surface-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">package</span>
+<h2 class="font-h3 text-h3 text-on-background m-0 text-xl">Détails du colis</h2>
+</div>
+<div class="p-6 flex flex-col gap-8">
+<!-- Nature du colis (Chips) -->
+<div class="flex flex-col gap-3">
+<label class="font-label-caps text-label-caps text-on-surface">Nature du colis *</label>
+<div class="flex flex-wrap gap-3">
+<label class="cursor-pointer">
+<input checked="" class="peer hidden" name="package_type" type="radio" value="document"/>
+<div class="px-4 py-2 rounded-full border border-outline font-label-caps text-label-caps text-on-surface flex items-center gap-2 transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[18px]">description</span>
+                                        Document
+                                    </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer hidden" name="package_type" type="radio" value="electronique"/>
+<div class="px-4 py-2 rounded-full border border-outline font-label-caps text-label-caps text-on-surface flex items-center gap-2 transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[18px]">devices</span>
+                                        Électronique
+                                    </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer hidden" name="package_type" type="radio" value="fragile"/>
+<div class="px-4 py-2 rounded-full border border-outline font-label-caps text-label-caps text-on-surface flex items-center gap-2 transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[18px]">wine_bar</span>
+                                        Fragile
+                                    </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer hidden" name="package_type" type="radio" value="vetement"/>
+<div class="px-4 py-2 rounded-full border border-outline font-label-caps text-label-caps text-on-surface flex items-center gap-2 transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[18px]">checkroom</span>
+                                        Vêtement
+                                    </div>
+</label>
+<label class="cursor-pointer">
+<input class="peer hidden" name="package_type" type="radio" value="autre"/>
+<div class="px-4 py-2 rounded-full border border-outline font-label-caps text-label-caps text-on-surface flex items-center gap-2 transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[18px]">category</span>
+                                        Autre
+                                    </div>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Poids -->
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<label class="font-label-caps text-label-caps text-on-surface">Poids estimé (kg) *</label>
+<span class="font-data-table text-data-table font-semibold text-primary bg-surface-variant px-2 py-1 rounded">2.5 kg</span>
+</div>
+<input class="w-full" max="50" min="0.1" step="0.1" type="range" value="2.5"/>
+<div class="flex justify-between font-label-caps text-label-caps text-outline text-[10px]">
+<span>0.1 kg</span>
+<span>50+ kg</span>
+</div>
+</div>
+<!-- Dimensions -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Dimensions (cm) <span class="text-outline font-normal lowercase">Optionnel</span></label>
+<div class="grid grid-cols-3 gap-2">
+<div class="relative">
+<input class="w-full pl-3 pr-6 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-center focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="L" type="number"/>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-label-caps text-[10px] text-outline">L</span>
+</div>
+<div class="relative">
+<input class="w-full pl-3 pr-6 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-center focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="l" type="number"/>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-label-caps text-[10px] text-outline">l</span>
+</div>
+<div class="relative">
+<input class="w-full pl-3 pr-6 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-center focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="h" type="number"/>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-label-caps text-[10px] text-outline">h</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Valeur & Description -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Valeur déclarée (FCFA) *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">payments</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="Ex: 50000" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps text-on-surface">Description du contenu</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-outline">edit_note</span>
+<textarea class="w-full pl-10 pr-4 py-2.5 bg-surface-container-lowest border border-outline rounded-lg text-body-regular font-body-regular text-on-background placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors resize-none" placeholder="Brève description..." rows="2"></textarea>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Options & Submit -->
+<div class="lg:col-span-4 flex flex-col gap-6 sticky top-28">
+<!-- Card: Options -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant p-6 flex flex-col gap-6">
+<h2 class="font-h3 text-h3 text-on-background m-0 text-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container">tune</span>
+                        Options d'envoi
+                    </h2>
+<!-- Vitesse -->
+<div class="flex flex-col gap-3">
+<label class="font-label-caps text-label-caps text-on-surface">Vitesse de livraison</label>
+<div class="flex flex-col gap-2">
+<label class="cursor-pointer relative">
+<input checked="" class="peer hidden" name="speed" type="radio" value="standard"/>
+<div class="p-4 border-2 border-outline-variant rounded-lg flex items-start gap-3 transition-all peer-checked:border-primary peer-checked:bg-surface-container-low">
+<span class="material-symbols-outlined text-on-surface mt-0.5">local_shipping</span>
+<div class="flex flex-col">
+<span class="font-body-regular font-semibold text-on-background">Standard</span>
+<span class="font-body-light text-[12px] text-on-surface-variant">Livraison dans les 24h à 48h.</span>
+</div>
+<div class="absolute right-4 top-4 w-5 h-5 rounded-full border-2 border-outline peer-checked:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer hidden" name="speed" type="radio" value="express"/>
+<div class="p-4 border-2 border-outline-variant rounded-lg flex items-start gap-3 transition-all peer-checked:border-primary peer-checked:bg-surface-container-low">
+<span class="material-symbols-outlined text-secondary mt-0.5">bolt</span>
+<div class="flex flex-col">
+<span class="font-body-regular font-semibold text-on-background">Express prioritaire</span>
+<span class="font-body-light text-[12px] text-on-surface-variant">Départ par le premier bus disponible.</span>
+</div>
+<div class="absolute right-4 top-4 w-5 h-5 rounded-full border-2 border-outline peer-checked:border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+</div>
+</label>
+</div>
+</div>
+<hr class="border-surface-variant"/>
+<!-- Qui paie ? -->
+<div class="flex flex-col gap-3">
+<label class="font-label-caps text-label-caps text-on-surface">Modalité de paiement</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="cursor-pointer text-center">
+<input checked="" class="peer hidden" name="payer" type="radio" value="sender"/>
+<div class="py-3 px-2 border border-outline rounded-lg font-body-regular text-sm transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+                                    Payé au départ
+                                </div>
+</label>
+<label class="cursor-pointer text-center">
+<input class="peer hidden" name="payer" type="radio" value="receiver"/>
+<div class="py-3 px-2 border border-outline rounded-lg font-body-regular text-sm transition-all peer-checked:bg-primary-container peer-checked:border-primary peer-checked:text-on-primary-container hover:bg-surface-variant">
+                                    Payé à l'arrivée
+                                </div>
+</label>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-h3 text-xl hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm flex items-center justify-center gap-2 group" type="submit">
+                    Calculer le tarif
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center font-body-light text-xs text-outline mt-2">
+<span class="material-symbols-outlined text-[14px] align-middle mr-1">info</span>
+                    Le tarif final dépendra des vérifications en agence.
+                </p>
+</div>
+</form>
+</main>
+<!-- Footer Component -->
+<footer class="bg-slate-900 dark:bg-black w-full rounded-none border-t-4 border-red-600 flat no shadows mt-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<div>
+<span class="text-xl font-bold text-white mb-4 block font-plus-jakarta-sans">Rahimo Transport</span>
+<p class="font-plus-jakarta-sans text-sm leading-relaxed text-slate-400">
+                    Leader du transport interurbain et de la logistique au Burkina Faso. Fiabilité, confort et sécurité pour tous vos trajets et expéditions.
+                </p>
+</div>
+<div>
+<h4 class="text-white font-medium mb-4 font-plus-jakarta-sans text-sm">Liens Utiles</h4>
+<ul class="space-y-2 font-plus-jakarta-sans text-sm leading-relaxed">
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Réserver un billet</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Agences &amp; Horaires</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Tarifs des colis</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Conditions générales</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-medium mb-4 font-plus-jakarta-sans text-sm">Services</h4>
+<ul class="space-y-2 font-plus-jakarta-sans text-sm leading-relaxed">
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Transport de passagers</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Envoi de courriers</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Fret &amp; Marchandises lourdes</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Location de bus</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-medium mb-4 font-plus-jakarta-sans text-sm">Applications</h4>
+<div class="flex flex-col gap-3">
+<button class="bg-surface-variant/10 border border-surface-variant/20 rounded-md py-2 px-4 flex items-center gap-3 text-slate-400 hover:text-white hover:bg-surface-variant/20 transition-all">
+<span class="material-symbols-outlined">android</span>
+<span class="font-plus-jakarta-sans text-sm">Google Play</span>
+</button>
+<button class="bg-surface-variant/10 border border-surface-variant/20 rounded-md py-2 px-4 flex items-center gap-3 text-slate-400 hover:text-white hover:bg-surface-variant/20 transition-all">
+<span class="material-symbols-outlined">phone_iphone</span>
+<span class="font-plus-jakarta-sans text-sm">App Store</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-800 w-full">
+<div class="px-8 py-6 w-full max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-plus-jakarta-sans text-sm leading-relaxed text-slate-500">© 2024 Rahimo Transport. Tous droits réservés.</span>
+<div class="flex gap-4">
+<a class="text-slate-500 hover:text-red-400 transition-colors" href="#"><span class="material-symbols-outlined">language</span></a>
+<a class="text-slate-500 hover:text-red-400 transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

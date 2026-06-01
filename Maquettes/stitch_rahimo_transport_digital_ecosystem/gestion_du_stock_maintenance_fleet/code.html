@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#5b403d",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-surface": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "secondary-container": "#d5e0f8",
+                        "on-tertiary-container": "#d7d9db",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-fixed": "#410002",
+                        "primary": "#93000b",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-primary-container": "#ffcdc7",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "surface-tint": "#b91c1c",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-secondary-container": "#586377",
+                        "surface-dim": "#cbdbf5",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "surface-variant": "#d3e4fe",
+                        "primary-container": "#b91c1c",
+                        "tertiary": "#444749",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#111c2d",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "secondary": "#545f73",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#e4beb9",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-primary-fixed-variant": "#93000b",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#5c5f61",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-surface": "#213145",
+                        "outline": "#8f6f6c",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "base": "4px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "code-md": ["JetBrains Mono"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "body-sm": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar Shell -->
+<nav class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 docked left-0 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="text-lg font-black text-red-500 mb-8 px-6">Rahimo Admin</div>
+<div class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span> Tableau de bord
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span> Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">package</span> Colis
+            </a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-opacity active:opacity-90" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span> Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span> Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">payments</span> Comptabilité
+            </a>
+</div>
+<div class="px-6 mt-auto">
+<div class="flex items-center space-x-3 py-4 border-t border-slate-800">
+<div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-white overflow-hidden">
+<img alt="Admin Profile" data-alt="Professional portrait of a West African logistics administrator in a clean, bright corporate office setting. He is wearing a tailored grey suit and smiling confidently. The lighting is soft and professional, emphasizing a modern corporate atmosphere with subtle red branding elements in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7grIMx0vgyuqzStRG9m1s6-BXM5wYSHjQD7laUtv_LZCPH42rRAfyH-UQrpo74iu7TucB0IrZOmw9PWCO3PEId0LPugFmHWKUZl9JXx5C-ETPTlaUxUhV3ubEP_34wzPfAB85u0f0F3BpKZGPc9NbocRIM4NytdwtfmADb2PfMGUPmOgwZbtWzp38N8oKWoeseCEoHLwiPJb5CvLfKYE0JznQ7M7WqIgV-jT8onS6gpOKsWPsbukNOSCuZfnj_zs5oQ49UrEygSLd"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-white truncate">Rahimo Admin</p>
+<p class="text-xs text-slate-400 truncate">Superviseur Général</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar Shell -->
+<header class="flex justify-between items-center px-6 h-16 ml-64 w-[calc(100%-16rem)] bg-red-700 dark:bg-red-900 text-white fixed top-0 z-40 border-b border-red-800 shadow-sm">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined">location_on</span>
+<h1 class="font-bold text-lg">Gare de Ouagadougou - Inventaire Pièces</h1>
+</div>
+<div class="flex items-center space-x-2">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">schedule</span></button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full border border-red-700"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-8 pb-12">
+<!-- Header & Action Bento -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-xl">
+<div class="md:col-span-3 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Gestion des Stocks Maintenance</h2>
+<p class="font-body-md text-body-md text-secondary">Suivi en temps réel des pièces détachées critiques pour la flotte Rahimo Transport. Optimisez vos cycles de maintenance préventive.</p>
+</div>
+<div class="flex space-x-md mt-lg">
+<button class="bg-primary text-white px-md py-sm rounded-lg font-title-md text-sm hover:opacity-90 transition-opacity flex items-center">
+<span class="material-symbols-outlined mr-2">add_circle</span> Ajouter une Référence
+                    </button>
+<button class="border border-primary text-primary px-md py-sm rounded-lg font-title-md text-sm hover:bg-primary-fixed transition-colors flex items-center">
+<span class="material-symbols-outlined mr-2">download</span> Exporter Inventaire
+                    </button>
+</div>
+</div>
+<div class="bg-surface-container-high p-lg rounded-xl border border-outline-variant shadow-sm flex flex-col items-center justify-center text-center">
+<div class="text-primary text-4xl mb-2 font-black">12</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Alertes Critiques</p>
+<div class="w-full bg-white/50 h-1 mt-4 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+<p class="text-[10px] mt-2 font-body-sm text-secondary">85% du stock critique à renouveler</p>
+</div>
+</div>
+<!-- Inventory Filters -->
+<div class="flex flex-wrap items-center gap-md mb-md">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-lg border-outline-variant focus:border-primary focus:ring-primary/10 bg-white text-sm" placeholder="Rechercher par SKU, Nom ou Catégorie..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-secondary mr-2">FILTRER PAR:</span>
+<select class="rounded-lg border-outline-variant text-sm py-2 bg-white">
+<option>Toutes les catégories</option>
+<option>Pneumatiques</option>
+<option>Filtration</option>
+<option>Lubrifiants</option>
+<option>Courroies</option>
+</select>
+<select class="rounded-lg border-outline-variant text-sm py-2 bg-white">
+<option>Statut: Tous</option>
+<option>Stock Faible</option>
+<option>Rupture</option>
+<option>Optimal</option>
+</select>
+</div>
+</div>
+<!-- Inventory Table -->
+<div class="bg-white rounded-xl border border-outline-variant overflow-hidden shadow-sm mb-xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider">Référence SKU</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider">Article</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider">Catégorie</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider text-right">Quantité</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider text-right">Seuil Alerte</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider text-center">Status</th>
+<th class="px-6 py-4 font-label-caps text-label-caps text-secondary uppercase tracking-wider text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Critical Item -->
+<tr class="hover:bg-red-50/30 transition-colors group">
+<td class="px-6 py-4 font-code-sm text-on-surface">RT-PNU-315-80</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-secondary">tire_repair</span>
+<span class="font-body-md font-semibold">Pneu Michelin 315/80 R22.5</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Pneumatiques</td>
+<td class="px-6 py-4 text-right font-code-md text-primary-container font-bold">04</td>
+<td class="px-6 py-4 text-right font-code-sm text-secondary">08</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">
+                                CRITIQUE
+                            </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+<!-- Critical Item -->
+<tr class="hover:bg-red-50/30 transition-colors group">
+<td class="px-6 py-4 font-code-sm text-on-surface">RT-OIL-15W40-20L</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-secondary">oil_barrel</span>
+<span class="font-body-md font-semibold">Huile Moteur 15W40 (20L)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Lubrifiants</td>
+<td class="px-6 py-4 text-right font-code-md text-primary-container font-bold">02</td>
+<td class="px-6 py-4 text-right font-code-sm text-secondary">10</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">
+                                CRITIQUE
+                            </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+<!-- Low Stock -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-code-sm text-on-surface">RT-FLT-D-092</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-secondary">filter_alt</span>
+<span class="font-body-md font-semibold">Filtre à Gasoil Bus Scania</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Filtration</td>
+<td class="px-6 py-4 text-right font-code-md text-on-surface">12</td>
+<td class="px-6 py-4 text-right font-code-sm text-secondary">15</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-yellow-100 text-yellow-800 border border-yellow-200">
+                                FAIBLE
+                            </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+<!-- Optimal -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 font-code-sm text-on-surface">RT-BELT-V-302</td>
+<td class="px-6 py-4">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-secondary">settings_input_component</span>
+<span class="font-body-md font-semibold">Courroie Alternateur V-Belt</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-sm text-secondary">Courroies</td>
+<td class="px-6 py-4 text-right font-code-md text-on-surface">45</td>
+<td class="px-6 py-4 text-right font-code-sm text-secondary">20</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200">
+                                OPTIMAL
+                            </span>
+</td>
+<td class="px-6 py-4 text-center">
+<button class="text-secondary hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 border-t border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<p class="text-xs font-body-sm text-secondary">Affichage de 4 sur 142 références</p>
+<div class="flex space-x-2">
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-2 border border-outline-variant rounded bg-primary text-white transition-colors text-xs font-bold px-3">1</button>
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors text-xs px-3">2</button>
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- History Section: Entrées/Sorties -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-title-md text-title-md text-on-surface">Historique Récent des Mouvements</h3>
+<span class="material-symbols-outlined text-secondary cursor-pointer">history</span>
+</div>
+<div class="p-0">
+<div class="divide-y divide-outline-variant">
+<div class="flex items-center justify-between px-6 py-4 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded bg-green-50 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined">add</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Entrée: Huile Moteur 15W40</p>
+<p class="text-xs text-secondary">Livraison fournisseur: TOTAL Energies</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-code-md text-green-600 font-bold">+20 L</p>
+<p class="text-[10px] text-secondary">Aujourd'hui, 09:15</p>
+</div>
+</div>
+<div class="flex items-center justify-between px-6 py-4 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded bg-red-50 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined">remove</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Sortie: Pneu Michelin 315/80</p>
+<p class="text-xs text-secondary">Maintenance Bus ID: #RAH-402</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-code-md text-red-600 font-bold">-02</p>
+<p class="text-[10px] text-secondary">Hier, 16:45</p>
+</div>
+</div>
+<div class="flex items-center justify-between px-6 py-4 hover:bg-surface-container-low transition-colors">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded bg-red-50 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined">remove</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Sortie: Filtre à Gasoil</p>
+<p class="text-xs text-secondary">Maintenance Bus ID: #RAH-215</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-code-md text-red-600 font-bold">-04</p>
+<p class="text-[10px] text-secondary">15 Oct, 11:20</p>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-container-low text-center">
+<a class="text-xs font-bold text-primary hover:underline" href="#">Voir tout le registre</a>
+</div>
+</div>
+</div>
+<!-- Dashboard Analytics / Quick Stats -->
+<div class="flex flex-col gap-gutter">
+<div class="bg-primary-container text-white p-6 rounded-xl shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-label-caps text-label-caps opacity-80 mb-2 uppercase">Valeur du Stock Total</h4>
+<p class="text-2xl font-black mb-4">15,420,000 FCFA</p>
+<div class="flex items-center text-xs bg-white/20 w-fit px-2 py-1 rounded">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +3.2% ce mois
+                        </div>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-10">payments</span>
+</div>
+<div class="bg-white border border-outline-variant p-6 rounded-xl shadow-sm">
+<h4 class="font-title-md text-title-md mb-4 flex items-center">
+<span class="material-symbols-outlined mr-2 text-primary">analytics</span> Top Consommation
+                    </h4>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold">Huile Moteur</span>
+<span class="text-secondary">420L / mois</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full w-[90%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold">Filtres Gasoil</span>
+<span class="text-secondary">85 pces / mois</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold">Pneumatiques</span>
+<span class="text-secondary">12 pces / mois</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full w-[30%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="ml-64 bg-slate-900 text-slate-400 border-t-4 border-red-600">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<div class="col-span-1">
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="font-body-sm leading-relaxed mb-6">Expert en logistique et transport interurbain au Burkina Faso. Excellence et fiabilité depuis 2004.</p>
+<div class="flex space-x-4">
+<a class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-600 transition-colors" href="#"><span class="material-symbols-outlined text-sm text-white">social_leaderboard</span></a>
+<a class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-600 transition-colors" href="#"><span class="material-symbols-outlined text-sm text-white">crossword</span></a>
+</div>
+</div>
+<div>
+<h5 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Liens Utiles</h5>
+<ul class="space-y-2 text-sm">
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Plan de maintenance</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Rapports mensuels</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Gestion Flotte</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Services</h5>
+<ul class="space-y-2 text-sm">
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Billetterie Digitale</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Rahimo Fret</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Maintenance Préventive</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Applications</h5>
+<ul class="space-y-2 text-sm">
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">App Conducteur</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">App Client Rahimo</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Dashboard Admin</a></li>
+</ul>
+</div>
+</div>
+<div class="bg-black py-6 px-8 text-center text-xs border-t border-slate-800">
+            © 2024 Rahimo Transport. Tous droits réservés.
+        </div>
+</footer>
+<script>
+        // Micro-interactions and animations
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', function() {
+                this.classList.add('scale-[0.99]');
+                setTimeout(() => this.classList.remove('scale-[0.99]'), 150);
+            });
+        });
+
+        // Simple alert toggle simulation
+        const notificationBtn = document.querySelector('header button:nth-child(2)');
+        notificationBtn.addEventListener('click', () => {
+            const dot = notificationBtn.querySelector('span:nth-child(2)');
+            if(dot) dot.style.display = 'none';
+        });
+    </script>
+</body></html>

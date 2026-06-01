@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Enregistrement Colis - Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#fff0ee",
+                    "on-secondary-fixed": "#271900",
+                    "outline": "#906f6b",
+                    "inverse-primary": "#ffb4ab",
+                    "on-tertiary-fixed": "#001e2e",
+                    "surface-dim": "#f2d3cf",
+                    "primary": "#b20112",
+                    "on-primary-fixed-variant": "#93000d",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#005d83",
+                    "on-surface-variant": "#5c403d",
+                    "on-surface": "#281716",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "primary-fixed": "#ffdad6",
+                    "on-primary-container": "#fff1ef",
+                    "primary-container": "#d62828",
+                    "background": "#fff8f7",
+                    "surface-container-highest": "#fbdbd8",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#004c6c",
+                    "on-secondary-container": "#6f4e00",
+                    "outline-variant": "#e5bdb9",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#c7e7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#ffe2de",
+                    "surface-container": "#ffe9e6",
+                    "on-secondary-fixed-variant": "#5e4200",
+                    "inverse-on-surface": "#ffedea",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#fbdbd8",
+                    "secondary": "#7c5800",
+                    "on-tertiary-container": "#ebf5ff",
+                    "error-container": "#ffdad6",
+                    "surface-tint": "#bd1119",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#83cfff",
+                    "tertiary-container": "#0077a6",
+                    "surface-bright": "#fff8f7",
+                    "secondary-fixed-dim": "#fcbb36",
+                    "secondary-fixed": "#ffdea8",
+                    "secondary-container": "#ffbe39",
+                    "on-primary-fixed": "#410002",
+                    "inverse-surface": "#3f2c2a",
+                    "on-background": "#281716",
+                    "surface": "#fff8f7"
+            },
+            "fontFamily": {
+                    "body-light": ["Plus Jakarta Sans"],
+                    "h3": ["Plus Jakarta Sans"],
+                    "data-table": ["Inter"],
+                    "body-regular": ["Plus Jakarta Sans"],
+                    "label-caps": ["Inter"],
+                    "h2": ["Plus Jakarta Sans"],
+                    "h1": ["Plus Jakarta Sans"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            background-color: #b20112;
+            color: white;
+            border-radius: 0.5rem;
+        }
+        .label-preview {
+            background: repeating-linear-gradient(
+              45deg,
+              #ffffff,
+              #ffffff 10px,
+              #f8fafc 10px,
+              #f8fafc 20px
+            );
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-regular text-on-surface overflow-hidden">
+<!-- Sidebar Wrapper (SideNavBar) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500">Rahimo Admin</span>
+<div class="flex items-center mt-6 p-3 bg-slate-800/50 rounded-xl">
+<div class="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center text-white font-bold mr-3">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div class="overflow-hidden">
+<p class="text-white text-sm font-bold truncate">Superviseur Gérant</p>
+<p class="text-slate-400 text-xs truncate">Gare de Ouagadougou</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+<span>Billetterie</span>
+</a>
+<!-- Active State for 'Colis' -->
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium shadow-lg shadow-red-900/20" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+<span>Colis</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span>
+<span>Flotte</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span>Personnel</span>
+</a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span>Comptabilité</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="flex items-center text-slate-400 hover:text-white transition-colors text-sm font-medium">
+<span class="material-symbols-outlined mr-2">logout</span>
+                Déconnexion
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen flex flex-col bg-surface overflow-y-auto">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 bg-red-700 dark:bg-red-900 text-white sticky top-0 z-40 border-b border-red-800 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<h1 class="font-h3 text-lg font-bold">Gare de Ouagadougou</h1>
+<span class="mx-2 opacity-40">/</span>
+<span class="text-sm font-medium text-red-100">Enregistrement Colis</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-1">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">schedule</span></button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full border-2 border-red-700"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-[1400px] mx-auto w-full grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Left Column: Form -->
+<div class="xl:col-span-2 space-y-6">
+<!-- Section Header -->
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-h2 text-h2 text-on-surface">Nouveau Colis</h2>
+<span class="px-3 py-1 bg-surface-container-high text-primary font-bold text-xs rounded-full border border-outline-variant">ID: RAH-2024-0892</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Expéditeur Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-2 mb-4 text-primary font-bold">
+<span class="material-symbols-outlined">person_pin</span>
+<span class="font-label-caps uppercase">Expéditeur</span>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Nom Complet</label>
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Ex: Jean Dupont" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Téléphone</label>
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="+226 XX XX XX XX" type="tel"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Ville d'origine</label>
+<select class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all">
+<option>Ouagadougou</option>
+<option>Bobo-Dioulasso</option>
+<option>Koudougou</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Destinataire Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-2 mb-4 text-secondary font-bold">
+<span class="material-symbols-outlined">hail</span>
+<span class="font-label-caps uppercase">Destinataire</span>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Nom Complet</label>
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-all" placeholder="Ex: Marie Koné" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Téléphone</label>
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-all" placeholder="+226 XX XX XX XX" type="tel"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Destination</label>
+<select class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition-all">
+<option>Bobo-Dioulasso</option>
+<option>Ouagadougou</option>
+<option>Banfora</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- Détails du Colis -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-2 mb-6 text-tertiary font-bold">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-caps uppercase">Détails du Colis</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Type de Colis</label>
+<select class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-tertiary focus:border-tertiary outline-none transition-all">
+<option>Carton Standard</option>
+<option>Sac / Valise</option>
+<option>Document</option>
+<option>Fragile</option>
+<option>Électronique</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Poids (kg)</label>
+<div class="relative">
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-tertiary focus:border-tertiary outline-none transition-all pr-12" id="weight-input" min="0" type="number" value="5"/>
+<span class="absolute right-4 top-2 text-on-surface-variant font-bold">kg</span>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Valeur Estimée (CFA)</label>
+<div class="relative">
+<input class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-tertiary focus:border-tertiary outline-none transition-all pr-12" placeholder="0" type="number"/>
+<span class="absolute right-4 top-2 text-on-surface-variant font-bold">CFA</span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<label class="block text-sm font-semibold text-on-surface-variant mb-1">Description / Notes</label>
+<textarea class="w-full px-4 py-2 bg-white border border-outline-variant rounded-lg focus:ring-2 focus:ring-tertiary focus:border-tertiary outline-none transition-all" placeholder="Ajouter des détails sur le contenu..." rows="2"></textarea>
+</div>
+</div>
+</div>
+<!-- Right Column: Summary & Receipt -->
+<div class="space-y-6">
+<!-- Calcul du Tarif -->
+<div class="bg-surface-container-high p-6 rounded-xl border-2 border-primary-container shadow-md">
+<h3 class="text-on-surface font-bold text-lg mb-4 flex items-center justify-between">
+                        Calcul du Tarif
+                        <span class="material-symbols-outlined text-primary">calculate</span>
+</h3>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Base (0-10kg)</span>
+<span class="font-medium">2 500 CFA</span>
+</div>
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Supplément Poids</span>
+<span class="font-medium" id="weight-extra">0 CFA</span>
+</div>
+<div class="flex justify-between text-sm text-on-surface-variant">
+<span>Assurance (1%)</span>
+<span class="font-medium">500 CFA</span>
+</div>
+<div class="pt-3 border-t border-outline-variant flex justify-between items-center">
+<span class="font-bold text-on-surface">TOTAL À PAYER</span>
+<span class="text-2xl font-black text-primary" id="total-price">3 000 CFA</span>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined">print</span>
+                        Enregistrer et Imprimer
+                    </button>
+</div>
+<!-- Label Preview -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm label-preview">
+<div class="flex items-center justify-between border-b border-dashed border-slate-300 pb-4 mb-4">
+<span class="font-black text-slate-800 text-lg">RAHIMO</span>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-500 uppercase">Numéro de suivi</p>
+<p class="font-mono font-bold text-slate-800">RH-67442-OUA</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Origine</p>
+<p class="font-bold text-slate-800">OUAGADOUGOU</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-400 uppercase">Destination</p>
+<p class="font-bold text-red-600">BOBO-D.</p>
+</div>
+</div>
+<div class="flex justify-center mb-6">
+<div class="p-3 bg-white border-2 border-slate-800 rounded-lg">
+<!-- Placeholder for QR Code -->
+<div class="w-32 h-32 bg-slate-100 flex items-center justify-center relative overflow-hidden group">
+<div class="grid grid-cols-4 gap-1 opacity-20">
+<div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-white"></div><div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-slate-900"></div>
+<div class="w-6 h-6 bg-white"></div><div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-white"></div><div class="w-6 h-6 bg-white"></div>
+<div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-white"></div><div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-slate-900"></div>
+<div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-slate-900"></div><div class="w-6 h-6 bg-white"></div><div class="w-6 h-6 bg-slate-900"></div>
+</div>
+<span class="absolute inset-0 flex items-center justify-center text-[10px] font-mono text-slate-400 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity">QR CODE SECURE</span>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-800 text-4xl">qr_code_2</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-end border-t border-dashed border-slate-300 pt-4">
+<div>
+<p class="text-[10px] font-bold text-slate-400 uppercase">Poids</p>
+<p class="font-bold text-slate-800" id="label-weight">5.0 kg</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-slate-400 uppercase">Date</p>
+<p class="font-bold text-slate-800">22 MAI 2024</p>
+</div>
+</div>
+</div>
+<div class="bg-blue-50 p-4 rounded-lg border border-blue-100 flex gap-3 items-start">
+<span class="material-symbols-outlined text-blue-600 mt-0.5">info</span>
+<p class="text-xs text-blue-700 leading-relaxed">
+                        Le client recevra un SMS de confirmation dès que le colis sera scanné à l'embarquement du bus.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const weightInput = document.getElementById('weight-input');
+        const weightExtra = document.getElementById('weight-extra');
+        const totalPrice = document.getElementById('total-price');
+        const labelWeight = document.getElementById('label-weight');
+
+        weightInput.addEventListener('input', (e) => {
+            const weight = parseFloat(e.target.value) || 0;
+            labelWeight.textContent = weight.toFixed(1) + ' kg';
+            
+            let extra = 0;
+            if (weight > 10) {
+                extra = (weight - 10) * 200; // 200 CFA par kg supplémentaire
+            }
+            
+            const insurance = 500;
+            const base = 2500;
+            const total = base + extra + insurance;
+            
+            weightExtra.textContent = extra.toLocaleString() + ' CFA';
+            totalPrice.textContent = total.toLocaleString() + ' CFA';
+        });
+
+        // Simple feedback for interaction
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.add('scale-95');
+                setTimeout(() => this.classList.remove('scale-95'), 150);
+            });
+        });
+    </script>
+</body></html>

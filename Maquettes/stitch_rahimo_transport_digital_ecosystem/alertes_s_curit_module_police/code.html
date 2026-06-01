@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Accès Sécurisé - Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#ebf5ff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#83cfff",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#5c403d",
+                    "surface-bright": "#fff8f7",
+                    "primary-fixed": "#ffdad6",
+                    "on-background": "#281716",
+                    "secondary-container": "#ffbe39",
+                    "surface": "#fff8f7",
+                    "on-surface": "#281716",
+                    "on-secondary-container": "#6f4e00",
+                    "on-primary-fixed": "#410002",
+                    "outline-variant": "#e5bdb9",
+                    "background": "#fff8f7",
+                    "secondary-fixed-dim": "#fcbb36",
+                    "inverse-surface": "#3f2c2a",
+                    "tertiary-container": "#0077a6",
+                    "on-tertiary-fixed": "#001e2e",
+                    "secondary": "#7c5800",
+                    "on-secondary-fixed-variant": "#5e4200",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#005d83",
+                    "surface-tint": "#bd1119",
+                    "surface-dim": "#f2d3cf",
+                    "primary-container": "#d62828",
+                    "surface-container-high": "#ffe2de",
+                    "on-secondary-fixed": "#271900",
+                    "outline": "#906f6b",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#ffedea",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#fbdbd8",
+                    "primary": "#b20112",
+                    "surface-variant": "#fbdbd8",
+                    "inverse-primary": "#ffb4ab",
+                    "secondary-fixed": "#ffdea8",
+                    "on-tertiary-fixed-variant": "#004c6c",
+                    "on-primary-fixed-variant": "#93000d",
+                    "surface-container-low": "#fff0ee",
+                    "tertiary-fixed": "#c7e7ff",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "error": "#ba1a1a",
+                    "surface-container": "#ffe9e6",
+                    "on-primary-container": "#fff1ef"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "data-table": ["Inter"],
+                    "h3": ["Plus Jakarta Sans"],
+                    "h1": ["Plus Jakarta Sans"],
+                    "body-regular": ["Plus Jakarta Sans"],
+                    "body-light": ["Plus Jakarta Sans"],
+                    "h2": ["Plus Jakarta Sans"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "data-table": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-regular": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-light": ["14px", {"lineHeight": "1.5", "fontWeight": "300"}],
+                    "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pin-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid #906f6b;
+            transition: all 0.2s ease;
+        }
+        .pin-dot.filled {
+            background-color: #b20112;
+            border-color: #b20112;
+            transform: scale(1.1);
+        }
+        .police-texture {
+            background-image: radial-gradient(#e5bdb9 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.1;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(144, 111, 107, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-regular text-on-surface min-h-screen flex flex-col">
+<!-- Auth Layer (Initial State) -->
+<div class="fixed inset-0 z-[100] bg-slate-900 flex items-center justify-center p-6" id="auth-screen">
+<div class="absolute inset-0 police-texture pointer-events-none"></div>
+<div class="max-w-md w-full glass-panel rounded-xl p-8 shadow-2xl space-y-8 animate-in fade-in zoom-in duration-500">
+<div class="text-center space-y-2">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-container text-on-primary-container mb-4">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<h1 class="font-h2 text-h2 text-slate-900 uppercase tracking-wider">Accès Restreint</h1>
+<p class="font-body-light text-slate-500 uppercase tracking-widest text-xs">Chef de Gare • Identification Requise</p>
+</div>
+<div class="flex justify-center space-x-4 py-4">
+<div class="pin-dot" id="dot-1"></div>
+<div class="pin-dot" id="dot-2"></div>
+<div class="pin-dot" id="dot-3"></div>
+<div class="pin-dot" id="dot-4"></div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('1')">1</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('2')">2</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('3')">3</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('4')">4</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('5')">5</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('6')">6</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('7')">7</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('8')">8</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('9')">9</button>
+<button class="h-16 rounded-lg bg-slate-100 text-slate-600 font-label-caps hover:bg-slate-200 transition-all flex items-center justify-center" onclick="clearPin()">
+<span class="material-symbols-outlined">backspace</span>
+</button>
+<button class="h-16 rounded-lg bg-white border border-outline-variant text-h3 font-h3 hover:bg-slate-50 active:scale-95 transition-all text-slate-900" onclick="pressKey('0')">0</button>
+<button class="h-16 rounded-lg bg-primary text-on-primary font-label-caps hover:bg-primary-container transition-all flex items-center justify-center shadow-lg" onclick="validatePin()">
+<span class="material-symbols-outlined">lock_open</span>
+</button>
+</div>
+<div class="text-center pt-4">
+<a class="text-slate-400 text-xs uppercase tracking-tighter hover:text-primary transition-colors" href="#">Signaler une anomalie d'accès</a>
+</div>
+</div>
+</div>
+<!-- Main Content Layer (Hidden Initially) -->
+<div class="hidden flex min-h-screen" id="main-content">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6 mb-8">
+<div class="text-lg font-black text-red-500 mb-1">Rahimo Admin</div>
+<div class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Sécurité Intérieure</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 cursor-default">
+<span class="material-symbols-outlined mr-3">report_problem</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Alertes Critiques</span>
+</div>
+<div class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Tableau de bord</span>
+</div>
+<div class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Billetterie</span>
+</div>
+<div class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Personnel</span>
+</div>
+<div class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors cursor-pointer">
+<span class="material-symbols-outlined mr-3">history</span>
+<span class="font-plus-jakarta-sans text-sm font-medium">Logs Système</span>
+</div>
+</nav>
+<div class="px-4 mt-auto">
+<div class="p-4 bg-slate-800/50 rounded-xl flex items-center gap-3">
+<img alt="Admin Profile" class="w-10 h-10 rounded-lg object-cover grayscale" data-alt="A formal portrait of a senior security official in a crisp, dark navy uniform. The background is a professional office setting with soft shadows. The lighting is focused and serious, reinforcing a position of authority. The overall aesthetic is clean and high-contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsHzI5oK0zi626VHEtfSSMQ9mnzm7AHF7nW-r1a7lFnA9XQNaiHsfvFTatQcgEANquKJhjrxk2DZjBthFWYe06ejlHxzlxSOuFCCSYxHw46egHF89id0KtcGf_QlHXzNld7FOLxjqtaP3gixQD91u2ZGqN22JGTNNxXRn8eOwgPrNrsp-wFkbHAVr_Aeu6OWlZLqTxmytFwguasG3W09zBekh2HmRUSvkojp77fkKzPvuqtJMXnwzbTBBZbgUu8ZolVq1KnsnLVfW5"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-white truncate">M. Diallo</p>
+<p class="text-[10px] text-slate-500 uppercase">Chef de Gare</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-8 h-16 w-full sticky top-0 bg-red-700 text-white z-40 shadow-sm border-b border-red-800">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-red-200">location_on</span>
+<h2 class="font-plus-jakarta-sans font-bold text-lg">Gare de Ouagadougou • Terminal Central</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center bg-red-800/50 px-3 py-1 rounded-full text-xs font-mono">
+<span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse mr-2"></span>
+                        LIVE: 14:32:05
+                    </div>
+<div class="flex gap-2">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">schedule</span></button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-yellow-400 rounded-full border-2 border-red-700"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</div>
+</header>
+<!-- Alerts Canvas -->
+<section class="p-8 space-y-8 bg-surface-container-low flex-1">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span class="text-label-caps font-label-caps text-primary mb-1 block">Protocole d'Urgence Niveau 3</span>
+<h1 class="font-h1 text-h1 text-slate-900">Alertes de Sécurité Critiques</h1>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-caps flex items-center gap-2 hover:bg-primary-container shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined">print</span>
+                        Exporter le Rapport
+                    </button>
+</div>
+<!-- Alert Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Urgent Card 1: Personne Recherchée -->
+<div class="bg-white rounded-xl shadow-md border-l-8 border-error overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div class="space-y-1">
+<span class="bg-error text-on-error text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">ALERTE ROUGE : RECHERCHÉ</span>
+<h3 class="font-h3 text-h3 text-slate-900">Moussa Traoré (Alias 'Le Guépard')</h3>
+<p class="text-sm text-slate-500">ID Fichier: BF-SEC-99283-A</p>
+</div>
+<div class="w-24 h-32 bg-slate-100 rounded border border-outline-variant relative overflow-hidden">
+<img alt="Wanted Person" class="w-full h-full object-cover grayscale contrast-125" data-alt="A high-contrast surveillance-style portrait of a man in a leather jacket. The image is grainy and monochrome with harsh overhead lighting that casts deep shadows under the brow and chin. The atmosphere is tense and clinical, characteristic of a law enforcement database record." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiWUtYx0NhjKA4a5_fQywd85RGcfYMt-7nIA44btlvG7tgTcRqlNfjhHE-XID0Wiec4sCfveyqyuw4LUeQEkXcJql5uKn0Y_VjP9zuZ1ElDeuiwh2e4Ym9s3osFDD1Pumya_Hjfcp_Pkbvc_Owx7j_CvXUYcbVXkBtro1Qqn3flFE0rVCGk5rAydqsFuiCvsZbJfOtAIdl1Otvei63EFnvwUJu-95ICiPa-4M_8T7x5nBosElyzU7cNlbt4y21GDsWA8WUa0LOWG05"/>
+<div class="absolute inset-0 border-2 border-primary/20 pointer-events-none"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Dernière Localisation</p>
+<p class="text-sm font-semibold text-slate-700">Guichet 4 - Bobo-Dioulasso</p>
+</div>
+<div class="p-3 bg-slate-50 rounded-lg border border-slate-100">
+<p class="text-[10px] text-slate-400 uppercase font-bold">Billet Soumis</p>
+<p class="text-sm font-semibold text-slate-700">Ligne RH-204 (15:00)</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-error">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span class="text-sm font-bold">CRIMES GRAVES : Fraude douanière &amp; Contrebande</span>
+</div>
+<p class="text-sm text-slate-600 italic">"Individu potentiellement armé. Ne pas intervenir seul. Alerter l'unité de sécurité de quai immédiatement."</p>
+</div>
+</div>
+<div class="bg-slate-50 border-t border-slate-100 px-6 py-4 flex justify-between items-center">
+<span class="text-xs text-slate-400 font-mono">Signalé il y a 12 min</span>
+<div class="flex gap-3">
+<button class="text-slate-600 hover:text-slate-900 font-label-caps text-xs">Ignorer</button>
+<button class="bg-slate-900 text-white px-4 py-2 rounded font-label-caps text-xs uppercase hover:bg-black transition-colors">Intercepter</button>
+</div>
+</div>
+</div>
+<!-- Urgent Card 2: Incident Grave -->
+<div class="bg-white rounded-xl shadow-md border-l-8 border-secondary overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="p-6">
+<div class="flex justify-between items-start mb-6">
+<div class="space-y-1">
+<span class="bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">INCIDENT : COLIS SUSPECT</span>
+<h3 class="font-h3 text-h3 text-slate-900">Soute Bus RH-880</h3>
+<p class="text-sm text-slate-500">Référence Incident: INC-00451-S</p>
+</div>
+<div class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">package_2</span>
+</div>
+</div>
+<div class="p-4 bg-orange-50 border border-orange-100 rounded-lg mb-6">
+<div class="flex gap-4">
+<div class="flex-1">
+<p class="text-[10px] text-orange-600 uppercase font-bold mb-1">Détails de l'Anomalie</p>
+<p class="text-sm text-slate-700 leading-relaxed">Poids déclaré: 5kg. Poids réel mesuré: 12.5kg. Contenu non identifié par scanner thermique. Détecteur de métaux actif.</p>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 border border-slate-100 rounded-lg">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-600">ID</div>
+<div>
+<p class="text-xs font-bold text-slate-900">Issa Sawadogo</p>
+<p class="text-[10px] text-slate-500 uppercase">Propriétaire déclaré</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">verified_user</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-50 border-t border-slate-100 px-6 py-4 flex justify-between items-center">
+<span class="text-xs text-slate-400 font-mono">Signalé il y a 4 min</span>
+<div class="flex gap-3">
+<button class="text-slate-600 hover:text-slate-900 font-label-caps text-xs">Vérification</button>
+<button class="bg-primary text-white px-4 py-2 rounded font-label-caps text-xs uppercase hover:bg-primary-container transition-colors">Isoler Colis</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Alerts List -->
+<div class="space-y-4">
+<h4 class="font-label-caps text-slate-400 text-xs uppercase tracking-widest border-b border-slate-200 pb-2">Journal des Alerts Récentes (Historique 2h)</h4>
+<div class="bg-white p-4 rounded-lg flex items-center justify-between border border-outline-variant hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-yellow-600">info</span>
+<div>
+<p class="text-sm font-bold text-slate-900">Dépassement de périmètre de sécurité</p>
+<p class="text-xs text-slate-500">Zone de fret - Terminal B • Caméra 09</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<span class="text-[10px] font-mono text-slate-400">14:15:22</span>
+<span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-[10px] font-bold uppercase">Résolu</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg flex items-center justify-between border border-outline-variant hover:border-primary/30 transition-colors">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-error">emergency_home</span>
+<div>
+<p class="text-sm font-bold text-slate-900">Comportement suspect en zone d'attente</p>
+<p class="text-xs text-slate-500">Quai 2 - Passage vers Zone VIP • Agent Sécurité 04</p>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<span class="text-[10px] font-mono text-slate-400">14:02:10</span>
+<span class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold uppercase">En cours</span>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full bg-slate-900 dark:bg-black border-t-4 border-red-600 px-8 py-8 mt-auto">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto">
+<div>
+<span class="text-xl font-bold text-white mb-2 block">Rahimo Transport</span>
+<p class="text-slate-400 text-xs font-plus-jakarta-sans">Système de Surveillance Opérationnel • Unité Sécurité Intégrée</p>
+</div>
+<div class="flex gap-8">
+<div>
+<p class="text-red-600 text-[10px] font-bold uppercase mb-2">Support</p>
+<a class="text-slate-400 hover:text-red-400 text-xs block mb-1" href="#">Aide technique</a>
+<a class="text-slate-400 hover:text-red-400 text-xs block" href="#">Ligne d'urgence</a>
+</div>
+<div>
+<p class="text-red-600 text-[10px] font-bold uppercase mb-2">Statut</p>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+<span class="text-slate-400 text-xs">Serveurs OK</span>
+</div>
+</div>
+</div>
+<p class="text-slate-500 text-[10px] text-right">© 2024 Rahimo Transport. <br/>Tous droits réservés.</p>
+</div>
+</footer>
+</main>
+</div>
+<script>
+        let currentPin = "";
+        const correctPin = "2024";
+
+        function pressKey(num) {
+            if (currentPin.length < 4) {
+                currentPin += num;
+                updatePinDisplay();
+            }
+        }
+
+        function clearPin() {
+            currentPin = currentPin.slice(0, -1);
+            updatePinDisplay();
+        }
+
+        function updatePinDisplay() {
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (i <= currentPin.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            }
+        }
+
+        function validatePin() {
+            if (currentPin === correctPin) {
+                document.getElementById('auth-screen').classList.add('animate-out', 'fade-out', 'zoom-out', 'duration-500');
+                setTimeout(() => {
+                    document.getElementById('auth-screen').remove();
+                    document.getElementById('main-content').classList.remove('hidden');
+                    document.getElementById('main-content').classList.add('animate-in', 'fade-in', 'duration-1000');
+                }, 450);
+            } else {
+                const authBox = document.querySelector('#auth-screen .glass-panel');
+                authBox.classList.add('animate-bounce');
+                setTimeout(() => authBox.classList.remove('animate-bounce'), 500);
+                currentPin = "";
+                updatePinDisplay();
+                alert("CODE PIN INCORRECT. ACCÈS REFUSÉ.");
+            }
+        }
+
+        // Clock interaction
+        setInterval(() => {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const liveBadge = document.querySelector('.font-mono');
+            if(liveBadge) liveBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse mr-2"></span> LIVE: ${timeString}`;
+        }, 1000);
+    </script>
+</body></html>

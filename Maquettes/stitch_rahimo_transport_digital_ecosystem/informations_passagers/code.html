@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Informations Passagers - Rahimo Transport</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#bd1119",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container-low": "#fff0ee",
+                        "on-tertiary-container": "#ebf5ff",
+                        "surface-container": "#ffe9e6",
+                        "surface-container-highest": "#fbdbd8",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "surface": "#fff8f7",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#e5bdb9",
+                        "surface-dim": "#f2d3cf",
+                        "secondary-fixed": "#ffdea8",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-surface-variant": "#5c403d",
+                        "primary": "#b20112",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "primary-container": "#d62828",
+                        "tertiary-fixed": "#c7e7ff",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-bright": "#fff8f7",
+                        "surface-variant": "#fbdbd8",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "on-primary-container": "#fff1ef",
+                        "secondary": "#7c5800",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001e2e",
+                        "on-secondary-container": "#6f4e00",
+                        "tertiary": "#005d83",
+                        "inverse-on-surface": "#ffedea",
+                        "secondary-container": "#ffbe39",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "inverse-primary": "#ffb4ab",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#281716",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#271900",
+                        "on-background": "#281716",
+                        "tertiary-container": "#0077a6",
+                        "background": "#fff8f7",
+                        "outline": "#906f6b",
+                        "inverse-surface": "#3f2c2a",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-fixed": "#410002"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-columns": "12",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "container-max": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-regular": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "data-table": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-light": ["14px", { "lineHeight": "1.5", "fontWeight": "300" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-regular": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-regular antialiased min-h-screen flex flex-col">
+<!-- Minimal Checkout Header (Suppressed global nav for transactional intent) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant py-4 px-margin sticky top-0 z-50 shadow-sm">
+<div class="max-w-container-max mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-h2" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+<span class="font-h3 text-h3 text-on-surface font-extrabold tracking-tight">Rahimo Transport</span>
+</div>
+<!-- Progress Steps (Desktop) -->
+<div class="hidden md:flex items-center gap-4">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="font-label-caps text-label-caps uppercase">Trajet</span>
+</div>
+<div class="w-8 h-px bg-outline-variant"></div>
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="font-label-caps text-label-caps uppercase">Sièges</span>
+</div>
+<div class="w-8 h-px bg-outline-variant"></div>
+<div class="flex items-center gap-2 text-primary-container">
+<span class="flex items-center justify-center w-5 h-5 rounded-full bg-primary-container text-on-primary-container font-label-caps text-[10px]">3</span>
+<span class="font-label-caps text-label-caps uppercase text-primary-container">Passagers</span>
+</div>
+<div class="w-8 h-px bg-outline-variant"></div>
+<div class="flex items-center gap-2 text-outline">
+<span class="flex items-center justify-center w-5 h-5 rounded-full border border-outline text-outline font-label-caps text-[10px]">4</span>
+<span class="font-label-caps text-label-caps uppercase">Paiement</span>
+</div>
+</div>
+<button class="md:hidden flex items-center gap-2 text-on-surface-variant font-label-caps text-label-caps uppercase">
+                Étape 3/4
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin py-12">
+<div class="mb-8">
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-4 font-label-caps text-label-caps uppercase">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+                Retour au plan de salle
+            </button>
+<h1 class="font-h1 text-h1 text-on-surface">Informations Passagers</h1>
+<p class="font-body-regular text-body-regular text-on-surface-variant mt-2 max-w-2xl">
+                Veuillez saisir les informations pour chaque passager. Ces informations sont requises pour l'émission des billets électroniques.
+            </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Forms -->
+<div class="col-span-1 lg:col-span-8 space-y-8">
+<!-- Passenger Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<!-- Card Header -->
+<div class="border-b border-outline-variant bg-surface-container/30 px-8 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container text-[28px]">person</span>
+<div>
+<h2 class="font-h3 text-h3 text-on-surface">Passager 1</h2>
+<p class="font-body-light text-body-light text-on-surface-variant">Siège 14 • Fenêtre</p>
+</div>
+</div>
+<!-- Category Indicator -->
+<div class="flex items-center bg-surface border border-outline-variant rounded-lg px-3 py-1">
+<span class="font-label-caps text-label-caps text-on-surface uppercase">Adulte</span>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-8">
+<!-- Segmented Control Toggle -->
+<div class="bg-surface border border-outline-variant p-1 rounded-lg inline-flex mb-8">
+<button class="bg-surface-container-lowest shadow-sm rounded-md px-6 py-2 font-label-caps text-label-caps text-on-surface uppercase tracking-wider transition-all">
+                                Pour moi
+                            </button>
+<button class="rounded-md px-6 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface uppercase tracking-wider transition-all">
+                                Pour une autre personne
+                            </button>
+</div>
+<!-- Form Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Prénom -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase tracking-wider">Prénom</label>
+<input class="w-full rounded-lg border border-outline-variant bg-surface px-4 py-3 font-body-regular text-body-regular text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline" placeholder="Ex: Jean" type="text" value="Jean"/>
+</div>
+<!-- Nom -->
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase tracking-wider">Nom de famille</label>
+<input class="w-full rounded-lg border border-outline-variant bg-surface px-4 py-3 font-body-regular text-body-regular text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline" placeholder="Ex: Dupont" type="text" value="Dupont"/>
+</div>
+<!-- Email -->
+<div class="md:col-span-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase tracking-wider">Adresse Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">mail</span>
+<input class="w-full rounded-lg border border-outline-variant bg-surface pl-12 pr-4 py-3 font-body-regular text-body-regular text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline" placeholder="jean.dupont@email.com" type="email" value="jean.dupont@email.com"/>
+</div>
+</div>
+<!-- Téléphone -->
+<div class="md:col-span-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase tracking-wider">Numéro de téléphone</label>
+<div class="flex gap-2">
+<select class="rounded-lg border border-outline-variant bg-surface px-4 py-3 font-body-regular text-body-regular text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none w-[140px] appearance-none cursor-pointer">
+<option value="+226">+226 (BF)</option>
+<option value="+225">+225 (CI)</option>
+<option value="+223">+223 (ML)</option>
+</select>
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline-variant">call</span>
+<input class="w-full rounded-lg border border-outline-variant bg-surface pl-12 pr-4 py-3 font-body-regular text-body-regular text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline" placeholder="XX XX XX XX" type="tel" value="70 12 34 56"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Info Box (Yellow SMS Ticket Notice) -->
+<div class="bg-secondary-container rounded-xl p-6 flex flex-col sm:flex-row gap-5 items-start shadow-sm border border-secondary-fixed-dim/20">
+<div class="bg-surface-container-lowest p-3 rounded-full shrink-0 shadow-sm mt-1">
+<span class="material-symbols-outlined text-on-secondary-container text-[28px]" style="font-variation-settings: 'FILL' 1;">sms</span>
+</div>
+<div>
+<h4 class="font-h3 text-h3 text-on-secondary-container mb-2 text-[20px]">Billet SMS QR Code</h4>
+<p class="font-body-regular text-body-regular text-on-secondary-container/90 leading-relaxed">
+                            Le billet électronique de ce passager sera envoyé instantanément par SMS sous forme de QR Code sécurisé. 
+                            <strong>Veuillez vérifier l'exactitude du numéro de téléphone.</strong> Aucun billet papier ne sera exigé lors de l'embarquement, présentez simplement le code sur votre téléphone.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Sticky Recap -->
+<div class="col-span-1 lg:col-span-4 sticky top-24">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_8px_24px_rgba(0,0,0,0.12)] border border-outline-variant overflow-hidden">
+<!-- Recap Header -->
+<div class="bg-surface-container p-6 border-b border-outline-variant">
+<h3 class="font-h3 text-h3 text-on-surface mb-4">Résumé de votre trajet</h3>
+<div class="flex justify-between items-center relative">
+<!-- Route Line -->
+<div class="absolute left-[11px] top-8 bottom-8 w-[2px] bg-outline-variant border-dashed border-l-2 border-outline-variant" style="background: transparent;"></div>
+<div class="flex flex-col gap-6 w-full z-10">
+<!-- Origin -->
+<div class="flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-surface-container-lowest border-4 border-primary-container shrink-0 mt-1"></div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Départ</p>
+<p class="font-body-regular text-body-regular font-bold text-on-surface">Ouagadougou</p>
+<p class="font-data-table text-data-table text-on-surface-variant">Gare Centrale (07:00)</p>
+</div>
+</div>
+<!-- Destination -->
+<div class="flex items-start gap-4">
+<div class="w-6 h-6 rounded-full bg-surface-container-lowest border-4 border-on-surface shrink-0 mt-1"></div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Arrivée</p>
+<p class="font-body-regular text-body-regular font-bold text-on-surface">Bobo-Dioulasso</p>
+<p class="font-data-table text-data-table text-on-surface-variant">Gare Principale (12:30)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recap Body -->
+<div class="p-6 space-y-6">
+<!-- Travel Details -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Date</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">12 Oct 2024</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Classe</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">VIP Climatise</p>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Pricing Breakdown -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-data-table text-data-table text-on-surface">1x Billet Adulte</span>
+<span class="font-data-table text-data-table text-on-surface font-semibold">15 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-data-table text-data-table text-on-surface-variant">Frais de service</span>
+<span class="font-data-table text-data-table text-on-surface-variant">500 FCFA</span>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="bg-surface p-4 rounded-lg border border-outline-variant">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2 block uppercase tracking-wider">Code Promo</label>
+<div class="flex gap-2">
+<input class="w-full rounded-md border border-outline-variant bg-surface-container-lowest px-3 py-2 font-data-table text-data-table focus:border-primary-container outline-none placeholder:text-outline-variant uppercase" placeholder="Entrez le code" type="text"/>
+<button class="bg-surface-container-highest text-on-surface px-4 py-2 rounded-md font-label-caps text-label-caps uppercase hover:bg-surface-variant transition-colors">
+                                    Appliquer
+                                </button>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Total -->
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Total à payer</p>
+<p class="font-data-table text-data-table text-on-surface-variant text-[12px]">Taxes incluses</p>
+</div>
+<p class="font-h2 text-h2 text-primary-container">15 500 <span class="text-[20px]">FCFA</span></p>
+</div>
+<!-- CTA -->
+<button class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-body-regular font-bold hover:bg-primary transition-colors flex justify-center items-center gap-2 shadow-sm">
+                            Continuer vers le paiement
+                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="text-center font-data-table text-data-table text-on-surface-variant flex items-center justify-center gap-1 mt-2">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+                            Paiement 100% sécurisé
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

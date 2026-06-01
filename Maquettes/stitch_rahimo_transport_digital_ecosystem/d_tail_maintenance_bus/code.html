@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            border-bottom: 3px solid #b20112;
+            color: #b20112;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#fbdbd8",
+                        "tertiary-fixed": "#c7e7ff",
+                        "on-tertiary-fixed": "#001e2e",
+                        "background": "#fff8f7",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#281716",
+                        "secondary-container": "#ffbe39",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-container-low": "#fff0ee",
+                        "inverse-on-surface": "#ffedea",
+                        "surface": "#fff8f7",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fff8f7",
+                        "inverse-surface": "#3f2c2a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-surface": "#281716",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "on-secondary-container": "#6f4e00",
+                        "on-primary-fixed": "#410002",
+                        "secondary": "#7c5800",
+                        "on-primary-container": "#fff1ef",
+                        "on-secondary-fixed": "#271900",
+                        "surface-tint": "#bd1119",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "surface-container": "#ffe9e6",
+                        "on-tertiary-container": "#ebf5ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "secondary-fixed": "#ffdea8",
+                        "surface-container-highest": "#fbdbd8",
+                        "outline-variant": "#e5bdb9",
+                        "primary-fixed": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#5c403d",
+                        "primary": "#b20112",
+                        "tertiary-container": "#0077a6",
+                        "tertiary": "#005d83",
+                        "surface-dim": "#f2d3cf",
+                        "surface-container-high": "#ffe2de",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#d62828",
+                        "outline": "#906f6b"
+                    },
+                    "fontFamily": {
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background font-body-regular text-on-surface min-h-screen">
+<!-- SideNavBar (From JSON) -->
+<nav class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500 block">Rahimo Admin</span>
+<span class="text-slate-400 text-xs font-medium">Superviseur Général</span>
+</div>
+<div class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+                Colis
+            </a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 font-body-regular text-sm" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+                Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+                Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors font-body-regular text-sm" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+                Comptabilité
+            </a>
+</div>
+<div class="px-4 mt-auto">
+<div class="flex items-center p-3 bg-slate-800 rounded-xl">
+<img alt="Admin Profile" class="w-10 h-10 rounded-full border-2 border-red-600" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWD2b7GT5CQTPH002fEwdMtwQMDQ4_AHrF_u9kDkxsYLNMBGEHJEwW6c6Xy2Z3-nADPYJ4jHL56DcaqbX0Rl0yytrN7t7hiE9h3asHXcc9Gqj2J3jGdlAkoq-SaqMfvcvoFmeiAwRjK9RJuk7h_VSFWjdoH3lUr4qBaUpw267ofJ0lkHP6loiX_A-plOCRZl7WHtbLjG16NfyZ0L8R6sCMzLI9m5U23MBbpXOvSi_2DOBQ3795-5n8aNllAZb-GnT6sEvbHRaGMZfV"/>
+<div class="ml-3 overflow-hidden">
+<p class="text-white text-sm font-bold truncate">Admin Rahimo</p>
+<p class="text-slate-400 text-xs truncate">admin@rahimo.com</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar (From JSON) -->
+<header class="flex justify-between items-center px-6 h-16 w-full sticky top-0 bg-red-700 dark:bg-red-900 text-white z-40 border-b border-red-800 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<h1 class="font-plus-jakarta-sans font-bold text-lg">Gare de Ouagadougou</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">schedule</span></button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Bus Header Info -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 rounded-2xl bg-surface-container overflow-hidden shadow-sm">
+<img alt="Bus Profile" class="w-full h-full object-cover" data-alt="A professional side view of a modern luxury commercial bus parked in a clean depot. The bus is painted in a vibrant white and red livery, reflecting the Rahimo Transport brand. Bright, even daylight illuminates the scene, highlighting the sleek aerodynamic design and large tinted windows of the vehicle. The overall atmosphere is organized, high-trust, and industrially clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLuQbCig7yw7C9hZZ8Vr5HYN22RqR2nP2Uwhfxjh9znA0B4KDyMmSlFDsXs_WTOvIwpZivTKttBNKTbaYHFp3XswIaveZpwLGbbx4JUdrVWbPjJ7Yl-ESeLTV0ho5cMHWNrzdHT13YHBvTvPTi_Ea6fJrS98c24xXA8clh20scOEqEVZOT5vbR4xS1sKuMWhwrZYKUrMzTbDx-DwQUmnGCxOU_T-0RKEMlpgY7S8iS53mpsSpTd7LSzjD-u_f_lrlkXu3ZcOFHQ-mq"/>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h2 class="font-h2 text-h2 text-on-surface">Bus #RT-2024-B8</h2>
+<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-wider">En Service</span>
+</div>
+<p class="font-body-regular text-on-surface-variant">Ligne: Ouagadougou <span class="material-symbols-outlined text-xs align-middle">arrow_forward</span> Bobo-Dioulasso</p>
+<div class="flex gap-4 mt-2">
+<span class="flex items-center text-xs text-outline font-medium"><span class="material-symbols-outlined text-sm mr-1">speed</span> 142,500 km</span>
+<span class="flex items-center text-xs text-outline font-medium"><span class="material-symbols-outlined text-sm mr-1">person</span> Chauffeur: Moussa T.</span>
+</div>
+</div>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-md active:scale-95" onclick="toggleModal()">
+<span class="material-symbols-outlined">report_problem</span>
+                    Déclarer une panne
+                </button>
+</div>
+<!-- Tab Navigation -->
+<div class="flex border-b border-outline-variant mb-8 overflow-x-auto">
+<button class="px-8 py-4 font-bold text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Infos</button>
+<button class="px-8 py-4 font-bold text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">GPS / Historique</button>
+<button class="px-8 py-4 font-bold active-tab whitespace-nowrap">Maintenance</button>
+<button class="px-8 py-4 font-bold text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Documents</button>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Urgent Alert Card (Bento Style) -->
+<div class="lg:col-span-12 bg-error-container text-on-error-container p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-error/20">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-white/40 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">oil_barrel</span>
+</div>
+<div>
+<h3 class="font-h3 text-h3 leading-tight">Alerte Vidange</h3>
+<p class="text-sm opacity-90">Dépassement de 500km prévu d'ici 2 jours. Entretien recommandé immédiatement.</p>
+</div>
+</div>
+<button class="bg-error text-white px-6 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition-all">Programmer maintenant</button>
+</div>
+<!-- Planned Maintenance Timeline -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-surface-container">
+<h3 class="font-h3 text-h3 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">event_upcoming</span>
+                        Entretiens prévus
+                    </h3>
+<div class="space-y-8 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
+<!-- Timeline Item -->
+<div class="relative pl-12">
+<div class="absolute left-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-on-primary ring-4 ring-white z-10">
+<span class="material-symbols-outlined text-sm">construction</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h4 class="font-bold text-on-surface">Révision moteur complète</h4>
+<p class="text-sm text-on-surface-variant">Vérification injecteurs et filtres</p>
+</div>
+<span class="px-3 py-1 bg-surface-container text-primary text-xs font-bold rounded-md">24 Mars 2024</span>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-12">
+<div class="absolute left-0 w-8 h-8 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant ring-4 ring-white z-10">
+<span class="material-symbols-outlined text-sm">settings_input_component</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h4 class="font-bold text-on-surface">Contrôle technique</h4>
+<p class="text-sm text-on-surface-variant">Mise en conformité réglementaire</p>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs font-bold rounded-md">15 Avril 2024</span>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-12">
+<div class="absolute left-0 w-8 h-8 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant ring-4 ring-white z-10">
+<span class="material-symbols-outlined text-sm">tire_repair</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h4 class="font-bold text-on-surface">Remplacement pneumatiques</h4>
+<p class="text-sm text-on-surface-variant">Essieu arrière - 4 pneus neufs</p>
+</div>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-xs font-bold rounded-md">02 Mai 2024</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Breakdown History -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-surface-container flex-1">
+<h3 class="font-h3 text-h3 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">history</span>
+                            Historique des pannes
+                        </h3>
+<div class="space-y-4">
+<!-- Breakdown Item -->
+<div class="p-4 rounded-xl border border-surface-container hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-secondary uppercase tracking-wider">Électrique</span>
+<span class="text-xs text-on-surface-variant">12 Jan 2024</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Défaut éclairage tableau de bord</h4>
+<p class="text-xs text-on-surface-variant mb-3 line-clamp-2">Le rétroéclairage s'est éteint en cours de trajet de nuit. Intervention immédiate au dépôt.</p>
+<div class="flex items-center gap-2 text-xs font-semibold text-green-600">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Réparé (Coût: 15,000 FCFA)
+                                </div>
+</div>
+<!-- Breakdown Item -->
+<div class="p-4 rounded-xl border border-surface-container hover:bg-surface-container-low transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-bold text-secondary uppercase tracking-wider">Mécanique</span>
+<span class="text-xs text-on-surface-variant">05 Nov 2023</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Fuite liquide de refroidissement</h4>
+<p class="text-xs text-on-surface-variant mb-3 line-clamp-2">Surchauffe moteur signalée. Remplacement durite défectueuse.</p>
+<div class="flex items-center gap-2 text-xs font-semibold text-green-600">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Réparé (Coût: 45,000 FCFA)
+                                </div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border border-outline rounded-xl text-sm font-bold text-outline hover:bg-surface-container-low transition-all">Voir tout l'historique</button>
+</div>
+</div>
+<!-- Fleet Analytics (Bento Mini) -->
+<div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-surface-container">
+<p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Disponibilité Mensuelle</p>
+<div class="text-4xl font-bold text-primary mb-4">94.2%</div>
+<div class="w-full bg-surface-container rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 94%"></div>
+</div>
+</div>
+<div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-surface-container">
+<p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Coût Maintenance (An)</p>
+<div class="text-4xl font-bold text-secondary mb-4">1.2M <span class="text-sm font-normal">FCFA</span></div>
+<p class="text-xs text-green-600 font-bold flex items-center"><span class="material-symbols-outlined text-sm mr-1">trending_down</span> -12% vs année dernière</p>
+</div>
+<div class="lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-surface-container">
+<p class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-2">Prochain Contrôle</p>
+<div class="text-4xl font-bold text-on-surface mb-4">22 <span class="text-sm font-normal">Jours</span></div>
+<p class="text-xs text-on-surface-variant italic">Centre de contrôle Agréé N°4</p>
+</div>
+</div>
+</div>
+<!-- Footer (From JSON) -->
+<footer class="w-full bg-slate-900 dark:bg-black border-t-4 border-red-600 mt-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400 text-sm leading-relaxed">Le leader du transport inter-régional au Burkina Faso. Excellence et Ponctualité.</p>
+</div>
+<div>
+<h4 class="text-white font-medium mb-6">Liens Utiles</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">A propos</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Nos Gares</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Recrutement</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-medium mb-6">Services</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Billetterie</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Fret Express</a></li>
+<li><a class="text-slate-400 hover:text-red-400 transition-transform hover:translate-x-1 block" href="#">Location Bus</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-medium mb-6">Support</h4>
+<div class="space-y-4">
+<p class="text-slate-400 text-sm">Centre d'appel 24/7</p>
+<p class="text-red-600 font-bold text-lg">+226 25 30 00 00</p>
+<div class="flex gap-4 pt-2">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white">social_leaderboard</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white">public</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-950 py-6 px-8 text-center">
+<p class="text-slate-500 text-sm font-plus-jakarta-sans">© 2024 Rahimo Transport. Tous droits réservés.</p>
+</div>
+</footer>
+</main>
+<!-- Modal for Breakdown Declaration -->
+<div class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4" id="breakdown-modal">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleModal()"></div>
+<div class="relative bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden scale-95 transition-transform duration-300" id="modal-content">
+<div class="bg-primary p-6 text-on-primary">
+<div class="flex justify-between items-center">
+<h3 class="font-h3 text-h3">Déclarer une panne</h3>
+<button class="material-symbols-outlined hover:bg-white/20 p-1 rounded-full" onclick="toggleModal()">close</button>
+</div>
+<p class="text-sm opacity-80 mt-1">Bus #RT-2024-B8 - Enregistrement d'incident</p>
+</div>
+<div class="p-8 space-y-6">
+<div>
+<label class="block text-sm font-bold text-on-surface mb-2">Type d'incident</label>
+<select class="w-full border-outline-variant rounded-xl p-3 focus:ring-2 focus:ring-primary focus:border-primary transition-all">
+<option>Mécanique (Moteur, boîte...)</option>
+<option>Pneumatique</option>
+<option>Électronique / Électrique</option>
+<option>Climatisation</option>
+<option>Autre</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-bold text-on-surface mb-2">Gravité</label>
+<div class="grid grid-cols-3 gap-3">
+<label class="border-2 border-outline-variant rounded-xl p-3 text-center cursor-pointer hover:bg-surface-container-low transition-all">
+<input class="hidden" name="severity" type="radio"/>
+<span class="text-sm font-bold text-green-600">Mineure</span>
+</label>
+<label class="border-2 border-outline-variant rounded-xl p-3 text-center cursor-pointer hover:bg-surface-container-low transition-all">
+<input class="hidden" name="severity" type="radio"/>
+<span class="text-sm font-bold text-secondary">Moyenne</span>
+</label>
+<label class="border-2 border-primary rounded-xl p-3 text-center cursor-pointer bg-primary-container/10">
+<input checked="" class="hidden" name="severity" type="radio"/>
+<span class="text-sm font-bold text-primary">Critique</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-sm font-bold text-on-surface mb-2">Description des symptômes</label>
+<textarea class="w-full border-outline-variant rounded-xl p-3 h-32 focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Décrivez le problème rencontré..."></textarea>
+</div>
+<div class="flex gap-4 pt-4">
+<button class="flex-1 py-3 border border-outline rounded-xl font-bold text-outline hover:bg-surface-container-low" onclick="toggleModal()">Annuler</button>
+<button class="flex-1 py-3 bg-primary text-on-primary rounded-xl font-bold hover:opacity-90 shadow-lg">Soumettre le rapport</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal() {
+            const modal = document.getElementById('breakdown-modal');
+            const content = document.getElementById('modal-content');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 10);
+            } else {
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 200);
+            }
+        }
+    </script>
+</body></html>

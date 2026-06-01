@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Dashboard DG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-color: #f5f5f5;
+        }
+        /* Custom scrollbar for dense data */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#fff0ee",
+                        "on-secondary-fixed": "#271900",
+                        "outline": "#906f6b",
+                        "inverse-primary": "#ffb4ab",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-dim": "#f2d3cf",
+                        "primary": "#b20112",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#005d83",
+                        "on-surface-variant": "#5c403d",
+                        "on-surface": "#281716",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#fff1ef",
+                        "primary-container": "#d62828",
+                        "background": "#fff8f7",
+                        "surface-container-highest": "#fbdbd8",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-secondary-container": "#6f4e00",
+                        "outline-variant": "#e5bdb9",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container": "#ffe9e6",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "inverse-on-surface": "#ffedea",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#fbdbd8",
+                        "secondary": "#7c5800",
+                        "on-tertiary-container": "#ebf5ff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#bd1119",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "tertiary-container": "#0077a6",
+                        "surface-bright": "#fff8f7",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "secondary-fixed": "#ffdea8",
+                        "secondary-container": "#ffbe39",
+                        "on-primary-fixed": "#410002",
+                        "inverse-surface": "#3f2c2a",
+                        "on-background": "#281716",
+                        "surface": "#fff8f7"
+                    },
+                    "fontFamily": {
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-body-regular text-on-surface">
+<!-- SideNavBar (Dark #1E1E2D mapped to slate-900 per JSON style) -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-slate-900 flex flex-col py-6 shadow-xl z-50 border-r border-slate-800">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500">Rahimo Admin</span>
+<div class="mt-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center text-white font-bold">DG</div>
+<div>
+<p class="text-white text-sm font-semibold">Directeur Général</p>
+<p class="text-slate-400 text-xs">Superviseur Général</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm" href="#">
+<span class="material-symbols-outlined mr-3 fill-icon">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+                Colis
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span>
+                Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+                Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 font-medium text-sm transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+                Comptabilité
+            </a>
+</nav>
+<div class="mt-auto px-6 pt-4 border-t border-slate-800">
+<a class="text-slate-400 hover:text-red-400 flex items-center gap-2 text-sm" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+                Déconnexion
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 bg-red-700 text-white sticky top-0 z-40 shadow-sm border-b border-red-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">location_on</span>
+<h1 class="font-bold text-lg">Gare Centrale Ouagadougou</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<div class="relative">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full border border-red-700"></span>
+</div>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<div class="p-8 space-y-8 max-w-[1600px] mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Revue Financière &amp; Opérationnelle</h2>
+<p class="text-body-light text-on-surface-variant">Données en temps réel consolidées pour l'ensemble du réseau Rahimo.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high text-on-surface px-4 py-2 rounded-lg flex items-center gap-2 font-semibold text-sm border border-outline-variant hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Exporter Rapport
+                    </button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg flex items-center gap-2 font-semibold text-sm hover:opacity-90 transition-all shadow-md">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        Actualiser
+                    </button>
+</div>
+</div>
+<!-- Financial KPIs (High Density) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- KPI: CA Jour -->
+<div class="bg-white p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-primary">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant">CA JOUR (FCFA)</p>
+<span class="text-green-600 flex items-center text-xs font-bold bg-green-50 px-2 py-1 rounded-full">
+                            +12.5% <span class="material-symbols-outlined text-xs">trending_up</span>
+</span>
+</div>
+<h3 class="text-3xl font-bold text-primary">4 850 200</h3>
+<div class="mt-4 w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[78%]"></div>
+</div>
+<p class="mt-2 text-xs text-slate-500">Objectif journalier: 6.2M FCFA</p>
+</div>
+<!-- KPI: CA Mois -->
+<div class="bg-white p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-tertiary">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant">CA MENSUEL (FCFA)</p>
+<span class="text-green-600 flex items-center text-xs font-bold bg-green-50 px-2 py-1 rounded-full">
+                            +4.2% <span class="material-symbols-outlined text-xs">trending_up</span>
+</span>
+</div>
+<h3 class="text-3xl font-bold text-tertiary">142 600 000</h3>
+<p class="mt-2 text-xs text-slate-500">Mois précédent: 136.8M FCFA</p>
+</div>
+<!-- KPI: Tickets Vendus -->
+<div class="bg-white p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-secondary">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant">TICKETS VENDUS (24H)</p>
+<span class="text-red-600 flex items-center text-xs font-bold bg-red-50 px-2 py-1 rounded-full">
+                            -2.1% <span class="material-symbols-outlined text-xs">trending_down</span>
+</span>
+</div>
+<h3 class="text-3xl font-bold text-on-secondary-container">1 245</h3>
+<p class="mt-2 text-xs text-slate-500">Taux d'occupation moyen: 88%</p>
+</div>
+<!-- KPI: Colis Traités -->
+<div class="bg-white p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border-l-4 border-slate-700">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant">COLIS TRAITÉS (24H)</p>
+<span class="text-green-600 flex items-center text-xs font-bold bg-green-50 px-2 py-1 rounded-full">
+                            +18% <span class="material-symbols-outlined text-xs">trending_up</span>
+</span>
+</div>
+<h3 class="text-3xl font-bold text-slate-900">856</h3>
+<p class="mt-2 text-xs text-slate-500">Poids total estimé: 12.4 tonnes</p>
+</div>
+</div>
+<!-- Dashboard Grid: Maps and Alerts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Map & Live tracking -->
+<div class="lg:col-span-2 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col min-h-[600px]">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<div>
+<h3 class="font-h3 text-h3 text-on-surface">Suivi Flotte Temps Réel</h3>
+<p class="text-xs text-on-surface-variant">Positionnement GPS des bus en circulation au Burkina Faso</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-xs font-bold text-green-700">42 Bus Actifs</span>
+</div>
+</div>
+<div class="relative flex-1 bg-slate-200 overflow-hidden">
+<!-- Image of the map of Burkina Faso -->
+<img alt="Carte de suivi" class="w-full h-full object-cover opacity-60 grayscale" data-alt="A highly detailed cartographic visualization of Burkina Faso's topography on a digital interface. The map features minimalist design with thin gray administrative borders and major arterial roads highlighted in subtle primary red. Small glowing icons representing transport buses are scattered across the map, suggesting movement through high-tech GPS tracking. The overall aesthetic is professional, modern, and data-centric with a clean white and gray color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaucvxd_abspLBqYsGdRC29wg5n1PLWUhEsRV-sVJVK1GWTYkmgPtFhGY2sj7xgh3aAwR9kxWAerjgyziCPAYz2aGZOx-wglcTEx_rI7yxmeUNnh00CUQ3RcQ3E3zCqTEOB5i8pogY26AzhbdOjd1s7EiAKhxUhnjJdwP70T5k6cVhdo-sGI7Q18kZjQ37BNyMnCqJPMSnXPT5ZV4soEzb8UPu8p_NWBw6LkU24HoqFUtiPhW5TFE7fw8VOCy67mHqrh7Hx0VXakcm"/>
+<!-- Overlay elements (GPS pins) -->
+<div class="absolute top-[20%] left-[30%] group">
+<span class="material-symbols-outlined text-primary text-3xl cursor-pointer drop-shadow-lg">directions_bus</span>
+<div class="hidden group-hover:block absolute -top-12 left-0 bg-white p-2 rounded shadow text-[10px] whitespace-nowrap z-10 border border-red-200">
+<b>Bus R-402</b> (Ouaga-Bobo)<br/>Vitesse: 85 km/h
+                            </div>
+</div>
+<div class="absolute top-[45%] left-[55%] group">
+<span class="material-symbols-outlined text-primary text-3xl cursor-pointer drop-shadow-lg">directions_bus</span>
+<div class="hidden group-hover:block absolute -top-12 left-0 bg-white p-2 rounded shadow text-[10px] whitespace-nowrap z-10 border border-red-200">
+<b>Bus R-510</b> (Ouaga-Dori)<br/>Vitesse: 78 km/h
+                            </div>
+</div>
+<div class="absolute top-[60%] left-[25%] group">
+<span class="material-symbols-outlined text-error text-3xl cursor-pointer drop-shadow-lg animate-bounce">warning</span>
+<div class="absolute -top-12 left-0 bg-white p-2 rounded shadow text-[10px] whitespace-nowrap z-10 border border-error">
+<b>ALERTE: R-112</b> (Banfora)<br/>Vitesse excessive: 105 km/h
+                            </div>
+</div>
+<!-- Map controls overlay -->
+<div class="absolute bottom-6 right-6 flex flex-col gap-2">
+<button class="bg-white p-2 rounded shadow-md hover:bg-slate-50"><span class="material-symbols-outlined">add</span></button>
+<button class="bg-white p-2 rounded shadow-md hover:bg-slate-50"><span class="material-symbols-outlined">remove</span></button>
+</div>
+</div>
+</div>
+<!-- Critical Alerts Panel -->
+<div class="bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex flex-col">
+<div class="p-6 border-b border-outline-variant">
+<h3 class="font-h3 text-h3 text-error flex items-center gap-2">
+<span class="material-symbols-outlined">report</span>
+                            Alertes Critiques
+                        </h3>
+</div>
+<div class="p-4 space-y-4 overflow-y-auto max-h-[500px]">
+<!-- Alert Item -->
+<div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-600 flex gap-4">
+<div class="bg-red-600 text-white p-2 rounded-full h-fit">
+<span class="material-symbols-outlined text-sm">speed</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-red-900">Excès de Vitesse</h4>
+<span class="text-[10px] text-red-600 font-bold uppercase">Maintenant</span>
+</div>
+<p class="text-xs text-red-800 mt-1">Bus R-112 sur l'axe Ouagadougou - Banfora a été détecté à 105 km/h (limite 90 km/h).</p>
+<div class="mt-3 flex gap-2">
+<button class="text-[10px] bg-red-600 text-white px-3 py-1 rounded font-bold">Appeler Chauffeur</button>
+<button class="text-[10px] bg-white text-red-600 border border-red-600 px-3 py-1 rounded font-bold">Ignorer</button>
+</div>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="p-4 bg-orange-50 rounded-lg border-l-4 border-orange-600 flex gap-4">
+<div class="bg-orange-600 text-white p-2 rounded-full h-fit">
+<span class="material-symbols-outlined text-sm">account_balance_wallet</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-orange-900">Écart de Caisse</h4>
+<span class="text-[10px] text-orange-600 font-bold uppercase">il y a 14 min</span>
+</div>
+<p class="text-xs text-orange-800 mt-1">Gare de Bobo-Dioulasso : Écart négatif détecté sur la caisse n°3 (-25 400 FCFA).</p>
+<div class="mt-3">
+<button class="text-[10px] bg-orange-600 text-white px-3 py-1 rounded font-bold">Vérifier Détails</button>
+</div>
+</div>
+</div>
+<!-- Alert Item -->
+<div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600 flex gap-4">
+<div class="bg-blue-600 text-white p-2 rounded-full h-fit">
+<span class="material-symbols-outlined text-sm">construction</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-sm text-blue-900">Maintenance Requise</h4>
+<span class="text-[10px] text-blue-600 font-bold uppercase">il y a 2h</span>
+</div>
+<p class="text-xs text-blue-800 mt-1">Bus R-305 : Le capteur de freinage indique une usure prononcée (92%).</p>
+</div>
+</div>
+</div>
+<div class="p-4 mt-auto border-t border-outline-variant">
+<button class="w-full text-center text-xs font-bold text-on-surface-variant hover:text-primary py-2 transition-colors">Voir l'historique des alertes</button>
+</div>
+</div>
+</div>
+<!-- Analytics Row: Charts & Data Tables -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<!-- CA par Gare (Chart Simulation with Bento Grid) -->
+<div class="bg-white p-6 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<h3 class="font-h3 text-h3 text-on-surface mb-6">Répartition du CA par Gare (FCFA)</h3>
+<div class="space-y-6">
+<!-- Bar chart item -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-semibold">Ouagadougou (Centrale)</span>
+<span class="text-on-surface-variant">2 140 000 FCFA</span>
+</div>
+<div class="h-4 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 85%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-semibold">Bobo-Dioulasso</span>
+<span class="text-on-surface-variant">1 250 000 FCFA</span>
+</div>
+<div class="h-4 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 55%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-semibold">Koudougou</span>
+<span class="text-on-surface-variant">645 000 FCFA</span>
+</div>
+<div class="h-4 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 30%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="font-semibold">Fada N'Gourma</span>
+<span class="text-on-surface-variant">325 000 FCFA</span>
+</div>
+<div class="h-4 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 15%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Revenues Distribution (Bento) -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-center items-center text-center">
+<div class="bg-white p-3 rounded-full mb-4 shadow-sm text-primary">
+<span class="material-symbols-outlined text-3xl">confirmation_number</span>
+</div>
+<h4 class="text-lg font-bold">Billetterie</h4>
+<p class="text-3xl font-black text-on-surface mt-2">72%</p>
+<p class="text-xs text-on-surface-variant mt-1">Part des revenus totaux</p>
+</div>
+<div class="bg-tertiary-container text-on-tertiary-container p-6 rounded-xl flex flex-col justify-center items-center text-center">
+<div class="bg-white/20 p-3 rounded-full mb-4 backdrop-blur-md">
+<span class="material-symbols-outlined text-3xl">package</span>
+</div>
+<h4 class="text-lg font-bold">Courrier/Colis</h4>
+<p class="text-3xl font-black mt-2">24%</p>
+<p class="text-xs opacity-80 mt-1">Secteur en croissance (+8%)</p>
+</div>
+<div class="bg-secondary-container col-span-2 p-6 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="bg-white/30 p-3 rounded-lg">
+<span class="material-symbols-outlined text-3xl text-on-secondary-fixed">local_gas_station</span>
+</div>
+<div class="text-left">
+<h4 class="text-sm font-bold uppercase tracking-wider text-on-secondary-fixed">Dépense Carburant (Estimation)</h4>
+<p class="text-2xl font-black text-on-secondary-fixed">1 450 000 FCFA</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-on-secondary-fixed uppercase opacity-70">Ratio charge/CA</p>
+<p class="text-lg font-bold text-on-secondary-fixed">29.8%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Table (Back-office Density) -->
+<div class="bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-on-surface">Derniers Départs &amp; États</h3>
+<div class="flex gap-2">
+<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">À l'heure: 95%</span>
+<span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">Retard: 5%</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-data-table text-data-table border-collapse">
+<thead class="bg-slate-50 text-on-surface-variant sticky top-0">
+<tr>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold">Bus ID</th>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold">Destination</th>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold">Heure Départ</th>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold">Passagers</th>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold">Status</th>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold text-right">Recette (Tickets)</th>
+<th class="px-6 py-4 border-b border-outline-variant font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">R-402</td>
+<td class="px-6 py-4">Bobo-Dioulasso</td>
+<td class="px-6 py-4">07:00 (Effectif 07:02)</td>
+<td class="px-6 py-4">68/70</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">En route</span>
+</td>
+<td class="px-6 py-4 text-right font-bold">408 000 FCFA</td>
+<td class="px-6 py-4 text-right">
+<button class="text-tertiary hover:underline">Détails</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">R-510</td>
+<td class="px-6 py-4">Dori</td>
+<td class="px-6 py-4">07:30 (Effectif 07:35)</td>
+<td class="px-6 py-4">52/52</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">En route</span>
+</td>
+<td class="px-6 py-4 text-right font-bold">390 000 FCFA</td>
+<td class="px-6 py-4 text-right">
+<button class="text-tertiary hover:underline">Détails</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">R-112</td>
+<td class="px-6 py-4">Banfora</td>
+<td class="px-6 py-4">08:00 (Retard 15min)</td>
+<td class="px-6 py-4">45/70</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-orange-100 px-2 py-1 text-xs font-medium text-orange-700">Retardé</span>
+</td>
+<td class="px-6 py-4 text-right font-bold">270 000 FCFA</td>
+<td class="px-6 py-4 text-right">
+<button class="text-tertiary hover:underline">Détails</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 font-medium">R-221</td>
+<td class="px-6 py-4">Ouahigouya</td>
+<td class="px-6 py-4">09:00 (Prévu)</td>
+<td class="px-6 py-4">12/70</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center rounded-full bg-slate-100 px-2 py-1 text-xs font-medium text-slate-700">Embarquement</span>
+</td>
+<td class="px-6 py-4 text-right font-bold">72 000 FCFA</td>
+<td class="px-6 py-4 text-right">
+<button class="text-tertiary hover:underline">Détails</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer (Hidden per JSON visibility rules if back-office, but styled here for completeness) -->
+<footer class="mt-12 bg-slate-900 border-t-4 border-red-600 px-8 py-8 w-full">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400 text-sm leading-relaxed">© 2024 Rahimo Transport. Tous droits réservés.</p>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-4">Liens Utiles</h4>
+<ul class="text-slate-400 text-sm space-y-2">
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Support Technique</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Base de connaissance</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-4">Services</h4>
+<ul class="text-slate-400 text-sm space-y-2">
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Gestion Flotte</a></li>
+<li><a class="hover:text-red-400 transition-transform hover:translate-x-1 inline-block" href="#">Audit Comptable</a></li>
+</ul>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer">public</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer">mail</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-white cursor-pointer">phone_android</span>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interactions and data simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update time indicator
+            const updateTime = () => {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+                // We could inject this into a specific element if needed
+            };
+            setInterval(updateTime, 60000);
+
+            // Simulation of "Live" data pulse
+            const alertCards = document.querySelectorAll('.bg-red-50');
+            alertCards.forEach(card => {
+                setInterval(() => {
+                    card.classList.toggle('ring-1');
+                    card.classList.toggle('ring-red-400');
+                }, 2000);
+            });
+
+            // Hover effects for the sidebar
+            const navLinks = document.querySelectorAll('aside nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    navLinks.forEach(l => {
+                        l.classList.remove('bg-red-700', 'text-white');
+                        l.classList.add('text-slate-400', 'hover:bg-slate-800', 'hover:text-white');
+                    });
+                    link.classList.add('bg-red-700', 'text-white');
+                    link.classList.remove('text-slate-400', 'hover:bg-slate-800', 'hover:text-white');
+                });
+            });
+        });
+    </script>
+</body></html>

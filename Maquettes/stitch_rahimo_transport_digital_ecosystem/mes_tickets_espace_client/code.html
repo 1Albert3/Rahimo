@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mes Tickets - Rahimo Transport</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#bd1119",
+                    "surface-container-high": "#ffe2de",
+                    "surface-container-low": "#fff0ee",
+                    "on-tertiary-container": "#ebf5ff",
+                    "surface-container": "#ffe9e6",
+                    "surface-container-highest": "#fbdbd8",
+                    "secondary-fixed-dim": "#fcbb36",
+                    "surface": "#fff8f7",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#e5bdb9",
+                    "surface-dim": "#f2d3cf",
+                    "secondary-fixed": "#ffdea8",
+                    "primary-fixed-dim": "#ffb4ab",
+                    "on-surface-variant": "#5c403d",
+                    "primary": "#b20112",
+                    "tertiary-fixed-dim": "#83cfff",
+                    "primary-container": "#d62828",
+                    "tertiary-fixed": "#c7e7ff",
+                    "on-primary-fixed-variant": "#93000d",
+                    "surface-bright": "#fff8f7",
+                    "surface-variant": "#fbdbd8",
+                    "on-secondary-fixed-variant": "#5e4200",
+                    "on-primary-container": "#fff1ef",
+                    "secondary": "#7c5800",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#001e2e",
+                    "on-secondary-container": "#6f4e00",
+                    "tertiary": "#005d83",
+                    "inverse-on-surface": "#ffedea",
+                    "secondary-container": "#ffbe39",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#004c6c",
+                    "inverse-primary": "#ffb4ab",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#281716",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#271900",
+                    "on-background": "#281716",
+                    "tertiary-container": "#0077a6",
+                    "background": "#fff8f7",
+                    "outline": "#906f6b",
+                    "inverse-surface": "#3f2c2a",
+                    "primary-fixed": "#ffdad6",
+                    "on-primary-fixed": "#410002"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "grid-columns": "12",
+                    "gutter": "24px",
+                    "margin": "32px",
+                    "container-max": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "h2": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "data-table": [
+                            "Inter"
+                    ],
+                    "h1": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "label-caps": [
+                            "Inter"
+                    ],
+                    "body-light": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "h3": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body-regular": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "h2": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-table": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h1": [
+                            "40px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-light": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "300"
+                            }
+                    ],
+                    "h3": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-regular": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-red-700 dark:bg-red-800 docked full-width top-0 sticky z-50 border-b border-red-800 shadow-md">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-[1280px] mx-auto">
+<!-- Brand -->
+<div class="text-2xl font-black text-white shrink-0">
+                Rahimo Transport
+            </div>
+<!-- Navigation Links (Hidden on mobile for this specific layout structure, assuming desktop first approach) -->
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-red-100 hover:text-white transition-colors" href="#">Accueil</a>
+<a class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-red-100 hover:text-white transition-colors" href="#">Réserver</a>
+<a class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-red-100 hover:text-white transition-colors" href="#">Colis</a>
+<a class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-red-100 hover:text-white transition-colors" href="#">Services</a>
+<a class="font-plus-jakarta-sans text-sm font-semibold tracking-tight text-red-100 hover:text-white transition-colors" href="#">Suivi</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-plus-jakarta-sans text-sm font-semibold tracking-tight bg-white text-red-700 px-6 py-2 rounded-md hover:bg-red-50 transition-colors scale-95 active:scale-90 duration-150">
+                    Acheter un ticket
+                </button>
+<div class="flex gap-2">
+<button class="text-white hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all p-2 scale-95 active:scale-90 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<!-- User Profile is implicitly active as we are in the customer space -->
+<button class="text-white hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all p-2 scale-95 active:scale-90 duration-150 flex items-center justify-center bg-red-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="max-w-container-max mx-auto px-margin py-margin flex flex-col md:flex-row gap-gutter min-h-[768px]">
+<!-- Sidebar Account Navigation -->
+<aside class="w-full md:w-64 shrink-0 flex flex-col gap-2">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg font-body-regular text-body-regular text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">space_dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg font-body-regular text-body-regular bg-primary-container text-on-primary-container font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+                    Tickets
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg font-body-regular text-body-regular text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">package</span>
+                    Colis
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg font-body-regular text-body-regular text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+                    Favoris
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg font-body-regular text-body-regular text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">loyalty</span>
+                    Fidélité
+                </a>
+<div class="h-px bg-outline-variant my-2"></div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg font-body-regular text-body-regular text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+                    Profil
+                </a>
+</div>
+</aside>
+<!-- Main Content Panel -->
+<section class="flex-grow flex flex-col">
+<!-- Page Header -->
+<div class="mb-8">
+<h1 class="font-h1 text-h1 text-on-surface">Mes Tickets</h1>
+<p class="font-body-light text-body-light text-on-surface-variant mt-2">Gérez vos réservations, consultez vos billets électroniques et modifiez vos voyages.</p>
+</div>
+<!-- Tabs -->
+<div class="flex gap-8 border-b border-outline-variant mb-6">
+<button class="pb-4 font-body-regular text-body-regular font-semibold text-primary border-b-2 border-primary">
+                    À venir (3)
+                </button>
+<button class="pb-4 font-body-regular text-body-regular text-on-surface-variant hover:text-on-surface transition-colors">
+                    Passés (12)
+                </button>
+<button class="pb-4 font-body-regular text-body-regular text-on-surface-variant hover:text-on-surface transition-colors">
+                    Annulés (1)
+                </button>
+</div>
+<!-- Ticket List -->
+<div class="flex flex-col gap-6">
+<!-- Ticket Card 1 -->
+<div class="flex flex-col md:flex-row bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden hover:shadow-md transition-shadow">
+<!-- QR Visual Area -->
+<div class="w-full md:w-40 bg-surface-container-low flex flex-col items-center justify-center p-6 border-b md:border-b-0 md:border-r border-dashed border-outline-variant shrink-0">
+<img alt="QR Code" class="w-24 h-24 object-contain rounded bg-white p-2 shadow-sm mix-blend-multiply" data-alt="A close-up, high-contrast black and white QR code graphic representing a digital transport ticket. The QR code is perfectly square, highly detailed, and centered against a clean, bright white background. The lighting is completely flat and shadowless to ensure maximum readability and a modern, functional aesthetic consistent with digital interface design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsU8FsHfjh3b0uUaQswLOe76TGfhgENQbfctqsKCnCq_ml27r9Yo_rynepSnH9TaJultZreiwvLRzKAkuOMIoYfgxFnpiEt4fY2GTEaZvBshvscRDtZT30mVIyGYm-pmyxK3KHgkpKEurzwjcK0mX93sEYANBzRWWjFbXy1eA1_yXJM-V5S1YEvOHU2giSZAw0G1vWWrwEdUwRZBT_Y-jqes2SiF_qUAmUNp8Bk0aDSVimxmQXtefKXPGnrumjBPMGTPt6ucGVpoJS"/>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-4 text-center">REF: RT-8X9P</span>
+</div>
+<!-- Details Area -->
+<div class="flex-grow p-6 flex flex-col justify-center gap-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-container text-on-tertiary-container font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                Confirmé
+                            </span>
+<span class="font-label-caps text-label-caps text-on-surface-variant ml-auto">Aller simple</span>
+</div>
+<div class="flex items-center gap-4">
+<h3 class="font-h3 text-h3 text-on-surface">Ouagadougou</h3>
+<span class="material-symbols-outlined text-outline">arrow_right_alt</span>
+<h3 class="font-h3 text-h3 text-on-surface">Bobo-Dioulasso</h3>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Date</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">Jeu 24 Oct.</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Départ</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">08:30</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Siège</p>
+<p class="font-data-table text-data-table text-primary font-semibold">12A</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Bus</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">VIP Climatise</p>
+</div>
+</div>
+</div>
+<!-- Actions Area -->
+<div class="w-full md:w-56 bg-surface-container flex flex-col justify-center p-6 gap-3 border-t md:border-t-0 md:border-l border-dashed border-outline-variant shrink-0">
+<button class="w-full bg-primary-container text-on-primary-container font-body-regular text-body-regular font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
+                            Voir le QR
+                        </button>
+<button class="w-full bg-surface-container-lowest border border-outline text-on-surface font-body-regular text-body-regular font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">print</span>
+                            Imprimer
+                        </button>
+<button class="w-full text-error font-body-regular text-body-regular font-semibold py-2 px-4 rounded-lg hover:bg-error-container transition-colors text-center mt-1">
+                            Annuler / Modifier
+                        </button>
+</div>
+</div>
+<!-- Ticket Card 2 -->
+<div class="flex flex-col md:flex-row bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden hover:shadow-md transition-shadow">
+<!-- QR Visual Area -->
+<div class="w-full md:w-40 bg-surface-container-low flex flex-col items-center justify-center p-6 border-b md:border-b-0 md:border-r border-dashed border-outline-variant shrink-0">
+<img alt="QR Code" class="w-24 h-24 object-contain rounded bg-white p-2 shadow-sm mix-blend-multiply opacity-50 grayscale" data-alt="A clean, high-contrast black and white square QR code centered on a plain white background. The image simulates a digital scanning code for a transport pass. The lighting is uniform and bright, eliminating shadows to highlight the structural grid of the code. The overall visual tone is crisp, modern, and aligned with a minimalist digital interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzR1oHV0hJT_U-rHMitqtGWZNzSxj4f2-AjCEquCyuSZPOE3mr8IUYadnoA7v1WE_Q4NE0FKZ995A96gPx7n81OU-_WKavTF_XitQAIpoR89rke86Np6YPuI1ZaGo64n0IDfWrQdJ30a60h6ZyKz11PD9clvKNCYWTHrmvrvaF8nHXZ7EzbdYwIJioPHUUWH9H5YxlCFqmCHd5pHyi8F2T8zphsRyCugB5lEQhvxl-UZS3KunY9W5dhp6u9dUuSs17gNGq3Qc0cZim"/>
+<span class="font-label-caps text-label-caps text-on-surface-variant mt-4 text-center">REF: RT-2M4K</span>
+</div>
+<!-- Details Area -->
+<div class="flex-grow p-6 flex flex-col justify-center gap-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                En attente de paiement
+                            </span>
+<span class="font-label-caps text-label-caps text-on-surface-variant ml-auto">Aller simple</span>
+</div>
+<div class="flex items-center gap-4">
+<h3 class="font-h3 text-h3 text-on-surface">Koudougou</h3>
+<span class="material-symbols-outlined text-outline">arrow_right_alt</span>
+<h3 class="font-h3 text-h3 text-on-surface">Ouagadougou</h3>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Date</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">Sam 26 Oct.</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Départ</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">14:00</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Siège</p>
+<p class="font-data-table text-data-table text-on-surface-variant">Non assigné</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Bus</p>
+<p class="font-data-table text-data-table text-on-surface font-semibold">Standard</p>
+</div>
+</div>
+</div>
+<!-- Actions Area -->
+<div class="w-full md:w-56 bg-surface-container flex flex-col justify-center p-6 gap-3 border-t md:border-t-0 md:border-l border-dashed border-outline-variant shrink-0">
+<button class="w-full bg-secondary-fixed text-on-secondary-fixed font-body-regular text-body-regular font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 hover:bg-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+                            Payer maintenant
+                        </button>
+<button class="w-full text-error font-body-regular text-body-regular font-semibold py-2 px-4 rounded-lg hover:bg-error-container transition-colors text-center mt-1">
+                            Annuler la réservation
+                        </button>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex justify-center items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-body-regular font-semibold">
+                    1
+                </button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors font-body-regular">
+                    2
+                </button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-slate-900 dark:bg-black w-full rounded-none border-t-4 border-red-600 flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<!-- Brand Column -->
+<div class="col-span-1">
+<span class="text-xl font-bold text-white mb-4 block font-plus-jakarta-sans text-sm leading-relaxed">
+                    Rahimo Transport
+                </span>
+<p class="font-plus-jakarta-sans text-sm leading-relaxed text-slate-400">
+                    L'excellence dans le transport de personnes et de colis à travers le Burkina Faso et la sous-région.
+                </p>
+</div>
+<!-- Links Column 1 -->
+<div class="col-span-1">
+<h4 class="text-white font-medium mb-4 font-plus-jakarta-sans text-sm">Liens Utiles</h4>
+<ul class="flex flex-col gap-3 font-plus-jakarta-sans text-sm leading-relaxed">
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">À propos</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Agences</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Contact</a></li>
+</ul>
+</div>
+<!-- Links Column 2 -->
+<div class="col-span-1">
+<h4 class="text-white font-medium mb-4 font-plus-jakarta-sans text-sm">Services</h4>
+<ul class="flex flex-col gap-3 font-plus-jakarta-sans text-sm leading-relaxed">
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Voyage passagers</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Envoi de colis</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Location de bus</a></li>
+</ul>
+</div>
+<!-- Legal & Copyright -->
+<div class="col-span-1 flex flex-col justify-between">
+<div>
+<h4 class="text-white font-medium mb-4 font-plus-jakarta-sans text-sm">Applications &amp; Réseaux Sociaux</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#"><span class="material-symbols-outlined">smartphone</span></a>
+<a class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+<div class="mt-8 font-plus-jakarta-sans text-sm leading-relaxed text-slate-500">
+                    © 2024 Rahimo Transport. Tous droits réservés.
+                </div>
+</div>
+</div>
+</footer>
+</body></html>

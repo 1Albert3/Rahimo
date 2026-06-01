@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sélection de Siège - Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#bd1119",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container-low": "#fff0ee",
+                        "on-tertiary-container": "#ebf5ff",
+                        "surface-container": "#ffe9e6",
+                        "surface-container-highest": "#fbdbd8",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "surface": "#fff8f7",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#e5bdb9",
+                        "surface-dim": "#f2d3cf",
+                        "secondary-fixed": "#ffdea8",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-surface-variant": "#5c403d",
+                        "primary": "#b20112",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "primary-container": "#d62828",
+                        "tertiary-fixed": "#c7e7ff",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-bright": "#fff8f7",
+                        "surface-variant": "#fbdbd8",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "on-primary-container": "#fff1ef",
+                        "secondary": "#7c5800",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#001e2e",
+                        "on-secondary-container": "#6f4e00",
+                        "tertiary": "#005d83",
+                        "inverse-on-surface": "#ffedea",
+                        "secondary-container": "#ffbe39",
+                        "on-error": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "inverse-primary": "#ffb4ab",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#281716",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#271900",
+                        "on-background": "#281716",
+                        "tertiary-container": "#0077a6",
+                        "background": "#fff8f7",
+                        "outline": "#906f6b",
+                        "inverse-surface": "#3f2c2a",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-fixed": "#410002"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-columns": "12",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "container-max": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "body-regular": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "h2": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "data-table": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h1": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-light": ["14px", { "lineHeight": "1.5", "fontWeight": "300" }],
+                        "h3": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-regular": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-regular text-body-regular">
+<!-- TopNavBar -->
+<nav class="bg-red-700 dark:bg-red-800 text-white font-plus-jakarta-sans text-sm font-semibold tracking-tight docked full-width top-0 sticky z-50 border-b border-red-800 shadow-md">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-[1280px] mx-auto">
+<div class="text-2xl font-black text-white">
+                Rahimo Transport
+            </div>
+<div class="flex gap-8 items-center">
+<a class="text-red-100 hover:text-white transition-colors" href="#">Accueil</a>
+<a class="border-b-2 border-yellow-400 text-white pb-1" href="#">Réserver</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Colis</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Services</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Suivi</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-red-700 dark:bg-red-800 text-white font-plus-jakarta-sans text-sm font-semibold tracking-tight hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all scale-95 active:scale-90 duration-150 px-4 py-2 border border-red-600">
+                    Acheter un ticket
+                </button>
+<div class="flex gap-2">
+<button class="hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all p-2 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-red-600 dark:hover:bg-red-700 rounded-md transition-all p-2 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin py-margin">
+<div class="mb-8">
+<h1 class="font-h1 text-h1 text-on-background mb-2">Sélection de Siège</h1>
+<p class="font-body-regular text-body-regular text-on-surface-variant">Choisissez vos places pour le trajet Ouagadougou - Bobo-Dioulasso</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left: Bus Seat Map (60%) -->
+<div class="lg:col-span-7 xl:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] p-8 border border-outline-variant">
+<!-- Legend -->
+<div class="flex flex-wrap items-center justify-center gap-6 mb-10 pb-6 border-b border-surface-variant">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md border-2 border-outline bg-surface"></div>
+<span class="font-data-table text-data-table text-on-surface-variant">Libre</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-on-error" style="font-variation-settings: 'FILL' 1;">close</span>
+</div>
+<span class="font-data-table text-data-table text-on-surface-variant">Occupé</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-secondary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-data-table text-data-table text-on-surface-variant">Sélectionné</span>
+</div>
+</div>
+<!-- Bus Visual -->
+<div class="relative max-w-md mx-auto">
+<!-- Bus Frame -->
+<div class="border-4 border-surface-variant rounded-t-[4rem] rounded-b-[2rem] p-6 bg-surface-container-lowest relative shadow-inner">
+<!-- Driver Area -->
+<div class="flex justify-between items-center mb-8 pb-6 border-b-2 border-dashed border-surface-variant px-4">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-on-surface-variant">steering_wheel_heat</span>
+</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">
+                                    Avant
+                                </div>
+</div>
+<!-- Seats Grid -->
+<div class="grid grid-cols-5 gap-y-6 gap-x-4 px-2">
+<!-- Row 1 -->
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">1A</span>
+</button>
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">1B</span>
+</button>
+<div class="col-span-1 flex items-center justify-center">
+<span class="font-data-table text-[10px] text-outline-variant writing-vertical">Allée</span>
+</div>
+<button class="h-14 rounded-lg bg-error opacity-70 cursor-not-allowed flex flex-col items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[20px] text-on-error" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-[10px] text-on-error mt-1">1C</span>
+</button>
+<button class="h-14 rounded-lg bg-error opacity-70 cursor-not-allowed flex flex-col items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[20px] text-on-error" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-[10px] text-on-error mt-1">1D</span>
+</button>
+<!-- Row 2 -->
+<button class="h-14 rounded-lg bg-error opacity-70 cursor-not-allowed flex flex-col items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[20px] text-on-error" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-[10px] text-on-error mt-1">2A</span>
+</button>
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">2B</span>
+</button>
+<div class="col-span-1"></div>
+<button class="h-14 rounded-lg bg-secondary-container shadow-md flex flex-col items-center justify-center transition-all transform scale-105 border-2 border-secondary">
+<span class="material-symbols-outlined text-[20px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">chair</span>
+<span class="font-label-caps text-[10px] text-on-secondary-container mt-1 font-bold">2C</span>
+</button>
+<button class="h-14 rounded-lg bg-secondary-container shadow-md flex flex-col items-center justify-center transition-all transform scale-105 border-2 border-secondary">
+<span class="material-symbols-outlined text-[20px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">chair</span>
+<span class="font-label-caps text-[10px] text-on-secondary-container mt-1 font-bold">2D</span>
+</button>
+<!-- Row 3 -->
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">3A</span>
+</button>
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">3B</span>
+</button>
+<div class="col-span-1"></div>
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">3C</span>
+</button>
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">3D</span>
+</button>
+<!-- Row 4 -->
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">4A</span>
+</button>
+<button class="h-14 rounded-lg bg-surface border-2 border-outline hover:border-primary-container hover:bg-surface-container flex flex-col items-center justify-center transition-all group">
+<span class="material-symbols-outlined text-[20px] text-outline group-hover:text-primary-container">chair</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant mt-1">4B</span>
+</button>
+<div class="col-span-1"></div>
+<button class="h-14 rounded-lg bg-error opacity-70 cursor-not-allowed flex flex-col items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[20px] text-on-error" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-[10px] text-on-error mt-1">4C</span>
+</button>
+<button class="h-14 rounded-lg bg-error opacity-70 cursor-not-allowed flex flex-col items-center justify-center" disabled="">
+<span class="material-symbols-outlined text-[20px] text-on-error" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-caps text-[10px] text-on-error mt-1">4D</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Sticky Recap Card (40%) -->
+<div class="lg:col-span-5 xl:col-span-4 relative">
+<div class="sticky top-[100px] bg-surface-container-lowest rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.12)] p-6 border border-surface-variant flex flex-col gap-6">
+<!-- Trip Summary -->
+<div class="flex flex-col gap-4">
+<h3 class="font-h3 text-h3 text-on-background border-b border-surface-variant pb-4">Résumé du Trajet</h3>
+<div class="flex items-start gap-4">
+<div class="flex flex-col items-center justify-center mt-1">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">trip_origin</span>
+<div class="w-[2px] h-8 bg-surface-variant my-1"></div>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div class="flex flex-col gap-5 w-full">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Départ</div>
+<div class="font-body-regular text-body-regular font-semibold text-on-background">Ouagadougou</div>
+<div class="font-data-table text-data-table text-on-surface-variant">Gare Centrale • 08:00</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Arrivée</div>
+<div class="font-body-regular text-body-regular font-semibold text-on-background">Bobo-Dioulasso</div>
+<div class="font-data-table text-data-table text-on-surface-variant">Gare Routière • 13:30</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<!-- Selected Seats -->
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-3">Sièges Sélectionnés</div>
+<div class="flex flex-wrap gap-2">
+<div class="px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-md font-data-table text-data-table font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">airline_seat_recline_normal</span>
+                                2C
+                            </div>
+<div class="px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-md font-data-table text-data-table font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">airline_seat_recline_normal</span>
+                                2D
+                            </div>
+</div>
+</div>
+<div class="w-full h-[1px] bg-surface-variant"></div>
+<!-- Pricing -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center font-data-table text-data-table text-on-surface-variant">
+<span>Ticket (x2)</span>
+<span>15 000 FCFA</span>
+</div>
+<div class="flex justify-between items-center font-data-table text-data-table text-on-surface-variant">
+<span>Frais de service</span>
+<span>500 FCFA</span>
+</div>
+<div class="flex justify-between items-center font-h3 text-h3 text-primary-container mt-2 pt-2 border-t border-surface-variant">
+<span>Total</span>
+<span>15 500 FCFA</span>
+</div>
+</div>
+<!-- Action -->
+<button class="w-full bg-primary-container text-on-primary-container font-h3 text-[18px] py-4 rounded-lg shadow-md hover:bg-primary transition-colors flex items-center justify-center gap-2 mt-4">
+                        Continuer
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-900 dark:bg-black text-red-600 font-plus-jakarta-sans text-sm leading-relaxed w-full rounded-none border-t-4 border-red-600 flat no shadows mt-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400">© 2024 Rahimo Transport. Tous droits réservés.</p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-white font-medium mb-2">Liens Utiles</span>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">Accueil</a>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">À propos</a>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">Contact</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-white font-medium mb-2">Services</span>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">Réservation</a>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">Envoi de colis</a>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">Location</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-white font-medium mb-2">Applications</span>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">Android</a>
+<a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform" href="#">iOS</a>
+</div>
+</div>
+</footer>
+</body></html>

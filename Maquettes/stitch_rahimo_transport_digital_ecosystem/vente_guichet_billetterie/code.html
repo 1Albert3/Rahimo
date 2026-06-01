@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Vente Guichet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#fff0ee",
+                        "on-secondary-fixed": "#271900",
+                        "outline": "#906f6b",
+                        "inverse-primary": "#ffb4ab",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-dim": "#f2d3cf",
+                        "primary": "#b20112",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#005d83",
+                        "on-surface-variant": "#5c403d",
+                        "on-surface": "#281716",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#fff1ef",
+                        "primary-container": "#d62828",
+                        "background": "#fff8f7",
+                        "surface-container-highest": "#fbdbd8",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-secondary-container": "#6f4e00",
+                        "outline-variant": "#e5bdb9",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container": "#ffe9e6",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "inverse-on-surface": "#ffedea",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#fbdbd8",
+                        "secondary": "#7c5800",
+                        "on-tertiary-container": "#ebf5ff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#bd1119",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "tertiary-container": "#0077a6",
+                        "surface-bright": "#fff8f7",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "secondary-fixed": "#ffdea8",
+                        "secondary-container": "#ffbe39",
+                        "on-primary-fixed": "#410002",
+                        "inverse-surface": "#3f2c2a",
+                        "on-background": "#281716",
+                        "surface": "#fff8f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .seat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .seat-aisle {
+            grid-column: 3;
+            width: 24px;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .no-shadow { box-shadow: none !important; }
+    </style>
+</head>
+<body class="bg-surface font-body-regular text-on-surface overflow-hidden h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 text-red-600 font-plus-jakarta-sans text-sm font-medium docked left-0 h-screen w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6">
+<span class="text-lg font-black text-red-500 mb-8 block">Rahimo Admin</span>
+<div class="flex items-center gap-3 mb-10 pb-6 border-b border-slate-800">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAkZ2EiWqAifmmSexSl7gjJkiL-0CGDB5k1kvkXUjBEPk9P_j_58qp-k3Boh5wt0xX60T-S_0rtzrJqguSVyyqKJw4Wr8So9QHkyox5aPLRgitDvg2dNjRskcUl-ILv9Et3pHGfNuTCeLE7F--5eAC0z8esWYWnr4jBYPsq-E4B6QA8cXDXAMT98K2NG94yk5TuWEIRFT7SqiDAg71Sv-5Y2IupvSv3NPTfM7qCAQoY8FQ87wE-qjM-hcG4zlsY9kQ_9rWW5bdfVMN"/>
+</div>
+<div>
+<p class="text-white font-bold block">Superviseur Géréral</p>
+<p class="text-slate-500 text-xs">Gare de Ouaga</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+                Tableau de bord
+            </a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span>
+                Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">package</span>
+                Colis
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span>
+                Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+                Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+                Comptabilité
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-red-700 text-white font-plus-jakarta-sans font-bold text-lg docked full-width top-0 z-40 border-b border-red-800 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined">location_on</span>
+<span>Gare de Ouagadougou</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-red-600 rounded-full p-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-red-600 rounded-full p-2 transition-all active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full border-2 border-white/20 overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC65iQrLcgy8z592_hJbgkF3UTOd4wBTrMjw75NrY450an4K2FRWMVWdc5za4T8x08qKokZ_QC4OBm6oXx54Y8Hy-Et0udoW6p_fUHkpvs2YYgracEz4dWVe2Z56d9aZJ1I_WscALDehOKVd2BPNl-jSqDfS7asntOhPYGb3RTZSnlKpYe3DHUOa2K83kwYp8fXouQGAGrsV6mVtVY-RqZn-_8dc8rPqxLr1tAbIClYMjVIl0dPJan8AgEbeXVBMJ13Aydc8ldU69zP"/>
+</div>
+</div>
+</header>
+<!-- POS Interface Content -->
+<div class="flex-1 p-6 grid grid-cols-12 gap-6 overflow-hidden">
+<!-- Left Panel: Trip & Seat Selection -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6 overflow-hidden">
+<!-- Quick Selection: Trips -->
+<section class="bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant p-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-h3 text-h3 text-on-surface">Sélection du départ</h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-label-caps text-on-surface-variant">AUJOURD'HUI</span>
+<span class="px-3 py-1 bg-tertiary-container text-white rounded-full text-label-caps">DIRECT</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<button class="p-4 border-2 border-primary bg-surface-container-low rounded-lg text-left flex flex-col transition-all">
+<span class="text-label-caps text-primary font-bold">08:30 - LIGNE 01</span>
+<span class="font-h3 text-lg mt-1">Bobo-Dioulasso</span>
+<div class="flex justify-between items-center mt-2">
+<span class="text-sm font-medium text-on-surface-variant">14 places dispo</span>
+<span class="font-bold text-primary">7 000 CFA</span>
+</div>
+</button>
+<button class="p-4 border border-outline-variant hover:border-primary-container bg-white rounded-lg text-left flex flex-col transition-all group">
+<span class="text-label-caps text-on-surface-variant font-bold">10:00 - LIGNE 04</span>
+<span class="font-h3 text-lg mt-1">Koudougou</span>
+<div class="flex justify-between items-center mt-2">
+<span class="text-sm font-medium text-on-surface-variant">28 places dispo</span>
+<span class="font-bold text-on-surface">3 000 CFA</span>
+</div>
+</button>
+<button class="p-4 border border-outline-variant hover:border-primary-container bg-white rounded-lg text-left flex flex-col transition-all group">
+<span class="text-label-caps text-on-surface-variant font-bold">12:30 - LIGNE 02</span>
+<span class="font-h3 text-lg mt-1">Banfora</span>
+<div class="flex justify-between items-center mt-2">
+<span class="text-sm font-medium text-on-surface-variant">05 places dispo</span>
+<span class="font-bold text-on-surface">10 000 CFA</span>
+</div>
+</button>
+</div>
+</section>
+<!-- Interactive Bus Plan -->
+<section class="flex-1 bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant p-4 flex flex-col min-h-0">
+<div class="flex items-center justify-between mb-4">
+<h2 class="font-h3 text-h3 text-on-surface">Plan du bus (Bus 45 - 55 Places)</h2>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 text-xs">
+<div class="w-4 h-4 rounded bg-white border border-green-500"></div> Libre
+                            </div>
+<div class="flex items-center gap-2 text-xs">
+<div class="w-4 h-4 rounded bg-primary"></div> Sélectionné
+                            </div>
+<div class="flex items-center gap-2 text-xs">
+<div class="w-4 h-4 rounded bg-[#E74C3C]"></div> Occupé
+                            </div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 scroll-hide">
+<div class="max-w-md mx-auto bg-surface-container rounded-[2rem] p-8 border-4 border-outline-variant relative">
+<!-- Driver Area -->
+<div class="flex justify-between items-center mb-12 border-b-2 border-outline-variant pb-4">
+<div class="w-12 h-12 bg-slate-200 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500">navigation</span>
+</div>
+<div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-500">door_open</span>
+</div>
+</div>
+<!-- Bus Seats Grid -->
+<div class="grid grid-cols-5 gap-y-4 gap-x-2">
+<!-- Example Seats Logic -->
+<script>
+                                    const grid = document.currentScript.parentElement;
+                                    for(let i=1; i<=55; i++) {
+                                        if (i % 5 === 3) {
+                                            const aisle = document.createElement('div');
+                                            aisle.className = 'w-6';
+                                            grid.appendChild(aisle);
+                                        }
+                                        const seat = document.createElement('button');
+                                        let status = 'free';
+                                        if([2, 5, 8, 12, 13, 14, 25, 26, 40].includes(i)) status = 'occupied';
+                                        if(i === 15) status = 'selected';
+
+                                        seat.className = `h-10 w-10 rounded-lg border-2 flex items-center justify-center text-xs font-bold transition-all ${
+                                            status === 'free' ? 'border-green-600 bg-green-50 text-green-700 hover:bg-green-100' :
+                                            status === 'occupied' ? 'bg-[#E74C3C] border-[#E74C3C] text-white cursor-not-allowed' :
+                                            'bg-primary border-primary text-white scale-110 shadow-lg'
+                                        }`;
+                                        seat.innerHTML = i === 15 ? '<span class="material-symbols-outlined text-sm" style="font-variation-settings: \'FILL\' 1;">person</span>' : i;
+                                        grid.appendChild(seat);
+                                    }
+                                </script>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Panel: Passenger & Payment -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6 overflow-hidden">
+<!-- Passenger Form -->
+<section class="bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] border border-outline-variant p-6">
+<h2 class="font-h3 text-lg text-on-surface mb-4">Détails du passager</h2>
+<div class="space-y-4">
+<div>
+<label class="block text-label-caps text-on-surface-variant mb-2">NOM COMPLET</label>
+<input class="w-full border-outline-variant rounded-lg focus:ring-primary focus:border-primary" placeholder="Entrez le nom" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-label-caps text-on-surface-variant mb-2">TÉLÉPHONE</label>
+<input class="w-full border-outline-variant rounded-lg focus:ring-primary focus:border-primary" placeholder="00 00 00 00" type="tel"/>
+</div>
+<div>
+<label class="block text-label-caps text-on-surface-variant mb-2">TYPE</label>
+<select class="w-full border-outline-variant rounded-lg focus:ring-primary focus:border-primary">
+<option>Adulte</option>
+<option>Enfant (-12 ans)</option>
+<option>Senior (+65 ans)</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Summary -->
+<section class="flex-1 bg-surface-container rounded-xl border-2 border-primary-container p-6 flex flex-col">
+<h2 class="font-h3 text-lg text-on-surface mb-4">Paiement</h2>
+<div class="flex-1 space-y-6">
+<!-- Mode de paiement -->
+<div class="grid grid-cols-3 gap-2">
+<button class="flex flex-col items-center justify-center p-3 bg-white border-2 border-primary rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-1">payments</span>
+<span class="text-[10px] font-bold">ESPÈCES</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white border border-outline-variant rounded-xl opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all">
+<img alt="Orange Money" class="w-6 h-6 rounded-md mb-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO5swipH17R67w_SUP8kUMofdw39Ct0z4l_LybnEQqDOe77jKBq02brGjH2ZoIruMyLQrDq4IQZYuuijR82fjDfK3y2j6D_i0WIUMpE_N3aC4sn7kBGBmto6zNwtv9d9yFQXyVqFGURAqyyhXRryHEbtEcmT2-5IlGI8ojVlHf-coW4GSDc8U5FEi2LfcsSqgc82qys-XOmGxkx5ipmFrC0NVlOiyH0m8spsuVxRpvS3vTlfHpmutYnpH5GShgOALEqns3kfcfSAmI"/>
+<span class="text-[10px] font-bold">ORANGE</span>
+</button>
+<button class="flex flex-col items-center justify-center p-3 bg-white border border-outline-variant rounded-xl opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all">
+<img alt="Moov Money" class="w-6 h-6 rounded-md mb-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4wMdGLbeYU0OP-DYFEITX93m7jSvzpNmrCmh686MfN-7yW9oV5U58aNwoSaLeTuCQTpU4bvEoO8Jxhn-8bQozLTa5y-bNa-PjNMK0yomrMgQQrJaNQRVRYK0QmIxx82wFIHFxirScIXmFdssFUPgmUVjy54oDPQFvssVcmaQIdPRyMTQjXt5PToNPNVKgh6yNnDwVc4qgxDpDyhZBSo4bXWazsUEVor-qz50S3a-RpOe_qUFmjK_BDVtOBDYYJHwRhBDWBb79PGpN"/>
+<span class="text-[10px] font-bold">MOOV</span>
+</button>
+</div>
+<!-- Amounts -->
+<div class="space-y-3 bg-white p-4 rounded-lg">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Ticket (Siège 15)</span>
+<span class="font-bold">7 000 CFA</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Frais service</span>
+<span class="font-bold">0 CFA</span>
+</div>
+<div class="border-t border-dashed border-outline-variant pt-2 flex justify-between items-center text-xl font-black text-primary">
+<span>TOTAL</span>
+<span>7 000 CFA</span>
+</div>
+</div>
+<!-- Change Calculator -->
+<div class="space-y-4">
+<div>
+<label class="block text-label-caps text-on-surface-variant mb-2">MONTANT REÇU</label>
+<div class="relative">
+<input class="w-full text-2xl font-bold border-outline-variant rounded-lg pr-12 focus:ring-primary focus:border-primary" id="received" type="number" value="10000"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-on-surface-variant">CFA</span>
+</div>
+</div>
+<div class="p-4 bg-green-100 border-2 border-green-500 rounded-lg flex justify-between items-center">
+<span class="font-bold text-green-700">MONNAIE À RENDRE</span>
+<span class="text-2xl font-black text-green-800" id="change">3 000 CFA</span>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="mt-6 w-full bg-primary text-white py-5 rounded-xl font-h2 text-lg shadow-lg hover:bg-red-800 active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">print</span>
+                        ENCAISSER ET IMPRIMER
+                    </button>
+</section>
+</div>
+</div>
+<!-- Footer (Shared Component - Simplified for POS) -->
+<footer class="mt-auto bg-slate-900 border-t-4 border-red-600 px-8 py-4 flex justify-between items-center no-shadow">
+<span class="text-white font-bold text-sm">RAHIMO TRANSPORT POS v2.4.0</span>
+<div class="flex gap-6">
+<span class="text-slate-400 text-sm">Session: Agent-402 (M. Sylla)</span>
+<span class="text-slate-400 text-sm">© 2024 Rahimo Transport. Tous droits réservés.</span>
+</div>
+</footer>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        const receivedInput = document.getElementById('received');
+        const changeDisplay = document.getElementById('change');
+        const total = 7000;
+
+        receivedInput.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value) || 0;
+            const diff = val - total;
+            if (diff >= 0) {
+                changeDisplay.textContent = diff.toLocaleString() + ' CFA';
+                changeDisplay.parentElement.classList.replace('bg-red-100', 'bg-green-100');
+                changeDisplay.parentElement.classList.replace('border-red-500', 'border-green-500');
+                changeDisplay.classList.replace('text-red-800', 'text-green-800');
+            } else {
+                changeDisplay.textContent = 'Insuffisant';
+                changeDisplay.parentElement.classList.replace('bg-green-100', 'bg-red-100');
+                changeDisplay.parentElement.classList.replace('border-green-500', 'border-red-500');
+                changeDisplay.classList.replace('text-green-800', 'text-red-800');
+            }
+        });
+
+        // Simple button ripple effect simulation
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                this.classList.add('opacity-80');
+                setTimeout(() => this.classList.remove('opacity-80'), 100);
+            });
+        });
+    </script>
+</body></html>

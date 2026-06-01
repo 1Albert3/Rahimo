@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Voyagez au Burkina Faso en toute sérénité</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Framer Motion via CDN -->
+<script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#93000b",
+                        "tertiary-container": "#5c5f61",
+                        "surface-container-low": "#eff4ff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary": "#ffffff",
+                        "primary": "#93000b",
+                        "on-tertiary-container": "#d7d9db",
+                        "surface-container-highest": "#d3e4fe",
+                        "background": "#f8f9ff",
+                        "surface-tint": "#b91c1c",
+                        "on-secondary-container": "#586377",
+                        "on-primary-container": "#ffcdc7",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-surface-variant": "#5b403d",
+                        "on-surface": "#0b1c30",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "surface": "#f8f9ff",
+                        "secondary-container": "#d5e0f8",
+                        "primary-container": "#93000b",
+                        "outline-variant": "#e4beb9",
+                        "on-secondary-fixed": "#111c2d",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-dim": "#cbdbf5",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed": "#191c1e",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-fixed": "#410002",
+                        "error-container": "#ffdad6",
+                        "secondary": "#545f73",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "inverse-primary": "#ffb4ab",
+                        "outline": "#8f6f6c",
+                        "on-error": "#ffffff",
+                        "surface-container": "#e5eeff",
+                        "inverse-surface": "#213145",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary": "#444749",
+                        "on-background": "#0b1c30"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "container-max": "1280px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "code": ["JetBrains Mono"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-mono-numbers { font-family: 'JetBrains Mono', monospace; }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #93000b;
+            z-index: 100;
+            transform-origin: 0%;
+            width: 30%; /* Mocking initial load progress */
+            transition: width 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-background text-on-background">
+<!-- Inertia Style Progress Bar -->
+<div class="progress-bar" id="top-progress"></div>
+<!-- Header GuestLayout -->
+<nav class="bg-primary text-white font-semibold docked full-width top-0 sticky z-50 border-b border-primary shadow-md">
+<div class="flex justify-between items-center px-8 h-20 w-full max-w-[1280px] mx-auto">
+<div class="text-2xl font-black text-white">
+                Rahimo Transport
+            </div>
+<div class="hidden md:flex space-x-6 items-center">
+<a class="border-b-2 border-white text-white pb-1 transition-all" href="#">Accueil</a>
+<a class="text-on-primary-container/80 hover:text-white transition-all px-3 py-2" href="#">Réserver</a>
+<a class="text-on-primary-container/80 hover:text-white transition-all px-3 py-2" href="#">Colis</a>
+<a class="text-on-primary-container/80 hover:text-white transition-all px-3 py-2" href="#">Services</a>
+<a class="text-on-primary-container/80 hover:text-white transition-all px-3 py-2" href="#">Suivi</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="bg-surface-container-lowest text-primary px-4 py-2 rounded-lg text-sm hover:bg-surface-container-low transition-colors">Acheter un ticket</button>
+<div class="flex space-x-2">
+<button aria-label="notifications" class="hover:bg-primary-fixed-dim/20 rounded-md p-2">
+<i class="w-6 h-6" data-lucide="bell"></i>
+</button>
+<button aria-label="account_circle" class="hover:bg-primary-fixed-dim/20 rounded-md p-2">
+<i class="w-6 h-6" data-lucide="user-circle"></i>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative bg-surface-container w-full min-h-[600px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Luxury coach bus in Burkina Faso" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiqykCFslc5Jil0VQNPO2X3_NMABUiWZOniKip-dXTG_iitP24LqzZtL7dLeU5grXCNQQgBfouWJGRSpQbdEKnb2ewM_VEMXggutcYOg6WZ-stqxqSGlV25gKedRp6-voWB-G62G2b9kV95vz4EeVtmpjXEQmdnBmRWlwixBk6t6BRyu1dWNFLpZVeb2m7zS4TMllPFAuXLtWYmZA_xZTMzoufkY9kLy6yKUOdowZBXIQ9JwK5hHb3J2na_Rl5Y0zvSHsnxlTZPwd2"/>
+<div class="absolute inset-0 bg-primary/60 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+</div>
+<div class="relative z-10 w-full max-w-[1280px] mx-auto px-8 py-16 flex flex-col md:flex-row items-center justify-between gap-12 reveal">
+<div class="md:w-1/2 text-white">
+<h1 class="text-5xl font-extrabold mb-6 leading-tight">Voyagez au Burkina Faso en toute sérénité</h1>
+<p class="text-lg text-surface-container-highest mb-8 max-w-lg">
+                    Achetez votre ticket en ligne, suivez vos colis, réservez vos services — sans file d'attente.
+                </p>
+</div>
+<!-- Booking Widget -->
+<div class="md:w-1/2 w-full">
+<div class="bg-surface rounded-xl shadow-2xl overflow-hidden backdrop-blur-md bg-white/95 border border-outline-variant">
+<div class="flex border-b border-outline-variant bg-surface-container-low">
+<button class="flex-1 py-4 text-center border-b-2 border-primary text-primary font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2">
+<i class="w-6 h-6" data-lucide="ticket"></i>
+                            Ticket
+                        </button>
+<button class="flex-1 py-4 text-center border-b-2 border-transparent text-secondary hover:text-primary font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 transition-colors">
+<i class="w-6 h-6" data-lucide="package"></i>
+                            Colis
+                        </button>
+<button class="flex-1 py-4 text-center border-b-2 border-transparent text-secondary hover:text-primary font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 transition-colors">
+<i class="w-6 h-6" data-lucide="bike"></i>
+                            Moto
+                        </button>
+<button class="flex-1 py-4 text-center border-b-2 border-transparent text-secondary hover:text-primary font-bold text-xs uppercase tracking-wider flex flex-col items-center gap-2 transition-colors">
+<i class="w-6 h-6" data-lucide="car"></i>
+                            Location
+                        </button>
+</div>
+<div class="p-6 space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-widest">Ville de départ</label>
+<div class="relative">
+<i class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" data-lucide="map-pin"></i>
+<select class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface transition-all">
+<option>Ouagadougou</option>
+<option>Bobo-Dioulasso</option>
+</select>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-widest">Ville d'arrivée</label>
+<div class="relative">
+<i class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" data-lucide="map-pin"></i>
+<select class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface transition-all">
+<option>Bobo-Dioulasso</option>
+<option>Ouagadougou</option>
+</select>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-widest">Date de départ</label>
+<div class="relative">
+<i class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" data-lucide="calendar"></i>
+<input class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface transition-all" type="date"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="text-[11px] font-bold uppercase text-on-surface-variant tracking-widest">Passagers</label>
+<div class="relative">
+<i class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-outline" data-lucide="users"></i>
+<select class="w-full pl-10 pr-4 py-3 bg-white border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface transition-all">
+<option>1 Passager</option>
+<option>2 Passagers</option>
+<option>3 Passagers</option>
+</select>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white font-bold py-4 rounded-lg mt-4 hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+                            Rechercher les départs
+                            <i class="w-5 h-5" data-lucide="arrow-right"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Stats Bar -->
+<div class="bg-primary py-10 relative z-20">
+<div class="max-w-[1280px] mx-auto px-8 flex flex-col md:flex-row justify-around items-center gap-8 reveal">
+<div class="text-center text-white">
+<p class="font-mono-numbers text-4xl font-bold mb-1">50 000+</p>
+<p class="text-[11px] font-bold uppercase tracking-widest text-on-primary-container">Voyageurs Mensuels</p>
+</div>
+<div class="hidden md:block w-px h-12 bg-white/20"></div>
+<div class="text-center text-white">
+<p class="font-mono-numbers text-4xl font-bold mb-1">25</p>
+<p class="text-[11px] font-bold uppercase tracking-widest text-on-primary-container">Destinations Desservies</p>
+</div>
+<div class="hidden md:block w-px h-12 bg-white/20"></div>
+<div class="text-center text-white">
+<p class="font-mono-numbers text-4xl font-bold mb-1">150+</p>
+<p class="text-[11px] font-bold uppercase tracking-widest text-on-primary-container">Flotte Moderne</p>
+</div>
+</div>
+</div>
+<!-- Services Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-[1280px] mx-auto px-8 reveal">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-on-surface mb-4">Nos Services</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Découvrez l'ensemble de nos solutions logistiques et de transport, conçues pour votre confort et votre efficacité.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Service Card 1 -->
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+<div class="w-14 h-14 bg-surface-container-high flex items-center justify-center rounded-xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+<i class="w-7 h-7" data-lucide="ticket"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Billets de Voyage</h3>
+<p class="text-on-surface-variant leading-relaxed">Réservation de billets de bus pour toutes les destinations nationales avec choix de siège.</p>
+</div>
+<!-- Service Card 2 -->
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+<div class="w-14 h-14 bg-surface-container-high flex items-center justify-center rounded-xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+<i class="w-7 h-7" data-lucide="package"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Envoi de Colis</h3>
+<p class="text-on-surface-variant leading-relaxed">Service d'expédition de courriers et colis express sécurisé à travers tout le réseau.</p>
+</div>
+<!-- Service Card 3 -->
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+<div class="w-14 h-14 bg-surface-container-high flex items-center justify-center rounded-xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+<i class="w-7 h-7" data-lucide="bike"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Transport de Motos</h3>
+<p class="text-on-surface-variant leading-relaxed">Logistique spécialisée pour le transport sécurisé de vos engins à deux roues.</p>
+</div>
+<!-- Service Card 4 -->
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+<div class="w-14 h-14 bg-surface-container-high flex items-center justify-center rounded-xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+<i class="w-7 h-7" data-lucide="car"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Location de Véhicules</h3>
+<p class="text-on-surface-variant leading-relaxed">Mise à disposition de bus et minibus pour vos événements et voyages de groupe.</p>
+</div>
+<!-- Service Card 5 -->
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+<div class="w-14 h-14 bg-surface-container-high flex items-center justify-center rounded-xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+<i class="w-7 h-7" data-lucide="parking-circle"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Parking Sécurisé</h3>
+<p class="text-on-surface-variant leading-relaxed">Espaces de stationnement surveillés dans nos gares principales pour vos véhicules.</p>
+</div>
+<!-- Service Card 6 -->
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm hover:shadow-md hover:-translate-y-1 transition-all group">
+<div class="w-14 h-14 bg-surface-container-high flex items-center justify-center rounded-xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+<i class="w-7 h-7" data-lucide="hotel"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Hébergement</h3>
+<p class="text-on-surface-variant leading-relaxed">Chambres de repos confortables disponibles en transit dans nos gares majeures.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Steps Timeline -->
+<section class="py-24 bg-white">
+<div class="max-w-[1280px] mx-auto px-8 reveal">
+<div class="text-center mb-16">
+<h2 class="text-4xl font-bold text-on-surface mb-4">Acheter un ticket en 3 étapes</h2>
+<p class="text-on-surface-variant max-w-2xl mx-auto">Un processus simple, rapide et entièrement digitalisé pour garantir votre place sans tracas.</p>
+</div>
+<div class="relative">
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-outline-variant -translate-y-1/2 z-0"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+<!-- Step 1 -->
+<div class="bg-surface-container-low p-10 rounded-2xl border border-outline-variant shadow-sm text-center relative group hover:border-primary transition-all">
+<div class="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center font-mono-numbers text-xl font-bold border-4 border-white shadow-lg">1</div>
+<div class="mt-4 mb-6 flex justify-center text-primary">
+<i class="w-12 h-12" data-lucide="search"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Recherche</h3>
+<p class="text-on-surface-variant leading-relaxed">Sélectionnez votre itinéraire, la date et consultez les horaires disponibles en temps réel.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-low p-10 rounded-2xl border border-outline-variant shadow-sm text-center relative group hover:border-primary transition-all">
+<div class="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center font-mono-numbers text-xl font-bold border-4 border-white shadow-lg">2</div>
+<div class="mt-4 mb-6 flex justify-center text-primary">
+<i class="w-12 h-12" data-lucide="armchair"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Sélection du Siège</h3>
+<p class="text-on-surface-variant leading-relaxed">Choisissez votre place préférée sur le plan de salle interactif du bus.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-low p-10 rounded-2xl border border-outline-variant shadow-sm text-center relative group hover:border-primary transition-all">
+<div class="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center font-mono-numbers text-xl font-bold border-4 border-white shadow-lg">3</div>
+<div class="mt-4 mb-6 flex justify-center text-primary">
+<i class="w-12 h-12" data-lucide="credit-card"></i>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-3">Paiement Sécurisé</h3>
+<p class="text-on-surface-variant leading-relaxed">Réglez via Mobile Money ou carte bancaire et recevez votre e-ticket instantanément.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-[1280px] mx-auto px-8 reveal">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-7 space-y-8">
+<h2 class="text-4xl font-bold text-on-surface">Ce que disent nos voyageurs</h2>
+<div class="grid gap-6">
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Amadou T." class="w-14 h-14 rounded-full object-cover border-2 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXu9jH6axF61l0X2RrmQMGiokkALq5QEC-6F04isLoY_SxSb8zrwjEyL5Tz2JSm3pT17AZvyOeX9iaEcv44ctq6Q4Lk6Z18Qdj-Cc-Br-X9lEMCfGS5CIB3j72vVLBk3ZKvlm3eCXvpaQRB68rKGsQcQs_Gcsw2KeEoTeAZ6mkdDWkzFKyAKnhOtyFE8GphvTudiETyTkCiqU6yTmhjGQ7mBE0bEI83_XO_FNnEX2fBh3B6B2MepATV8kV38TuBb-VH0VWtytdqekk8"/>
+<div>
+<h4 class="font-bold text-on-surface text-lg">Amadou T.</h4>
+<div class="flex text-yellow-500">
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+</div>
+</div>
+</div>
+<p class="text-on-surface-variant italic leading-relaxed text-lg">"L'application m'a sauvé tellement de temps ! Fini les files d'attente à la gare de Ouaga. Mon siège préféré m'attend à chaque voyage."</p>
+</div>
+<div class="bg-white p-8 rounded-2xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Fatoumata S." class="w-14 h-14 rounded-full object-cover border-2 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiQ69vNF6Y4mUw029icPZyLrkVzqHeGjziVeddukM6QP8Q_CoWNhW6-ga5j6iagwDvHtq_vQAWkwja08w3nqB2bk6tATbJ3M7ysllzdC7A896LgiJsBxytFHUe2bv_xz08NuHlp1fBzKzOY2qjt4AIZa3j1RWY9AtycVtnH4KkkQizXcBEsCLUWuE0GcVU_Wuz2p8977QCQ8SvMd5q0AR0AvVGRwxTWgbcboscp3HvCzmdG-gOV-HJ3jlCiLnBlXzZv1DtS5iZ2UVo"/>
+<div>
+<h4 class="font-bold text-on-surface text-lg">Fatoumata S.</h4>
+<div class="flex text-yellow-500">
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star"></i>
+<i class="w-4 h-4 fill-current" data-lucide="star-half"></i>
+</div>
+</div>
+</div>
+<p class="text-on-surface-variant italic leading-relaxed text-lg">"Le service d'envoi de colis est impeccable. Je peux suivre mon paquet en temps réel sur mon téléphone jusqu'à Bobo-Dioulasso."</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="bg-primary rounded-[2rem] p-12 text-white relative overflow-hidden shadow-2xl shadow-primary/20">
+<div class="absolute -right-16 -bottom-16 opacity-10 rotate-12">
+<i class="w-64 h-64" data-lucide="smartphone"></i>
+</div>
+<div class="relative z-10">
+<h3 class="text-3xl font-bold mb-6">L'expérience complète dans votre poche</h3>
+<p class="text-on-primary-container text-lg mb-10 leading-relaxed">
+                                Téléchargez l'application Rahimo pour gérer vos voyages, suivre vos colis en direct et accéder à des offres exclusives.
+                            </p>
+<div class="flex flex-col gap-4">
+<button class="bg-white text-on-surface flex items-center gap-4 py-4 px-8 rounded-xl font-bold hover:bg-surface-container-low transition-all shadow-md group">
+<i class="w-8 h-8 text-primary" data-lucide="play-circle"></i>
+<div class="text-left">
+<div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant leading-none mb-1">DISPONIBLE SUR</div>
+<div class="text-lg leading-none">Google Play</div>
+</div>
+</button>
+<button class="bg-white text-on-surface flex items-center gap-4 py-4 px-8 rounded-xl font-bold hover:bg-surface-container-low transition-all shadow-md group">
+<i class="w-8 h-8 text-primary" data-lucide="apple"></i>
+<div class="text-left">
+<div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant leading-none mb-1">TÉLÉCHARGER DANS L'</div>
+<div class="text-lg leading-none">App Store</div>
+</div>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-inverse-surface w-full rounded-none border-t-4 border-primary">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto text-white">
+<div>
+<span class="text-2xl font-black mb-6 block">Rahimo Transport</span>
+<p class="text-on-tertiary-container/70 leading-relaxed">
+                    Leader du transport routier de personnes et de marchandises au Burkina Faso. Connectons nos régions en toute sécurité.
+                </p>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-6">Liens Utiles</h4>
+<ul class="space-y-4 text-on-tertiary-container/70">
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> À propos</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> Agences</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> Contact</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-6">Services</h4>
+<ul class="space-y-4 text-on-tertiary-container/70">
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> Acheter un ticket</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> Suivi de colis</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> Location de bus</a></li>
+<li><a class="hover:text-primary transition-colors flex items-center gap-2 group" href="#"><i class="w-4 h-4 group-hover:translate-x-1 transition-transform" data-lucide="chevron-right"></i> Transport de motos</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-6">Contact</h4>
+<ul class="space-y-5 text-on-tertiary-container/70">
+<li class="flex items-start gap-4">
+<i class="w-6 h-6 text-primary flex-shrink-0" data-lucide="map-pin"></i>
+<span>Gare de Ouagadougou, Secteur 10</span>
+</li>
+<li class="flex items-center gap-4">
+<i class="w-6 h-6 text-primary flex-shrink-0" data-lucide="phone"></i>
+<span class="font-mono-numbers">+226 25 00 00 00</span>
+</li>
+<li class="flex items-center gap-4">
+<i class="w-6 h-6 text-primary flex-shrink-0" data-lucide="mail"></i>
+<span>contact@rahimo.bf</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-white/5 text-center py-8 text-on-tertiary-container/40 text-sm font-mono-numbers">
+            © 2024 Rahimo Transport. Tous droits réservés.
+        </div>
+</footer>
+<script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Intersection Observer for reveal animations (simulating Framer Motion fadeIn)
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section, header > div, .stats-bar-inner').forEach(el => {
+            el.classList.add('opacity-0'); // Initial state for reveal
+            observer.observe(el);
+        });
+
+        // Simulate top progress bar load
+        window.addEventListener('load', () => {
+            const bar = document.getElementById('top-progress');
+            bar.style.width = '100%';
+            setTimeout(() => {
+                bar.style.opacity = '0';
+            }, 400);
+        });
+    </script>
+</body></html>

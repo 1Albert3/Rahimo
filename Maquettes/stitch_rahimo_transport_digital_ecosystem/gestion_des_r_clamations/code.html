@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rahimo Transport - Gestion des Réclamations</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#fff0ee",
+                        "on-secondary-fixed": "#271900",
+                        "outline": "#906f6b",
+                        "inverse-primary": "#ffb4ab",
+                        "on-tertiary-fixed": "#001e2e",
+                        "surface-dim": "#f2d3cf",
+                        "primary": "#b20112",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#005d83",
+                        "on-surface-variant": "#5c403d",
+                        "on-surface": "#281716",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#fff1ef",
+                        "primary-container": "#d62828",
+                        "background": "#fff8f7",
+                        "surface-container-highest": "#fbdbd8",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004c6c",
+                        "on-secondary-container": "#6f4e00",
+                        "outline-variant": "#e5bdb9",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ffe2de",
+                        "surface-container": "#ffe9e6",
+                        "on-secondary-fixed-variant": "#5e4200",
+                        "inverse-on-surface": "#ffedea",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#fbdbd8",
+                        "secondary": "#7c5800",
+                        "on-tertiary-container": "#ebf5ff",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#bd1119",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#83cfff",
+                        "tertiary-container": "#0077a6",
+                        "surface-bright": "#fff8f7",
+                        "secondary-fixed-dim": "#fcbb36",
+                        "secondary-fixed": "#ffdea8",
+                        "secondary-container": "#ffbe39",
+                        "on-primary-fixed": "#410002",
+                        "inverse-surface": "#3f2c2a",
+                        "on-background": "#281716",
+                        "surface": "#fff8f7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "body-light": ["Plus Jakarta Sans"],
+                        "h3": ["Plus Jakarta Sans"],
+                        "data-table": ["Inter"],
+                        "body-regular": ["Plus Jakarta Sans"],
+                        "label-caps": ["Inter"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "h1": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-light": ["14px", {"lineHeight": "1.5", "fontWeight": "300"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "data-table": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-regular": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h1": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e5bdb9; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-regular antialiased">
+<!-- Navigation Shell (SideNavBar) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-6 bg-slate-900 dark:bg-slate-950 text-slate-400 font-plus-jakarta-sans text-sm font-medium w-64 border-r border-slate-800 shadow-xl z-50">
+<div class="px-6 mb-8">
+<span class="text-lg font-black text-red-500 block">Rahimo Admin</span>
+<div class="flex items-center mt-6 gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden">
+<img alt="Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWMG_tqBlmL93UR54Nd7Lidiy_0ZzRdUiHmBgRbGa0RyBTz_L5hMLd0dsatuCJyQU_sz1t8nyuX7PP2Ikq3IVrUapM4ihLRa-NrXfOOdK_ybdbiMnMX9z4arXiIZ85986RlfO4UKmmOHxmoEv8J866q7ZUmbVp3a2-XyjRR9nTTd6wFj5PzA_au0EsAw7olar-QaRDr-2I4qouQBVTSD5hnoZuPoOFgChKS5dHz4apwckGqXGEAUeDp5jnsCKuQbWSQwS169mmQtZu"/>
+</div>
+<div>
+<p class="text-white font-semibold text-xs">Superviseur Gérant</p>
+<p class="text-[10px] opacity-60">ID #7721-RT</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span> Tableau de bord
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">confirmation_number</span> Billetterie
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">package</span> Colis
+            </a>
+<a class="bg-red-700 text-white rounded-lg mx-2 flex items-center px-4 py-3 shadow-lg shadow-red-900/20" href="#">
+<span class="material-symbols-outlined mr-3">report</span> Réclamations
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">directions_bus</span> Flotte
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">group</span> Personnel
+            </a>
+<a class="text-slate-400 hover:bg-slate-800 hover:text-white rounded-lg mx-2 flex items-center px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">payments</span> Comptabilité
+            </a>
+</nav>
+<div class="px-4 mt-auto">
+<div class="bg-slate-800/50 rounded-xl p-4">
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-2">Support Technique</p>
+<p class="text-xs text-slate-300">Nécessitez-vous de l'aide ?</p>
+<button class="mt-3 w-full bg-slate-700 text-white text-xs py-2 rounded-lg hover:bg-slate-600 transition-all">Consulter Doc</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-6 h-16 w-full bg-red-700 text-white font-plus-jakarta-sans font-bold text-lg border-b border-red-800 shadow-sm sticky top-0 z-40">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">location_on</span>
+<h1 class="text-lg">Gare de Ouagadougou</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="hover:bg-red-600 rounded-full p-2 transition-all cursor-pointer">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div class="hover:bg-red-600 rounded-full p-2 transition-all cursor-pointer relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-yellow-400 rounded-full"></span>
+</div>
+<div class="hover:bg-red-600 rounded-full p-2 transition-all cursor-pointer border-l border-red-600/50 ml-2">
+<span class="material-symbols-outlined">settings</span>
+</div>
+</div>
+</header>
+<!-- Dynamic Content Section -->
+<div class="p-8 flex flex-col lg:flex-row gap-8 h-[calc(100vh-64px)] overflow-hidden">
+<!-- List Section -->
+<div class="flex-1 flex flex-col min-w-0 bg-surface shadow-sm rounded-xl border border-surface-container-high overflow-hidden">
+<div class="p-6 border-b border-surface-container-high bg-surface-bright flex justify-between items-center">
+<div>
+<h2 class="font-h3 text-h3 text-on-surface">Réclamations</h2>
+<p class="text-body-light text-on-surface-variant">24 tickets actifs aujourd'hui</p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container-low border border-outline-variant p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="bg-surface-container-low border border-outline-variant p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+</div>
+<!-- Tickets List (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Ticket Urgent -->
+<div class="p-4 rounded-xl border-l-4 border-l-error bg-white shadow-sm hover:shadow-md transition-all cursor-pointer border border-surface-container-high ring-1 ring-inset ring-transparent hover:ring-primary/10" onclick="selectTicket(1)">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold uppercase tracking-wider text-error bg-error-container px-2 py-0.5 rounded-full">Urgent</span>
+<span class="text-xs text-on-surface-variant font-data-table">Il y a 12 min</span>
+</div>
+<h3 class="font-semibold text-on-surface mb-1 truncate">Colis perdu - Ligne Bobo-Dioulasso</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mb-3">Le client signale que son colis (REF #RT-299) n'est pas arrivé à destination malgré la confirmation de déchargement.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">MS</div>
+<span class="text-xs font-medium text-on-surface">Moussa Sanon</span>
+</div>
+<span class="text-[11px] font-semibold text-outline">#REC-8842</span>
+</div>
+</div>
+<!-- Ticket In Progress -->
+<div class="p-4 rounded-xl border-l-4 border-l-secondary bg-white shadow-sm hover:shadow-md transition-all cursor-pointer border border-surface-container-high ring-1 ring-inset ring-transparent hover:ring-primary/10" onclick="selectTicket(2)">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary-container/30 px-2 py-0.5 rounded-full">En cours</span>
+<span class="text-xs text-on-surface-variant font-data-table">Il y a 2h</span>
+</div>
+<h3 class="font-semibold text-on-surface mb-1 truncate">Retard bus climatisé</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mb-3">Plainte concernant un retard de 3 heures au départ de Koudougou sans information préalable.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary/10 flex items-center justify-center text-[10px] font-bold text-tertiary">AO</div>
+<span class="text-xs font-medium text-on-surface">Alizeta Ouédraogo</span>
+</div>
+<span class="text-[11px] font-semibold text-outline">#REC-8839</span>
+</div>
+</div>
+<!-- Ticket Resolved -->
+<div class="p-4 rounded-xl border-l-4 border-l-tertiary bg-white shadow-sm hover:shadow-md transition-all cursor-pointer border border-surface-container-high ring-1 ring-inset ring-transparent hover:ring-primary/10 opacity-70" onclick="selectTicket(3)">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold uppercase tracking-wider text-tertiary bg-tertiary-container/30 px-2 py-0.5 rounded-full">Résolu</span>
+<span class="text-xs text-on-surface-variant font-data-table">Hier</span>
+</div>
+<h3 class="font-semibold text-on-surface mb-1 truncate">Erreur facturation bagage</h3>
+<p class="text-sm text-on-surface-variant line-clamp-2 mb-3">Double prélèvement lors du paiement en ligne du supplément bagage.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold text-slate-500">IS</div>
+<span class="text-xs font-medium text-on-surface">Idrissa Sawadogo</span>
+</div>
+<span class="text-[11px] font-semibold text-outline">#REC-8815</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detail Section (Asymmetric / Bento) -->
+<div class="flex-[2] flex flex-col gap-6 overflow-y-auto" id="detail-pane">
+<!-- Main Ticket Info -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-white rounded-2xl p-8 border border-surface-container-high shadow-sm">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center text-white text-2xl font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">report</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-h2 font-h2 text-on-surface">#REC-8842</h2>
+<span class="bg-error text-white text-[10px] px-2 py-1 rounded-md font-bold uppercase">Urgent</span>
+</div>
+<p class="text-body-regular text-on-surface-variant">Ouverture du ticket : 25 Octobre 2023 à 14:12</p>
+</div>
+</div>
+<div class="space-y-6">
+<div>
+<h4 class="text-label-caps font-label-caps text-outline mb-2">DESCRIPTION DU PROBLÈME</h4>
+<p class="text-body-regular text-on-surface leading-relaxed">
+                                    "Bonjour, j'ai expédié un colis contenant des pièces détachées automobiles depuis la gare de Ouagadougou hier. Le destinataire à Bobo-Dioulasso se présente au guichet mais on lui informe que le colis n'est pas dans le registre d'arrivée. J'ai pourtant le reçu de dépôt. C'est urgent, c'est pour une réparation client."
+                                </p>
+</div>
+<div class="grid grid-cols-2 gap-4 bg-surface-container-lowest p-4 rounded-xl border border-surface-container-high">
+<div>
+<h4 class="text-[11px] font-bold text-outline uppercase mb-1">Détails Colis</h4>
+<p class="text-sm font-semibold">REF: RT-BBO-29910</p>
+<p class="text-xs text-on-surface-variant">Poids: 14.5kg • Type: Fragile</p>
+</div>
+<div class="border-l border-surface-container-high pl-4">
+<h4 class="text-[11px] font-bold text-outline uppercase mb-1">Itinéraire</h4>
+<p class="text-sm font-semibold">Ouaga → Bobo</p>
+<p class="text-xs text-on-surface-variant">Bus #224 • Chauffeur: Traoré A.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-slate-900 text-white rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+<div>
+<h4 class="text-[10px] font-bold text-red-500 uppercase tracking-widest mb-4">Informations Client</h4>
+<div class="text-center mb-6">
+<div class="w-20 h-20 rounded-full mx-auto bg-slate-800 border-2 border-slate-700 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-4xl">account_circle</span>
+</div>
+<h3 class="font-bold text-lg">Moussa Sanon</h3>
+<p class="text-slate-400 text-xs">Client Fidélité Gold</p>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-slate-500 text-lg">call</span>
+<span>+226 70 00 00 00</span>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-slate-500 text-lg">mail</span>
+<span class="truncate">m.sanon@email.com</span>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<span class="material-symbols-outlined text-slate-500 text-lg">history</span>
+<span>12 voyages effectués</span>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 bg-red-700 hover:bg-red-600 rounded-xl font-bold transition-all text-sm">Appeler le client</button>
+</div>
+</div>
+<!-- Photos and Timeline -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white rounded-2xl p-6 border border-surface-container-high shadow-sm">
+<h4 class="text-label-caps font-label-caps text-outline mb-4">PHOTOS JOINTES (3)</h4>
+<div class="grid grid-cols-3 gap-3">
+<div class="aspect-square rounded-lg bg-surface-container overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Preuve de dépôt" class="w-full h-full object-cover" data-alt="A detailed photo of a cardboard shipping box sitting on a industrial metal scale in a logistics warehouse. The lighting is bright and overhead, highlighting the textures of the cardboard and the digital readout of the scale. The background shows blurred industrial shelves and shipping equipment, maintaining a professional transport and logistics atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq5hi-KBIuEdBeb34Y--2W8zfDtKHNWSSyghyyIKsLbBAzI-r-mAiOaYCYtgL-krY0eRqU5lUDybEcijF21W57E423Z9XWN5OJu3-6nsUfVOfYrrVvVLhzCgNa0RqPWY5HvpZ17yegds62GQwB24_xseO3-1_XaK9ZsmYFhEISF_hc367Lmjng1zt7ZftbbtGuX3k0oAhZFVZhteHIjgpBmDbuXtoROgLvL34swpdjJ39hY99IjlD0SinERtQVufSgnqA4yUJqZo6J"/>
+</div>
+<div class="aspect-square rounded-lg bg-surface-container overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Bordereau" class="w-full h-full object-cover" data-alt="A close-up high-resolution photograph of a white paper shipping receipt with printed red and black text, held by a hand. The receipt shows tracking numbers and barcodes clearly. The lighting is soft and natural, emphasizing the document's authenticity within a clean, high-trust administrative setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAj-cdihgeJN4C0SR3Gp6k5zI0EjqkwwQpvddNXMtXD5P3Qd6tmRgb0U-uLFYcvviTiszdbmG4xQArceQUV-9AM-1BGpyvbHNJcEHMQiNXOpXtW3Outl_r4ynrC0WB9bmuGpwTmGGxK09giR5miOjJaYQl_JkDck7HDwTrNVlcD17huab6DwClQrJMUU4O3atJzDdNmSk41zYxzZSsIjhZrM9jHx4b2OMbvshm-QoIbveS6kGF56t_sYxPcDdjnX4Efus8b7pPDLca2"/>
+</div>
+<div class="aspect-square rounded-lg bg-slate-100 flex flex-col items-center justify-center border-2 border-dashed border-slate-300 text-slate-400">
+<span class="material-symbols-outlined">add_a_photo</span>
+<span class="text-[10px] mt-1">Ajouter</span>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-6 border border-surface-container-high shadow-sm">
+<h4 class="text-label-caps font-label-caps text-outline mb-4">HISTORIQUE DU TICKET</h4>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 rounded-full bg-primary mt-1.5"></div>
+<div class="w-0.5 flex-1 bg-slate-100 my-1"></div>
+</div>
+<div>
+<p class="text-xs font-bold">Ticket créé par Client</p>
+<p class="text-[10px] text-on-surface-variant">Aujourd'hui, 14:12</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="flex flex-col items-center">
+<div class="w-2 h-2 rounded-full bg-secondary mt-1.5"></div>
+<div class="w-0.5 h-6 bg-slate-100 my-1"></div>
+</div>
+<div>
+<p class="text-xs font-bold">Assigné à Support Niveau 1</p>
+<p class="text-[10px] text-on-surface-variant">Aujourd'hui, 14:15</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Response Zone -->
+<div class="bg-white rounded-2xl border border-surface-container-high shadow-md overflow-hidden mb-8">
+<div class="p-4 bg-surface-bright border-b border-surface-container-high flex justify-between items-center">
+<span class="text-sm font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">reply</span>
+                            Répondre au client
+                        </span>
+<div class="flex gap-2">
+<button class="text-[11px] font-bold text-tertiary-container bg-tertiary/10 px-3 py-1 rounded-full hover:bg-tertiary/20">Modèle type</button>
+</div>
+</div>
+<textarea class="w-full p-6 border-none focus:ring-0 text-sm h-32 placeholder:text-outline-variant" placeholder="Écrivez votre réponse ici..."></textarea>
+<div class="p-4 bg-surface-container-low flex flex-wrap justify-between items-center gap-4">
+<div class="flex gap-3">
+<button class="bg-white border border-outline-variant text-on-surface px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-white/50 transition-all">
+<span class="material-symbols-outlined text-sm">attach_file</span> Joindre un fichier
+                            </button>
+<button class="bg-white border border-outline-variant text-on-surface px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-white/50 transition-all">
+<span class="material-symbols-outlined text-sm">visibility_off</span> Note interne
+                            </button>
+</div>
+<div class="flex gap-2">
+<button class="bg-secondary text-on-secondary-fixed px-5 py-2.5 rounded-xl text-xs font-bold shadow-sm hover:translate-y-[-1px] active:translate-y-0 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">card_giftcard</span> Geste commercial
+                            </button>
+<button class="bg-tertiary text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-sm hover:translate-y-[-1px] active:translate-y-0 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">payments</span> Remboursement
+                            </button>
+<button class="bg-primary text-white px-8 py-2.5 rounded-xl text-xs font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                                Résoudre &amp; Envoyer
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactions & Effects Script -->
+<script>
+        function selectTicket(id) {
+            // Simplified micro-interaction for ticket selection
+            const cards = document.querySelectorAll('[onclick^="selectTicket"]');
+            cards.forEach(card => {
+                card.classList.remove('ring-primary/40', 'bg-primary-container/5');
+            });
+            event.currentTarget.classList.add('ring-primary/40', 'bg-primary-container/5');
+            
+            // In a real app, this would trigger a data refresh for the detail pane
+            console.log("Selected Ticket ID:", id);
+        }
+
+        // Initialize state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Highlight the first ticket as active by default for visual demo
+            const firstTicket = document.querySelector('[onclick^="selectTicket"]');
+            if(firstTicket) firstTicket.classList.add('ring-primary/40', 'bg-primary-container/5');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nos Agences | Rahimo Transport</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .agency-list-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .agency-list-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .agency-list-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to right, rgba(248, 249, 255, 1) 0%, rgba(248, 249, 255, 0) 15%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#d7d9db",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "on-secondary-fixed": "#111c2d",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "surface-tint": "#b91c1c",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-container": "#5c5f61",
+                        "surface-container": "#e5eeff",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-secondary-container": "#586377",
+                        "on-tertiary": "#ffffff",
+                        "on-surface-variant": "#5b403d",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "on-background": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "primary-container": "#b91c1c",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary-fixed": "#191c1e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed": "#d8e3fb",
+                        "on-primary-container": "#ffcdc7",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#e4beb9",
+                        "tertiary-fixed": "#e0e3e5",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#93000b",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#545f73",
+                        "tertiary": "#444749",
+                        "outline": "#8f6f6c",
+                        "on-surface": "#0b1c30",
+                        "inverse-primary": "#ffb4ab",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "primary": "#93000b",
+                        "on-primary-fixed": "#410002",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d5e0f8",
+                        "surface-variant": "#d3e4fe",
+                        "surface-dim": "#cbdbf5",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Plus Jakarta Sans"],
+                        "code-sm": ["JetBrains Mono"],
+                        "code-md": ["JetBrains Mono"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-caps": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "title-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "code-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "title-md": ["18px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Shell: TopNavBar -->
+<header class="bg-red-700 dark:bg-red-800 text-white font-plus-jakarta-sans text-sm font-semibold tracking-tight docked full-width top-0 sticky z-50 border-b border-red-800 shadow-md h-20 flex items-center">
+<div class="flex justify-between items-center px-8 w-full max-w-[1280px] mx-auto">
+<div class="text-2xl font-black text-white">Rahimo Transport</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-red-100 hover:text-white transition-colors" href="#">Accueil</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Réserver</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Colis</a>
+<a class="border-b-2 border-yellow-400 text-white pb-1" href="#">Services</a>
+<a class="text-red-100 hover:text-white transition-colors" href="#">Suivi</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-white text-primary px-6 py-2 rounded-lg hover:bg-red-50 transition-all scale-95 active:scale-90 duration-150">Acheter un ticket</button>
+<div class="flex gap-2">
+<span class="material-symbols-outlined hover:bg-red-600 rounded-md p-2 transition-all cursor-pointer">notifications</span>
+<span class="material-symbols-outlined hover:bg-red-600 rounded-md p-2 transition-all cursor-pointer">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-col md:flex-row h-[calc(100vh-80px)] overflow-hidden">
+<!-- Side Agency List -->
+<aside class="w-full md:w-96 bg-white border-r border-outline-variant flex flex-col z-20 shadow-xl">
+<div class="p-6 border-b border-outline-variant">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-4">Nos Agences</h1>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/15 transition-all font-body-sm text-body-sm" placeholder="Rechercher une ville..." type="text"/>
+</div>
+<div class="flex gap-2 mt-4 overflow-x-auto pb-2 no-scrollbar">
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-primary text-white text-label-caps font-label-caps">Toutes</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-container-high transition-colors">Vente Billets</button>
+<button class="whitespace-nowrap px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant text-label-caps font-label-caps hover:bg-surface-container-high transition-colors">VIP</button>
+</div>
+</div>
+<div class="agency-list-scroll flex-1 overflow-y-auto">
+<!-- Agency Card 1 -->
+<div class="p-6 border-b border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all group">
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Gare de Ouagadougou</h2>
+<span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Ouvert</span>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-start gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<p class="text-body-sm font-body-sm">Avenue de la Liberté, Secteur 01, Ouagadougou</p>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">call</span>
+<p class="font-code-md text-code-md tracking-wider">+226 25 30 00 00</p>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<p class="text-body-sm font-body-sm">06:00 - 22:00 (Tous les jours)</p>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg" title="Vente de billets">confirmation_number</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg" title="Envoi colis">package</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg" title="Salon VIP">star</span>
+</div>
+</div>
+<!-- Agency Card 2 -->
+<div class="p-6 border-b border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all group">
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Gare de Bobo-Dioulasso</h2>
+<span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Ouvert</span>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-start gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<p class="text-body-sm font-body-sm">Quartier Diarradougou, Face au Grand Marché</p>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">call</span>
+<p class="font-code-md text-code-md tracking-wider">+226 20 97 00 11</p>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<p class="text-body-sm font-body-sm">05:30 - 21:00 (Tous les jours)</p>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">confirmation_number</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">package</span>
+</div>
+</div>
+<!-- Agency Card 3 -->
+<div class="p-6 border-b border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all group">
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Gare de Koudougou</h2>
+<span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Ouvert</span>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-start gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<p class="text-body-sm font-body-sm">Secteur 03, Route Nationale 01</p>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">call</span>
+<p class="font-code-md text-code-md tracking-wider">+226 24 44 22 33</p>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">confirmation_number</span>
+</div>
+</div>
+<!-- Agency Card 4 -->
+<div class="p-6 border-b border-outline-variant hover:bg-surface-container-low cursor-pointer transition-all group">
+<div class="flex justify-between items-start mb-2">
+<h2 class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Gare de Banfora</h2>
+<span class="bg-slate-100 text-slate-500 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">Fermé</span>
+</div>
+<div class="space-y-2 mb-4">
+<div class="flex items-start gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<p class="text-body-sm font-body-sm">Sortie vers Niangoloko, Banfora</p>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">call</span>
+<p class="font-code-md text-code-md tracking-wider">+226 20 91 55 44</p>
+</div>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">confirmation_number</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">package</span>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-1.5 rounded-lg">star</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Interactive Map Content -->
+<section class="flex-1 relative bg-surface">
+<div class="absolute inset-0 z-0 overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-20" data-alt="A stylized satellite view of West African terrain, specifically showing the semi-arid landscape and road networks of Burkina Faso. The image has a clean, high-key lighting with a subtle blue tint to maintain a modern corporate UI look. Minimalist topographic lines are overlayed to suggest logistical precision and reliable transportation networks across the region." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK66URtTPyrMjW69gTCH79U18z7HdP5aohnhBYc-CsUBqswq4awX0PPjUAfqG0RVO5LmKVgDp1-QGzkrDSU1kdYLkppZ2paER9ABh1iVG22J0TLCBOSGMGOdZMrGBLjhwCfFA0V6R04dAk1zy-jPyiHL9m20LRkJ_A7Q0dTLDhJ_emQb0MVce0zqzDCbJuJMTMwVCVhTD2vez025WshLUAhyq9yoOhJjd-UOXPCWJzRcotGztwwZwdPxn9eavnjxt0jbJFHZnxscUK"/>
+<div class="absolute inset-0 map-gradient-overlay pointer-events-none"></div>
+</div>
+<!-- Map Markers (Simulated) -->
+<div class="absolute inset-0 z-10 p-20 pointer-events-none">
+<div class="relative w-full h-full">
+<!-- Ouagadougou Marker -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group pointer-events-auto cursor-pointer">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-12 h-12 bg-primary/20 rounded-full animate-ping"></div>
+<div class="bg-primary w-5 h-5 rounded-full border-4 border-white shadow-lg z-10"></div>
+<div class="absolute bottom-full mb-3 bg-inverse-surface text-white px-3 py-2 rounded-lg text-label-caps font-label-caps opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                Ouagadougou (Principale)
+                            </div>
+</div>
+</div>
+<!-- Bobo Marker -->
+<div class="absolute top-[65%] left-[30%] group pointer-events-auto cursor-pointer">
+<div class="relative flex items-center justify-center">
+<div class="bg-primary w-4 h-4 rounded-full border-2 border-white shadow-lg"></div>
+<div class="absolute bottom-full mb-2 bg-inverse-surface text-white px-3 py-1 rounded-lg text-label-caps font-label-caps opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                Bobo-Dioulasso
+                            </div>
+</div>
+</div>
+<!-- Koudougou Marker -->
+<div class="absolute top-[55%] left-[42%] group pointer-events-auto cursor-pointer">
+<div class="relative flex items-center justify-center">
+<div class="bg-primary w-4 h-4 rounded-full border-2 border-white shadow-lg"></div>
+<div class="absolute bottom-full mb-2 bg-inverse-surface text-white px-3 py-1 rounded-lg text-label-caps font-label-caps opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                Koudougou
+                            </div>
+</div>
+</div>
+<!-- Banfora Marker -->
+<div class="absolute top-[75%] left-[25%] group pointer-events-auto cursor-pointer">
+<div class="relative flex items-center justify-center">
+<div class="bg-primary w-4 h-4 rounded-full border-2 border-white shadow-lg"></div>
+<div class="absolute bottom-full mb-2 bg-inverse-surface text-white px-3 py-1 rounded-lg text-label-caps font-label-caps opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                Banfora
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Controls -->
+<div class="absolute bottom-8 right-8 z-30 flex flex-col gap-2">
+<button class="bg-white p-3 rounded-xl shadow-lg border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface">add</span>
+</button>
+<button class="bg-white p-3 rounded-xl shadow-lg border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface">remove</span>
+</button>
+<button class="bg-white p-3 rounded-xl shadow-lg border border-outline-variant hover:bg-surface-container transition-colors mt-2">
+<span class="material-symbols-outlined text-on-surface">my_location</span>
+</button>
+</div>
+<!-- Floating Quick Contact -->
+<div class="absolute top-8 right-8 z-30 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white max-w-xs">
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Service Client</h3>
+<p class="text-body-sm font-body-sm text-secondary mb-4">Besoin d'assistance immédiate pour votre trajet ?</p>
+<div class="flex items-center gap-3 bg-primary text-white p-3 rounded-xl cursor-pointer hover:bg-primary-container hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined">headset_mic</span>
+<span class="font-code-md text-code-md">+226 25 30 11 11</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-slate-900 dark:bg-black w-full rounded-none border-t-4 border-red-600">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 w-full max-w-[1280px] mx-auto font-plus-jakarta-sans text-sm leading-relaxed">
+<div>
+<span class="text-xl font-bold text-white mb-4 block">Rahimo Transport</span>
+<p class="text-slate-400">Le transport d'excellence au Burkina Faso. Confort, sécurité et ponctualité à chaque trajet.</p>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6">Liens Utiles</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Réseau d'agences</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Foire aux questions</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Conditions de transport</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6">Services</h4>
+<ul class="space-y-3">
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Vente de billets en ligne</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Expédition de colis</a></li>
+<li><a class="text-slate-400 hover:text-red-400 hover:translate-x-1 transition-transform inline-block" href="#">Location de bus</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-red-600 font-bold mb-6">Réseaux Sociaux</h4>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-red-600 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-red-600 transition-colors cursor-pointer">
+<span class="material-symbols-outlined">alternate_email</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-black/50 py-6 px-8 text-center text-slate-500 border-t border-slate-800">
+            © 2024 Rahimo Transport. Tous droits réservés.
+        </div>
+</footer>
+<script>
+        // Simple filter interaction simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        const agencyCards = document.querySelectorAll('.agency-list-scroll > div');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            agencyCards.forEach(card => {
+                const title = card.querySelector('h2').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Add active scale effects to cards
+        agencyCards.forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>
