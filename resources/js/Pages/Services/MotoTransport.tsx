@@ -24,11 +24,11 @@ export default function MotoTransport() {
                 <div className="w-16 h-16 bg-status-green-bg rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} className="text-status-green-text" />
                 </div>
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-2">Demande envoyée !</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-2">Demande envoyée !</h1>
                 <p className="text-on-surface-variant text-sm mb-6">Nous vous envoyons une estimation sous 24h.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Link href={route('services.public.moto')} className="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold text-sm">Nouvelle demande</Link>
-                    <Link href={route('services.index')} className="px-6 py-3 border border-outline-variant text-on-surface rounded-xl font-semibold text-sm">Retour aux services</Link>
+                    <Link href={route('services.public.moto')} className="px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm">Nouvelle demande</Link>
+                    <Link href={route('services.index')} className="px-6 py-3 border border-outline text-slate-dark rounded-xl font-semibold text-sm">Retour aux services</Link>
                 </div>
             </div>
         );
@@ -36,26 +36,26 @@ export default function MotoTransport() {
 
     return (
         <div className="max-w-lg mx-auto px-4 md:px-6 py-10">
-            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-on-surface mb-6 transition-colors">
+            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-slate-dark mb-6 transition-colors">
                 <ArrowLeft size={14} /> Services
             </Link>
 
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
                     <Package size={20} className="text-white" />
                 </div>
                 <div>
-                    <h1 className="text-xl font-black text-on-surface tracking-tight">Transport Moto</h1>
+                    <h1 className="text-xl font-black text-slate-dark tracking-tight">Transport Moto</h1>
                     <p className="text-xs text-on-surface-variant">Expédiez votre moto en toute sécurité</p>
                 </div>
             </div>
 
             <motion.form onSubmit={e => { e.preventDefault(); post(route('services.public.moto.store')); }}
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl shadow-ambient p-6 space-y-4"
+                className="bg-white rounded-xl shadow-xl p-6 space-y-4"
             >
                 <div>
-                    <h2 className="font-bold text-sm text-on-surface mb-3">Expéditeur</h2>
+                    <h2 className="font-bold text-sm text-slate-dark mb-3">Expéditeur</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block mb-1">Nom *</label>
@@ -74,10 +74,10 @@ export default function MotoTransport() {
                     </div>
                 </div>
 
-                <hr className="border-outline-variant/30" />
+                <hr className="border-outline" />
 
                 <div>
-                    <h2 className="font-bold text-sm text-on-surface mb-3">Destinataire</h2>
+                    <h2 className="font-bold text-sm text-slate-dark mb-3">Destinataire</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block mb-1">Nom *</label>
@@ -96,10 +96,10 @@ export default function MotoTransport() {
                     </div>
                 </div>
 
-                <hr className="border-outline-variant/30" />
+                <hr className="border-outline" />
 
                 <div>
-                    <h2 className="font-bold text-sm text-on-surface mb-3">Trajet</h2>
+                    <h2 className="font-bold text-sm text-slate-dark mb-3">Trajet</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block mb-1">Ville d'origine *</label>
@@ -118,10 +118,10 @@ export default function MotoTransport() {
                     </div>
                 </div>
 
-                <hr className="border-outline-variant/30" />
+                <hr className="border-outline" />
 
                 <div>
-                    <h2 className="font-bold text-sm text-on-surface mb-3">Moto</h2>
+                    <h2 className="font-bold text-sm text-slate-dark mb-3">Moto</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                             <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block mb-1">Marque *</label>
@@ -156,7 +156,7 @@ export default function MotoTransport() {
                 </div>
 
                 <button type="submit" disabled={processing}
-                    className="w-full py-3 bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-ambient"
+                    className="w-full py-3 bg-orange-500 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-xl"
                 >{processing ? 'Envoi...' : 'Envoyer ma demande'}</button>
             </motion.form>
         </div>

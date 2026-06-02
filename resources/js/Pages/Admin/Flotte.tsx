@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { router, useForm } from '@inertiajs/react';
-import { AlertTriangle, Bus, CheckCircle, MapPin, Navigation, Pencil, Plus, RefreshCw, Trash2, Wrench, X } from 'lucide-react';
+import { AlertTriangle, Bus, CalendarClock, CheckCircle, Gauge, MapPin, Navigation, Pencil, Plus, RefreshCw, Search, Trash2, Wrench, X } from 'lucide-react';
 import BackOfficeLayout from '@/Layouts/BackOfficeLayout';
 import StatusBadge from '@/Components/StatusBadge';
 import type { PageProps, Vehicle } from '@/types';
@@ -22,6 +22,11 @@ export default function Flotte({ vehicules, stats }: Props) {
     const [showModal, setShowModal] = useState(false);
     const [mode, setMode] = useState<FormMode>('create');
     const [editingVehicle, setEditingVehicle] = useState<Vehicle | null>(null);
+    const [search, setSearch] = useState('');
+
+    const filteredVehicules = vehicules.filter(v =>
+        !search || `${v.brand} ${v.model} ${v.registration_number}`.toLowerCase().includes(search.toLowerCase())
+    );
 
     const { data, setData, post, put, processing, errors, reset } = useForm({
         registration_number: '',
@@ -98,7 +103,7 @@ export default function Flotte({ vehicules, stats }: Props) {
     useEffect(() => { loadGps(); const t = setInterval(loadGps, 15000); return () => clearInterval(t); }, []);
 
     const STATS = [
-        { label: 'Total',        val: stats.total,                   icon: Bus,            color: 'text-admin-muted',        bg: 'bg-white/5' },
+        { label: 'Total',        val: stats.total,                   icon: Bus,            color: 'text-on-surface-variant',        bg: 'bg-gris-surface' },
         { label: 'Bus Actifs',   val: stats.actifs,                  icon: CheckCircle,    color: 'text-status-green-text',  bg: 'bg-status-green-bg/30' },
         { label: 'Maintenance',  val: stats.maintenance,             icon: Wrench,         color: 'text-status-yellow-text', bg: 'bg-status-yellow-bg/30' },
         { label: 'Retard Maint.',val: stats.en_retard_maintenance,   icon: AlertTriangle,  color: 'text-status-red-text',    bg: 'bg-status-red-bg/30' },
@@ -106,59 +111,76 @@ export default function Flotte({ vehicules, stats }: Props) {
 
     return (
         <div className="w-full max-w-7xl space-y-6">
-            <div className="flex items-center justify-between flex-wrap gap-3">
+            {/* En-tête */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Gestion de la Flotte</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Suivi GPS, maintenance et gestion des véhicules</p>
+                    <h1 className="text-xl font-bold text-slate-dark tracking-tight">Gestion de la flotte</h1>
+                    <p className="text-sm text-on-surface-variant mt-0.5">Suivi GPS, maintenance et gestion des véhicules</p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex items-center gap-2">
+                    <div className="relative">
+                        <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
+                        <input type="text" value={search} onChange={e => setSearch(e.target.value)}
+                            className="w-52 bg-gris-surface border border-outline rounded-xl pl-9 pr-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
+                            placeholder="Immatriculation, marque..."
+                        />
+                    </div>
                     <button onClick={openCreate}
-                        className="flex items-center gap-2 bg-primary text-on-primary text-sm font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-all"
+                        className="flex items-center gap-1.5 bg-primary text-on-primary text-sm font-bold px-4 py-2 rounded-xl hover:opacity-90 transition-all"
                     >
-                        <Plus size={15} /> Ajouter
+                        <Plus size={16} /> Véhicule
                     </button>
-                    <button onClick={loadGps}
-                        className="flex items-center gap-2 border border-white/10 text-admin-muted hover:text-white hover:bg-white/5 text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
-                    >
-                        <RefreshCw size={15} /> Actualiser
-                    </button>
-                    <button onClick={simulate} disabled={simulating}
-                        className="flex items-center gap-2 border border-white/10 text-admin-muted hover:text-white hover:bg-white/5 text-sm font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
-                    >
-                        <Navigation size={15} className={simulating ? 'animate-pulse' : ''} /> Simuler GPS
-                    </button>
+                    <div className="flex items-center gap-1 ml-1 pl-2 border-l border-outline">
+                        <button onClick={loadGps} title="Actualiser"
+                            className="p-2 rounded-xl text-on-surface-variant hover:text-slate-dark hover:bg-gris-surface transition-colors"
+                        >
+                            <RefreshCw size={16} />
+                        </button>
+                        <button onClick={simulate} disabled={simulating} title="Simuler GPS"
+                            className="p-2 rounded-xl text-on-surface-variant hover:text-slate-dark hover:bg-gris-surface transition-colors disabled:opacity-50"
+                        >
+                            <Navigation size={16} className={simulating ? 'animate-pulse' : ''} />
+                        </button>
+                        <a href={route('admin.gps-map')} title="Vue Live"
+                            className="p-2 rounded-xl text-sahel-yellow hover:bg-sahel-yellow/10 transition-colors"
+                        >
+                            <MapPin size={16} />
+                        </a>
+                    </div>
                 </div>
             </div>
 
+            {/* KPI */}
             <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-4" variants={stagger} initial="initial" animate="animate">
                 {STATS.map((s) => {
                     const Icon = s.icon;
                     return (
                         <motion.div key={s.label} variants={fadeUp}
-                            className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3"
+                            className="bg-white rounded-xl border border-outline shadow-sm p-4 flex items-center gap-3"
                         >
-                            <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                            <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                                 <Icon size={18} className={s.color} />
                             </div>
                             <div>
                                 <p className={`text-xl font-bold ${s.color}`}>{s.val}</p>
-                                <p className="text-xs text-admin-muted">{s.label}</p>
+                                <p className="text-xs text-on-surface-variant">{s.label}</p>
                             </div>
                         </motion.div>
                     );
                 })}
             </motion.div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
-                <div className="p-4 flex items-center justify-between">
-                    <h2 className="text-sm font-semibold text-white flex items-center gap-2">
-                        <MapPin size={15} className="text-primary-container" />
-                        Suivi GPS Temps Réel
+            {/* Suivi GPS */}
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
+                <div className="px-5 py-4 flex items-center justify-between border-b border-outline">
+                    <h2 className="text-sm font-bold text-slate-dark flex items-center gap-2">
+                        <MapPin size={15} className="text-primary" />
+                        Suivi GPS temps réel
                     </h2>
-                    <span className="text-xs text-admin-muted">{gpsVehicles.length} véhicules actifs</span>
+                    <span className="text-xs text-on-surface-variant">{gpsVehicles.length} véhicule{gpsVehicles.length > 1 ? 's' : ''} actif{gpsVehicles.length > 1 ? 's' : ''}</span>
                 </div>
-                <div className="p-6 min-h-[300px] bg-[#0F172A] relative">
-                    <div className="absolute inset-0 opacity-5"
+                <div className="p-5 min-h-[260px] bg-gris-surface relative">
+                    <div className="absolute inset-0 opacity-[0.04]"
                         style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, #475569 1px, transparent 1px)', backgroundSize: '40px 40px' }}
                     />
                     <div className="relative z-10 flex flex-wrap gap-3">
@@ -168,15 +190,15 @@ export default function Flotte({ vehicules, stats }: Props) {
                                 <div key={v.id}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm ${
                                         speed > 90
-                                            ? 'bg-red-950/50 border-status-red-ring text-status-red-text'
-                                            : 'bg-white/5 border-white/10 text-white'
+                                            ? 'bg-status-red-bg/30 border-status-red-ring text-status-red-text'
+                                            : 'bg-white border-outline text-slate-dark shadow-sm'
                                     }`}
                                 >
                                     <Navigation size={16} className={speed > 0 ? 'animate-pulse' : ''} />
                                     <div>
                                         <p className="font-mono font-bold text-xs">{v.registration_number}</p>
-                                        <p className="text-[10px] opacity-70">
-                                            {v.brand} · {speed} km/h · {v.last_update ?? 'N/A'}
+                                        <p className="text-[10px] text-on-surface-variant">
+                                            {v.brand} <span className="mx-1">·</span> {speed} km/h <span className="mx-1">·</span> {v.last_update ?? 'N/A'}
                                         </p>
                                     </div>
                                     <div className={`w-2 h-2 rounded-full ${speed > 90 ? 'bg-status-red-text animate-pulse' : 'bg-status-green-text'}`} />
@@ -184,7 +206,7 @@ export default function Flotte({ vehicules, stats }: Props) {
                             );
                         })}
                         {gpsVehicles.length === 0 && (
-                            <p className="text-admin-muted text-sm w-full text-center py-8">
+                            <p className="text-on-surface-variant text-sm w-full text-center py-8">
                                 Aucun véhicule actif. Cliquez sur "Simuler GPS" pour générer des données de test.
                             </p>
                         )}
@@ -192,59 +214,117 @@ export default function Flotte({ vehicules, stats }: Props) {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                {vehicules.map((v, i) => (
-                    <motion.div key={v.id} variants={fadeUp} initial="initial" animate="animate"
-                        className="bg-admin-card rounded-xl border border-white/5 overflow-hidden hover:border-white/10 transition-colors group"
-                    >
-                        <div className="p-5 flex flex-col lg:flex-row gap-4 lg:items-center">
-                            <div className="flex items-center gap-4 flex-1">
-                                <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                                    <Bus size={22} className="text-admin-muted" />
+            {/* Parc véhicules */}
+            <div>
+                <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-sm font-bold text-slate-dark tracking-tight">
+                        Parc véhicules
+                        <span className="text-on-surface-variant font-normal ml-2">({filteredVehicules.length} véhicule{filteredVehicules.length > 1 ? 's' : ''})</span>
+                    </h2>
+                    {search && (
+                        <button onClick={() => setSearch('')} className="text-xs text-primary hover:underline font-semibold">
+                            Effacer le filtre
+                        </button>
+                    )}
+                </div>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
+                    {filteredVehicules.map((v, i) => {
+                        const statusBorder = v.status === 'active' ? 'border-l-status-yellow-ring' : v.status === 'maintenance' ? 'border-l-sahel-yellow' : 'border-l-primary';
+                        const iconBg = v.status === 'active' ? 'bg-status-yellow-bg text-status-yellow-text' : v.status === 'maintenance' ? 'bg-sahel-yellow/20 text-sahel-yellow' : 'bg-status-red-bg text-primary';
+                        return (
+                            <motion.div key={v.id} variants={fadeUp} initial="initial" animate="animate"
+                                className={`bg-white rounded-xl border border-outline shadow-sm overflow-hidden transition-all hover:shadow-md border-l-4 ${statusBorder}`}
+                            >
+                                <div className="p-6 flex items-start justify-between gap-5">
+                                    <div className="flex items-start gap-4">
+                                        <div className={`w-14 h-14 rounded-xl ${iconBg} flex items-center justify-center shrink-0`}>
+                                            <Bus size={24} />
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-slate-dark text-base">{v.brand} {v.model}</h3>
+                                            <p className="text-xs font-mono text-on-surface-variant mt-1">{v.registration_number} <span className="mx-1">·</span> {v.capacity} places</p>
+                                            <div className="flex items-center gap-2 mt-3">
+                                                <StatusBadge status={v.status} />
+                                                <span className="text-[10px] text-on-surface-variant font-mono">{v.year}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-1 shrink-0">
+                                        <button onClick={() => openEdit(v)}
+                                            className="p-2 rounded-xl text-on-surface-variant hover:text-slate-dark hover:bg-gris-surface transition-all"
+                                            title="Modifier"
+                                        >
+                                            <Pencil size={14} />
+                                        </button>
+                                        <button onClick={() => confirmDelete(v)}
+                                            className="p-2 rounded-xl text-on-surface-variant hover:text-status-red-text hover:bg-status-red-bg/20 transition-all"
+                                            title="Supprimer"
+                                        >
+                                            <Trash2 size={14} />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="font-bold text-white text-sm">{v.brand} {v.model}</h3>
-                                    <p className="text-xs font-mono text-admin-muted mt-0.5">{v.registration_number} · {v.capacity} places</p>
+                                <div className="border-t border-outline/60 px-6 py-4">
+                                    <div className="grid grid-cols-2 gap-y-3.5 gap-x-8 text-xs">
+                                        <div className="flex items-center gap-2.5 text-on-surface-variant">
+                                            <Gauge size={14} className="shrink-0 text-primary" />
+                                            <span className="font-medium">Km</span>
+                                            <span className="ml-auto font-mono font-semibold text-slate-dark">{v.mileage.toLocaleString('fr-FR')}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2.5 text-on-surface-variant">
+                                            <Wrench size={14} className="shrink-0 text-status-yellow-text" />
+                                            <span className="font-medium">Dernière</span>
+                                            <span className="ml-auto font-mono text-slate-dark">{v.last_maintenance_date ?? '—'}</span>
+                                        </div>
+                                        <div className="flex items-center gap-2.5 text-on-surface-variant">
+                                            <CalendarClock size={14} className="shrink-0 text-primary" />
+                                            <span className="font-medium">Prochaine</span>
+                                            <span className={`ml-auto font-mono font-semibold ${
+                                                v.next_maintenance_date && v.next_maintenance_date <= new Date().toISOString().slice(0, 10)
+                                                    ? 'text-status-red-text'
+                                                    : 'text-slate-dark'
+                                            }`}>
+                                                {v.next_maintenance_date ?? '—'}
+                                            </span>
+                                        </div>
+                                        <div className="flex items-center gap-2.5 text-on-surface-variant">
+                                            <MapPin size={14} className="shrink-0 text-status-yellow-text" />
+                                            <span className="font-medium">GPS</span>
+                                            <span className="ml-auto font-mono text-slate-dark">{(v as any).last_gps_update ?? '—'}</span>
+                                        </div>
+                                    </div>
                                 </div>
+                            </motion.div>
+                        );
+                    })}
+                    {filteredVehicules.length === 0 && (
+                        <div className="xl:col-span-2 py-20 text-center">
+                            <div className="w-16 h-16 rounded-2xl bg-gris-surface flex items-center justify-center mx-auto mb-4">
+                                <Bus size={28} className="text-on-surface-variant/50" />
                             </div>
-                            <div className="flex items-center gap-2">
-                                <StatusBadge status={v.status} />
-                                <span className="text-xs text-admin-muted font-mono">{v.year}</span>
-                                <button onClick={() => openEdit(v)}
-                                    className="p-1.5 rounded-lg text-admin-muted hover:text-white hover:bg-white/10 transition-all opacity-0 group-hover:opacity-100"
-                                    title="Modifier"
-                                >
-                                    <Pencil size={14} />
+                            <p className="text-sm font-medium text-slate-dark mb-1">Aucun véhicule trouvé</p>
+                            <p className="text-xs text-on-surface-variant mb-4">
+                                {search ? 'Aucun résultat ne correspond à votre recherche.' : 'Le parc est vide pour le moment.'}
+                            </p>
+                            {search && (
+                                <button onClick={() => setSearch('')} className="text-xs text-primary hover:underline font-semibold">
+                                    ← Réinitialiser la recherche
                                 </button>
-                                <button onClick={() => confirmDelete(v)}
-                                    className="p-1.5 rounded-lg text-admin-muted hover:text-status-red-text hover:bg-status-red-bg/20 transition-all opacity-0 group-hover:opacity-100"
-                                    title="Supprimer"
-                                >
-                                    <Trash2 size={14} />
-                                </button>
-                            </div>
-                        </div>
-                        <div className="border-t border-white/5 px-5 py-3 bg-white/[0.02] flex flex-wrap gap-x-6 gap-y-1 text-xs">
-                            <span className="text-admin-muted">Km: <span className="text-white font-mono">{v.mileage.toLocaleString('fr-FR')}</span></span>
-                            <span className="text-admin-muted">Dernière maint.: <span className="text-white font-mono">{v.last_maintenance_date ?? 'N/A'}</span></span>
-                            <span className="text-admin-muted">Prochaine: <span className="text-white font-mono">{v.next_maintenance_date ?? 'N/A'}</span></span>
-                            {(v as any).last_gps_update && (
-                                <span className="text-admin-muted">GPS: <span className="text-white font-mono">{(v as any).last_gps_update}</span></span>
                             )}
                         </div>
-                    </motion.div>
-                ))}
+                    )}
+                </div>
             </div>
 
             {/* Modal Ajouter / Modifier */}
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4" onClick={() => setShowModal(false)}>
-                    <div className="bg-admin-card rounded-2xl border border-white/10 p-6 w-full max-w-lg shadow-2xl" onClick={e => e.stopPropagation()}>
+                    <div className="bg-white rounded-xl border border-outline p-6 w-full max-w-lg shadow-xl" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-lg font-bold text-white">
+                            <h3 className="text-lg font-bold text-slate-dark">
                                 {mode === 'create' ? 'Ajouter un véhicule' : 'Modifier le véhicule'}
                             </h3>
-                            <button onClick={() => setShowModal(false)} className="p-1 text-admin-muted hover:text-white">
+                            <button onClick={() => setShowModal(false)} className="p-1 text-on-surface-variant hover:text-slate-dark">
                                 <X size={18} />
                             </button>
                         </div>
@@ -252,16 +332,16 @@ export default function Flotte({ vehicules, stats }: Props) {
                         <form onSubmit={submit} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Immatriculation *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Immatriculation *</label>
                                     <input type="text" value={data.registration_number} onChange={e => setData('registration_number', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder="R-XXX" />
                                     {errors.registration_number && <p className="text-status-red-text text-xs mt-1">{errors.registration_number}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Marque *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Marque *</label>
                                     <input type="text" value={data.brand} onChange={e => setData('brand', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder="Mercedes" />
                                     {errors.brand && <p className="text-status-red-text text-xs mt-1">{errors.brand}</p>}
                                 </div>
@@ -269,16 +349,16 @@ export default function Flotte({ vehicules, stats }: Props) {
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Modèle *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Modèle *</label>
                                     <input type="text" value={data.model} onChange={e => setData('model', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder="Sprinter" />
                                     {errors.model && <p className="text-status-red-text text-xs mt-1">{errors.model}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Capacité *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Capacité *</label>
                                     <input type="number" value={data.capacity} onChange={e => setData('capacity', Number(e.target.value))}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         min={1} />
                                     {errors.capacity && <p className="text-status-red-text text-xs mt-1">{errors.capacity}</p>}
                                 </div>
@@ -286,14 +366,14 @@ export default function Flotte({ vehicules, stats }: Props) {
 
                             <div className="grid grid-cols-3 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Année</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Année</label>
                                     <input type="number" value={data.year} onChange={e => setData('year', Number(e.target.value))}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors" />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Carburant</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Carburant</label>
                                     <select value={data.fuel_type} onChange={e => setData('fuel_type', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark focus:outline-none focus:border-primary transition-colors"
                                     >
                                         <option value="">Sélectionner</option>
                                         <option value="diesel">Diesel</option>
@@ -303,9 +383,9 @@ export default function Flotte({ vehicules, stats }: Props) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Statut *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Statut *</label>
                                     <select value={data.status} onChange={e => setData('status', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark focus:outline-none focus:border-primary transition-colors"
                                     >
                                         <option value="active">Actif</option>
                                         <option value="maintenance">En maintenance</option>
@@ -316,15 +396,15 @@ export default function Flotte({ vehicules, stats }: Props) {
                             </div>
 
                             <div>
-                                <label className="block text-xs font-semibold text-admin-muted mb-1">Kilométrage</label>
+                                <label className="block text-xs font-semibold text-on-surface-variant mb-1">Kilométrage</label>
                                 <input type="number" value={data.mileage} onChange={e => setData('mileage', Number(e.target.value))}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                    className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                     min={0} />
                             </div>
 
                             <div className="flex gap-3 pt-2">
                                 <button type="button" onClick={() => setShowModal(false)}
-                                    className="flex-1 py-2.5 rounded-xl border border-white/10 text-admin-muted hover:text-white hover:bg-white/5 text-sm font-semibold transition-all"
+                                    className="flex-1 py-2.5 rounded-xl border border-outline text-on-surface-variant hover:text-slate-dark hover:bg-gris-surface text-sm font-semibold transition-all"
                                 >Annuler</button>
                                 <button type="submit" disabled={processing}
                                     className="flex-1 py-2.5 rounded-xl bg-primary text-on-primary text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50"

@@ -44,13 +44,13 @@ export default function Formations({ cours, stats }: Props) {
     return (
         <div className="w-full max-w-7xl space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-white">Formations & E-Learning</h1>
-                <p className="text-admin-muted text-sm mt-0.5">Modules de formation pour les chauffeurs et le personnel</p>
+                <h1 className="text-xl font-bold text-slate-dark">Formations & E-Learning</h1>
+                <p className="text-on-surface-variant text-sm mt-0.5">Modules de formation pour les chauffeurs et le personnel</p>
             </div>
 
             <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-4" variants={stagger} initial="initial" animate="animate">
                 {[
-                    { label: 'Total Modules',   val: stats.total,     icon: Book,        color: 'text-admin-text',      bg: 'bg-white/5' },
+                    { label: 'Total Modules',   val: stats.total,     icon: Book,        color: 'text-slate-dark',      bg: 'bg-gris-surface' },
                     { label: 'Complétés',       val: stats.completed, icon: CheckCircle,  color: 'text-status-green-text', bg: 'bg-status-green-bg/30' },
                     { label: 'Score Moyen',     val: `${stats.score_moyen}%`, icon: Trophy, color: 'text-status-yellow-text',  bg: 'bg-status-yellow-bg/30' },
                     { label: 'Obligatoires',    val: stats.obligatoires, icon: GraduationCap, color: 'text-status-blue-text', bg: 'bg-status-blue-bg/30' },
@@ -58,14 +58,14 @@ export default function Formations({ cours, stats }: Props) {
                     const Icon = s.icon;
                     return (
                         <motion.div key={s.label} variants={fadeUp}
-                            className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3"
+                            className="bg-white rounded-xl border border-outline p-4 flex items-center gap-3"
                         >
-                            <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                            <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                                 <Icon size={18} className={s.color} />
                             </div>
                             <div>
                                 <p className={`text-xl font-bold ${s.color}`}>{s.val}</p>
-                                <p className="text-xs text-admin-muted">{s.label}</p>
+                                <p className="text-xs text-on-surface-variant">{s.label}</p>
                             </div>
                         </motion.div>
                     );
@@ -74,17 +74,17 @@ export default function Formations({ cours, stats }: Props) {
 
             <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-4" variants={stagger} initial="initial" animate="animate">
                 {cours.map((c) => {
-                    const cat = CATEGORIES[c.categorie] ?? { label: c.categorie, color: 'text-admin-muted' };
+                    const cat = CATEGORIES[c.categorie] ?? { label: c.categorie, color: 'text-on-surface-variant' };
                     return (
                         <motion.div key={c.id} variants={fadeUp}>
                             <Link href={route(`${prefix}.formations.show`, { course: c.id })}
-                                className="block bg-admin-card rounded-xl border border-white/5 p-5 hover:border-white/10 transition-colors"
+                                className="block bg-white rounded-xl border border-outline p-5 hover:border-outline transition-colors"
                             >
                                 <div className="flex items-start gap-4">
-                                    <div className={`w-10 h-10 rounded-lg ${c.completed ? 'bg-status-green-bg/30' : 'bg-white/5'} flex items-center justify-center shrink-0`}>
+                                    <div className={`w-10 h-10 rounded-xl ${c.completed ? 'bg-status-green-bg/30' : 'bg-gris-surface'} flex items-center justify-center shrink-0`}>
                                         {c.completed
                                             ? <CheckCircle size={20} className="text-status-green-text" />
-                                            : <BookOpen size={20} className="text-admin-muted" />
+                                            : <BookOpen size={20} className="text-on-surface-variant" />
                                         }
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -94,21 +94,21 @@ export default function Formations({ cours, stats }: Props) {
                                                 <span className="text-[9px] font-bold uppercase text-status-red-text bg-status-red-bg/30 px-1.5 py-0.5 rounded">Obligatoire</span>
                                             )}
                                         </div>
-                                        <h3 className="font-semibold text-white text-sm mb-1">{c.titre}</h3>
-                                        <p className="text-xs text-admin-muted line-clamp-2">{c.description}</p>
-                                        <div className="flex items-center gap-4 mt-3 text-xs text-admin-muted">
+                                        <h3 className="font-semibold text-slate-dark text-sm mb-1">{c.titre}</h3>
+                                        <p className="text-xs text-on-surface-variant line-clamp-2">{c.description}</p>
+                                        <div className="flex items-center gap-4 mt-3 text-xs text-on-surface-variant">
                                             <span className="flex items-center gap-1"><Clock size={11} /> {c.duree_minutes} min</span>
                                             <span>{DIFFICULTES[c.difficulte] ?? c.difficulte}</span>
                                             <span>{c.passed_quizzes}/{c.total_quizzes} quiz</span>
                                         </div>
                                         {c.progress > 0 && (
                                             <div className="mt-3">
-                                                <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                                    <div className="h-full bg-primary-container rounded-full transition-all"
+                                                <div className="w-full h-1.5 bg-gris-surface rounded-full overflow-hidden">
+                                                    <div className="h-full bg-primary/10 rounded-full transition-all"
                                                         style={{ width: `${c.progress}%` }}
                                                     />
                                                 </div>
-                                                <p className="text-[10px] text-admin-muted mt-1">{c.progress}% complété</p>
+                                                <p className="text-[10px] text-on-surface-variant mt-1">{c.progress}% complété</p>
                                             </div>
                                         )}
                                     </div>

@@ -28,7 +28,7 @@ export default function FlashToast() {
                     animate={{ opacity: 1, y: 0, x: 0 }}
                     exit={{ opacity: 0, y: -16, x: 16 }}
                     transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-                    className="fixed top-6 right-6 z-[9999] flex items-center gap-3 rounded-lg px-5 py-4 shadow-card text-sm font-medium max-w-sm"
+                    className="fixed top-6 right-6 z-[9999] flex items-center gap-3 rounded-xl px-5 py-4 shadow-lg text-sm font-medium max-w-sm"
                     style={{
                         background: isSuccess ? '#F0FDF4' : '#FEF2F2',
                         border: `1px solid ${isSuccess ? '#86EFAC' : '#FECACA'}`,

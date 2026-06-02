@@ -26,27 +26,27 @@ export default function Manifeste({ passagers, trajet }: Props) {
                 <ArrowLeft size={14} /> Retour
             </Link>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 p-6">
+            <div className="bg-white rounded-xl border border-outline p-6">
                 <div className="flex items-center justify-between mb-6">
                     <div>
-                        <h1 className="text-xl font-bold text-white">Manifeste des Passagers</h1>
-                        <p className="text-admin-muted text-sm mt-0.5">{trajet.route}</p>
+                        <h1 className="text-xl font-bold text-slate-dark">Manifeste des Passagers</h1>
+                        <p className="text-on-surface-variant text-sm mt-0.5">{trajet.route}</p>
                     </div>
                     <div className="text-right">
-                        <p className="text-sm font-semibold text-white font-mono">{trajet.trip_number}</p>
-                        <p className="text-xs text-admin-muted">{trajet.date} à {trajet.heure}</p>
-                        <p className="text-xs text-admin-muted">{trajet.bus} · {trajet.chauffeur}</p>
+                        <p className="text-sm font-semibold text-slate-dark font-mono">{trajet.trip_number}</p>
+                        <p className="text-xs text-on-surface-variant">{trajet.date} à {trajet.heure}</p>
+                        <p className="text-xs text-on-surface-variant">{trajet.bus} · {trajet.chauffeur}</p>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-2 mb-4">
-                    <Users size={16} className="text-primary-container" />
-                    <span className="text-sm text-white font-semibold">{passagers.length} passager(s) confirmé(s)</span>
+                    <Users size={16} className="text-primary" />
+                    <span className="text-sm text-slate-dark font-semibold">{passagers.length} passager(s) confirmé(s)</span>
                 </div>
 
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['N°', 'Nom', 'Téléphone', 'Siège', 'Référence'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -55,16 +55,16 @@ export default function Manifeste({ passagers, trajet }: Props) {
                         </thead>
                         <tbody>
                             {passagers.map((p: any, i: number) => (
-                                <tr key={i} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 text-admin-muted">{i + 1}</td>
-                                    <td className="px-4 py-3 font-semibold text-white">{p.nom}</td>
-                                    <td className="px-4 py-3 font-mono text-admin-muted">{p.telephone}</td>
-                                    <td className="px-4 py-3 font-mono text-admin-muted">{p.siege ?? '—'}</td>
-                                    <td className="px-4 py-3 font-mono text-admin-muted">{p.reference}</td>
+                                <tr key={i} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 text-on-surface-variant">{i + 1}</td>
+                                    <td className="px-4 py-3 font-semibold text-slate-dark">{p.nom}</td>
+                                    <td className="px-4 py-3 font-mono text-on-surface-variant">{p.telephone}</td>
+                                    <td className="px-4 py-3 font-mono text-on-surface-variant">{p.siege ?? '—'}</td>
+                                    <td className="px-4 py-3 font-mono text-on-surface-variant">{p.reference}</td>
                                 </tr>
                             ))}
                             {passagers.length === 0 && (
-                                <tr><td colSpan={5} className="text-center py-8 text-admin-muted text-sm">Aucun passager confirmé.</td></tr>
+                                <tr><td colSpan={5} className="text-center py-8 text-on-surface-variant text-sm">Aucun passager confirmé.</td></tr>
                             )}
                         </tbody>
                     </table>

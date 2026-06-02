@@ -21,7 +21,7 @@ export default function Pagination<T>({ data, preserveScroll = true }: Props<T>)
             <button
                 onClick={() => go(data.links[0]?.url ?? null)}
                 disabled={data.current_page === 1}
-                className="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="w-9 h-9 rounded-xl border border-outline flex items-center justify-center text-slate-dark hover:bg-gris-surface disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
                 <ChevronLeft size={16} />
             </button>
@@ -32,10 +32,10 @@ export default function Pagination<T>({ data, preserveScroll = true }: Props<T>)
                     onClick={() => go(link.url)}
                     disabled={!link.url}
                     className={cn(
-                        'w-9 h-9 rounded-lg text-sm font-medium transition-colors',
+                        'w-9 h-9 rounded-xl text-sm font-medium transition-colors',
                         link.active
-                            ? 'bg-primary-container text-on-primary shadow-card'
-                            : 'border border-outline-variant text-on-surface hover:bg-surface-container',
+                            ? 'bg-primary text-on-primary shadow-sm'
+                            : 'border border-outline text-slate-dark hover:bg-gris-surface',
                     )}
                     dangerouslySetInnerHTML={{ __html: link.label }}
                 />
@@ -44,7 +44,7 @@ export default function Pagination<T>({ data, preserveScroll = true }: Props<T>)
             <button
                 onClick={() => go(data.links[data.links.length - 1]?.url ?? null)}
                 disabled={data.current_page === data.last_page}
-                className="w-9 h-9 rounded-lg border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                className="w-9 h-9 rounded-xl border border-outline flex items-center justify-center text-slate-dark hover:bg-gris-surface disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
                 <ChevronRight size={16} />
             </button>

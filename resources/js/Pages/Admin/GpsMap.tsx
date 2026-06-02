@@ -100,8 +100,8 @@ export default function GpsMap({ vehicules: initial }: Props) {
 
             <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Carte GPS Temps Réel</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">
+                    <h1 className="text-xl font-bold text-slate-dark">Carte GPS Temps Réel</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">
                         {vehicules.length} véhicule{vehicules.length > 1 ? 's' : ''} suivi{vehicules.length > 1 ? 's' : ''}
                         {mapReady && <span className="text-status-green-text ml-2">● Connecté</span>}
                     </p>
@@ -109,50 +109,50 @@ export default function GpsMap({ vehicules: initial }: Props) {
                 <div className="flex items-center gap-3">
                     <div className="flex items-center gap-2">
                         <span className="w-3 h-3 rounded-full bg-green-500" />
-                        <span className="text-xs text-admin-muted">En ligne</span>
+                        <span className="text-xs text-on-surface-variant">En ligne</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="w-3 h-3 rounded-full bg-yellow-500" />
-                        <span className="text-xs text-admin-muted">Arrêté</span>
+                        <span className="text-xs text-on-surface-variant">Arrêté</span>
                     </div>
                 </div>
             </div>
 
-            <div className="flex-1 relative rounded-xl overflow-hidden border border-white/5">
+            <div className="flex-1 relative rounded-xl overflow-hidden border border-outline">
                 <div id="gps-map" className="absolute inset-0" style={{ zIndex: 1 }} />
                 {!mapReady && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-admin-card z-10">
-                        <p className="text-admin-muted text-sm">Chargement de la carte...</p>
+                    <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+                        <p className="text-on-surface-variant text-sm">Chargement de la carte...</p>
                     </div>
                 )}
             </div>
 
             {selected && (
-                <div className="bg-admin-card rounded-xl border border-white/5 p-4">
+                <div className="bg-white rounded-xl border border-outline shadow-sm p-4">
                     <div className="flex items-center justify-between mb-3">
-                        <h3 className="font-semibold text-white">
+                        <h3 className="font-semibold text-slate-dark">
                             {selected.registration_number} — {selected.brand} {selected.model}
                         </h3>
-                        <button onClick={() => setSelected(null)} className="text-admin-muted hover:text-white text-sm">Fermer</button>
+                        <button onClick={() => setSelected(null)} className="text-on-surface-variant hover:text-slate-dark text-sm">Fermer</button>
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
                         <div>
-                            <span className="text-admin-muted text-xs">Latitude</span>
-                            <p className="text-white font-mono">{selected.latitude.toFixed(6)}</p>
+                            <span className="text-on-surface-variant text-xs">Latitude</span>
+                            <p className="text-slate-dark font-mono">{selected.latitude.toFixed(6)}</p>
                         </div>
                         <div>
-                            <span className="text-admin-muted text-xs">Longitude</span>
-                            <p className="text-white font-mono">{selected.longitude.toFixed(6)}</p>
+                            <span className="text-on-surface-variant text-xs">Longitude</span>
+                            <p className="text-slate-dark font-mono">{selected.longitude.toFixed(6)}</p>
                         </div>
                         <div>
-                            <span className="text-admin-muted text-xs">Statut</span>
+                            <span className="text-on-surface-variant text-xs">Statut</span>
                             <p className={selected.status === 'active' ? 'text-status-green-text' : 'text-status-yellow-text'}>
                                 {selected.status === 'active' ? 'En ligne' : 'Arrêté'}
                             </p>
                         </div>
                         <div>
-                            <span className="text-admin-muted text-xs">Dernière mise à jour</span>
-                            <p className="text-white">{selected.last_update ?? '—'}</p>
+                            <span className="text-on-surface-variant text-xs">Dernière mise à jour</span>
+                            <p className="text-slate-dark">{selected.last_update ?? '—'}</p>
                         </div>
                     </div>
                 </div>

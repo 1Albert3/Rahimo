@@ -61,16 +61,16 @@ function Timeline({ entries }: { entries: TimelineEntry[] }) {
                 return (
                     <div key={i} className="flex gap-4 pb-6 last:pb-0 relative">
                         {i < entries.length - 1 && (
-                            <div className={`absolute left-[15px] top-8 w-0.5 h-full -z-0 ${isPast ? 'bg-primary' : 'bg-surface-container-high'}`} />
+                            <div className={`absolute left-[15px] top-8 w-0.5 h-full -z-0 ${isPast ? 'bg-primary' : 'bg-gris-surface'}`} />
                         )}
                         <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                            isActive ? 'bg-primary text-white shadow-md scale-110' :
-                            isPast ? 'bg-primary-fixed text-primary' : 'bg-surface-container-high text-on-surface-variant'
+                            isActive ? 'bg-primary text-white shadow-xl scale-110' :
+                            isPast ? 'bg-white text-primary' : 'bg-gris-surface text-on-surface-variant'
                         } transition-all`}>
                             <Icon size={14} />
                         </div>
                         <div className="flex-1 min-w-0 pt-1">
-                            <p className={`text-sm font-bold ${isActive ? 'text-primary' : 'text-on-surface'}`}>{e.label}</p>
+                            <p className={`text-sm font-bold ${isActive ? 'text-primary' : 'text-slate-dark'}`}>{e.label}</p>
                             <p className="text-xs text-on-surface-variant mt-0.5">
                                 {formatDate(e.date)}
                                 {e.location && ` · ${e.location}`}
@@ -97,10 +97,10 @@ export default function Track({ colis }: Props) {
     return (
         <div className="max-w-[720px] mx-auto px-4 md:px-6 py-10">
             <div className="mb-8 text-center">
-                <div className="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mx-auto mb-4">
                     <Package size={26} className="text-primary" />
                 </div>
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-1">Suivre un Colis</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-1">Suivre un Colis</h1>
                 <p className="text-on-surface-variant text-sm">Entrez le numéro de suivi pour connaître l'état de votre colis</p>
             </div>
 
@@ -110,12 +110,12 @@ export default function Track({ colis }: Props) {
                     value={data.tracking_number}
                     onChange={(e) => setData('tracking_number', e.target.value)}
                     placeholder="COL-20250525-XXXXXX"
-                    className="flex-1 px-4 py-3 bg-white rounded-xl text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:border-primary focus:ring-2 focus:ring-primary/15 outline-none transition-all font-mono"
+                    className="flex-1 px-4 py-3 bg-white rounded-xl text-sm text-slate-dark placeholder:text-on-surface-variant/60 focus:border-primary focus:ring-2 focus:ring-primary/15 outline-none transition-all font-mono"
                 />
                 <button
                     type="submit"
                     disabled={processing || !data.tracking_number}
-                    className="bg-gradient-to-br from-primary to-primary-container hover:from-primary hover:to-primary text-white px-5 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-colors shadow-ambient disabled:opacity-50"
+                    className="bg-primary hover:bg-kinetic-red-hover text-white px-5 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-colors shadow-xl disabled:opacity-50"
                 >
                     {processing ? <Loader2 size={16} className="animate-spin" /> : <Search size={16} />}
                     Suivre
@@ -125,11 +125,11 @@ export default function Track({ colis }: Props) {
             {colis && (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
                     {/* Header */}
-                    <div className="bg-white rounded-2xl shadow-ambient overflow-hidden">
+                    <div className="bg-white rounded-xl shadow-xl overflow-hidden">
                         <div className="bg-primary px-6 py-4 text-white">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-xs font-semibold uppercase tracking-wider text-on-primary-container mb-1">Numéro de suivi</p>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-1">Numéro de suivi</p>
                                     <p className="font-mono text-lg font-black tracking-wider">{colis.tracking_number}</p>
                                 </div>
                                 <StatusBadge status={colis.status} />
@@ -148,19 +148,19 @@ export default function Track({ colis }: Props) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Expéditeur</p>
-                                    <p className="font-semibold text-on-surface text-sm">{colis.expediteur_name}</p>
+                                    <p className="font-semibold text-slate-dark text-sm">{colis.expediteur_name}</p>
                                     <p className="text-xs text-on-surface-variant">{colis.expediteur_phone}</p>
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Destinataire</p>
-                                    <p className="font-semibold text-on-surface text-sm">{colis.destinataire_name}</p>
+                                    <p className="font-semibold text-slate-dark text-sm">{colis.destinataire_name}</p>
                                     <p className="text-xs text-on-surface-variant">{colis.destinataire_phone}</p>
                                 </div>
                             </div>
 
                             {colis.destination_address && (
                                 <div className="text-sm text-on-surface-variant">
-                                    <span className="font-semibold text-on-surface">Adresse livraison :</span> {colis.destination_address}
+                                    <span className="font-semibold text-slate-dark">Adresse livraison :</span> {colis.destination_address}
                                 </div>
                             )}
 
@@ -173,7 +173,7 @@ export default function Track({ colis }: Props) {
                                 ].map(({ label, val }) => (
                                     <div key={label}>
                                         <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-0.5">{label}</p>
-                                        <p className="text-sm font-semibold text-on-surface">{val}</p>
+                                        <p className="text-sm font-semibold text-slate-dark">{val}</p>
                                     </div>
                                 ))}
                             </div>
@@ -181,16 +181,16 @@ export default function Track({ colis }: Props) {
                             {colis.description && (
                                 <div>
                                     <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">Description</p>
-                                    <p className="text-sm text-on-surface">{colis.description}</p>
+                                    <p className="text-sm text-slate-dark">{colis.description}</p>
                                 </div>
                             )}
 
                             {colis.expedition_date && (
-                                <div className="bg-surface-container-low rounded-xl p-4 flex items-center gap-3">
-                                    <div className="w-8 h-8 bg-primary-fixed rounded-lg flex items-center justify-center">
+                                <div className="bg-gris-surface rounded-xl p-4 flex items-center gap-3">
+                                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                                         <Package size={14} className="text-primary" />
                                     </div>
-                                    <p className="text-sm font-semibold text-on-surface">Expédié le {formatDate(colis.expedition_date)}</p>
+                                    <p className="text-sm font-semibold text-slate-dark">Expédié le {formatDate(colis.expedition_date)}</p>
                                 </div>
                             )}
 
@@ -207,8 +207,8 @@ export default function Track({ colis }: Props) {
 
                     {/* Timeline */}
                     {hasTimeline && (
-                        <div className="bg-white rounded-2xl shadow-ambient p-6">
-                            <h2 className="font-bold text-sm text-on-surface mb-5 flex items-center gap-2">
+                        <div className="bg-white rounded-xl shadow-xl p-6">
+                            <h2 className="font-bold text-sm text-slate-dark mb-5 flex items-center gap-2">
                                 <Navigation size={14} className="text-primary" /> Suivi en temps réel
                             </h2>
                             <Timeline entries={colis.timeline} />
@@ -217,12 +217,12 @@ export default function Track({ colis }: Props) {
 
                     {/* Photos */}
                     {hasPhotos && (
-                        <div className="bg-white rounded-2xl shadow-ambient p-6">
-                            <h2 className="font-bold text-sm text-on-surface mb-4">Photos du colis</h2>
+                        <div className="bg-white rounded-xl shadow-xl p-6">
+                            <h2 className="font-bold text-sm text-slate-dark mb-4">Photos du colis</h2>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                 {colis.photos.map((url, i) => (
                                     <a key={i} href={url} target="_blank" rel="noopener noreferrer"
-                                        className="aspect-square rounded-xl overflow-hidden bg-surface-container-low group"
+                                        className="aspect-square rounded-xl overflow-hidden bg-gris-surface group"
                                     >
                                         <img src={url} alt={`Photo ${i + 1}`}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

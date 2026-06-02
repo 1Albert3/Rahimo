@@ -18,20 +18,20 @@ export default function Error({ status }: Props) {
     return (
         <div className="min-h-screen flex items-center justify-center bg-background px-4">
             <div className="text-center max-w-md">
-                <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
                     <Icon size={36} className="text-primary" />
                 </div>
-                <h1 className="text-6xl font-black text-on-surface mb-2">{status}</h1>
-                <h2 className="text-2xl font-bold text-on-surface mb-3">{page.title}</h2>
+                <h1 className="text-6xl font-black text-slate-dark mb-2">{status}</h1>
+                <h2 className="text-2xl font-bold text-slate-dark mb-3">{page.title}</h2>
                 <p className="text-on-surface-variant mb-8 leading-relaxed">{page.message}</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link href={route('welcome')}
-                        className="bg-primary text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-primary-hover transition-colors shadow-ambient"
+                        className="bg-primary text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-primary-hover transition-colors shadow-xl"
                     >
                         <Home size={16} /> Accueil
                     </Link>
                     <Link href={route('trips.search')}
-                        className="border text-on-surface px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors"
+                        className="border text-slate-dark px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-gris-surface transition-colors"
                     >
                         <Search size={16} /> Rechercher un voyage
                     </Link>

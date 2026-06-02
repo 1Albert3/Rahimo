@@ -57,35 +57,35 @@ export default function Hebergement({ accommodations, stats }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Hébergement</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Gestion des chambres et réservations</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Hébergement</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Gestion des chambres et réservations</p>
                 </div>
                 <button onClick={() => setShowForm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-semibold transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl text-sm font-semibold transition-all"
                 ><Plus size={16} /> Nouvelle réservation</button>
             </div>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4" variants={stagger} initial="initial" animate="animate">
                 {ST.map((s) => (
                     <motion.div key={s.label} variants={fadeUp}
-                        className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3"
+                        className="bg-white rounded-xl border border-outline shadow-sm p-4 flex items-center gap-3"
                     >
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                             <s.icon size={18} className={s.color} />
                         </div>
                         <div>
                             <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </motion.div>
                 ))}
             </motion.div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto min-w-[600px] lg:min-w-0">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className=" text-admin-muted text-xs uppercase tracking-wider">
+                            <tr className=" text-on-surface-variant text-xs uppercase tracking-wider">
                                 <th className="text-left p-4">Client</th>
                                 <th className="text-left p-4">Chambre</th>
                                 <th className="text-left p-4">Check-in</th>
@@ -97,42 +97,46 @@ export default function Hebergement({ accommodations, stats }: Props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {accommodations.map((a) => (
-                                <tr key={a.id} className=" hover:bg-white/5 transition-colors">
+                            {accommodations.map((a) => {
+                                const s = a.status;
+                                const borderCls = s === 'reserve' ? 'border-l-primary' : s === 'en_cours' ? 'border-l-status-yellow-ring' : s === 'termine' ? 'border-l-status-green-ring' : 'border-l-outline';
+                                return (
+                                <tr key={a.id} className={` hover:bg-gris-surface transition-colors border-l-4 ${borderCls}`}>
                                     <td className="p-4">
-                                        <p className="font-semibold text-white">{a.guest_name}</p>
-                                        <p className="text-admin-muted text-xs">{a.guest_phone}</p>
+                                        <p className="font-semibold text-slate-dark">{a.guest_name}</p>
+                                        <p className="text-on-surface-variant text-xs">{a.guest_phone}</p>
                                     </td>
                                     <td className="p-4">
-                                        <span className="flex items-center gap-1 text-admin-muted">
+                                        <span className="flex items-center gap-1 text-on-surface-variant">
                                             <Bed size={14} />
                                             {ROOM_LABELS[a.room_type] ?? a.room_type}
                                             {a.room_number && <> — #{a.room_number}</>}
                                         </span>
                                     </td>
-                                    <td className="p-4 text-admin-muted">{a.check_in}</td>
-                                    <td className="p-4 text-admin-muted">{a.check_out ?? '—'}</td>
-                                    <td className="p-4 text-right text-white">{a.amount_per_night.toLocaleString()} FCFA</td>
-                                    <td className="p-4 text-right text-white font-semibold">{a.total_amount.toLocaleString()} FCFA</td>
+                                    <td className="p-4 text-on-surface-variant">{a.check_in}</td>
+                                    <td className="p-4 text-on-surface-variant">{a.check_out ?? '—'}</td>
+                                    <td className="p-4 text-right text-slate-dark">{a.amount_per_night.toLocaleString()} FCFA</td>
+                                    <td className="p-4 text-right text-slate-dark font-semibold">{a.total_amount.toLocaleString()} FCFA</td>
                                     <td className="p-4 text-center"><StatusBadge status={a.status} /></td>
                                     <td className="p-4 text-center">
                                         <div className="flex items-center justify-center gap-2">
                                             {a.status === 'reserve' && (
                                                 <button onClick={() => router.post(route('admin.services.hebergement.checkin', a.id))}
-                                                    className="px-3 py-1.5 bg-status-blue-text/20 text-status-blue-text rounded-lg text-xs font-semibold hover:bg-status-blue-text/30 transition-all"
+                                                    className="px-3 py-1.5 bg-status-blue-text/20 text-status-blue-text rounded-xl text-xs font-semibold hover:bg-status-blue-text/30 transition-all"
                                                 ><DoorOpen size={12} /> Check-in</button>
                                             )}
                                             {a.status === 'en_cours' && (
                                                 <button onClick={() => router.post(route('admin.services.hebergement.checkout', a.id))}
-                                                    className="px-3 py-1.5 bg-status-yellow-text/20 text-status-yellow-text rounded-lg text-xs font-semibold hover:bg-status-yellow-text/30 transition-all"
+                                                    className="px-3 py-1.5 bg-status-yellow-text/20 text-status-yellow-text rounded-xl text-xs font-semibold hover:bg-status-yellow-text/30 transition-all"
                                                 ><DoorClosed size={12} /> Check-out</button>
                                             )}
                                         </div>
                                     </td>
                                 </tr>
-                            ))}
+                                );
+                            })}
                             {accommodations.length === 0 && (
-                                <tr><td colSpan={8} className="p-8 text-center text-admin-muted">Aucune réservation</td></tr>
+                                <tr><td colSpan={8} className="p-8 text-center text-on-surface-variant">Aucune réservation</td></tr>
                             )}
                         </tbody>
                     </table>
@@ -141,30 +145,30 @@ export default function Hebergement({ accommodations, stats }: Props) {
 
             {showForm && (
                 <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => setShowForm(false)}>
-                    <div className="bg-admin-card rounded-2xl border border-white/10 p-6 w-full max-w-lg mx-2 sm:mx-4" onClick={e => e.stopPropagation()}>
+                    <div className="bg-white rounded-xl border border-outline shadow-sm p-6 w-full max-w-lg mx-2 sm:mx-4" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-bold text-white">Nouvelle réservation</h2>
-                            <button onClick={() => setShowForm(false)} className="text-admin-muted hover:text-white transition-colors"><X size={20} /></button>
+                            <h2 className="text-lg font-bold text-slate-dark">Nouvelle réservation</h2>
+                            <button onClick={() => setShowForm(false)} className="text-on-surface-variant hover:text-slate-dark transition-colors"><X size={20} /></button>
                         </div>
                         <form onSubmit={submit} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Nom complet *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Nom complet *</label>
                                     <input value={data.guest_name} onChange={e => setData('guest_name', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                     {errors.guest_name && <p className="text-status-red-text text-xs mt-1">{errors.guest_name}</p>}
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Téléphone *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Téléphone *</label>
                                     <input value={data.guest_phone} onChange={e => setData('guest_phone', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Type chambre *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Type chambre *</label>
                                     <select value={data.room_type} onChange={e => setData('room_type', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary"
                                     >
                                         <option value="standard">Standard</option>
                                         <option value="vip">VIP</option>
@@ -172,42 +176,42 @@ export default function Hebergement({ accommodations, stats }: Props) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">N° chambre</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">N° chambre</label>
                                     <input value={data.room_number} onChange={e => setData('room_number', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Check-in *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Check-in *</label>
                                     <input type="datetime-local" value={data.check_in} onChange={e => setData('check_in', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Check-out</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Check-out</label>
                                     <input type="datetime-local" value={data.check_out} onChange={e => setData('check_out', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Prix/nuit (FCFA) *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Prix/nuit (FCFA) *</label>
                                     <input type="number" value={data.amount_per_night} onChange={e => setData('amount_per_night', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Total (FCFA) *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Total (FCFA) *</label>
                                     <input type="number" value={data.total_amount} onChange={e => setData('total_amount', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div>
-                                <label className="text-xs text-admin-muted mb-1 block">Notes</label>
+                                <label className="text-xs text-on-surface-variant mb-1 block">Notes</label>
                                 <textarea value={data.notes} onChange={e => setData('notes', e.target.value)} rows={2}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                    className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                             </div>
                             <button type="submit" disabled={processing}
-                                className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-semibold text-sm transition-all disabled:opacity-50"
+                                className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-semibold text-sm transition-all disabled:opacity-50"
                             >{processing ? 'Enregistrement...' : 'Enregistrer'}</button>
                         </form>
                     </div>

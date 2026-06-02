@@ -94,20 +94,20 @@ export default function Utilisateurs({ users }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-3">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Gestion des Utilisateurs</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Créer, modifier et gérer les comptes utilisateurs</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Gestion des Utilisateurs</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Créer, modifier et gérer les comptes utilisateurs</p>
                 </div>
                 <button onClick={openCreate}
-                    className="flex items-center gap-2 bg-primary text-on-primary text-sm font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-all"
+                    className="flex items-center gap-2 bg-primary text-on-primary text-sm font-bold px-4 py-2 rounded-xl hover:opacity-90 transition-all"
                 >
                     <Plus size={15} /> Nouvel utilisateur
                 </button>
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Nom', 'Email', 'Téléphone', 'Rôle', 'Statut', 'Créé le', ''].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold whitespace-nowrap">{h}</th>
@@ -116,42 +116,46 @@ export default function Utilisateurs({ users }: Props) {
                         </thead>
                         <motion.tbody variants={stagger} initial="initial" animate="animate">
                             {users.data.length === 0 ? (
-                                <tr><td colSpan={7} className="text-center py-8 text-admin-muted text-sm">Aucun utilisateur.</td></tr>
+                                <tr><td colSpan={7} className="text-center py-8 text-on-surface-variant text-sm">Aucun utilisateur.</td></tr>
                             ) : (
-                                users.data.map((u) => (
-                                    <motion.tr key={u.id} variants={fadeUp} className="hover:bg-white/5 transition-colors">
+                                users.data.map((u) => {
+                                    const borderCls = u.is_active ? 'border-l-status-green-ring' : 'border-l-status-red-ring';
+                                    return (
+                                    <motion.tr key={u.id} variants={fadeUp}
+                                        className={`hover:bg-gris-surface transition-colors border-l-4 ${borderCls}`}
+                                    >
                                         <td className="px-4 py-3">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
-                                                    <User size={14} className="text-admin-muted" />
+                                                <div className="w-8 h-8 rounded-full bg-gris-surface flex items-center justify-center">
+                                                    <User size={14} className="text-on-surface-variant" />
                                                 </div>
                                                 <div>
-                                                    <p className="font-semibold text-white text-sm">{u.name}</p>
-                                                    {u.city && <p className="text-[10px] text-admin-muted">{u.city}</p>}
+                                                    <p className="font-semibold text-slate-dark text-sm">{u.name}</p>
+                                                    {u.city && <p className="text-[10px] text-on-surface-variant">{u.city}</p>}
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs">{u.email}</td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs font-mono">{u.phone ?? '—'}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs">{u.email}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs font-mono">{u.phone ?? '—'}</td>
                                         <td className="px-4 py-3">
-                                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/10 text-admin-muted">
+                                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-gris-surface text-on-surface-variant">
                                                 {ROLE_LABELS[u.role] ?? u.role}
                                             </span>
                                         </td>
                                         <td className="px-4 py-3">
                                             <StatusBadge status={u.is_active ? 'active' : 'inactive'} />
                                         </td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs">{u.created_at}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs">{u.created_at}</td>
                                         <td className="px-4 py-3">
                                             <div className="flex items-center gap-1">
                                                 <button onClick={() => openEdit(u)}
-                                                    className="p-1.5 rounded-lg text-admin-muted hover:text-white hover:bg-white/10 transition-all"
+                                                    className="p-1.5 rounded-xl text-on-surface-variant hover:text-slate-dark hover:bg-gris-surface transition-all"
                                                     title="Modifier"
                                                 >
                                                     <Pencil size={14} />
                                                 </button>
                                                 <button onClick={() => confirmDeactivate(u)}
-                                                    className="p-1.5 rounded-lg text-admin-muted hover:text-status-red-text hover:bg-status-red-bg/20 transition-all"
+                                                    className="p-1.5 rounded-xl text-on-surface-variant hover:text-status-red-text hover:bg-status-red-bg/20 transition-all"
                                                     title="Désactiver"
                                                 >
                                                     <Trash2 size={14} />
@@ -159,13 +163,14 @@ export default function Utilisateurs({ users }: Props) {
                                             </div>
                                         </td>
                                     </motion.tr>
-                                ))
+                                    );
+                                })
                             )}
                         </motion.tbody>
                     </table>
                 </div>
                 {users.last_page > 1 && (
-                    <div className="p-4 border-t border-white/5">
+                    <div className="p-4 border-t border-outline">
                         <Pagination data={users} />
                     </div>
                 )}
@@ -174,62 +179,62 @@ export default function Utilisateurs({ users }: Props) {
             {/* Modal */}
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4" onClick={() => setShowModal(false)}>
-                    <div className="bg-admin-card rounded-2xl border border-white/10 p-6 w-full max-w-lg shadow-2xl" onClick={e => e.stopPropagation()}>
+                    <div className="bg-white rounded-xl border border-outline p-6 w-full max-w-lg shadow-xl" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h3 className="text-lg font-bold text-white">
+                            <h3 className="text-lg font-bold text-slate-dark">
                                 {mode === 'create' ? 'Nouvel utilisateur' : 'Modifier l\'utilisateur'}
                             </h3>
-                            <button onClick={() => setShowModal(false)} className="p-1 text-admin-muted hover:text-white">
+                            <button onClick={() => setShowModal(false)} className="p-1 text-on-surface-variant hover:text-slate-dark">
                                 <X size={18} />
                             </button>
                         </div>
 
                         <form onSubmit={submit} className="space-y-4">
                             <div>
-                                <label className="block text-xs font-semibold text-admin-muted mb-1">Nom complet *</label>
+                                <label className="block text-xs font-semibold text-on-surface-variant mb-1">Nom complet *</label>
                                 <input type="text" value={data.name} onChange={e => setData('name', e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                    className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                     placeholder="Jean Dupont" />
                                 {errors.name && <p className="text-status-red-text text-xs mt-1">{errors.name}</p>}
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Email *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Email *</label>
                                     <input type="email" value={data.email} onChange={e => setData('email', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder="jean@exemple.com" />
                                     {errors.email && <p className="text-status-red-text text-xs mt-1">{errors.email}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Téléphone</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Téléphone</label>
                                     <input type="text" value={data.phone} onChange={e => setData('phone', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder="+226 70 00 00 00" />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Mot de passe {mode === 'edit' && <span className="text-admin-muted font-normal">(vide = inchangé)</span>} *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Mot de passe {mode === 'edit' && <span className="text-on-surface-variant font-normal">(vide = inchangé)</span>} *</label>
                                     <input type="password" value={data.password} onChange={e => setData('password', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder={mode === 'edit' ? 'Laisser vide' : 'Min. 8 caractères'} />
                                     {errors.password && <p className="text-status-red-text text-xs mt-1">{errors.password}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Ville</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Ville</label>
                                     <input type="text" value={data.city} onChange={e => setData('city', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-admin-muted focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark placeholder-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         placeholder="Ouagadougou" />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Rôle *</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Rôle *</label>
                                     <select value={data.role} onChange={e => setData('role', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-sm text-slate-dark focus:outline-none focus:border-primary transition-colors"
                                     >
                                         {Object.entries(ROLE_LABELS).map(([k, v]) => (
                                             <option key={k} value={k}>{v}</option>
@@ -238,12 +243,12 @@ export default function Utilisateurs({ users }: Props) {
                                     {errors.role && <p className="text-status-red-text text-xs mt-1">{errors.role}</p>}
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-admin-muted mb-1">Statut</label>
+                                    <label className="block text-xs font-semibold text-on-surface-variant mb-1">Statut</label>
                                     <div className="flex items-center gap-3 h-full pt-2">
                                         <label className="flex items-center gap-2 cursor-pointer">
                                             <input type="checkbox" checked={data.is_active} onChange={e => setData('is_active', e.target.checked)}
                                                 className="accent-primary" />
-                                            <span className="text-sm text-admin-muted">Actif</span>
+                                            <span className="text-sm text-on-surface-variant">Actif</span>
                                         </label>
                                     </div>
                                 </div>
@@ -251,7 +256,7 @@ export default function Utilisateurs({ users }: Props) {
 
                             <div className="flex gap-3 pt-2">
                                 <button type="button" onClick={() => setShowModal(false)}
-                                    className="flex-1 py-2.5 rounded-xl border border-white/10 text-admin-muted hover:text-white hover:bg-white/5 text-sm font-semibold transition-all"
+                                    className="flex-1 py-2.5 rounded-xl border border-outline text-on-surface-variant hover:text-slate-dark hover:bg-gris-surface text-sm font-semibold transition-all"
                                 >Annuler</button>
                                 <button type="submit" disabled={processing}
                                     className="flex-1 py-2.5 rounded-xl bg-primary text-on-primary text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50"

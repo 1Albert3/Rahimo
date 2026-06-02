@@ -53,7 +53,7 @@ export default function Reclamations({ myReclamations }: Props) {
                 <div className="w-16 h-16 bg-status-green-bg rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} className="text-status-green-text" />
                 </div>
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-2">Réclamation envoyée !</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-2">Réclamation envoyée !</h1>
                 <p className="text-on-surface-variant text-sm mb-6">Nous traitons votre demande dans les plus brefs délais.</p>
                 <Link href={route('services.index')} className="text-primary font-semibold hover:underline text-sm">Retour aux services</Link>
             </div>
@@ -62,23 +62,23 @@ export default function Reclamations({ myReclamations }: Props) {
 
     return (
         <div className="max-w-2xl mx-auto px-4 md:px-6 py-10">
-            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-on-surface mb-6 transition-colors">
+            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-slate-dark mb-6 transition-colors">
                 <ArrowLeft size={14} /> Services
             </Link>
 
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-status-red-text flex items-center justify-center">
                     <FileText size={20} className="text-white" />
                 </div>
                 <div>
-                    <h1 className="text-xl font-black text-on-surface tracking-tight">Réclamations</h1>
+                    <h1 className="text-xl font-black text-slate-dark tracking-tight">Réclamations</h1>
                     <p className="text-xs text-on-surface-variant">Soumettre une réclamation ou suivre son traitement</p>
                 </div>
             </div>
 
             {/* Rechercher mes réclamations */}
-            <div className="bg-white rounded-2xl shadow-ambient p-5 mb-6">
-                <h2 className="font-bold text-sm text-on-surface mb-3 flex items-center gap-2">
+            <div className="bg-white rounded-xl shadow-xl p-5 mb-6">
+                <h2 className="font-bold text-sm text-slate-dark mb-3 flex items-center gap-2">
                     <Search size={14} /> Suivre mes réclamations
                 </h2>
                 <div className="flex gap-2">
@@ -87,26 +87,30 @@ export default function Reclamations({ myReclamations }: Props) {
                         className="flex-1 px-3 py-2.5 bg-surface rounded-xl text-sm focus:border-primary focus:ring-2 focus:ring-primary/15 outline-none transition-all"
                     />
                     <button onClick={searchReclamations}
-                        className="px-4 py-2.5 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-semibold text-sm"
+                        className="px-4 py-2.5 bg-primary text-white rounded-xl font-semibold text-sm"
                     >Consulter</button>
                 </div>
                 {myReclamations.length > 0 && (
                     <div className="mt-4 space-y-2">
-                        {myReclamations.map(r => (
-                            <div key={r.id} className="bg-surface-container-low rounded-xl p-3">
+                        {myReclamations.map(r => {
+                            const rs = r.statut;
+                            const rBorderCls = rs === 'resolue' ? 'border-l-status-green-ring' : rs === 'en_cours' ? 'border-l-status-yellow-ring' : rs === 'fermee' ? 'border-l-outline' : 'border-l-status-red-ring';
+                            return (
+                            <div key={r.id} className={`bg-gris-surface rounded-xl p-3 border-l-4 ${rBorderCls}`}>
                                 <div className="flex items-center gap-2 mb-1">
                                     <span className="font-mono text-xs font-bold text-primary">{r.code}</span>
                                     <StatusBadge status={r.statut} />
                                 </div>
                                 <p className="text-xs text-on-surface-variant">{r.type} · {r.created_at}</p>
-                                <p className="text-sm text-on-surface mt-1">{r.description}</p>
+                                <p className="text-sm text-slate-dark mt-1">{r.description}</p>
                                 {r.response && (
-                                    <div className="mt-2 bg-primary-fixed/50 rounded-lg p-2 text-xs">
+                                    <div className="mt-2 bg-white/50 rounded-lg p-2 text-xs">
                                         <span className="font-bold text-primary">Réponse :</span> {r.response}
                                     </div>
                                 )}
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 )}
                 {myReclamations.length === 0 && phoneSearch && (
@@ -116,9 +120,9 @@ export default function Reclamations({ myReclamations }: Props) {
 
             {/* Nouvelle réclamation */}
             <motion.form onSubmit={submit} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl shadow-ambient p-6 space-y-4"
+                className="bg-white rounded-xl shadow-xl p-6 space-y-4"
             >
-                <h2 className="font-bold text-sm text-on-surface flex items-center gap-2">
+                <h2 className="font-bold text-sm text-slate-dark flex items-center gap-2">
                     <MessageSquare size={14} /> Nouvelle réclamation
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -154,7 +158,7 @@ export default function Reclamations({ myReclamations }: Props) {
                     />
                 </div>
                 <button type="submit" disabled={processing}
-                    className="w-full py-3 bg-gradient-to-br from-red-500 to-red-600 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-ambient"
+                    className="w-full py-3 bg-status-red-text text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-xl"
                 >{processing ? 'Envoi...' : 'Envoyer ma réclamation'}</button>
             </motion.form>
         </div>

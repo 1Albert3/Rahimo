@@ -28,8 +28,8 @@ export default function Pointage({ pointage, stats }: Props) {
     return (
         <div className="w-full max-w-7xl space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-white">Pointage</h1>
-                <p className="text-admin-muted text-sm mt-0.5">{new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                <h1 className="text-xl font-bold text-slate-dark">Pointage</h1>
+                <p className="text-on-surface-variant text-sm mt-0.5">{new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
             </div>
 
             <div className="grid grid-cols-4 gap-4">
@@ -39,17 +39,17 @@ export default function Pointage({ pointage, stats }: Props) {
                     { label: 'Retards', val: stats.late, color: 'text-status-yellow-text', bg: 'bg-status-yellow-bg/30' },
                     { label: 'Congés', val: stats.leave, color: 'text-status-blue-text', bg: 'bg-status-blue-bg/30' },
                 ].map(s => (
-                    <div key={s.label} className={`${s.bg} rounded-xl border border-white/5 p-4 text-center`}>
+                    <div key={s.label} className={`${s.bg} rounded-xl border border-outline p-4 text-center`}>
                         <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                        <p className="text-xs text-admin-muted">{s.label}</p>
+                        <p className="text-xs text-on-surface-variant">{s.label}</p>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Employé', 'Rôle', 'Arrivée', 'Départ', 'Statut', 'Notes', 'Action'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -58,11 +58,11 @@ export default function Pointage({ pointage, stats }: Props) {
                         </thead>
                         <tbody>
                             {pointage.map(p => (
-                                <tr key={p.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 font-semibold text-white">{p.name}</td>
-                                    <td className="px-4 py-3 text-admin-muted capitalize">{p.role}</td>
-                                    <td className="px-4 py-3 font-mono text-admin-muted">{p.clock_in ?? '—'}</td>
-                                    <td className="px-4 py-3 font-mono text-admin-muted">{p.clock_out ?? '—'}</td>
+                                <tr key={p.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 font-semibold text-slate-dark">{p.name}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant capitalize">{p.role}</td>
+                                    <td className="px-4 py-3 font-mono text-on-surface-variant">{p.clock_in ?? '—'}</td>
+                                    <td className="px-4 py-3 font-mono text-on-surface-variant">{p.clock_out ?? '—'}</td>
                                     <td className="px-4 py-3">
                                         <span className={`text-xs font-bold px-2 py-1 rounded-lg ${
                                             p.status === 'present' ? 'bg-status-green-bg text-status-green-text' :
@@ -71,10 +71,10 @@ export default function Pointage({ pointage, stats }: Props) {
                                             'bg-status-blue-bg text-status-blue-text'
                                         }`}>{STATUS_LABELS[p.status] ?? p.status}</span>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted text-xs max-w-[150px] truncate">{p.notes ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant text-xs max-w-[150px] truncate">{p.notes ?? '—'}</td>
                                     <td className="px-4 py-3">
                                         <select onChange={e => { if (e.target.value) pointer(p.id, e.target.value); }} defaultValue=""
-                                            className="bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-xs text-admin-muted focus:outline-none focus:border-primary"
+                                            className="bg-gris-surface border border-outline rounded-xl px-2 py-1 text-xs text-on-surface-variant focus:outline-none focus:border-primary transition-colors"
                                         >
                                             <option value="" disabled>Action...</option>
                                             <option value="present">Présent</option>

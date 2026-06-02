@@ -33,12 +33,12 @@ export default function Login({
             <Head title="Connexion" />
 
             <div className="min-h-[calc(100vh-16rem)] flex items-center justify-center px-4 py-8 sm:py-12">
-                <div className="w-full max-w-md bg-surface-container-lowest rounded-2xl shadow-ambient p-6 sm:p-8">
+                <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-6 sm:p-8">
                     <div className="text-center mb-8">
-                        <div className="w-14 h-14 bg-gradient-to-br from-primary to-primary-container rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mx-auto mb-4">
                             <Bus size={28} className="text-white" />
                         </div>
-                        <h1 className="text-xl font-black text-on-surface">Rahimo Transport</h1>
+                        <h1 className="text-xl font-black text-slate-dark">Rahimo Transport</h1>
                         <p className="text-sm text-on-surface-variant mt-1">Connectez-vous à votre espace</p>
                     </div>
 

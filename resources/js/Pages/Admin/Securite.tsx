@@ -31,8 +31,8 @@ export default function Securite({ logs, stats }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Sécurité & Activité</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Journal des actions et connexions</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Sécurité & Activité</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Journal des actions et connexions</p>
                 </div>
                 <div className="flex items-center gap-2">
                     <Shield size={16} className="text-status-green-text" />
@@ -43,28 +43,28 @@ export default function Securite({ logs, stats }: Props) {
             <motion.div className="grid grid-cols-2 sm:grid-cols-3 gap-4" variants={stagger} initial="initial" animate="animate">
                 {ST.map((s) => (
                     <motion.div key={s.label} variants={fadeUp}
-                        className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3"
+                        className="bg-white rounded-xl border border-outline p-4 flex items-center gap-3"
                     >
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                             <s.icon size={18} className={s.color} />
                         </div>
                         <div>
                             <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </motion.div>
                 ))}
             </motion.div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline overflow-hidden">
                 <div className="p-5 ">
-                    <h3 className="font-semibold text-white flex items-center gap-2">
-                        <Activity size={16} className="text-primary-container" /> Journal d'activité (200 dernières actions)
+                    <h3 className="font-semibold text-slate-dark flex items-center gap-2">
+                        <Activity size={16} className="text-primary" /> Journal d'activité (200 dernières actions)
                     </h3>
                 </div>
                 <div className="overflow-x-auto min-w-[600px] lg:min-w-0">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Utilisateur', 'Action', 'Description', 'IP', 'Date'].map((h) => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -73,18 +73,18 @@ export default function Securite({ logs, stats }: Props) {
                         </thead>
                         <tbody className=" font-mono text-xs">
                             {logs.map((l) => (
-                                <tr key={l.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 text-admin-text font-semibold">{l.user_name}</td>
+                                <tr key={l.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 text-slate-dark font-semibold">{l.user_name}</td>
                                     <td className="px-4 py-3">
-                                        <span className="bg-white/10 px-2 py-0.5 rounded text-admin-muted">{l.action}</span>
+                                        <span className="bg-gris-surface px-2 py-0.5 rounded text-on-surface-variant">{l.action}</span>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted max-w-[300px] truncate">{l.description ?? '—'}</td>
-                                    <td className="px-4 py-3 text-admin-muted">{l.ip_address ?? '—'}</td>
-                                    <td className="px-4 py-3 text-admin-muted">{l.created_at}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant max-w-[300px] truncate">{l.description ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{l.ip_address ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{l.created_at}</td>
                                 </tr>
                             ))}
                             {logs.length === 0 && (
-                                <tr><td colSpan={5} className="p-8 text-center text-admin-muted">Aucune activité enregistrée</td></tr>
+                                <tr><td colSpan={5} className="p-8 text-center text-on-surface-variant">Aucune activité enregistrée</td></tr>
                             )}
                         </tbody>
                     </table>

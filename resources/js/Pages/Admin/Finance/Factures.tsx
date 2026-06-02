@@ -40,11 +40,11 @@ export default function Factures({ factures, stats }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Factures</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Gestion des factures clients et fournisseurs</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Factures</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Gestion des factures clients et fournisseurs</p>
                 </div>
                 <button onClick={() => setShowForm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-semibold"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl text-sm font-semibold"
                 ><Plus size={16} /> Nouvelle facture</button>
             </div>
 
@@ -54,17 +54,17 @@ export default function Factures({ factures, stats }: Props) {
                     { label: 'Encaissé total', val: formatFCFA(stats.total_encaisse), color: 'text-status-green-text' },
                     { label: 'Factures impayées', val: stats.nb_impayees, color: 'text-status-yellow-text' },
                 ].map(s => (
-                    <div key={s.label} className="bg-admin-card rounded-xl border border-white/5 p-4">
-                        <p className="text-xs text-admin-muted">{s.label}</p>
+                    <div key={s.label} className="bg-white rounded-xl border border-outline shadow-sm p-4">
+                        <p className="text-xs text-on-surface-variant">{s.label}</p>
                         <p className={`text-2xl font-bold font-mono ${s.color}`}>{s.val}</p>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['N° Facture', 'Client', 'Date', 'Échéance', 'Montant', 'Statut', 'Action'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -73,17 +73,17 @@ export default function Factures({ factures, stats }: Props) {
                         </thead>
                         <tbody>
                             {factures.map((f: any) => (
-                                <tr key={f.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 font-mono text-white font-semibold">{f.invoice_number}</td>
-                                    <td className="px-4 py-3 text-admin-muted">{f.client_name}</td>
-                                    <td className="px-4 py-3 text-admin-muted font-mono">{f.issue_date}</td>
-                                    <td className="px-4 py-3 text-admin-muted font-mono">{f.due_date}</td>
-                                    <td className="px-4 py-3 font-mono text-white font-bold">{formatFCFA(f.total)}</td>
+                                <tr key={f.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 font-mono text-slate-dark font-semibold">{f.invoice_number}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{f.client_name}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant font-mono">{f.issue_date}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant font-mono">{f.due_date}</td>
+                                    <td className="px-4 py-3 font-mono text-slate-dark font-bold">{formatFCFA(f.total)}</td>
                                     <td className="px-4 py-3">
                                         <span className={`text-xs font-bold px-2 py-1 rounded-lg ${
                                             f.status === 'paid' ? 'bg-status-green-bg text-status-green-text' :
                                             f.status === 'overdue' ? 'bg-status-red-bg text-status-red-text' :
-                                            f.status === 'cancelled' ? 'bg-admin-muted/20 text-admin-muted' :
+                                            f.status === 'cancelled' ? 'bg-on-surface-variant/20 text-on-surface-variant' :
                                             f.status === 'sent' ? 'bg-status-blue-bg text-status-blue-text' :
                                             'bg-status-yellow-bg text-status-yellow-text'
                                         }`}>{STATUS_LABELS[f.status] ?? f.status}</span>
@@ -105,7 +105,7 @@ export default function Factures({ factures, stats }: Props) {
                                 </tr>
                             ))}
                             {factures.length === 0 && (
-                                <tr><td colSpan={7} className="text-center py-8 text-admin-muted text-sm">Aucune facture.</td></tr>
+                                <tr><td colSpan={7} className="text-center py-8 text-on-surface-variant text-sm">Aucune facture.</td></tr>
                             )}
                         </tbody>
                     </table>
@@ -114,17 +114,17 @@ export default function Factures({ factures, stats }: Props) {
 
             {showForm && (
                 <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => setShowForm(false)}>
-                    <div className="bg-admin-card rounded-2xl border border-white/10 p-6 w-full max-w-lg mx-2" onClick={e => e.stopPropagation()}>
+                    <div className="bg-white rounded-xl border border-outline shadow-sm p-6 w-full max-w-lg mx-2" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-bold text-white">Nouvelle facture</h2>
-                            <button onClick={() => setShowForm(false)} className="text-admin-muted hover:text-white"><X size={20} /></button>
+                            <h2 className="text-lg font-bold text-slate-dark">Nouvelle facture</h2>
+                            <button onClick={() => setShowForm(false)} className="text-on-surface-variant hover:text-slate-dark"><X size={20} /></button>
                         </div>
                         <form onSubmit={submit} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Type</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Type</label>
                                     <select value={form.data.type} onChange={e => form.setData('type', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary"
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary"
                                     >
                                         <option value="sale">Vente</option>
                                         <option value="purchase">Achat</option>
@@ -133,47 +133,47 @@ export default function Factures({ factures, stats }: Props) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Client</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Client</label>
                                     <input type="text" value={form.data.client_name} onChange={e => form.setData('client_name', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" required />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" required />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Téléphone</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Téléphone</label>
                                     <input type="text" value={form.data.client_phone} onChange={e => form.setData('client_phone', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Taux TVA (%)</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Taux TVA (%)</label>
                                     <input type="number" value={form.data.tax_rate} onChange={e => form.setData('tax_rate', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Date d'émission</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Date d'émission</label>
                                     <input type="date" value={form.data.issue_date} onChange={e => form.setData('issue_date', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" required />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" required />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Date d'échéance</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Date d'échéance</label>
                                     <input type="date" value={form.data.due_date} onChange={e => form.setData('due_date', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" required />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" required />
                                 </div>
                             </div>
                             <div>
-                                <label className="text-xs text-admin-muted mb-1 block">Montant HT (FCFA)</label>
+                                <label className="text-xs text-on-surface-variant mb-1 block">Montant HT (FCFA)</label>
                                 <input type="number" value={form.data.subtotal} onChange={e => form.setData('subtotal', e.target.value)}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" required />
+                                    className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" required />
                             </div>
                             <div>
-                                <label className="text-xs text-admin-muted mb-1 block">Notes</label>
+                                <label className="text-xs text-on-surface-variant mb-1 block">Notes</label>
                                 <textarea value={form.data.notes} onChange={e => form.setData('notes', e.target.value)} rows={2}
-                                    className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                    className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                             </div>
                             <button type="submit" disabled={form.processing}
-                                className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-semibold text-sm disabled:opacity-50"
+                                className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-semibold text-sm disabled:opacity-50"
                             >{form.processing ? 'Création...' : 'Créer la facture'}</button>
                         </form>
                     </div>

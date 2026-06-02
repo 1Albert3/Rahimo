@@ -28,7 +28,7 @@ const VILLES = ['Ouagadougou','Bobo-Dioulasso','Koudougou','Banfora','Ouahigouya
 const stagger = { animate: { transition: { staggerChildren: 0.07 } } };
 const fadeUp  = { initial: { opacity: 0, y: 12 }, animate: { opacity: 1, y: 0 } };
 
-const inputCls = 'w-full px-3 py-2.5 bg-surface-container-low rounded-lg text-sm text-on-surface focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 outline-none transition-all';
+const inputCls = 'w-full px-3 py-2.5 bg-gris-surface rounded-lg text-sm text-slate-dark focus:bg-white focus:ring-2 focus:ring-primary/15 outline-none transition-all';
 
 const TYPE_LABELS: Record<string, string> = {
     vip: 'VIP Climatisé',
@@ -117,7 +117,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
     return (
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
             <form onSubmit={handleSearch}
-                className="bg-surface-container-lowest rounded-xl p-4 shadow-ambient mb-8 flex flex-wrap gap-3 items-end"
+                className="bg-white rounded-xl p-4 shadow-xl mb-8 flex flex-wrap gap-3 items-end"
             >
                 {[
                     { label: 'Départ',  key: 'depart'  as const },
@@ -141,7 +141,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                     </select>
                 </div>
                 <button type="submit"
-                    className="bg-gradient-to-br from-primary to-primary-container text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:brightness-110 transition-all flex items-center gap-2 shadow-ambient"
+                    className="bg-primary text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:brightness-110 transition-all flex items-center gap-2 shadow-xl"
                 >
                     <Filter size={16} /> Rechercher
                 </button>
@@ -149,15 +149,15 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                 <button onClick={() => setFiltersOpen(true)}
-                    className="md:hidden flex items-center gap-2 text-sm font-semibold text-primary bg-surface-container-lowest rounded-xl shadow-ambient px-4 py-3"
+                    className="md:hidden flex items-center gap-2 text-sm font-semibold text-primary bg-white rounded-xl shadow-xl px-4 py-3"
                 >
                     <SlidersHorizontal size={16} /> Filtres
                 </button>
 
                 <aside className="hidden md:block md:col-span-3">
-                    <div className="bg-surface-container-lowest rounded-xl p-5 shadow-ambient sticky top-20">
+                    <div className="bg-white rounded-xl p-5 shadow-xl sticky top-20">
                         <div className="flex items-center justify-between mb-5">
-                            <h2 className="font-semibold text-on-surface text-sm">Filtres</h2>
+                            <h2 className="font-semibold text-slate-dark text-sm">Filtres</h2>
                             <button onClick={resetFilters} className="text-xs text-primary hover:underline font-medium">Réinitialiser</button>
                         </div>
 
@@ -168,7 +168,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                                     className="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary/20"
                                 />
                                 <div>
-                                    <p className="text-sm text-on-surface group-hover:text-primary transition-colors">{TYPE_LABELS[val]}</p>
+                                    <p className="text-sm text-slate-dark group-hover:text-primary transition-colors">{TYPE_LABELS[val]}</p>
                                     <p className="text-xs text-on-surface-variant">{TYPE_SUBS[val]}</p>
                                 </div>
                             </label>
@@ -189,7 +189,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                         />
 
                         <button onClick={doSearch}
-                            className="w-full mt-5 bg-gradient-to-br from-primary to-primary-container text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:brightness-110 transition-all shadow-ambient"
+                            className="w-full mt-5 bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:brightness-110 transition-all shadow-xl"
                         >
                             Appliquer
                         </button>
@@ -205,12 +205,12 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                         >
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}
-                                className="bg-surface-container-lowest rounded-xl p-5 shadow-ambient w-[90vw] max-w-sm mx-auto"
+                                className="bg-white rounded-xl p-5 shadow-xl w-[90vw] max-w-sm mx-auto"
                                 onClick={e => e.stopPropagation()}
                             >
                                 <div className="flex items-center justify-between mb-5">
-                                    <h2 className="font-semibold text-on-surface text-sm">Filtres</h2>
-                                    <button onClick={() => setFiltersOpen(false)} className="text-on-surface-variant hover:text-on-surface"><X size={18} /></button>
+                                    <h2 className="font-semibold text-slate-dark text-sm">Filtres</h2>
+                                    <button onClick={() => setFiltersOpen(false)} className="text-on-surface-variant hover:text-slate-dark"><X size={18} /></button>
                                 </div>
 
                                 <h3 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-3">Type de bus</h3>
@@ -220,7 +220,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                                             className="mt-0.5 w-4 h-4 rounded text-primary focus:ring-primary/20"
                                         />
                                         <div>
-                                            <p className="text-sm text-on-surface group-hover:text-primary transition-colors">{TYPE_LABELS[val]}</p>
+                                            <p className="text-sm text-slate-dark group-hover:text-primary transition-colors">{TYPE_LABELS[val]}</p>
                                             <p className="text-xs text-on-surface-variant">{TYPE_SUBS[val]}</p>
                                         </div>
                                     </label>
@@ -236,7 +236,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                                 </select>
 
                                 <button onClick={() => { doSearch(); setFiltersOpen(false); }}
-                                    className="w-full bg-gradient-to-br from-primary to-primary-container text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:brightness-110 transition-all shadow-ambient"
+                                    className="w-full bg-primary text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:brightness-110 transition-all shadow-xl"
                                 >
                                     Appliquer
                                 </button>
@@ -246,9 +246,9 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                 </AnimatePresence>
 
                 <section className="md:col-span-9 flex flex-col gap-4">
-                    <div className="bg-surface-container-lowest rounded-xl p-5 shadow-ambient flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="bg-white rounded-xl p-5 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                         <div>
-                            <h1 className="text-xl font-bold text-on-surface flex items-center gap-2">
+                            <h1 className="text-xl font-bold text-slate-dark flex items-center gap-2">
                                 {form.depart}
                                 <ArrowRight size={18} className="text-primary" />
                                 {form.arrivee}
@@ -261,7 +261,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                         <div className="flex items-center gap-2 text-xs text-on-surface-variant">
                             <ArrowUpDown size={14} />
                             <select value={sortBy} onChange={(e) => { setSortBy(e.target.value); }}
-                                className="bg-transparent font-semibold text-on-surface outline-none"
+                                className="bg-transparent font-semibold text-slate-dark outline-none"
                             >
                                 {SORT_OPTIONS.map(opt => (
                                     <option key={opt.val} value={opt.val}>{opt.label}</option>
@@ -271,9 +271,9 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                     </div>
 
                     {trajets.length === 0 ? (
-                        <div className="bg-surface-container-lowest rounded-xl p-12 shadow-ambient text-center">
+                        <div className="bg-white rounded-xl p-12 shadow-xl text-center">
                             <Wind size={40} className="mx-auto text-on-surface-variant/60 mb-4" />
-                            <p className="text-on-surface font-semibold mb-1">Aucun départ disponible</p>
+                            <p className="text-slate-dark font-semibold mb-1">Aucun départ disponible</p>
                             <p className="text-sm text-on-surface-variant">Essayez une autre date ou modifiez vos filtres.</p>
                         </div>
                     ) : (
@@ -283,39 +283,39 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                                 const vehicleType = (trajet as any).type ?? 'standard';
                                 return (
                                     <motion.div key={trajet.id} variants={fadeUp}
-                                        className={`bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden transition-all ${
-                                            complet ? 'opacity-60' : 'hover:shadow-lg cursor-pointer'
+                                        className={`bg-white rounded-xl shadow-xl overflow-hidden transition-all ${
+                                            complet ? 'opacity-60' : 'hover:shadow-xl cursor-pointer'
                                         }`}
                                     >
                                         <div className="p-5 flex flex-col lg:flex-row items-center gap-5">
                                             <div className="flex flex-col items-center justify-center w-full lg:w-28 pb-4 lg:pb-0 lg:pr-5 shrink-0">
                                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 ${
-                                                    vehicleType === 'vip' ? 'bg-kinetic-gold-light' : 'bg-surface-container-low'
+                                                    vehicleType === 'vip' ? 'bg-sahel-yellow/10' : 'bg-gris-surface'
                                                 }`}>
-                                                    <Bus size={22} className={vehicleType === 'vip' ? 'text-kinetic-gold' : 'text-on-surface-variant'} />
+                                                    <Bus size={22} className={vehicleType === 'vip' ? 'text-sahel-yellow' : 'text-on-surface-variant'} />
                                                 </div>
                                                 <span className="text-[11px] font-bold uppercase tracking-wider text-center">
                                                     {vehicleType === 'vip' ? (
-                                                        <span className="text-kinetic-gold">VIP</span>
+                                                        <span className="text-sahel-yellow">VIP</span>
                                                     ) : 'Standard'}
                                                 </span>
                                             </div>
 
                                             <div className="flex-1 flex items-center justify-between w-full gap-4 px-2">
                                                 <div className="text-center">
-                                                    <div className="text-2xl font-black text-on-surface tracking-tight">{trajet.departure_time}</div>
+                                                    <div className="text-2xl font-black text-slate-dark tracking-tight">{trajet.departure_time}</div>
                                                     <div className="text-xs text-on-surface-variant mt-0.5">{trajet.departure_city}</div>
                                                 </div>
                                                 <div className="flex-1 flex flex-col items-center px-3">
                                                     <span className="text-xs font-semibold text-on-surface-variant mb-1.5">{trajet.duration}</span>
-                                                    <div className="w-full h-px bg-surface-container-high relative">
+                                                    <div className="w-full h-px bg-gris-surface relative">
                                                         <div className="w-2 h-2 rounded-full bg-primary absolute left-0 top-1/2 -translate-y-1/2" />
-                                                        <div className="w-2 h-2 rounded-full border-2 border-primary bg-surface-container-lowest absolute right-0 top-1/2 -translate-y-1/2" />
+                                                        <div className="w-2 h-2 rounded-full border-2 border-primary bg-white absolute right-0 top-1/2 -translate-y-1/2" />
                                                     </div>
                                                     <span className="text-xs mt-1.5 font-medium text-primary">Direct</span>
                                                 </div>
                                                 <div className="text-center">
-                                                    <div className="text-2xl font-black text-on-surface tracking-tight">{trajet.arrival_time}</div>
+                                                    <div className="text-2xl font-black text-slate-dark tracking-tight">{trajet.arrival_time}</div>
                                                     <div className="text-xs text-on-surface-variant mt-0.5">{trajet.arrival_city}</div>
                                                 </div>
                                             </div>
@@ -330,7 +330,7 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                                                         </span>
                                                     ) : null}
                                                 </div>
-                                                <div className={`text-xl font-black tracking-tight ${complet ? 'text-on-surface-variant/60 line-through' : 'text-on-surface'}`}>
+                                                <div className={`text-xl font-black tracking-tight ${complet ? 'text-on-surface-variant/60 line-through' : 'text-slate-dark'}`}>
                                                     {formatFCFA(trajet.price)}
                                                 </div>
                                                 <button
@@ -338,8 +338,8 @@ export default function Search({ trajets, depart, arrivee, date, passagers, filt
                                                     disabled={complet}
                                                     className={`w-full text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
                                                         complet
-                                                            ? 'bg-surface-container-low text-on-surface-variant cursor-not-allowed'
-                                                            : 'bg-gradient-to-br from-primary to-primary-container text-white hover:brightness-110 shadow-ambient'
+                                                            ? 'bg-gris-surface text-on-surface-variant cursor-not-allowed'
+                                                            : 'bg-primary text-white hover:brightness-110 shadow-xl'
                                                     }`}
                                                 >
                                                     {complet ? 'Non disponible' : 'Choisir'}

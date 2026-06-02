@@ -20,7 +20,7 @@ export default function ServicesIndex() {
     return (
         <div className="max-w-[1080px] mx-auto px-4 md:px-6 py-10 md:py-16">
             <div className="text-center mb-10">
-                <h1 className="text-3xl md:text-4xl font-black text-on-surface tracking-tight mb-2">Nos Services</h1>
+                <h1 className="text-3xl md:text-4xl font-black text-slate-dark tracking-tight mb-2">Nos Services</h1>
                 <p className="text-on-surface-variant text-sm max-w-lg mx-auto">
                     Rahimo Transport propose une gamme complète de services pour faciliter vos déplacements et vos envois.
                 </p>
@@ -30,19 +30,19 @@ export default function ServicesIndex() {
                 {SERVICES.map(s => (
                     <motion.div key={s.label} variants={fadeUp}>
                         <Link href={route(s.route)}
-                            className="block bg-white rounded-2xl shadow-ambient p-5 hover:shadow-ambient transition-all group"
+                            className="block bg-white rounded-xl shadow-xl p-5 hover:shadow-xl transition-all group"
                         >
                             <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                                 <s.icon size={20} className="text-white" />
                             </div>
-                            <h2 className="font-black text-on-surface text-base mb-1">{s.label}</h2>
+                            <h2 className="font-black text-slate-dark text-base mb-1">{s.label}</h2>
                             <p className="text-sm text-on-surface-variant">{s.desc}</p>
                         </Link>
                     </motion.div>
                 ))}
             </motion.div>
 
-            <div className="mt-10 bg-surface-container-low rounded-2xl p-6 text-center">
+            <div className="mt-10 bg-gris-surface rounded-xl p-6 text-center">
                 <p className="text-sm text-on-surface-variant">
                     Vous avez déjà une réservation en cours ?{' '}
                     <Link href={route('client.dashboard')} className="text-primary font-semibold hover:underline">Mon espace client →</Link>

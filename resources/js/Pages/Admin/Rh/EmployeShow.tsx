@@ -33,14 +33,14 @@ export default function EmployeShow({ employe, contrats, documents, stats }: Pro
                 <ArrowLeft size={14} /> Retour au personnel
             </Link>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 p-6">
+            <div className="bg-white rounded-xl border border-outline shadow-sm p-6">
                 <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-full bg-primary/20 text-primary-container flex items-center justify-center text-xl font-bold">
+                    <div className="w-14 h-14 rounded-full bg-primary/20 text-primary flex items-center justify-center text-xl font-bold">
                         {employe.name.slice(0, 2).toUpperCase()}
                     </div>
                     <div>
-                        <h1 className="text-xl font-bold text-white">{employe.name}</h1>
-                        <p className="text-admin-muted text-sm capitalize">{employe.role} · {employe.city ?? 'N/A'}</p>
+                        <h1 className="text-xl font-bold text-slate-dark">{employe.name}</h1>
+                        <p className="text-on-surface-variant text-sm capitalize">{employe.role} · {employe.city ?? 'N/A'}</p>
                     </div>
                     <div className="ml-auto"><StatusBadge status={employe.is_active ? 'actif' : 'inactif'} /></div>
                 </div>
@@ -53,8 +53,8 @@ export default function EmployeShow({ employe, contrats, documents, stats }: Pro
                         { label: 'Exp. Permis', val: employe.license_expiry_date ?? '—' },
                     ].map(d => (
                         <div key={d.label}>
-                            <p className="text-xs text-admin-muted">{d.label}</p>
-                            <p className="text-sm text-white font-semibold">{d.val}</p>
+                            <p className="text-xs text-on-surface-variant">{d.label}</p>
+                            <p className="text-sm text-slate-dark font-semibold">{d.val}</p>
                         </div>
                     ))}
                 </div>
@@ -65,20 +65,20 @@ export default function EmployeShow({ employe, contrats, documents, stats }: Pro
                         { label: 'Absences', val: stats.total_absences, color: 'text-status-red-text' },
                         { label: 'Salaire mensuel', val: formatFCFA(stats.monthly_salary), color: 'text-status-green-text' },
                     ].map(s => (
-                        <div key={s.label} className="bg-white/5 rounded-lg p-3 text-center">
+                        <div key={s.label} className="bg-gris-surface rounded-xl p-3 text-center">
                             <p className="text-lg font-bold font-mono" style={{ color: s.color.includes('text-') ? undefined : s.color }}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
             {contrats.length > 0 && (
-                <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
-                    <div className="p-4"><h3 className="font-semibold text-white text-sm">Contrats</h3></div>
+                <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
+                    <div className="p-4"><h3 className="font-semibold text-slate-dark text-sm">Contrats</h3></div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm">
-                            <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                            <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                                 <tr>
                                     {['Type', 'Début', 'Fin', 'Salaire', 'Statut'].map(h => (
                                         <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -88,10 +88,10 @@ export default function EmployeShow({ employe, contrats, documents, stats }: Pro
                             <tbody>
                                 {contrats.map(c => (
                                     <tr key={c.id}>
-                                        <td className="px-4 py-3 capitalize text-white">{c.type}</td>
-                                        <td className="px-4 py-3 text-admin-muted">{c.start_date}</td>
-                                        <td className="px-4 py-3 text-admin-muted">{c.end_date ?? 'Indéterminée'}</td>
-                                        <td className="px-4 py-3 font-mono text-white font-semibold">{formatFCFA(c.salary_base)}</td>
+                                        <td className="px-4 py-3 capitalize text-slate-dark">{c.type}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant">{c.start_date}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant">{c.end_date ?? 'Indéterminée'}</td>
+                                        <td className="px-4 py-3 font-mono text-slate-dark font-semibold">{formatFCFA(c.salary_base)}</td>
                                         <td className="px-4 py-3"><StatusBadge status={c.is_active ? 'actif' : 'inactif'} /></td>
                                     </tr>
                                 ))}
@@ -102,13 +102,13 @@ export default function EmployeShow({ employe, contrats, documents, stats }: Pro
             )}
 
             {documents.length > 0 && (
-                <div className="bg-admin-card rounded-xl border border-white/5 p-4">
-                    <h3 className="font-semibold text-white text-sm mb-4">Documents</h3>
+                <div className="bg-white rounded-xl border border-outline shadow-sm p-4">
+                    <h3 className="font-semibold text-slate-dark text-sm mb-4">Documents</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                         {documents.map((d: any) => (
-                            <div key={d.id} className="bg-white/5 rounded-lg p-3 flex items-center gap-2">
-                                <FileText size={16} className="text-primary-container" />
-                                <span className="text-xs text-white truncate">{d.label}</span>
+                            <div key={d.id} className="bg-gris-surface rounded-xl p-3 flex items-center gap-2">
+                                <FileText size={16} className="text-primary" />
+                                <span className="text-xs text-slate-dark truncate">{d.label}</span>
                             </div>
                         ))}
                     </div>

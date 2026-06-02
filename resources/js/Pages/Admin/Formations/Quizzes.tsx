@@ -48,33 +48,33 @@ export default function Quizzes({ course, quizzes }: Props) {
     return (
         <div className="w-full max-w-4xl space-y-6">
             <div className="flex items-center gap-3">
-                <a href={route('admin.formations.cours')} className="text-admin-muted hover:text-white transition-colors">
+                <a href={route('admin.formations.cours')} className="text-on-surface-variant hover:text-slate-dark transition-colors">
                     <ArrowLeft size={20} />
                 </a>
                 <div>
-                    <h1 className="text-xl font-bold text-white">Quiz : {course.titre}</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Gérer les questions du module</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Quiz : {course.titre}</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Gérer les questions du module</p>
                 </div>
             </div>
 
-            <form onSubmit={submit} className="bg-admin-card rounded-xl border border-white/5 p-5 space-y-4">
-                <h2 className="font-semibold text-white text-sm">{editingId ? 'Modifier' : 'Ajouter'} une question</h2>
+            <form onSubmit={submit} className="bg-white rounded-xl border border-outline p-5 space-y-4">
+                <h2 className="font-semibold text-slate-dark text-sm">{editingId ? 'Modifier' : 'Ajouter'} une question</h2>
                 <div>
-                    <label className="block text-sm text-admin-muted mb-1">Question *</label>
+                    <label className="block text-sm text-on-surface-variant mb-1">Question *</label>
                     <input type="text" value={data.question} onChange={e => setData('question', e.target.value)}
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:border-primary-container outline-none" />
+                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary transition-colors" />
                 </div>
                 <div>
-                    <label className="block text-sm text-admin-muted mb-1">Réponses *</label>
+                    <label className="block text-sm text-on-surface-variant mb-1">Réponses *</label>
                     <div className="space-y-2">
                         {data.options.map((opt, i) => (
                             <div key={i} className="flex items-center gap-2">
                                 <input type="radio" name="correct"
                                     checked={data.correct_answer === opt}
                                     onChange={() => setData('correct_answer', opt)}
-                                    className="text-primary-container" />
+                                    className="text-primary" />
                                 <input type="text" value={opt} onChange={e => setOption(i, e.target.value)}
-                                    className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-white text-sm focus:border-primary-container outline-none"
+                                    className="flex-1 bg-gris-surface border border-outline rounded-xl px-3 py-1.5 text-slate-dark text-sm focus:outline-none focus:border-primary transition-colors"
                                     placeholder={`Option ${i + 1}`} />
                                 {data.options.length > 2 && (
                                     <button type="button" onClick={() => removeOption(i)}
@@ -90,27 +90,27 @@ export default function Quizzes({ course, quizzes }: Props) {
                 </div>
                 <div className="flex gap-4">
                     <div>
-                        <label className="block text-sm text-admin-muted mb-1">Points</label>
+                        <label className="block text-sm text-on-surface-variant mb-1">Points</label>
                         <input type="number" min={1} value={data.points} onChange={e => setData('points', parseInt(e.target.value) || 10)}
-                            className="w-20 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:border-primary-container outline-none" />
+                            className="w-20 bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary transition-colors" />
                     </div>
                 </div>
                 <div className="flex gap-2">
                     <button type="submit" disabled={processing}
-                        className="btn-primary px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2 disabled:opacity-50"
+                        className="btn-primary px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 disabled:opacity-50"
                     ><Save size={14} /> {editingId ? 'Mettre à jour' : 'Ajouter'}</button>
                     {editingId && (
                         <button type="button" onClick={cancelEdit}
-                            className="px-4 py-2 text-sm text-admin-muted hover:text-white"
+                            className="px-4 py-2 text-sm text-on-surface-variant hover:text-slate-dark"
                         >Annuler</button>
                     )}
                 </div>
             </form>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Question', 'Réponses', 'Bonne réponse', 'Points', 'Actions'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -119,19 +119,19 @@ export default function Quizzes({ course, quizzes }: Props) {
                         </thead>
                         <tbody>
                             {quizzes.map(q => (
-                                <tr key={q.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 text-white">{q.question}</td>
-                                    <td className="px-4 py-3 text-admin-muted">
+                                <tr key={q.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 text-slate-dark">{q.question}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">
                                         <div className="flex flex-wrap gap-1">
                                             {q.options.map((o, i) => (
-                                                <span key={i} className="text-xs bg-white/5 px-2 py-0.5 rounded">{o}</span>
+                                                <span key={i} className="text-xs bg-gris-surface px-2 py-0.5 rounded">{o}</span>
                                             ))}
                                         </div>
                                     </td>
                                     <td className="px-4 py-3">
                                         <span className="text-status-green-text font-mono text-xs">{q.correct_answer}</span>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted font-mono">{q.points}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant font-mono">{q.points}</td>
                                     <td className="px-4 py-3">
                                         <div className="flex gap-2">
                                             <button onClick={() => editQuiz(q)}
@@ -145,7 +145,7 @@ export default function Quizzes({ course, quizzes }: Props) {
                                 </tr>
                             ))}
                             {quizzes.length === 0 && (
-                                <tr><td colSpan={5} className="text-center py-8 text-admin-muted text-sm">Aucune question.</td></tr>
+                                <tr><td colSpan={5} className="text-center py-8 text-on-surface-variant text-sm">Aucune question.</td></tr>
                             )}
                         </tbody>
                     </table>

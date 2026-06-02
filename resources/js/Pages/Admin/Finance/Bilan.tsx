@@ -22,8 +22,8 @@ export default function Bilan({ revenus, totalRevenus, depenses, masseSalariale,
     return (
         <div className="w-full max-w-7xl space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-white">Bilan & Compte de Résultat</h1>
-                <p className="text-admin-muted text-sm mt-0.5">Mois en cours</p>
+                <h1 className="text-xl font-bold text-slate-dark">Bilan & Compte de Résultat</h1>
+                <p className="text-on-surface-variant text-sm mt-0.5">Mois en cours</p>
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -33,17 +33,17 @@ export default function Bilan({ revenus, totalRevenus, depenses, masseSalariale,
                     { label: 'Masse Salariale', val: formatFCFA(masseSalariale), color: 'text-status-yellow-text' },
                     { label: 'Résultat Net', val: formatFCFA(resultatNet), color: resultatNet >= 0 ? 'text-status-green-text' : 'text-status-red-text' },
                 ].map(s => (
-                    <div key={s.label} className="bg-admin-card rounded-xl border border-white/5 p-4">
-                        <p className="text-xs text-admin-muted">{s.label}</p>
+                    <div key={s.label} className="bg-white rounded-xl border border-outline shadow-sm p-4">
+                        <p className="text-xs text-on-surface-variant">{s.label}</p>
                         <p className={`text-2xl font-bold font-mono ${s.color}`}>{s.val}</p>
                     </div>
                 ))}
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-admin-card rounded-xl border border-white/5 p-5">
-                    <h3 className="text-sm font-semibold text-white mb-1">Répartition des Revenus</h3>
-                    <p className="text-xs text-admin-muted mb-4">Par service</p>
+                <div className="bg-white rounded-xl border border-outline shadow-sm p-5">
+                    <h3 className="text-sm font-semibold text-slate-dark mb-1">Répartition des Revenus</h3>
+                    <p className="text-xs text-on-surface-variant mb-4">Par service</p>
                     {revData.length > 0 ? (
                         <>
                             <ResponsiveContainer width="100%" height={220}>
@@ -58,17 +58,17 @@ export default function Bilan({ revenus, totalRevenus, depenses, masseSalariale,
                                 {revData.map((s, i) => (
                                     <div key={s.name} className="flex items-center gap-2 text-xs">
                                         <span className="w-3 h-3 rounded-sm shrink-0" style={{ backgroundColor: PIE_COLORS[i % PIE_COLORS.length] }} />
-                                        <span className="text-admin-muted capitalize">{s.name}</span>
+                                        <span className="text-on-surface-variant capitalize">{s.name}</span>
                                     </div>
                                 ))}
                             </div>
                         </>
-                    ) : <p className="text-admin-muted text-sm text-center py-8">Aucun revenu ce mois.</p>}
+                    ) : <p className="text-on-surface-variant text-sm text-center py-8">Aucun revenu ce mois.</p>}
                 </div>
 
-                <div className="bg-admin-card rounded-xl border border-white/5 p-5">
-                    <h3 className="text-sm font-semibold text-white mb-1">Dépenses par Catégorie</h3>
-                    <p className="text-xs text-admin-muted mb-4">Mois en cours</p>
+                <div className="bg-white rounded-xl border border-outline shadow-sm p-5">
+                    <h3 className="text-sm font-semibold text-slate-dark mb-1">Dépenses par Catégorie</h3>
+                    <p className="text-xs text-on-surface-variant mb-4">Mois en cours</p>
                     {depData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={depData} layout="vertical">
@@ -78,7 +78,7 @@ export default function Bilan({ revenus, totalRevenus, depenses, masseSalariale,
                                 <Bar dataKey="value" fill="#b70100" radius={[0, 4, 4, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
-                    ) : <p className="text-admin-muted text-sm text-center py-8">Aucune dépense ce mois.</p>}
+                    ) : <p className="text-on-surface-variant text-sm text-center py-8">Aucune dépense ce mois.</p>}
                 </div>
             </div>
         </div>

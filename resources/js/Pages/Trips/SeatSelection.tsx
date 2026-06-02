@@ -47,8 +47,8 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
 
     const seatCls = (seat: Siege) => {
         if (!seat.libre) return 'bg-primary/10 border-2 border-primary/30 cursor-not-allowed opacity-60';
-        if (selected.includes(seat.numero)) return 'bg-primary border-2 border-primary shadow-ambient scale-105';
-        return 'bg-white border-2 hover:border-primary/50 hover:bg-primary-fixed cursor-pointer';
+        if (selected.includes(seat.numero)) return 'bg-primary border-2 border-primary shadow-xl scale-105';
+        return 'bg-white border-2 hover:border-primary/50 hover:bg-white cursor-pointer';
     };
 
     const vehicleType = (trajet as any).type ?? 'standard';
@@ -57,7 +57,7 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
             <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div>
-                    <h1 className="text-2xl font-black text-on-surface tracking-tight mb-1">Sélection de Siège</h1>
+                    <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-1">Sélection de Siège</h1>
                     <p className="text-on-surface-variant text-sm">
                         {trajet.departure_city} → {trajet.arrival_city} · {trajet.departure_time}
                         {trajet.vehicle?.registration_number && <span className="font-mono font-semibold ml-2">{trajet.vehicle.registration_number}</span>}
@@ -65,7 +65,7 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
                 </div>
                 <div className="flex items-center gap-2 text-xs">
                     <span className="font-semibold">{maxSelect} passager{maxSelect > 1 ? 's' : ''}</span>
-                    <span className={`px-2 py-1 rounded font-bold uppercase ${vehicleType === 'vip' ? 'bg-kinetic-gold-light text-kinetic-gold' : 'bg-surface-container-low text-on-surface-variant'}`}>
+                    <span className={`px-2 py-1 rounded font-bold uppercase ${vehicleType === 'vip' ? 'bg-sahel-yellow/10 text-sahel-yellow' : 'bg-gris-surface text-on-surface-variant'}`}>
                         {vehicleType === 'vip' ? 'VIP' : 'Standard'}
                     </span>
                 </div>
@@ -73,12 +73,12 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 <div className="lg:col-span-7">
-                    <div className="bg-white rounded-xl shadow-ambient p-6">
+                    <div className="bg-white rounded-xl shadow-xl p-6">
                         <div className="flex flex-wrap items-center justify-center gap-5 mb-7">
                             {[
                                 { cls: 'bg-white border-2',                    label: 'Libre' },
                                 { cls: 'bg-primary/10 border-2 border-primary/30 opacity-60', label: 'Occupé' },
-                                { cls: 'bg-primary border-2 border-primary shadow-ambient scale-105', label: 'Sélectionné' },
+                                { cls: 'bg-primary border-2 border-primary shadow-xl scale-105', label: 'Sélectionné' },
                             ].map((l) => (
                                 <div key={l.label} className="flex items-center gap-2">
                                     <div className={`w-6 h-6 rounded-md ${l.cls}`} />
@@ -88,9 +88,9 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
                         </div>
 
                         <div className="max-w-[320px] mx-auto">
-                            <div className="border-4 rounded-t-[3rem] rounded-b-2xl p-5 bg-surface-container-low shadow-inner">
+                            <div className="border-4 rounded-t-[3rem] rounded-b-2xl p-5 bg-gris-surface shadow-inner">
                                 <div className="flex justify-between items-center mb-5 px-2">
-                                    <div className="w-9 h-9 rounded-full bg-surface-container-high flex items-center justify-center text-sm opacity-60"><Bus size={16} /></div>
+                                    <div className="w-9 h-9 rounded-full bg-gris-surface flex items-center justify-center text-sm opacity-60"><Bus size={16} /></div>
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Avant</span>
                                 </div>
                                 <div className="space-y-2.5">
@@ -123,7 +123,7 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
                                                                 {tooltipSeat === seat.numero && seat.libre && (
                                                                     <motion.div
                                                                         initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 4 }}
-                                                                        className="absolute -top-8 left-1/2 -translate-x-1/2 z-10 bg-inverse-surface text-inverse-on-surface text-[10px] px-2 py-1 rounded whitespace-nowrap font-medium"
+                                                                        className="absolute -top-8 left-1/2 -translate-x-1/2 z-10 bg-slate-dark text-inverse-on-surface text-[10px] px-2 py-1 rounded whitespace-nowrap font-medium"
                                                                     >
                                                                         Siège {seat.numero} · {((seat as any).features ?? []).join(' · ')}
                                                                     </motion.div>
@@ -142,24 +142,24 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
                 </div>
 
                 <div className="lg:col-span-5">
-                    <div className="sticky top-20 bg-white rounded-xl shadow-ambient p-6 flex flex-col gap-5">
-                        <h3 className="font-bold text-on-surface">Résumé du Trajet</h3>
+                    <div className="sticky top-20 bg-white rounded-xl shadow-xl p-6 flex flex-col gap-5">
+                        <h3 className="font-bold text-slate-dark">Résumé du Trajet</h3>
 
                         <div className="flex items-start gap-3">
                             <div className="flex flex-col items-center mt-1">
                                 <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-                                <div className="w-px h-8 bg-surface-container-high my-1" />
+                                <div className="w-px h-8 bg-gris-surface my-1" />
                                 <div className="w-2.5 h-2.5 rounded-full border-2 border-primary" />
                             </div>
                             <div className="flex flex-col gap-4 flex-1">
                                 <div>
                                     <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-0.5">Départ</p>
-                                    <p className="font-semibold text-on-surface text-sm">{trajet.departure_city}</p>
+                                    <p className="font-semibold text-slate-dark text-sm">{trajet.departure_city}</p>
                                     <p className="text-xs text-on-surface-variant">Gare Centrale · {trajet.departure_time}</p>
                                 </div>
                                 <div>
                                     <p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-0.5">Arrivée</p>
-                                    <p className="font-semibold text-on-surface text-sm">{trajet.arrival_city}</p>
+                                    <p className="font-semibold text-slate-dark text-sm">{trajet.arrival_city}</p>
                                     <p className="text-xs text-on-surface-variant">Gare Routière · {trajet.arrival_time}</p>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
                                 <span>Frais de service</span>
                                 <span>{selected.length > 0 ? formatFCFA(500) : '—'}</span>
                             </div>
-                            <div className="flex justify-between font-black text-lg text-on-surface pt-2">
+                            <div className="flex justify-between font-black text-lg text-slate-dark pt-2">
                                 <span>Total</span>
                                 <span>{formatFCFA(total)}</span>
                             </div>
@@ -208,7 +208,7 @@ export default function SeatSelection({ trajet, sieges, passagers_max = 4 }: Pro
                                     router.visit(route('trips.checkout'), { data: { trajet: trajet.id, sieges: selected } });
                             }}
                             disabled={selected.length === 0}
-                            className="w-full bg-gradient-to-br from-primary to-primary-container hover:from-primary hover:to-primary text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-ambient disabled:opacity-40 disabled:cursor-not-allowed"
+                            className="w-full bg-primary hover:bg-kinetic-red-hover text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xl disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                             Continuer <ArrowRight size={18} />
                         </motion.button>

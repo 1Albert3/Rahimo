@@ -23,35 +23,35 @@ export default function FormationsIndex({ courses, stats }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Gestion des Formations</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">CRUD des modules e-learning</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Gestion des Formations</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">CRUD des modules e-learning</p>
                 </div>
                 <Link href={route('admin.formations.cours.creer')}
-                    className="btn-primary px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"
+                    className="btn-primary px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"
                 ><Plus size={16} /> Nouvelle Formation</Link>
             </div>
 
             <div className="grid grid-cols-4 gap-4">
                 {[
-                    { label: 'Total', val: stats.total, icon: Book, color: 'text-admin-text', bg: 'bg-white/5' },
+                    { label: 'Total', val: stats.total, icon: Book, color: 'text-slate-dark', bg: 'bg-gris-surface' },
                     { label: 'Publiées', val: stats.publies, icon: CheckCircle, color: 'text-status-green-text', bg: 'bg-status-green-bg/30' },
                     { label: 'Obligatoires', val: stats.obligatoires, icon: Clock, color: 'text-status-yellow-text', bg: 'bg-status-yellow-bg/30' },
                     { label: 'Certificats', val: stats.certificats_delivres, icon: Award, color: 'text-status-blue-text', bg: 'bg-status-blue-bg/30' },
                 ].map(s => (
-                    <div key={s.label} className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}><s.icon size={18} className={s.color} /></div>
+                    <div key={s.label} className="bg-white rounded-xl border border-outline p-4 flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}><s.icon size={18} className={s.color} /></div>
                         <div>
                             <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Titre', 'Catégorie', 'Difficulté', 'Durée', 'Quiz', 'Vidéo', 'Publié', 'Date', 'Actions'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -60,11 +60,11 @@ export default function FormationsIndex({ courses, stats }: Props) {
                         </thead>
                         <tbody>
                             {courses.data.map(c => (
-                                <tr key={c.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 font-semibold text-white">{c.titre}</td>
-                                    <td className="px-4 py-3 text-admin-muted">{CATEGORIES[c.categorie] ?? c.categorie}</td>
-                                    <td className="px-4 py-3 text-admin-muted capitalize">{c.difficulte}</td>
-                                    <td className="px-4 py-3 text-admin-muted font-mono">{c.duree_minutes} min</td>
+                                <tr key={c.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 font-semibold text-slate-dark">{c.titre}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{CATEGORIES[c.categorie] ?? c.categorie}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant capitalize">{c.difficulte}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant font-mono">{c.duree_minutes} min</td>
                                     <td className="px-4 py-3">
                                         <Link href={route('admin.formations.quiz.index', c.id)}
                                             className="text-status-blue-text hover:underline font-semibold text-xs"
@@ -76,7 +76,7 @@ export default function FormationsIndex({ courses, stats }: Props) {
                                             {c.published ? 'Oui' : 'Non'}
                                         </span>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted text-xs font-mono">{c.created_at}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant text-xs font-mono">{c.created_at}</td>
                                     <td className="px-4 py-3">
                                         <div className="flex gap-2">
                                             <Link href={route('admin.formations.cours.modifier', c.id)}
@@ -90,7 +90,7 @@ export default function FormationsIndex({ courses, stats }: Props) {
                                 </tr>
                             ))}
                             {courses.data.length === 0 && (
-                                <tr><td colSpan={9} className="text-center py-8 text-admin-muted text-sm">Aucune formation.</td></tr>
+                                <tr><td colSpan={9} className="text-center py-8 text-on-surface-variant text-sm">Aucune formation.</td></tr>
                             )}
                         </tbody>
                     </table>

@@ -26,32 +26,32 @@ export default function PaiementsIndex({ payments, stats, filters }: Props) {
     return (
         <div className="w-full max-w-7xl space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-white">Paiements & Transactions</h1>
-                <p className="text-admin-muted text-sm mt-0.5">Gestion des paiements Orange Money, Moov Money, CB</p>
+                <h1 className="text-xl font-bold text-slate-dark">Paiements & Transactions</h1>
+                <p className="text-on-surface-variant text-sm mt-0.5">Gestion des paiements Orange Money, Moov Money, CB</p>
             </div>
 
             <div className="grid grid-cols-5 gap-4">
                 {[
-                    { label: 'Total Transactions', val: stats.total, icon: DollarSign, color: 'text-admin-text', bg: 'bg-white/5' },
+                    { label: 'Total Transactions', val: stats.total, icon: DollarSign, color: 'text-slate-dark', bg: 'bg-gris-surface' },
                     { label: 'Complétés', val: `${stats.completed.toLocaleString()} FCFA`, icon: TrendingUp, color: 'text-status-green-text', bg: 'bg-status-green-bg/30' },
                     { label: 'En attente', val: stats.pending, icon: RotateCcw, color: 'text-status-yellow-text', bg: 'bg-status-yellow-bg/30' },
                     { label: 'Échoués', val: stats.failed, icon: RefreshCw, color: 'text-status-red-text', bg: 'bg-status-red-bg/30' },
                     { label: 'Remboursés', val: `${stats.refunded.toLocaleString()} FCFA`, icon: DollarSign, color: 'text-status-blue-text', bg: 'bg-status-blue-bg/30' },
                 ].map(s => (
-                    <div key={s.label} className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}><s.icon size={18} className={s.color} /></div>
+                    <div key={s.label} className="bg-white rounded-xl border border-outline shadow-sm p-4 flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}><s.icon size={18} className={s.color} /></div>
                         <div>
                             <p className={`text-xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Référence', 'Client', 'Trajet', 'Montant', 'Méthode', 'Statut', 'Transaction', 'Date', 'Actions'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -60,17 +60,17 @@ export default function PaiementsIndex({ payments, stats, filters }: Props) {
                         </thead>
                         <tbody>
                             {payments.data.map(p => {
-                                const badge = STATUS_BADGES[p.status] ?? { label: p.status, color: 'text-admin-muted' };
+                                const badge = STATUS_BADGES[p.status] ?? { label: p.status, color: 'text-on-surface-variant' };
                                 return (
-                                    <tr key={p.id} className="hover:bg-white/5 transition-colors">
-                                        <td className="px-4 py-3 font-mono text-xs text-white">{p.reference}</td>
-                                        <td className="px-4 py-3 text-white">{p.client}</td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs">{p.route}</td>
-                                        <td className="px-4 py-3 font-mono font-bold text-white">{p.amount.toLocaleString()} FCFA</td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs capitalize">{p.method}</td>
+                                    <tr key={p.id} className="hover:bg-gris-surface transition-colors">
+                                        <td className="px-4 py-3 font-mono text-xs text-slate-dark">{p.reference}</td>
+                                        <td className="px-4 py-3 text-slate-dark">{p.client}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs">{p.route}</td>
+                                        <td className="px-4 py-3 font-mono font-bold text-slate-dark">{p.amount.toLocaleString()} FCFA</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs capitalize">{p.method}</td>
                                         <td className="px-4 py-3"><span className={`text-xs font-bold px-2 py-0.5 rounded ${badge.color}`}>{badge.label}</span></td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs font-mono max-w-[120px] truncate">{p.transaction_id ?? '—'}</td>
-                                        <td className="px-4 py-3 text-admin-muted text-xs">{p.date}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs font-mono max-w-[120px] truncate">{p.transaction_id ?? '—'}</td>
+                                        <td className="px-4 py-3 text-on-surface-variant text-xs">{p.date}</td>
                                         <td className="px-4 py-3">
                                             <div className="flex gap-2">
                                                 {p.status === 'completed' && (
@@ -80,7 +80,7 @@ export default function PaiementsIndex({ payments, stats, filters }: Props) {
                                                 )}
                                                 {p.transaction_id && (
                                                     <button onClick={() => router.post(route('admin.paiements.verifier', p.id))}
-                                                        className="text-admin-muted hover:text-white text-xs"
+                                                        className="text-on-surface-variant hover:text-slate-dark text-xs"
                                                     >Vérifier</button>
                                                 )}
                                             </div>

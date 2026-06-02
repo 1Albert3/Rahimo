@@ -16,9 +16,9 @@ export default function Authenticated({
         useState(false);
 
     return (
-        <div className="min-h-screen bg-surface-container-low">
+        <div className="min-h-screen bg-gris-surface">
             <FlashToast />
-            <nav className="bg-white/80 backdrop-blur-xl sticky top-0 z-50 shadow-ambient">
+            <nav className="bg-white sticky top-0 z-50 shadow-xl">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between">
                         <div className="flex">
@@ -45,7 +45,7 @@ export default function Authenticated({
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                className="inline-flex items-center rounded-md border border-outline-variant/15 bg-white px-3 py-2 text-sm font-medium leading-4 text-on-surface-variant transition duration-150 ease-in-out hover:text-on-surface focus:outline-none"
+                                                className="inline-flex items-center rounded-md border border-outline bg-white px-3 py-2 text-sm font-medium leading-4 text-on-surface-variant transition duration-150 ease-in-out hover:text-slate-dark focus:outline-none"
                                             >
                                                 {user.name}
 
@@ -90,7 +90,7 @@ export default function Authenticated({
                                         (previousState) => !previousState,
                                     )
                                 }
-                                className="inline-flex items-center justify-center rounded-md p-2 text-on-surface-variant transition duration-150 ease-in-out hover:bg-surface-container-low hover:text-on-surface focus:bg-surface-container-low focus:text-on-surface focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-md p-2 text-on-surface-variant transition duration-150 ease-in-out hover:bg-gris-surface hover:text-slate-dark focus:bg-gris-surface focus:text-slate-dark focus:outline-none"
                             >
                                 <svg
                                     className="h-6 w-6"
@@ -141,9 +141,9 @@ export default function Authenticated({
                         </ResponsiveNavLink>
                     </div>
 
-                    <div className="border-t border-outline-variant/15 pb-1 pt-4">
+                    <div className="border-t border-outline pb-1 pt-4">
                         <div className="px-4">
-                            <div className="text-base font-medium text-on-surface">
+                            <div className="text-base font-medium text-slate-dark">
                                 {user.name}
                             </div>
                             <div className="text-sm font-medium text-on-surface-variant">
@@ -168,7 +168,7 @@ export default function Authenticated({
             </nav>
 
             {header && (
-                <header className="bg-white shadow-ambient">
+                <header className="bg-white shadow-xl">
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {header}
                     </div>

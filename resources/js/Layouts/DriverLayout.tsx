@@ -27,19 +27,19 @@ function SidebarContent({ currentRoute, onNav }: { currentRoute: string | undefi
         <>
             <div className="px-4 sm:px-6 mb-6 sm:mb-8">
                 <div className="flex items-center gap-2 mb-5">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">
                         <Bus size={16} className="text-white" />
                     </div>
-                    <span className="text-base sm:text-lg font-black text-primary-fixed">Rahimo</span>
+                    <span className="text-base sm:text-lg font-black text-slate-dark">Rahimo</span>
                 </div>
                 {auth?.user && (
-                    <div className="p-3 bg-gradient-to-br from-white/[0.08] to-white/[0.03] rounded-xl border border-white/10 backdrop-blur-sm">
+                    <div className="p-3 bg-white rounded-xl border border-outline">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white font-bold shrink-0 text-sm shadow-lg">
+                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold shrink-0 text-sm">
                                 {auth.user.name.slice(0, 2).toUpperCase()}
                             </div>
                             <div className="overflow-hidden min-w-0">
-                                <p className="text-white text-sm font-semibold truncate leading-tight">{auth.user.name}</p>
+                                <p className="text-slate-dark text-sm font-semibold truncate leading-tight">{auth.user.name}</p>
                                 <p className="text-on-surface-variant text-[10px] truncate mt-0.5">Chauffeur</p>
                             </div>
                         </div>
@@ -56,8 +56,8 @@ function SidebarContent({ currentRoute, onNav }: { currentRoute: string | undefi
                             className={cn(
                                 'flex items-center px-3 sm:px-4 py-2.5 rounded-xl font-medium text-sm transition-all',
                                 isActive
-                                    ? 'bg-primary text-on-primary shadow-sm'
-                                    : 'text-slate-300 hover:bg-white/10 hover:text-white',
+                                    ? 'bg-primary/10 text-primary'
+                                    : 'text-on-surface-variant hover:bg-white hover:text-slate-dark',
                             )}
                         >
                             <Icon size={18} className="mr-3 shrink-0" strokeWidth={isActive ? 2.5 : 1.75} />
@@ -69,12 +69,12 @@ function SidebarContent({ currentRoute, onNav }: { currentRoute: string | undefi
 
             <div className="mt-auto px-3 sm:px-4 pt-4 pb-2 space-y-1">
                 <Link href={route('profile.edit')} onClick={onNav}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-on-surface-variant hover:text-primary-fixed-dim hover:bg-white/5 transition-all"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all"
                 >
                     <Settings size={16} /> Paramètres
                 </Link>
                 <Link href={route('logout')} method="post" as="button" onClick={onNav}
-                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-on-surface-variant hover:text-status-red-text hover:bg-status-red-bg/20 transition-all w-full"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-on-surface-variant hover:text-error hover:bg-red-bg/20 transition-all w-full"
                 >
                     <LogOut size={16} /> Déconnexion
                 </Link>
@@ -95,7 +95,7 @@ export default function DriverLayout({ children, title, breadcrumbs }: Props) {
         <div className="min-h-screen flex bg-background text-on-background">
             <FlashToast />
 
-            <aside className="hidden lg:flex fixed left-0 top-0 h-full w-64 bg-inverse-surface/95 backdrop-blur-xl flex-col py-6 shadow-ambient z-50">
+            <aside className="hidden lg:flex fixed left-0 top-0 h-full w-64 bg-surface-variant flex-col py-6 shadow-xl z-50">
                 <SidebarContent currentRoute={currentRoute} />
             </aside>
 
@@ -109,17 +109,17 @@ export default function DriverLayout({ children, title, breadcrumbs }: Props) {
                         <motion.aside
                             initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                            className="absolute left-0 top-0 h-full w-72 bg-inverse-surface flex flex-col py-4 sm:py-6 shadow-2xl"
+                            className="absolute left-0 top-0 h-full w-72 bg-surface-variant flex flex-col py-4 sm:py-6 shadow-xl"
                             onClick={e => e.stopPropagation()}
                         >
                             <div className="flex items-center justify-between px-4 sm:px-6 mb-2">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center">
+                                    <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center">
                                         <Bus size={16} className="text-white" />
                                     </div>
-                                    <span className="text-base sm:text-lg font-black text-primary-fixed">Rahimo</span>
+                                    <span className="text-base sm:text-lg font-black text-slate-dark">Rahimo</span>
                                 </div>
-                                <button onClick={() => setSidebarOpen(false)} className="text-slate-400 hover:text-white p-1">
+                                <button onClick={() => setSidebarOpen(false)} className="text-on-surface-variant hover:text-slate-dark p-1">
                                     <X size={20} />
                                 </button>
                             </div>
@@ -130,13 +130,13 @@ export default function DriverLayout({ children, title, breadcrumbs }: Props) {
             </AnimatePresence>
 
             <div className="flex-1 flex flex-col min-h-screen lg:ml-64">
-                <header className="flex justify-between items-center px-3 sm:px-6 lg:px-8 h-14 sm:h-16 bg-surface-container-lowest/80 backdrop-blur-xl sticky top-0 z-40 shadow-ambient">
+                <header className="flex justify-between items-center px-3 sm:px-6 lg:px-8 h-14 sm:h-16 bg-white sticky top-0 z-40 shadow-sm">
                     <div className="flex items-center gap-2 text-primary min-w-0">
-                        <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-1.5 -ml-1 text-on-surface hover:bg-surface-container-low rounded-lg transition-all">
+                        <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-1.5 -ml-1 text-slate-dark hover:bg-surface-variant rounded-xl transition-all">
                             <Menu size={20} />
                         </button>
                         <MapPin size={16} className="hidden sm:block shrink-0" />
-                        <h1 className="font-bold text-sm sm:text-lg text-on-surface truncate">
+                        <h1 className="font-bold text-sm sm:text-lg text-slate-dark truncate">
                             {breadcrumbs && breadcrumbs.length > 0 ? (
                                 <nav className="flex items-center gap-1 text-xs sm:text-sm">
                                     {breadcrumbs.map((b, i) => (
@@ -144,7 +144,7 @@ export default function DriverLayout({ children, title, breadcrumbs }: Props) {
                                             {i > 0 && <ChevronRight size={13} className="text-on-surface-variant shrink-0" />}
                                             {b.href
                                                 ? <Link href={b.href} className="text-on-surface-variant hover:text-primary transition-colors truncate">{b.label}</Link>
-                                                : <span className="font-bold text-on-surface truncate">{b.label}</span>
+                                                : <span className="font-bold text-slate-dark truncate">{b.label}</span>
                                             }
                                         </span>
                                     ))}
@@ -170,10 +170,10 @@ export default function DriverLayout({ children, title, breadcrumbs }: Props) {
                     {children}
                 </motion.main>
 
-                <footer className="bg-inverse-surface/95 backdrop-blur-xl px-4 sm:px-8 py-4 sm:py-6">
+                <footer className="bg-surface-variant px-4 sm:px-8 py-4 sm:py-6 border-t border-outline">
                     <div className="max-w-[1600px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-0">
-                        <span className="text-white font-bold text-xs sm:text-sm">Rahimo Transport</span>
-                        <span className="text-on-tertiary-container/40 text-[10px] sm:text-xs font-mono">© {new Date().getFullYear()} Rahimo Group</span>
+                        <span className="text-slate-dark font-bold text-xs sm:text-sm">Rahimo Transport</span>
+                        <span className="text-on-surface-variant text-[10px] sm:text-xs font-mono">© {new Date().getFullYear()} Rahimo Group</span>
                     </div>
                 </footer>
             </div>

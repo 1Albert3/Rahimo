@@ -27,14 +27,14 @@ interface DashboardProps extends PageProps {
 
 const stagger = { animate: { transition: { staggerChildren: 0.08 } } };
 const fadeIn = { initial: { opacity: 0, y: 10 }, animate: { opacity: 1, y: 0 } };
-const PIE_COLORS = ['#b70100', '#2563eb', '#059669', '#7c3aed', '#d97706'];
+const PIE_COLORS = ['#E60000', '#2563eb', '#059669', '#7c3aed', '#d97706'];
 
 function KpiCard({ label, value, trend, trendUp, sub }: {
     label: string; value: string; trend?: string; trendUp?: boolean; sub?: string;
 }) {
     return (
         <motion.div variants={fadeIn}
-            className="bg-white p-6 rounded-2xl border border-outline-variant/15 shadow-ambient"
+            className="bg-white p-6 rounded-xl border border-outline shadow-sm"
         >
             <div className="flex justify-between items-start mb-4">
                 <p className="text-xs font-bold text-on-surface-variant uppercase tracking-wider">{label}</p>
@@ -54,9 +54,9 @@ function KpiCard({ label, value, trend, trendUp, sub }: {
 function ChartCard({ title, subtitle, children, className }: { title: string; subtitle?: string; children: React.ReactNode; className?: string }) {
     return (
         <motion.div variants={fadeIn}
-            className={`bg-white p-6 rounded-2xl border border-outline-variant/15 shadow-ambient ${className ?? ''}`}
+            className={`bg-white p-6 rounded-xl border border-outline shadow-sm ${className ?? ''}`}
         >
-            <h3 className="font-bold text-on-surface mb-1">{title}</h3>
+            <h3 className="font-bold text-slate-dark mb-1">{title}</h3>
             {subtitle && <p className="text-xs text-on-surface-variant mb-4">{subtitle}</p>}
             {children}
         </motion.div>
@@ -84,15 +84,15 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
         <div className="space-y-8 w-full max-w-7xl">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-on-surface">
-                        {isDG && 'Revue Financière & Opérationnelle'}
-                        {role === 'responsable_flotte' && 'Pilotage de la Flotte'}
-                        {role === 'comptable' && 'Revue Financière'}
-                        {role === 'chef_garde' && 'Supervision de la Gare'}
-                        {role === 'guichetiere' && 'Vue d\'ensemble du Guichet'}
-                        {(role === 'agent_police' || role === 'bagagiste') && 'Tableau de Bord'}
+                    <h2 className="text-2xl font-bold text-slate-dark tracking-tight">
+                        {isDG && 'Revue financière & opérationnelle'}
+                        {role === 'responsable_flotte' && 'Pilotage de la flotte'}
+                        {role === 'comptable' && 'Revue financière'}
+                        {role === 'chef_garde' && 'Supervision de la gare'}
+                        {role === 'guichetiere' && 'Vue d\'ensemble du guichet'}
+                        {(role === 'agent_police' || role === 'bagagiste') && 'Tableau de bord'}
                     </h2>
-                    <p className="text-sm text-on-surface-variant mt-1">Données en temps réel — Rahimo Transport</p>
+                    <p className="text-sm text-on-surface-variant mt-1">Données en direct — Rahimo Transport</p>
                 </div>
             </div>
 
@@ -111,7 +111,7 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
                                 <XAxis dataKey="jour" tick={{ fontSize: 10 }} interval="preserveStartEnd" />
                                 <YAxis tick={{ fontSize: 10 }} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
                                 <Tooltip formatter={(v: any) => [formatFCFA(Number(v)), 'CA']} labelFormatter={(l: any) => String(l)} />
-                                <Line type="monotone" dataKey="recettes" stroke="#b70100" strokeWidth={2} dot={false} />
+                                <Line type="monotone" dataKey="recettes" stroke="#E60000" strokeWidth={2} dot={false} />
                             </LineChart>
                         </ResponsiveContainer>
                     </ChartCard>
@@ -121,7 +121,7 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
                                 <XAxis dataKey="date" tick={{ fontSize: 10 }} />
                                 <YAxis domain={[0, 100]} tick={{ fontSize: 10 }} tickFormatter={(v: number) => `${v}%`} />
                                 <Tooltip formatter={(v: any) => [`${Number(v)}%`, 'Occupation']} />
-                                <Bar dataKey="taux" fill="#b70100" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="taux" fill="#E60000" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </ChartCard>
@@ -136,7 +136,7 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
                                 <div key={r.route} className="flex items-center gap-3">
                                     <span className="w-6 h-6 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0">{i + 1}</span>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-semibold text-on-surface truncate">{r.route}</p>
+                                        <p className="text-sm font-semibold text-slate-dark truncate">{r.route}</p>
                                         <p className="text-xs text-on-surface-variant">{r.passagers} passagers · {r.reservations} résa.</p>
                                     </div>
                                     <p className="font-mono font-bold text-sm text-primary">{formatFCFA(r.revenu)}</p>
@@ -188,10 +188,10 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
 
                 {/* Alertes (visible par tous) */}
                 <motion.div variants={fadeIn}
-                    className="bg-white rounded-2xl border border-outline-variant/15 shadow-ambient flex flex-col"
+                    className="bg-white rounded-xl border border-outline shadow-sm flex flex-col"
                 >
-                    <div className="p-6 bg-surface-container-low">
-                        <h3 className="font-bold text-on-surface flex items-center gap-2">
+                    <div className="p-5 bg-gris-surface border-b border-outline">
+                        <h3 className="font-bold text-slate-dark flex items-center gap-2">
                             <Zap size={18} className="text-primary" /> Alertes
                         </h3>
                     </div>
@@ -202,14 +202,14 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
                         {alertes.map(a => (
                             <div key={a.id} className={`p-4 rounded-xl border-l-4 flex gap-3 ${
                                 a.severite === 'critique' ? 'bg-status-red-bg border-primary' :
-                                a.severite === 'haute' ? 'bg-status-yellow-bg border-status-yellow-ring' : 'bg-surface-container-low border-outline-variant'
+                                a.severite === 'haute' ? 'bg-status-yellow-bg border-status-yellow-ring' : 'bg-gris-surface border-outline'
                             }`}>
                                 <AlertTriangle size={16} className={`shrink-0 mt-0.5 ${
                                     a.severite === 'critique' ? 'text-primary' :
                                     a.severite === 'haute' ? 'text-status-yellow-text' : 'text-on-surface-variant'
                                 }`} />
                                 <div className="flex-1 min-w-0">
-                                    <p className="text-sm font-semibold text-on-surface">{a.type}</p>
+                                    <p className="text-sm font-semibold text-slate-dark">{a.type}</p>
                                     <p className="text-xs text-on-surface-variant mt-0.5">{a.message}</p>
                                     <p className="text-[10px] text-on-surface-variant mt-1">{a.created_at}</p>
                                 </div>
@@ -222,17 +222,17 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
             {/* Départs du jour (visible guichet, chef garde, flotte, DG) */}
             {isGuichet && (
                 <motion.div variants={fadeIn}
-                    className="bg-white rounded-2xl border border-outline-variant/15 shadow-ambient overflow-hidden"
+                    className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden"
                 >
-                    <div className="p-6 bg-surface-container-low flex justify-between items-center">
-                        <h3 className="font-bold text-on-surface">Départs du Jour</h3>
+                    <div className="p-5 bg-gris-surface border-b border-outline flex justify-between items-center">
+                        <h3 className="font-bold text-slate-dark">Départs du Jour</h3>
                         <span className="inline-flex items-center rounded-full bg-status-green-bg px-3 py-1 text-xs font-bold text-status-green-text border border-status-green-ring">
                             Ponctualité: {departs.length > 0 ? Math.round(departs.filter(d => d.statut !== 'retarde').length / departs.length * 100) : 100}%
                         </span>
                     </div>
                     <div className="overflow-x-auto min-w-[600px] lg:min-w-0">
                         <table className="w-full text-left min-w-[640px]">
-                            <thead className="bg-surface-container-low text-on-surface-variant">
+                            <thead className="bg-gris-surface text-on-surface-variant">
                                 <tr>
                                     {['Bus ID', 'Destination', 'Départ', 'Passagers', 'Statut', 'Action'].map(h => (
                                         <th key={h} className="px-6 py-4 text-xs font-bold uppercase tracking-wider">{h}</th>
@@ -241,15 +241,15 @@ export default function AdminDashboard({ kpis, revenus_tendances, top_routes, re
                             </thead>
                             <tbody>
                                 {departs.map(d => (
-                                    <tr key={d.bus_id + d.heure} className="hover:bg-surface-container-low transition-colors">
+                                    <tr key={d.bus_id + d.heure} className="hover:bg-gris-surface transition-colors">
                                         <td className="px-6 py-4 font-mono font-bold text-primary">{d.bus_id}</td>
-                                        <td className="px-6 py-4 text-sm font-medium text-on-surface">{d.destination}</td>
+                                        <td className="px-6 py-4 text-sm font-medium text-slate-dark">{d.destination}</td>
                                         <td className="px-6 py-4 text-sm font-mono text-on-surface-variant">{d.heure}</td>
                                         <td className="px-6 py-4 text-sm font-mono text-on-surface-variant">{d.passagers}</td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 text-[10px] font-bold uppercase rounded-lg ${
+                                            <span className={`px-2 py-1 text-[10px] font-bold uppercase rounded-xl ${
                                                 d.statut === 'in_progress' || d.statut === 'confirmed' ? 'bg-status-green-bg text-status-green-text' :
-                                                d.statut === 'retarde' ? 'bg-status-yellow-bg text-status-yellow-text' : 'bg-surface-container text-on-surface-variant'
+                                                d.statut === 'retarde' ? 'bg-status-yellow-bg text-status-yellow-text' : 'bg-gris-surface text-on-surface-variant'
                                             }`}>
                                                 {d.statut === 'in_progress' ? 'En route' : d.statut === 'confirmed' ? 'Programmé' : d.statut === 'retarde' ? 'Retardé' : d.statut}
                                             </span>

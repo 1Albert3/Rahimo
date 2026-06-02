@@ -63,13 +63,13 @@ interface TripOption {
 function StatCard({ icon: Icon, label, val, accent }: { icon: React.ElementType; label: string; val: string | number; accent: string }) {
     return (
         <motion.div variants={fadeUp}
-            className="bg-white rounded-xl shadow-ambient p-5 flex items-center gap-4"
+            className="bg-white rounded-xl shadow-xl p-5 flex items-center gap-4"
         >
             <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${accent}`}>
                 <Icon size={20} />
             </div>
             <div>
-                <p className="text-2xl font-black text-on-surface">{val}</p>
+                <p className="text-2xl font-black text-slate-dark">{val}</p>
                 <p className="text-xs text-on-surface-variant">{label}</p>
             </div>
         </motion.div>
@@ -84,10 +84,10 @@ function CancelModal({ billet, onClose }: { billet: Billet; onClose: () => void 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
-            <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full mx-4" onClick={e => e.stopPropagation()}>
+            <div className="bg-white rounded-xl shadow-xl p-6 max-w-md w-full mx-4" onClick={e => e.stopPropagation()}>
                 <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-black text-on-surface">Annuler la réservation</h3>
-                    <button onClick={onClose} className="p-1 hover:bg-surface-container-low rounded-lg"><X size={18} /></button>
+                    <h3 className="font-black text-slate-dark">Annuler la réservation</h3>
+                    <button onClick={onClose} className="p-1 hover:bg-gris-surface rounded-lg"><X size={18} /></button>
                 </div>
                 <div className="bg-status-red-bg rounded-xl p-4 mb-4 flex items-start gap-3">
                     <AlertTriangle size={20} className="text-status-red-text shrink-0 mt-0.5" />
@@ -107,7 +107,7 @@ function CancelModal({ billet, onClose }: { billet: Billet; onClose: () => void 
                 </div>
                 <div className="flex gap-3">
                     <button onClick={onClose}
-                        className="flex-1 py-2.5 rounded-xl border border-outline-variant text-on-surface font-semibold text-sm hover:bg-surface-container-low transition-colors"
+                        className="flex-1 py-2.5 rounded-xl border border-outline text-slate-dark font-semibold text-sm hover:bg-gris-surface transition-colors"
                     >Conserver</button>
                     <button onClick={() => post(route('booking.cancel', { booking: billet.id }))} disabled={processing}
                         className="flex-1 py-2.5 rounded-xl bg-status-red-text text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
@@ -137,24 +137,24 @@ function RescheduleModal({ billet, onClose }: { billet: Billet; onClose: () => v
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
-            <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <div className="bg-white rounded-xl shadow-xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
                 <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-black text-on-surface">Reporter le voyage</h3>
-                    <button onClick={onClose} className="p-1 hover:bg-surface-container-low rounded-lg"><X size={18} /></button>
+                    <h3 className="font-black text-slate-dark">Reporter le voyage</h3>
+                    <button onClick={onClose} className="p-1 hover:bg-gris-surface rounded-lg"><X size={18} /></button>
                 </div>
                 <p className="text-sm text-on-surface-variant mb-4">
                     {billet.trip?.departure_city} → {billet.trip?.arrival_city} · {billet.seats_count} place{billet.seats_count > 1 ? 's' : ''}
                 </p>
                 {!searched ? (
                     <button onClick={searchTrips} disabled={searching || processing}
-                        className="w-full py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+                        className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
                     >{searching ? 'Recherche...' : 'Chercher les disponibilités'}</button>
                 ) : (
                     <div className="space-y-2">
                         {trips.length === 0 && <p className="text-sm text-on-surface-variant text-center py-4">Aucun trajet disponible.</p>}
                         {trips.map((t: TripOption) => (
                             <label key={t.id}
-                                className={`block p-3 rounded-xl border-2 cursor-pointer transition-all ${data.new_trip_id === t.id ? 'border-primary bg-primary-fixed' : 'border-outline-variant hover:border-primary/50'}`}
+                                className={`block p-3 rounded-xl border-2 cursor-pointer transition-all ${data.new_trip_id === t.id ? 'border-primary bg-white' : 'border-outline hover:border-primary/50'}`}
                             >
                                 <div className="flex items-center gap-3">
                                     <input type="radio" name="new_trip" value={t.id}
@@ -163,18 +163,18 @@ function RescheduleModal({ billet, onClose }: { billet: Billet; onClose: () => v
                                         className="accent-primary"
                                     />
                                     <div className="flex-1">
-                                        <p className="font-bold text-sm text-on-surface">{t.departure_city} → {t.arrival_city}</p>
+                                        <p className="font-bold text-sm text-slate-dark">{t.departure_city} → {t.arrival_city}</p>
                                         <p className="text-xs text-on-surface-variant">{t.departure_date} · {t.departure_time} · {t.available_seats} places</p>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-black text-sm text-on-surface">{formatFCFA(t.price)}</p>
+                                        <p className="font-black text-sm text-slate-dark">{formatFCFA(t.price)}</p>
                                     </div>
                                 </div>
                             </label>
                         ))}
                         {trips.length > 0 && (
                             <button onClick={() => post(route('booking.reschedule', { booking: billet.id }))} disabled={!data.new_trip_id || processing}
-                                className="w-full mt-3 py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+                                className="w-full mt-3 py-3 rounded-xl bg-primary text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
                             >Confirmer le report</button>
                         )}
                     </div>
@@ -213,15 +213,15 @@ function ChangeSeatModal({ billet, onClose }: { billet: Billet; onClose: () => v
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
-            <div className="bg-white rounded-2xl shadow-2xl p-6 max-w-lg w-full mx-4" onClick={e => e.stopPropagation()}>
+            <div className="bg-white rounded-xl shadow-xl p-6 max-w-lg w-full mx-4" onClick={e => e.stopPropagation()}>
                 <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-black text-on-surface">Changer de siège</h3>
-                    <button onClick={onClose} className="p-1 hover:bg-surface-container-low rounded-lg"><X size={18} /></button>
+                    <h3 className="font-black text-slate-dark">Changer de siège</h3>
+                    <button onClick={onClose} className="p-1 hover:bg-gris-surface rounded-lg"><X size={18} /></button>
                 </div>
                 <p className="text-xs text-on-surface-variant mb-3">Sélectionnez {billet.seats_count} place{billet.seats_count > 1 ? 's' : ''}</p>
                 {seats.length === 0 && !loading && (
                     <button onClick={loadSeats}
-                        className="w-full py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white font-bold text-sm hover:opacity-90 transition-opacity"
+                        className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm hover:opacity-90 transition-opacity"
                     >Afficher le plan du bus</button>
                 )}
                 {loading && <p className="text-center text-sm text-on-surface-variant py-4">Chargement...</p>}
@@ -236,9 +236,9 @@ function ChangeSeatModal({ billet, onClose }: { billet: Billet; onClose: () => v
                                 return (
                                     <button key={s.numero} disabled={disabled} onClick={() => toggleSeat(s.numero)}
                                         className={`w-9 h-9 rounded-lg text-[10px] font-bold transition-all ${
-                                            selected ? 'bg-primary text-white scale-110 shadow-md' :
-                                            s.libre ? 'bg-surface-container-low text-on-surface hover:bg-primary-fixed hover:text-primary' :
-                                            'bg-surface-container text-on-surface-variant/30 cursor-not-allowed'
+                                            selected ? 'bg-primary text-white scale-110 shadow-xl' :
+                                            s.libre ? 'bg-gris-surface text-slate-dark hover:bg-white hover:text-primary' :
+                                            'bg-gris-surface text-on-surface-variant/30 cursor-not-allowed'
                                         }`}
                                         title={`Siège ${s.numero}${s.libre ? ' - Libre' : ' - Occupé'}`}
                                     >{s.numero}</button>
@@ -246,7 +246,7 @@ function ChangeSeatModal({ billet, onClose }: { billet: Billet; onClose: () => v
                             })}
                         </div>
                         <button onClick={() => post(route('booking.change-seat', { booking: billet.id }))} disabled={data.seat_numbers.length !== (billet.seats_count ?? 1) || processing}
-                            className="w-full py-3 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+                            className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
                         >Confirmer les sièges</button>
                     </>
                 )}
@@ -275,15 +275,15 @@ function BilletActions({ billet, onCancel, onReschedule, onChangeSeat }: {
                 className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-status-green-bg text-status-green-text font-semibold hover:opacity-80 transition-opacity"
             ><Share2 size={12} /> WhatsApp</button>
             <a href={route('booking.pdf', { booking: billet.id })}
-                className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container transition-colors"
+                className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-gris-surface text-slate-dark font-semibold hover:bg-gris-surface transition-colors"
             ><Download size={12} /> PDF</a>
             {billet.can_cancel && (
                 <>
                     <button onClick={onReschedule}
-                        className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container transition-colors"
+                        className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-gris-surface text-slate-dark font-semibold hover:bg-gris-surface transition-colors"
                     ><RefreshCw size={12} /> Reporter</button>
                     <button onClick={onChangeSeat}
-                        className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container transition-colors"
+                        className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-gris-surface text-slate-dark font-semibold hover:bg-gris-surface transition-colors"
                     ><Ticket size={12} /> Siège</button>
                     <button onClick={onCancel}
                         className="flex items-center gap-1 text-[11px] px-3 py-1.5 rounded-lg bg-status-red-bg text-status-red-text font-semibold hover:opacity-80 transition-opacity"
@@ -328,32 +328,32 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
     return (
         <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-10">
             <div className="mb-8">
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-1">Mon Espace</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-1">Mon Espace</h1>
                 <p className="text-on-surface-variant text-sm">Gérez vos tickets, colis et programme de fidélité</p>
             </div>
 
             <motion.div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8" variants={stagger} initial="initial" animate="animate">
-                <StatCard icon={Ticket} label="Tickets actifs" val={activeTickets} accent="bg-primary-fixed text-primary" />
+                <StatCard icon={Ticket} label="Tickets actifs" val={activeTickets} accent="bg-white text-primary" />
                 <StatCard icon={Package} label="Colis en cours" val={activeColis} accent="bg-status-blue-bg text-status-blue-text" />
-                <StatCard icon={Award} label="Points fidélité" val={points.toLocaleString('fr-FR')} accent="bg-kinetic-gold-light text-status-yellow-text" />
+                <StatCard icon={Award} label="Points fidélité" val={points.toLocaleString('fr-FR')} accent="bg-sahel-yellow/10 text-status-yellow-text" />
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 space-y-4">
                     {/* Tickets */}
                     <div className="flex items-center justify-between">
-                        <h2 className="font-bold text-on-surface flex items-center gap-2 text-sm">
+                        <h2 className="font-bold text-slate-dark flex items-center gap-2 text-sm">
                             <Ticket size={16} className="text-primary" /> Mes Tickets
                         </h2>
                         <Link href={route('trips.search')} className="text-xs text-primary hover:underline font-semibold">+ Nouveau ticket</Link>
                     </div>
 
                     {/* Filtres */}
-                    <div className="flex gap-1.5 bg-surface-container-low p-1 rounded-xl w-fit">
+                    <div className="flex gap-1.5 bg-gris-surface p-1 rounded-xl w-fit">
                         {FILTERS.map(f => (
                             <button key={f.key} onClick={() => setFilter(f.key)}
                                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                                    filter === f.key ? 'bg-white text-on-surface shadow-sm' : 'text-on-surface-variant hover:text-on-surface'
+                                    filter === f.key ? 'bg-white text-slate-dark shadow-sm' : 'text-on-surface-variant hover:text-slate-dark'
                                 }`}
                             >{f.label}</button>
                         ))}
@@ -362,15 +362,18 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                     {/* Liste tickets */}
                     <motion.div className="space-y-3" variants={stagger} initial="initial" animate="animate">
                         {filtered.length === 0 && (
-                            <div className="bg-white rounded-xl shadow-ambient p-8 text-center">
+                            <div className="bg-white rounded-xl shadow-xl p-8 text-center">
                                 <p className="text-on-surface-variant text-sm">Aucun ticket trouvé.</p>
                                 {filter !== 'all' && <button onClick={() => setFilter('all')} className="text-primary hover:underline text-sm mt-2">Voir tous</button>}
                                 {filter === 'all' && <Link href={route('trips.search')} className="text-primary hover:underline text-sm mt-2 inline-block">Réserver un voyage</Link>}
                             </div>
                         )}
-                        {filtered.map((b) => (
+                        {filtered.map((b) => {
+                            const s = b.status;
+                            const borderCls = s === 'confirmed' ? 'border-l-status-green-ring' : s === 'pending' ? 'border-l-status-yellow-ring' : s === 'cancelled' || s === 'annule' ? 'border-l-status-red-ring' : 'border-l-primary';
+                            return (
                             <motion.div key={b.id} variants={fadeUp}
-                                className="bg-white rounded-xl shadow-ambient p-5 hover:shadow-ambient transition-shadow"
+                                className={`bg-white rounded-xl shadow-xl p-5 hover:shadow-xl transition-shadow border-l-4 ${borderCls}`}
                             >
                                 <div className="flex items-start justify-between gap-3">
                                     <div className="flex-1 min-w-0">
@@ -381,10 +384,10 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                                                 <span className="text-[10px] bg-status-green-bg text-status-green-text px-1.5 py-0.5 rounded-full font-semibold">Payé</span>
                                             )}
                                             {b.refund_policy && b.can_cancel && (
-                                                <span className="text-[10px] bg-surface-container-low text-on-surface-variant px-1.5 py-0.5 rounded-full font-semibold" title={b.refund_policy}>{b.refund_policy}</span>
+                                                <span className="text-[10px] bg-gris-surface text-on-surface-variant px-1.5 py-0.5 rounded-full font-semibold" title={b.refund_policy}>{b.refund_policy}</span>
                                             )}
                                         </div>
-                                        <p className="font-semibold text-on-surface text-sm">{b.trip?.departure_city} → {b.trip?.arrival_city}</p>
+                                        <p className="font-semibold text-slate-dark text-sm">{b.trip?.departure_city} → {b.trip?.arrival_city}</p>
                                         <p className="text-xs text-on-surface-variant mt-0.5">
                                             {b.trip?.departure_date ? new Date(b.trip.departure_date).toLocaleDateString('fr-FR') : ''} · {b.trip?.departure_time} · {b.seats_count} place{b.seats_count > 1 ? 's' : ''}
                                         </p>
@@ -396,7 +399,7 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                                         />
                                     </div>
                                     <div className="text-right shrink-0">
-                                        <p className="font-black text-on-surface">{formatFCFA(b.total_price)}</p>
+                                        <p className="font-black text-slate-dark">{formatFCFA(b.total_price)}</p>
                                         <div className="flex items-center gap-2 mt-1.5 justify-end">
                                             {b.qr_code && b.qr_code.startsWith('http') && (
                                                 <img src={b.qr_code} alt="QR" className="w-6 h-6" />
@@ -409,22 +412,23 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                                         </div>
                                     </div>
                                 </div>
-                            </motion.div>
-                        ))}
+                                </motion.div>
+                            );
+                        })}
                     </motion.div>
 
                     {/* Activité récente */}
                     {activity.length > 0 && (
                         <div className="mt-6">
-                            <h2 className="font-bold text-on-surface flex items-center gap-2 text-sm mb-3">
+                            <h2 className="font-bold text-slate-dark flex items-center gap-2 text-sm mb-3">
                                 <History size={16} className="text-on-surface-variant" /> Activité récente
                             </h2>
-                            <div className="bg-white rounded-xl shadow-ambient">
+                            <div className="bg-white rounded-xl shadow-xl">
                                 {activity.map((a, i) => (
                                     <div key={i} className="flex items-center gap-3 px-5 py-3">
                                         <Clock size={14} className="text-on-surface-variant shrink-0" />
                                         <div className="flex-1 min-w-0">
-                                            <p className="text-sm text-on-surface truncate">{a.description ?? a.action}</p>
+                                            <p className="text-sm text-slate-dark truncate">{a.description ?? a.action}</p>
                                         </div>
                                         <span className="text-xs text-on-surface-variant shrink-0">{a.created_at}</span>
                                     </div>
@@ -438,7 +442,7 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                 <div className="space-y-5">
                     <div>
                         <div className="flex items-center justify-between mb-3">
-                            <h2 className="font-bold text-on-surface flex items-center gap-2 text-sm">
+                            <h2 className="font-bold text-slate-dark flex items-center gap-2 text-sm">
                                 <Package size={16} className="text-status-blue-text" /> Mes Colis
                             </h2>
                             <div className="flex items-center gap-2">
@@ -447,20 +451,24 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                             </div>
                         </div>
                         {myColis.length === 0 ? (
-                            <div className="bg-white rounded-xl shadow-ambient p-4 text-center">
+                            <div className="bg-white rounded-xl shadow-xl p-4 text-center">
                                 <p className="text-xs text-on-surface-variant">Aucun colis</p>
                             </div>
-                        ) : myColis.map((c) => (
-                            <div key={c.id} className="bg-white rounded-xl shadow-ambient p-4 mb-3 hover:shadow-ambient transition-shadow">
+                        ) : myColis.map((c) => {
+                            const cs = c.status;
+                            const cBorderCls = cs === 'livre' ? 'border-l-status-green-ring' : cs === 'en_cours' || cs === 'en_transit' ? 'border-l-status-yellow-ring' : cs === 'annule' ? 'border-l-status-red-ring' : 'border-l-primary';
+                            return (
+                            <div key={c.id} className={`bg-white rounded-xl shadow-xl p-4 mb-3 hover:shadow-xl transition-shadow border-l-4 ${cBorderCls}`}>
                                 <div className="flex items-center justify-between mb-1 flex-wrap gap-1">
                                     <span className="font-mono text-xs font-black text-status-blue-text">{c.tracking_number}</span>
                                     <StatusBadge status={COLIS_STATUS_MAP[c.status] ?? c.status} />
                                 </div>
-                                <p className="text-sm text-on-surface">{c.departure_city} → {c.arrival_city}</p>
+                                <p className="text-sm text-slate-dark">{c.departure_city} → {c.arrival_city}</p>
                                 {c.weight && <p className="text-xs text-on-surface-variant mt-0.5">{c.weight} kg · {formatFCFA(c.price)}</p>}
                                 {c.expedition_date && <p className="text-xs text-on-surface-variant">Expédié le {c.expedition_date}</p>}
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     {/* Fidélité */}
@@ -468,26 +476,26 @@ export default function ClientDashboard({ billets, colis, points_fidelite, fidel
                         <div className="absolute -right-4 -bottom-4 opacity-10"><Award size={72} /></div>
                         <div className="relative z-10">
                             <div className="flex items-center gap-2 mb-3">
-                                <Award size={16} className="text-kinetic-gold" />
+                                <Award size={16} className="text-sahel-yellow" />
                                 <span className="text-sm font-semibold">Programme Fidélité</span>
                             </div>
                             {loy && (
-                                <div className="text-xs text-on-primary-container mb-3 flex items-center gap-2 flex-wrap">
+                                <div className="text-xs text-white/70 mb-3 flex items-center gap-2 flex-wrap">
                                     <span className="bg-white/20 px-2 py-0.5 rounded-full font-bold uppercase">{loy.tier.label}</span>
                                     <span>— {loy.tier.discount}% de réduction</span>
                                 </div>
                             )}
                             <p className="text-3xl font-black mb-0.5">{points.toLocaleString('fr-FR')}</p>
-                            <p className="text-xs text-on-primary-container mb-4">points accumulés</p>
+                            <p className="text-xs text-white/70 mb-4">points accumulés</p>
                             {loy?.next ? (
                                 <>
                                     <div className="w-full bg-white/20 rounded-full h-1.5 mb-2">
-                                        <div className="bg-kinetic-gold h-1.5 rounded-full transition-all" style={{ width: `${loy.progress}%` }} />
+                                        <div className="bg-sahel-yellow h-1.5 rounded-full transition-all" style={{ width: `${loy.progress}%` }} />
                                     </div>
-                                    <p className="text-xs text-on-primary-container">{loy.next.needed} points avant le palier {loy.next.label}</p>
+                                    <p className="text-xs text-white/70">{loy.next.needed} points avant le palier {loy.next.label}</p>
                                 </>
                             ) : (
-                                <p className="text-xs text-on-primary-container"><span className="text-kinetic-gold font-bold">Platine</span> — palier maximum atteint !</p>
+                                <p className="text-xs text-white/70"><span className="text-sahel-yellow font-bold">Platine</span> — palier maximum atteint !</p>
                             )}
                         </div>
                     </div>

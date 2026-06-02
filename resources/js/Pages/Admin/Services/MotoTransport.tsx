@@ -61,35 +61,35 @@ export default function MotoTransport({ transports, stats }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Transport Motos</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Expédition de motos entre villes</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Transport Motos</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Expédition de motos entre villes</p>
                 </div>
                 <button onClick={() => setShowForm(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-lg text-sm font-semibold transition-all"
+                    className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-hover text-white rounded-xl text-sm font-semibold transition-all"
                 ><Plus size={16} /> Nouvel envoi</button>
             </div>
 
             <motion.div className="grid grid-cols-2 sm:grid-cols-4 gap-4" variants={stagger} initial="initial" animate="animate">
                 {ST.map((s) => (
                     <motion.div key={s.label} variants={fadeUp}
-                        className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3"
+                        className="bg-white rounded-xl border border-outline shadow-sm p-4 flex items-center gap-3"
                     >
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                             <s.icon size={18} className={s.color} />
                         </div>
                         <div>
                             <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </motion.div>
                 ))}
             </motion.div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto min-w-[600px] lg:min-w-0">
                     <table className="w-full text-sm">
                         <thead>
-                            <tr className=" text-admin-muted text-xs uppercase tracking-wider">
+                            <tr className=" text-on-surface-variant text-xs uppercase tracking-wider">
                                 <th className="text-left p-4">Expéditeur</th>
                                 <th className="text-left p-4">Destinataire</th>
                                 <th className="text-left p-4">Trajet</th>
@@ -100,39 +100,43 @@ export default function MotoTransport({ transports, stats }: Props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {transports.map((m) => (
-                                <tr key={m.id} className=" hover:bg-white/5 transition-colors">
+                            {transports.map((m) => {
+                                const s = m.status;
+                                const borderCls = s === 'livre' ? 'border-l-status-green-ring' : s === 'en_cours' ? 'border-l-status-yellow-ring' : s === 'en_attente' ? 'border-l-primary' : 'border-l-outline';
+                                return (
+                                <tr key={m.id} className={` hover:bg-gris-surface transition-colors border-l-4 ${borderCls}`}>
                                     <td className="p-4">
-                                        <p className="font-semibold text-white">{m.sender_name}</p>
-                                        <p className="text-admin-muted text-xs">{m.sender_phone}</p>
+                                        <p className="font-semibold text-slate-dark">{m.sender_name}</p>
+                                        <p className="text-on-surface-variant text-xs">{m.sender_phone}</p>
                                     </td>
                                     <td className="p-4">
-                                        <p className="text-white">{m.recipient_name}</p>
-                                        <p className="text-admin-muted text-xs">{m.recipient_phone}</p>
+                                        <p className="text-slate-dark">{m.recipient_name}</p>
+                                        <p className="text-on-surface-variant text-xs">{m.recipient_phone}</p>
                                     </td>
                                     <td className="p-4">
-                                        <span className="text-admin-muted">{m.origin_city} → {m.destination_city}</span>
+                                        <span className="text-on-surface-variant">{m.origin_city} → {m.destination_city}</span>
                                     </td>
                                     <td className="p-4">
-                                        <span className="flex items-center gap-1 text-admin-muted">
+                                        <span className="flex items-center gap-1 text-on-surface-variant">
                                             <Bike size={14} />
                                             {m.moto_brand} {m.moto_model}
                                             {m.moto_registration && <>({m.moto_registration})</>}
                                         </span>
                                     </td>
-                                    <td className="p-4 text-right text-white font-semibold">{m.amount.toLocaleString()} FCFA</td>
+                                    <td className="p-4 text-right text-slate-dark font-semibold">{m.amount.toLocaleString()} FCFA</td>
                                     <td className="p-4 text-center"><StatusBadge status={m.status} /></td>
                                     <td className="p-4 text-center">
                                         {STATUS_ACTIONS[m.status] && (
                                             <button onClick={() => router.post(route('admin.services.moto.status', { motoTransport: m.id }), { status: STATUS_ACTIONS[m.status].next } as any)}
-                                                className="px-3 py-1.5 bg-status-blue-text/20 text-status-blue-text rounded-lg text-xs font-semibold hover:bg-status-blue-text/30 transition-all"
+                                                className="px-3 py-1.5 bg-status-blue-text/20 text-status-blue-text rounded-xl text-xs font-semibold hover:bg-status-blue-text/30 transition-all"
                                             >{STATUS_ACTIONS[m.status].label}</button>
                                         )}
                                     </td>
                                 </tr>
-                            ))}
+                                );
+                            })}
                             {transports.length === 0 && (
-                                <tr><td colSpan={7} className="p-8 text-center text-admin-muted">Aucun transport</td></tr>
+                                <tr><td colSpan={7} className="p-8 text-center text-on-surface-variant">Aucun transport</td></tr>
                             )}
                         </tbody>
                     </table>
@@ -141,79 +145,79 @@ export default function MotoTransport({ transports, stats }: Props) {
 
             {showForm && (
                 <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50" onClick={() => setShowForm(false)}>
-                    <div className="bg-admin-card rounded-2xl border border-white/10 p-6 w-full max-w-lg mx-2 sm:mx-4" onClick={e => e.stopPropagation()}>
+                    <div className="bg-white rounded-xl border border-outline shadow-sm p-6 w-full max-w-lg mx-2 sm:mx-4" onClick={e => e.stopPropagation()}>
                         <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-lg font-bold text-white">Nouvel envoi moto</h2>
-                            <button onClick={() => setShowForm(false)} className="text-admin-muted hover:text-white transition-colors"><X size={20} /></button>
+                            <h2 className="text-lg font-bold text-slate-dark">Nouvel envoi moto</h2>
+                            <button onClick={() => setShowForm(false)} className="text-on-surface-variant hover:text-slate-dark transition-colors"><X size={20} /></button>
                         </div>
                         <form onSubmit={submit} className="space-y-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Expéditeur *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Expéditeur *</label>
                                     <input value={data.sender_name} onChange={e => setData('sender_name', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Tél. expéditeur *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Tél. expéditeur *</label>
                                     <input value={data.sender_phone} onChange={e => setData('sender_phone', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Destinataire *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Destinataire *</label>
                                     <input value={data.recipient_name} onChange={e => setData('recipient_name', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Tél. destinataire *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Tél. destinataire *</label>
                                     <input value={data.recipient_phone} onChange={e => setData('recipient_phone', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Ville départ *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Ville départ *</label>
                                     <input value={data.origin_city} onChange={e => setData('origin_city', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Ville arrivée *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Ville arrivée *</label>
                                     <input value={data.destination_city} onChange={e => setData('destination_city', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-3 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Marque *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Marque *</label>
                                     <input value={data.moto_brand} onChange={e => setData('moto_brand', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Modèle *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Modèle *</label>
                                     <input value={data.moto_model} onChange={e => setData('moto_model', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Immatriculation</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Immatriculation</label>
                                     <input value={data.moto_registration} onChange={e => setData('moto_registration', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Montant (FCFA) *</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Montant (FCFA) *</label>
                                     <input type="number" value={data.amount} onChange={e => setData('amount', e.target.value)} required
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                                 <div>
-                                    <label className="text-xs text-admin-muted mb-1 block">Notes</label>
+                                    <label className="text-xs text-on-surface-variant mb-1 block">Notes</label>
                                     <input value={data.notes} onChange={e => setData('notes', e.target.value)}
-                                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-primary" />
+                                        className="w-full bg-gris-surface border border-outline rounded-xl px-3 py-2 text-slate-dark text-sm focus:outline-none focus:border-primary" />
                                 </div>
                             </div>
                             <button type="submit" disabled={processing}
-                                className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-lg font-semibold text-sm transition-all disabled:opacity-50"
+                                className="w-full py-2.5 bg-primary hover:bg-primary-hover text-white rounded-xl font-semibold text-sm transition-all disabled:opacity-50"
                             >{processing ? 'Enregistrement...' : 'Enregistrer'}</button>
                         </form>
                     </div>

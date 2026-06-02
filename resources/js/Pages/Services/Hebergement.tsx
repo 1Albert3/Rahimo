@@ -31,11 +31,11 @@ export default function Hebergement() {
                 <div className="w-16 h-16 bg-status-green-bg rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} className="text-status-green-text" />
                 </div>
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-2">Réservation effectuée !</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-2">Réservation effectuée !</h1>
                 <p className="text-on-surface-variant text-sm mb-6">Un agent vous contactera pour confirmer votre séjour.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Link href={route('services.public.hebergement')} className="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold text-sm">Nouvelle réservation</Link>
-                    <Link href={route('services.index')} className="px-6 py-3 border border-outline-variant text-on-surface rounded-xl font-semibold text-sm">Retour aux services</Link>
+                    <Link href={route('services.public.hebergement')} className="px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm">Nouvelle réservation</Link>
+                    <Link href={route('services.index')} className="px-6 py-3 border border-outline text-slate-dark rounded-xl font-semibold text-sm">Retour aux services</Link>
                 </div>
             </div>
         );
@@ -43,16 +43,16 @@ export default function Hebergement() {
 
     return (
         <div className="max-w-lg mx-auto px-4 md:px-6 py-10">
-            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-on-surface mb-6 transition-colors">
+            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-slate-dark mb-6 transition-colors">
                 <ArrowLeft size={14} /> Services
             </Link>
 
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-purple-500 flex items-center justify-center">
                     <Bed size={20} className="text-white" />
                 </div>
                 <div>
-                    <h1 className="text-xl font-black text-on-surface tracking-tight">Hébergement</h1>
+                    <h1 className="text-xl font-black text-slate-dark tracking-tight">Hébergement</h1>
                     <p className="text-xs text-on-surface-variant">Réservez une chambre dans nos gares</p>
                 </div>
             </div>
@@ -61,11 +61,11 @@ export default function Hebergement() {
                 {ROOM_TYPES.map(r => (
                     <button key={r.key} type="button" onClick={() => updateRoom(r.key, r.price)}
                         className={`w-full text-left p-4 rounded-xl border-2 transition-all ${
-                            data.room_type === r.key ? 'border-purple-500 bg-purple-50' : 'border-outline-variant hover:border-purple-500/50'
+                            data.room_type === r.key ? 'border-purple-500 bg-purple-50' : 'border-outline hover:border-purple-500/50'
                         }`}
                     >
                         <div className="flex items-center justify-between mb-1">
-                            <p className="font-black text-on-surface">{r.label}</p>
+                            <p className="font-black text-slate-dark">{r.label}</p>
                             <p className="font-bold text-sm text-purple-600">{r.price}</p>
                         </div>
                         <p className="text-xs text-on-surface-variant">{r.desc}</p>
@@ -75,7 +75,7 @@ export default function Hebergement() {
 
             <motion.form onSubmit={e => { e.preventDefault(); post(route('services.public.hebergement.store')); }}
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl shadow-ambient p-6 space-y-4"
+                className="bg-white rounded-xl shadow-xl p-6 space-y-4"
             >
                 <div>
                     <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block mb-1">Nom complet *</label>
@@ -111,7 +111,7 @@ export default function Hebergement() {
                     />
                 </div>
                 <button type="submit" disabled={processing}
-                    className="w-full py-3 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-ambient"
+                    className="w-full py-3 bg-purple-500 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-xl"
                 >{processing ? 'Envoi...' : 'Réserver ma chambre'}</button>
             </motion.form>
         </div>

@@ -27,11 +27,11 @@ export default function Location({ types }: Props) {
                 <div className="w-16 h-16 bg-status-green-bg rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle size={32} className="text-status-green-text" />
                 </div>
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-2">Demande envoyée !</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-2">Demande envoyée !</h1>
                 <p className="text-on-surface-variant text-sm mb-6">Nous vous contacterons sous 24h pour finaliser la location.</p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Link href={route('services.public.location')} className="px-6 py-3 bg-gradient-to-br from-primary to-primary-container text-white rounded-xl font-bold text-sm">Nouvelle demande</Link>
-                    <Link href={route('services.index')} className="px-6 py-3 border border-outline-variant text-on-surface rounded-xl font-semibold text-sm">Retour aux services</Link>
+                    <Link href={route('services.public.location')} className="px-6 py-3 bg-primary text-white rounded-xl font-bold text-sm">Nouvelle demande</Link>
+                    <Link href={route('services.index')} className="px-6 py-3 border border-outline text-slate-dark rounded-xl font-semibold text-sm">Retour aux services</Link>
                 </div>
             </div>
         );
@@ -39,23 +39,23 @@ export default function Location({ types }: Props) {
 
     return (
         <div className="max-w-lg mx-auto px-4 md:px-6 py-10">
-            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-on-surface mb-6 transition-colors">
+            <Link href={route('services.index')} className="inline-flex items-center gap-1 text-sm text-on-surface-variant hover:text-slate-dark mb-6 transition-colors">
                 <ArrowLeft size={14} /> Services
             </Link>
 
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center">
                     <Car size={20} className="text-white" />
                 </div>
                 <div>
-                    <h1 className="text-xl font-black text-on-surface tracking-tight">Location</h1>
+                    <h1 className="text-xl font-black text-slate-dark tracking-tight">Location</h1>
                     <p className="text-xs text-on-surface-variant">Louez un véhicule pour vos déplacements</p>
                 </div>
             </div>
 
             <motion.form onSubmit={e => { e.preventDefault(); post(route('services.public.location.store')); }}
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl shadow-ambient p-6 space-y-4"
+                className="bg-white rounded-xl shadow-xl p-6 space-y-4"
             >
                 <div>
                     <label className="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant block mb-1">Type *</label>
@@ -63,7 +63,7 @@ export default function Location({ types }: Props) {
                         {types.map(t => (
                             <button key={t.key} type="button" onClick={() => setData('type', t.key)}
                                 className={`p-3 rounded-xl border-2 text-center transition-all ${
-                                    data.type === t.key ? 'border-emerald-500 bg-emerald-50' : 'border-outline-variant hover:border-emerald-500/50'
+                                    data.type === t.key ? 'border-emerald-500 bg-emerald-50' : 'border-outline hover:border-emerald-500/50'
                                 }`}
                             >
                                 {t.key === 'voiture' ? <Car size={20} className="mx-auto mb-1" /> : <Bike size={20} className="mx-auto mb-1" />}
@@ -140,7 +140,7 @@ export default function Location({ types }: Props) {
                 </div>
 
                 <button type="submit" disabled={processing}
-                    className="w-full py-3 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-ambient"
+                    className="w-full py-3 bg-emerald-500 text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 shadow-xl"
                 >{processing ? 'Envoi...' : 'Envoyer ma demande'}</button>
             </motion.form>
         </div>

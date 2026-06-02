@@ -26,8 +26,8 @@ export default function SpeedAlerts({ alerts, stats }: Props) {
     return (
         <div className="w-full max-w-7xl space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-white">Alertes Excès de Vitesse</h1>
-                <p className="text-admin-muted text-sm mt-0.5">Surveillance GPS en temps réel des dépassements de vitesse</p>
+                <h1 className="text-xl font-bold text-slate-dark">Alertes Excès de Vitesse</h1>
+                <p className="text-on-surface-variant text-sm mt-0.5">Surveillance GPS en temps réel des dépassements de vitesse</p>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
@@ -36,22 +36,22 @@ export default function SpeedAlerts({ alerts, stats }: Props) {
                     { label: 'Niveau DANGER', val: stats.danger, icon: Gauge, color: 'text-status-red-text', bg: 'bg-status-red-bg/30' },
                     { label: 'Aujourd\'hui', val: stats.today, icon: AlertTriangle, color: 'text-status-yellow-text', bg: 'bg-status-yellow-bg/30' },
                 ].map(s => (
-                    <div key={s.label} className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                    <div key={s.label} className="bg-white rounded-xl border border-outline shadow-sm p-4 flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                             <s.icon size={18} className={s.color} />
                         </div>
                         <div>
                             <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </div>
                 ))}
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Véhicule', 'Chauffeur', 'Vitesse', 'Limite', 'Niveau', 'Notification', 'Date', 'Logs', 'Action'].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -60,15 +60,15 @@ export default function SpeedAlerts({ alerts, stats }: Props) {
                         </thead>
                         <tbody>
                             {alerts.data.map(a => (
-                                <tr key={a.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 font-semibold text-white font-mono">{a.vehicle}</td>
-                                    <td className="px-4 py-3 text-admin-muted">{a.driver ?? '—'}</td>
+                                <tr key={a.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 font-semibold text-slate-dark font-mono">{a.vehicle}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{a.driver ?? '—'}</td>
                                     <td className="px-4 py-3">
                                         <span className={`font-mono font-bold ${a.speed > 105 ? 'text-status-red-text' : 'text-status-yellow-text'}`}>
                                             {a.speed} km/h
                                         </span>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted font-mono">{a.speed_limit}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant font-mono">{a.speed_limit}</td>
                                     <td className="px-4 py-3">
                                         <span className={`text-xs font-bold px-2 py-1 rounded-lg ${
                                             a.level === 'danger'
@@ -78,9 +78,9 @@ export default function SpeedAlerts({ alerts, stats }: Props) {
                                             {a.level === 'danger' ? 'DANGER' : 'AVERTISSEMENT'}
                                         </span>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted text-xs max-w-[200px] truncate">{a.notification ?? '—'}</td>
-                                    <td className="px-4 py-3 text-admin-muted text-xs font-mono">{a.created_at}</td>
-                                    <td className="px-4 py-3 text-admin-muted">{a.log_count}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant text-xs max-w-[200px] truncate">{a.notification ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant text-xs font-mono">{a.created_at}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{a.log_count}</td>
                                     <td className="px-4 py-3">
                                         {a.status === 'active' && (
                                             <div className="flex gap-1">
@@ -93,7 +93,7 @@ export default function SpeedAlerts({ alerts, stats }: Props) {
                                             </div>
                                         )}
                                         {a.status === 'acknowledged' && (
-                                            <span className="text-xs text-admin-muted">Acquitté</span>
+                                            <span className="text-xs text-on-surface-variant">Acquitté</span>
                                         )}
                                         {a.status === 'resolved' && (
                                             <span className="text-xs text-status-green-text">Résolu</span>
@@ -102,7 +102,7 @@ export default function SpeedAlerts({ alerts, stats }: Props) {
                                 </tr>
                             ))}
                             {alerts.data.length === 0 && (
-                                <tr><td colSpan={9} className="text-center py-8 text-admin-muted text-sm">Aucune alerte de vitesse.</td></tr>
+                                <tr><td colSpan={9} className="text-center py-8 text-on-surface-variant text-sm">Aucune alerte de vitesse.</td></tr>
                             )}
                         </tbody>
                     </table>

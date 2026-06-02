@@ -8,7 +8,7 @@ import type { Fidelite, PageProps, Trajet } from '@/types';
 
 interface Props extends PageProps { trajet?: Trajet; sieges?: number[]; fidelite?: Fidelite | null; }
 
-const inputCls = 'w-full px-3 py-3 bg-surface-container-low rounded-lg text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/15 outline-none transition-all';
+const inputCls = 'w-full px-3 py-3 bg-gris-surface rounded-lg text-sm text-slate-dark placeholder:text-on-surface-variant/60 focus:bg-white focus:ring-2 focus:ring-primary/15 outline-none transition-all';
 const labelCls = 'text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant';
 
 const CHANNELS = [
@@ -88,7 +88,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
     return (
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
             <div className="mb-6">
-                <h1 className="text-2xl font-black text-on-surface tracking-tight mb-1">Informations & Paiement</h1>
+                <h1 className="text-2xl font-black text-slate-dark tracking-tight mb-1">Informations & Paiement</h1>
                 <p className="text-on-surface-variant text-sm">Complétez vos informations pour finaliser la réservation</p>
             </div>
 
@@ -96,22 +96,22 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     <div className="lg:col-span-7 space-y-5">
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                            className="bg-white rounded-xl shadow-ambient p-6"
+                            className="bg-white rounded-xl shadow-xl p-6"
                         >
-                            <h2 className="font-bold text-on-surface mb-5 flex items-center gap-2 text-sm">
-                                <div className="w-6 h-6 bg-primary-fixed rounded-md flex items-center justify-center">
+                            <h2 className="font-bold text-slate-dark mb-5 flex items-center gap-2 text-sm">
+                                <div className="w-6 h-6 bg-white rounded-md flex items-center justify-center">
                                     <User size={13} className="text-primary" />
                                 </div>
                                 Informations Passager
                             </h2>
 
                             {isLoggedIn && (
-                                <label className="flex items-center gap-3 mb-5 p-4 bg-surface-container-low rounded-xl cursor-pointer">
+                                <label className="flex items-center gap-3 mb-5 p-4 bg-gris-surface rounded-xl cursor-pointer">
                                     <input type="checkbox" checked={forOther} onChange={(e) => setForOther(e.target.checked)}
                                         className="text-primary focus:ring-primary/20 rounded"
                                     />
                                     <div>
-                                        <p className="text-sm font-semibold text-on-surface">Acheter pour une autre personne</p>
+                                        <p className="text-sm font-semibold text-slate-dark">Acheter pour une autre personne</p>
                                         <p className="text-xs text-on-surface-variant">Le billet sera nominatif pour le passager renseigné ci-dessous</p>
                                     </div>
                                 </label>
@@ -136,10 +136,10 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                         </motion.div>
 
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                            className="bg-white rounded-xl shadow-ambient p-6"
+                            className="bg-white rounded-xl shadow-xl p-6"
                         >
-                            <h2 className="font-bold text-on-surface mb-5 flex items-center gap-2 text-sm">
-                                <div className="w-6 h-6 bg-primary-fixed rounded-md flex items-center justify-center">
+                            <h2 className="font-bold text-slate-dark mb-5 flex items-center gap-2 text-sm">
+                                <div className="w-6 h-6 bg-white rounded-md flex items-center justify-center">
                                     <CreditCard size={13} className="text-primary" />
                                 </div>
                                 Mode de Paiement
@@ -153,8 +153,8 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                     <label key={opt.val}
                                         className={`flex items-start gap-3 p-4 rounded-xl cursor-pointer transition-all ${
                                             data.payment_method === opt.val
-                                                ? 'bg-primary-fixed ring-2 ring-primary'
-                                                : 'bg-surface-container-low hover:bg-surface-container'
+                                                ? 'bg-white ring-2 ring-primary'
+                                                : 'bg-gris-surface hover:bg-gris-surface'
                                         }`}
                                     >
                                         <input type="radio" name="payment_method" value={opt.val}
@@ -163,7 +163,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                             className="mt-0.5 text-primary focus:ring-primary/20"
                                         />
                                         <div>
-                                            <p className="text-sm font-semibold text-on-surface">{opt.label}</p>
+                                            <p className="text-sm font-semibold text-slate-dark">{opt.label}</p>
                                             <p className="text-xs text-on-surface-variant">{opt.sub}</p>
                                         </div>
                                     </label>
@@ -177,17 +177,17 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                 </div>
                             )}
                             {data.payment_method === 'cash' && (
-                                <p className="text-xs text-on-surface-variant bg-surface-container-low p-3 rounded-lg">
+                                <p className="text-xs text-on-surface-variant bg-gris-surface p-3 rounded-lg">
                                     Présentez-vous au guichet avec votre numéro de réservation pour effectuer le paiement.
                                 </p>
                             )}
                         </motion.div>
 
                         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-                            className="bg-white rounded-xl shadow-ambient p-6"
+                            className="bg-white rounded-xl shadow-xl p-6"
                         >
-                            <h2 className="font-bold text-on-surface mb-5 flex items-center gap-2 text-sm">
-                                <div className="w-6 h-6 bg-primary-fixed rounded-md flex items-center justify-center">
+                            <h2 className="font-bold text-slate-dark mb-5 flex items-center gap-2 text-sm">
+                                <div className="w-6 h-6 bg-white rounded-md flex items-center justify-center">
                                     <MessageSquare size={13} className="text-primary" />
                                 </div>
                                 Réception du Ticket
@@ -199,8 +199,8 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                         <label key={ch.val}
                                             className={`flex items-start gap-3 p-4 rounded-xl cursor-pointer transition-all ${
                                                 data.notification_channel === ch.val
-                                                    ? 'bg-primary-fixed ring-2 ring-primary'
-                                                    : 'bg-surface-container-low hover:bg-surface-container'
+                                                    ? 'bg-white ring-2 ring-primary'
+                                                    : 'bg-gris-surface hover:bg-gris-surface'
                                             }`}
                                         >
                                             <input type="radio" name="notification_channel" value={ch.val}
@@ -210,7 +210,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                             />
                                             <div>
                                                 <Icon size={16} className="text-primary mb-1" />
-                                                <p className="text-sm font-semibold text-on-surface">{ch.label}</p>
+                                                <p className="text-sm font-semibold text-slate-dark">{ch.label}</p>
                                                 <p className="text-xs text-on-surface-variant">{ch.sub}</p>
                                             </div>
                                         </label>
@@ -221,7 +221,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
 
                         {isLoggedIn && forOther && (
                             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                                className="bg-primary-fixed rounded-xl p-5 text-primary flex items-start gap-3"
+                                className="bg-white rounded-xl p-5 text-primary flex items-start gap-3"
                             >
                                 <Info size={18} className="shrink-0 mt-0.5" />
                                 <div>
@@ -233,8 +233,8 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                     </div>
 
                     <div className="lg:col-span-5">
-                        <div className="sticky top-20 bg-white rounded-xl shadow-ambient p-6 space-y-5">
-                            <h3 className="font-bold text-on-surface">Récapitulatif</h3>
+                        <div className="sticky top-20 bg-white rounded-xl shadow-xl p-6 space-y-5">
+                            <h3 className="font-bold text-slate-dark">Récapitulatif</h3>
 
                             <div className="space-y-2.5 text-sm">
                                 {[
@@ -245,7 +245,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                 ].map(({ label, val, mono }) => (
                                     <div key={label} className="flex justify-between">
                                         <span className="text-on-surface-variant">{label}</span>
-                                        <span className={`font-medium text-on-surface ${mono ? 'font-mono text-xs' : ''}`}>{val}</span>
+                                        <span className={`font-medium text-slate-dark ${mono ? 'font-mono text-xs' : ''}`}>{val}</span>
                                     </div>
                                 ))}
                             </div>
@@ -271,7 +271,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                                         <span>-{formatFCFA(promoDiscount)}</span>
                                     </div>
                                 )}
-                                <div className="flex justify-between font-black text-lg text-on-surface pt-2">
+                                <div className="flex justify-between font-black text-lg text-slate-dark pt-2">
                                     <span>Total</span>
                                     <span>{formatFCFA(total)}</span>
                                 </div>
@@ -296,7 +296,7 @@ export default function Checkout({ trajet, sieges, fidelite }: Props) {
                             </div>
 
                             <motion.button type="submit" whileTap={{ scale: 0.97 }} disabled={processing}
-                                className="w-full bg-gradient-to-br from-primary to-primary-container hover:from-primary hover:to-primary text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-ambient disabled:opacity-70"
+                                className="w-full bg-primary hover:bg-kinetic-red-hover text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-xl disabled:opacity-70"
                             >
                                 {processing && <Loader2 size={16} className="animate-spin" />}
                                 Confirmer & Payer {formatFCFA(total)}

@@ -17,14 +17,14 @@ export default function RhPersonnel({ personnel }: Props) {
     return (
         <div className="w-full max-w-7xl space-y-6">
             <div>
-                <h1 className="text-xl font-bold text-white">Personnel</h1>
-                <p className="text-admin-muted text-sm mt-0.5">{personnel.length} employé(s)</p>
+                <h1 className="text-xl font-bold text-slate-dark">Personnel</h1>
+                <p className="text-on-surface-variant text-sm mt-0.5">{personnel.length} employé(s)</p>
             </div>
 
-            <div className="bg-admin-card rounded-xl border border-white/5 overflow-hidden">
+            <div className="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-white/5 text-admin-muted text-xs uppercase tracking-wider">
+                        <thead className="bg-gris-surface text-on-surface-variant text-xs uppercase tracking-wider">
                             <tr>
                                 {['Nom', 'Contact', 'Ville', 'Rôle', 'Contrat', 'Fin Contrat', 'Statut', ''].map(h => (
                                     <th key={h} className="px-4 py-3 text-left font-semibold">{h}</th>
@@ -33,16 +33,16 @@ export default function RhPersonnel({ personnel }: Props) {
                         </thead>
                         <tbody>
                             {personnel.map(p => (
-                                <tr key={p.id} className="hover:bg-white/5 transition-colors">
-                                    <td className="px-4 py-3 font-semibold text-white">{p.name}</td>
+                                <tr key={p.id} className="hover:bg-gris-surface transition-colors">
+                                    <td className="px-4 py-3 font-semibold text-slate-dark">{p.name}</td>
                                     <td className="px-4 py-3">
-                                        <p className="text-admin-muted text-xs">{p.email}</p>
-                                        <p className="text-admin-muted text-xs font-mono">{p.phone}</p>
+                                        <p className="text-on-surface-variant text-xs">{p.email}</p>
+                                        <p className="text-on-surface-variant text-xs font-mono">{p.phone}</p>
                                     </td>
-                                    <td className="px-4 py-3 text-admin-muted">{p.city ?? '—'}</td>
-                                    <td className="px-4 py-3 text-admin-muted capitalize">{p.role}</td>
-                                    <td className="px-4 py-3 text-admin-muted capitalize">{p.contract_type ?? '—'}</td>
-                                    <td className="px-4 py-3 text-admin-muted font-mono">{p.contract_end ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant">{p.city ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant capitalize">{p.role}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant capitalize">{p.contract_type ?? '—'}</td>
+                                    <td className="px-4 py-3 text-on-surface-variant font-mono">{p.contract_end ?? '—'}</td>
                                     <td className="px-4 py-3"><StatusBadge status={p.is_active ? 'actif' : 'inactif'} /></td>
                                     <td className="px-4 py-3">
                                         <Link href={route('admin.rh.personnel.show', p.id)}

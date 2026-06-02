@@ -43,8 +43,8 @@ export default function Alertes({ actives, traitees, stats }: Props) {
         <div className="w-full max-w-7xl space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Alertes & Sécurité</h1>
-                    <p className="text-admin-muted text-sm mt-0.5">Surveillance en temps réel du réseau</p>
+                    <h1 className="text-xl font-bold text-slate-dark">Alertes & Sécurité</h1>
+                    <p className="text-on-surface-variant text-sm mt-0.5">Surveillance en temps réel du réseau</p>
                 </div>
                 <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 bg-status-green-text rounded-full animate-pulse" />
@@ -55,21 +55,21 @@ export default function Alertes({ actives, traitees, stats }: Props) {
             <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-4" variants={stagger} initial="initial" animate="animate">
                 {STATS.map((s) => (
                     <motion.div key={s.label} variants={fadeUp}
-                        className="bg-admin-card rounded-xl border border-white/5 p-4 flex items-center gap-3"
+                        className="bg-white rounded-xl border border-outline shadow-sm p-4 flex items-center gap-3"
                     >
-                        <div className={`w-10 h-10 rounded-lg ${s.bg} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-xl ${s.bg} flex items-center justify-center`}>
                             <Shield size={18} className={s.color} />
                         </div>
                         <div>
                             <p className={`text-2xl font-bold ${s.color}`}>{s.val}</p>
-                            <p className="text-xs text-admin-muted">{s.label}</p>
+                            <p className="text-xs text-on-surface-variant">{s.label}</p>
                         </div>
                     </motion.div>
                 ))}
             </motion.div>
 
             <div>
-                <h2 className="text-sm font-semibold uppercase tracking-wider text-admin-muted mb-3 flex items-center gap-2">
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-on-surface-variant mb-3 flex items-center gap-2">
                     <Bell size={14} /> Alertes Actives ({actives.length})
                 </h2>
                 <motion.div className="space-y-3" variants={stagger} initial="initial" animate="animate">
@@ -87,22 +87,22 @@ export default function Alertes({ actives, traitees, stats }: Props) {
                                         <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-sm ${cfg.badge}`}>
                                             {a.categorie}
                                         </span>
-                                        {a.bus && <span className="font-mono text-xs font-bold text-admin-muted">{a.bus}</span>}
-                                        {a.lieu && <span className="text-xs text-admin-muted">{a.lieu}</span>}
-                                        <span className="text-xs text-admin-muted ml-auto flex items-center gap-1">
+                                        {a.bus && <span className="font-mono text-xs font-bold text-on-surface-variant">{a.bus}</span>}
+                                        {a.lieu && <span className="text-xs text-on-surface-variant">{a.lieu}</span>}
+                                        <span className="text-xs text-on-surface-variant ml-auto flex items-center gap-1">
                                             <Clock size={11} /> {a.temps}
                                         </span>
                                     </div>
-                                    <p className="font-semibold text-white text-sm mb-1">{a.titre}</p>
-                                    <p className="text-xs text-admin-muted leading-relaxed">{a.description}</p>
+                                    <p className="font-semibold text-slate-dark text-sm mb-1">{a.titre}</p>
+                                    <p className="text-xs text-on-surface-variant leading-relaxed">{a.description}</p>
                                 </div>
                             </motion.div>
                         );
                     })}
                     {actives.length === 0 && (
-                        <div className="bg-admin-card rounded-xl border border-white/5 p-8 text-center">
+                        <div className="bg-white rounded-xl border border-outline shadow-sm p-8 text-center">
                             <CheckCheck size={32} className="text-status-green-text mx-auto mb-2" />
-                            <p className="text-admin-muted text-sm">Aucune alerte active. Tout est sous contrôle.</p>
+                            <p className="text-on-surface-variant text-sm">Aucune alerte active. Tout est sous contrôle.</p>
                         </div>
                     )}
                 </motion.div>
@@ -110,7 +110,7 @@ export default function Alertes({ actives, traitees, stats }: Props) {
 
             {traitees.length > 0 && (
                 <div>
-                    <h2 className="text-sm font-semibold uppercase tracking-wider text-admin-muted mb-3 flex items-center gap-2">
+                    <h2 className="text-sm font-semibold uppercase tracking-wider text-on-surface-variant mb-3 flex items-center gap-2">
                         <CheckCheck size={14} /> Historique ({traitees.length})
                     </h2>
                     <motion.div className="space-y-2" variants={stagger} initial="initial" animate="animate">
@@ -118,19 +118,19 @@ export default function Alertes({ actives, traitees, stats }: Props) {
                             const cfg = TYPE_CONFIG[a.type] ?? TYPE_CONFIG.info;
                             return (
                                 <motion.div key={a.id} variants={fadeUp}
-                                    className="bg-white/5 border border-white/5 rounded-xl p-4 flex gap-3 opacity-60"
+                                    className="bg-gris-surface border border-outline rounded-xl p-4 flex gap-3 opacity-60"
                                 >
                                     <div className="shrink-0 mt-0.5">
-                                        <CheckCheck size={16} className="text-admin-muted" />
+                                        <CheckCheck size={16} className="text-on-surface-variant" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-2 mb-0.5">
                                             <span className={`text-[9px] font-bold uppercase px-1.5 py-0.5 rounded-sm ${cfg.badge}`}>
                                                 {a.categorie}
                                             </span>
-                                            <span className="text-xs text-admin-muted">{a.temps}</span>
+                                            <span className="text-xs text-on-surface-variant">{a.temps}</span>
                                         </div>
-                                        <p className="text-xs text-admin-muted">{a.titre}</p>
+                                        <p className="text-xs text-on-surface-variant">{a.titre}</p>
                                     </div>
                                 </motion.div>
                             );
