@@ -1,0 +1,59 @@
+/* Design tokens – Rahimo Transport (Kinetic Horizon) */
+:root {
+    /* Brand */
+    --brand-red: #E60000;
+    --brand-red-700: #C20000;
+    --brand-dark: #0F172A;
+    --muted-blue: #F9F9F9;
+    --card-bg: #FFFFFF;
+    --accent: #E60000;
+
+    /* Surface / background */
+    --background: #FFFFFF;
+    --on-background: #475569;
+    --surface: #FFFFFF;
+    --on-surface: #475569;
+    --surface-variant: #F9F9F9;
+    --on-surface-variant: #64748B;
+
+    /* Outline */
+    --outline: #F1F5F9;
+    --outline-variant: #E2E8F0;
+
+    /* Status */
+    --status-green-bg: #F0FDF4;
+    --status-green-text: #166534;
+    --status-red-bg: #FEF2F2;
+    --status-red-text: #DC2626;
+    --status-yellow-bg: #FEFCE8;
+    --status-yellow-text: #854D0E;
+    --status-blue-bg: #EFF6FF;
+    --status-blue-text: #1E40AF;
+}
+
+/* Global helpers */
+.header-bg {
+    background: linear-gradient(180deg, var(--brand-red) 0%, rgba(230, 0, 0, 0.85) 60%);
+}
+
+.card-style {
+    background: var(--card-bg);
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(11, 17, 23, 0.06);
+}
+
+.section-muted {
+    background: var(--muted-blue);
+}
+
+.footer-dark {
+    background: #0F172A;
+    color: #CBD5E1;
+}
+
+/* Small responsive tweaks */
+@media (min-width: 768px) {
+    .header-hero {
+        padding: 4rem 2rem;
+    }
+}

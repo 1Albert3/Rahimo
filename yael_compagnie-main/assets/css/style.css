@@ -1,0 +1,207 @@
+:root {
+  --primary-orange: red;
+  --primary-black: #1a1a1a;
+  --primary-white: #fff;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--medium-gray);
+  color: var(--primary-black);
+}
+
+.auth-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ---- GAUCHE ---- */
+.auth-left {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-orange), red);
+  overflow: hidden;
+}
+.auth-left::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/images/1.jpeg') center/cover no-repeat;
+  opacity: 0.9;
+  z-index: 1;
+}
+.auth-left::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/images/4.jpeg');
+  z-index: 2;
+}
+.auth-image-placeholder {
+  position: relative;
+  z-index: 3;
+  max-width: 400px;
+  text-align: center;
+  color: var(--primary-white);
+  padding: 40px;
+}
+.auth-image-placeholder i {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+.auth-image-placeholder h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.auth-image-placeholder p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---- DROITE ---- */
+.auth-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-white);
+  padding: 40px;
+}
+.auth-form {
+  width: 100%;
+  max-width: 420px;
+}
+.auth-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.auth-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.auth-subtitle {
+  font-size: 1rem;
+  color: var(--dark-gray);
+}
+
+/* ---- FORMULAIRES ---- */
+.form-group {
+  position: relative;
+  margin-bottom: 24px;
+}
+.form-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dark-gray);
+  font-size: 1.25rem;
+}
+.form-input {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+.form-input:focus {
+  border-color: var(--primary-orange);
+  outline: none;
+}
+.form-label {
+  position: absolute;
+  left: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-white);
+  padding: 0 8px;
+  color: var(--dark-gray);
+  transition: var(--transition);
+  pointer-events: none;
+}
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  top: 0;
+  transform: translateY(-100%) scale(0.85);
+  color: var(--primary-orange);
+}
+
+/* ---- BOUTON ---- */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+.btn-primary {
+  background: var(--primary-orange);
+  color: var(--primary-white);
+}
+.btn-primary:hover {
+  background: #000;
+  transform: translateY(-2px);
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+  .auth-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px 1fr;
+  }
+  .auth-left {
+    min-height: 300px;
+  }
+  .auth-image-placeholder {
+    padding: 20px;
+  }
+}
+
+/* ===== Loader overlay ===== */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.loader-overlay.hidden { display: none !important; }
+
+.loader-spinner {
+  width: 52px;
+  height: 52px;
+  border: 4px solid #eee;
+  border-top: 4px solid red;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

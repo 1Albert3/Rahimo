@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Compagnie STAF – Gestion des gares</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/gares.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet"/>
+  <style>
+    /* Centrer les modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <i class="fas fa-route"></i>
+        <span>Compagnie STAF</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <i class="fas fa-home"></i><span>Tableau de bord</span>
+        </a>
+        <a href="villes.html" class="nav-item">
+          <i class="fas fa-city"></i><span>Gestion des villes</span>
+        </a>
+        <a href="gares.html" class="nav-item active">
+          <i class="fas fa-briefcase"></i><span>Gestion des gares</span>
+        </a>
+        <a href="#" id="nav-logout" class="nav-item">
+          <i class="fas fa-sign-out-alt"></i><span>Déconnexion</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+      <!-- Header avec titre et boutons -->
+      <header class="main-header">
+        <div class="header-left">
+          <h1>Gestion des gares</h1>
+          <p>Liste des gares</p>
+        </div>
+        <div class="header-right">
+          <button id="addGaresBtn" class="btn new-ride"><i class="fas fa-plus"></i> Nouvelle gare</button>
+        </div>
+      </header>
+
+      <!-- Barre de recherche -->
+      <div class="search-box">
+        <i class="fa-solid fa-search"></i>
+        <input type="text" id="searchInput" placeholder=" Rechercher une gare ..." />
+      </div>
+      <div class="card">
+        <div class="card-header"><i class="fa-solid fa-list"></i><h2>Liste des gares</h2></div>
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Nom</th><th>Ville</th><th>Numéro</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="gares-tbody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL gares -->
+  <div id="garesModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2><i class="fa-solid fa-briefcase"></i> Nouvelle gare</h2>
+      <form id="garesForm">
+        <input type="hidden" id="garesId">
+        <div class="form-group">
+          <input type="text" id="garesName" placeholder=" " required />
+          <label for="garesName">Nom de la gare</label>
+          <i class="fa-solid fa-briefcase icon"></i>
+        </div>
+        <div class="form-group">
+          <select id="villeId" required>
+            <option value="" disabled selected>Sélectionner une ville</option>
+          </select>
+          <label for="villeId">Ville</label>
+          <i class="fa-solid fa-city icon"></i>
+        </div>
+        <div class="form-group">
+          <input type="text" id="garesNumero" placeholder=" " required />
+          <label for="garesNumero">Numéro</label>
+          <i class="fa-solid fa-hashtag icon"></i>
+        </div>
+        <div class="form-group">
+          <input type="password" id="garesPassword" placeholder=" " required />
+          <label for="garesPassword">Mot de passe</label>
+          <i class="fa-solid fa-lock icon"></i>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-cancel" id="cancelModalGare"><i class="fa-solid fa-cancel"></i> Annuler</button>
+          <button type="submit" class="btn btn-add"><i class="fa-solid fa-check"></i> Ajouter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de confirmation de suppression -->
+  <div id="deleteGaresModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2><i class="fa-solid fa-trash"></i> Confirmation</h2>
+      <p>Voulez-vous vraiment supprimer cette gare ?</p>
+      <div class="modal-actions">
+        <button id="cancelDeleteGaresBtn" class="btn btn-cancel">
+          <i class="fa-solid fa-ban"></i> Annuler
+        </button>
+        <button id="confirmDeleteGaresBtn" class="btn btn-delete">
+          <i class="fa-solid fa-trash"></i> Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="../services/http.js"></script>
+  <script src="../services/auth.js"></script>
+  <script src="../assets/js/gares.js"></script>
+</body>
+</html>

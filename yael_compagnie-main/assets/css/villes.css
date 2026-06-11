@@ -1,0 +1,333 @@
+/* Modal ajout/modification */
+#villesModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#villesModal.active {
+  display: flex;
+}
+
+#villesModal .modal-content {
+  background: var(--primary-white);
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+#villesModal .modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+#villesModal h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--primary-black);
+}
+
+#villesModal h2 i {
+  color: var(--primary-orange);
+}
+
+#villesModal .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+#villesModal .form-group input {
+  width: 100%;
+  padding: 16px 12px 8px 40px;
+  border: 1px solid var(--medium-gray);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+#villesModal .form-group label {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: var(--primary-white);
+  padding: 0 4px;
+  font-size: 1rem;
+  color: var(--dark-gray);
+  transition: all 0.3s;
+}
+
+#villesModal .form-group input:focus + label,
+#villesModal .form-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 0.8rem;
+  color: var(--primary-orange);
+}
+
+#villesModal .form-group .icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: var(--primary-black);
+  font-size: 1.1rem;
+}
+
+#villesModal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+#villesModal .btn-add,
+#villesModal .btn-update {
+  background-color: var(--primary-orange);
+  color: var(--primary-white);
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#villesModal .btn-add:hover,
+#villesModal .btn-update:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+#villesModal .btn-cancel {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#villesModal .btn-cancel:hover {
+  background-color: rgba(26, 26, 26, 0.8);
+}
+
+/* Modal suppression */
+#deletevillesModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#deletevillesModal.active {
+  display: flex;
+}
+
+#deletevillesModal .modal-content {
+  background: var(--primary-white);
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+#deletevillesModal .modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+#deletevillesModal h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-black);
+}
+
+#deletevillesModal h2 i {
+  color: var(--primary-orange);
+}
+
+#deletevillesModal p {
+  margin: 1rem 0;
+  color: var(--dark-gray);
+  font-size: 1rem;
+}
+
+#deletevillesModal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+#cancelDeletevillesBtn {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+#cancelDeletevillesBtn:hover {
+  background-color: rgba(26, 26, 26, 0.8);
+}
+
+#confirmDeletevillesBtn {
+  background-color: var(--primary-orange);
+  color: var(--primary-white);
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  border: none;
+}
+
+#confirmDeletevillesBtn:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Table */
+.card {
+  background: var(--primary-white);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.card-header {
+  background: var(--light-gray);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-header i {
+  color: var(--primary-orange);
+}
+
+.card-header h2 {
+  font-size: 1.1rem;
+  color: var(--primary-black);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--primary-white);
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+th {
+  background: var(--light-gray);
+  font-weight: 500;
+  text-align: left;
+  padding: 10px;
+}
+
+thead th:nth-child(1) { /* ID - à gauche */
+  width: 10%;
+}
+
+thead th:nth-child(2) { /* NOM - au centre */
+  width: 30%;
+  text-align: center;
+}
+
+thead th:nth-child(3) { /* PRÉNOM - au centre */
+  width: 30%;
+  text-align: center;
+}
+
+thead th:nth-child(4) { /* NUMÉRO - au centre */
+  width: 20%;
+  text-align: center;
+}
+
+thead th:nth-child(5) { /* ACTION - à droite */
+  width: 10%;
+  text-align: right;
+}
+
+tbody td:nth-child(1) { /* ID - à gauche */
+  text-align: left;
+}
+
+tbody td:nth-child(2) { /* NOM - au centre */
+  text-align: center;
+}
+
+tbody td:nth-child(3) { /* PRÉNOM - au centre */
+  text-align: center;
+}
+
+tbody td:nth-child(4) { /* NUMÉRO - au centre */
+  text-align: center;
+}
+
+tbody td:nth-child(5) { /* ACTION - à droite */
+  text-align: right;
+}
+
+.btn-edit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-orange);
+  font-size: 1rem;
+  padding: 2px;
+  margin-right: 5px;
+  transition: color 0.3s;
+}
+
+.btn-edit i {
+  font-size: 1rem;
+}
+
+.btn-edit:hover {
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-black);
+  font-size: 1rem;
+  padding: 2px;
+  transition: color 0.3s;
+}
+
+.btn-delete i {
+  font-size: 1rem;
+}
+
+.btn-delete:hover {
+  color: rgba(26, 26, 26, 0.8);
+}

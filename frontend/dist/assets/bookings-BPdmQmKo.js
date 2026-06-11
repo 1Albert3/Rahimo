@@ -1,0 +1,1 @@
+import{c as t}from"./index-B9JmmGE4.js";async function i(n){const{data:o}=await t.post("/bookings",n);return o}async function s(n){const{data:o}=await t.get(`/bookings/${n}`);return o}async function c(){const{data:n}=await t.get("/my-bookings");return n}function r(n){return`/api/bookings/${n}/pdf`}export{s as a,i as c,c as g,r as p};

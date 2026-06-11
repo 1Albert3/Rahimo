@@ -1,0 +1,6 @@
+/* Import theme tokens */
+@import './_theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

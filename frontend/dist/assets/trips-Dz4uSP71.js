@@ -1,0 +1,1 @@
+import{c as s}from"./index-B9JmmGE4.js";async function n(t){const{data:a}=await s.get("/trips",{params:t});return a.data??a}async function e(t,a=1){const{data:r}=await s.get(`/trips/${t}/seats`,{params:{passagers:a}});return r}export{e as g,n as s};

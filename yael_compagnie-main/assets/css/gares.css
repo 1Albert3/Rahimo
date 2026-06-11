@@ -1,0 +1,340 @@
+/* Modal ajout/modification */
+#garesModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#garesModal.active {
+  display: flex;
+}
+
+#garesModal .modal-content {
+  background: var(--primary-white);
+  padding: 16px; /* Réduction de l'espacement */
+  width: 90%;
+  max-width: 480px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+#garesModal .modal-close {
+  position: absolute;
+  top: 12px; /* Réduction de l'espacement */
+  right: 12px;
+  font-size: 1.3rem; /* Légère réduction */
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+#garesModal h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Réduction de l'espacement */
+  margin-top: 0;
+  font-size: 1.3rem; /* Légère réduction */
+  color: var(--primary-black);
+}
+
+#garesModal h2 i {
+  color: var(--primary-orange);
+}
+
+#garesModal .form-group {
+  position: relative;
+  margin-bottom: 1rem; /* Réduction de l'espacement */
+}
+
+#garesModal .form-group input,
+#garesModal .form-group select {
+  width: 100%;
+  padding: 10px 12px 6px 36px; /* Réduction de l'espacement vertical */
+  border: 1px solid var(--medium-gray);
+  border-radius: 4px;
+  font-size: 0.95rem; /* Légère réduction */
+}
+
+#garesModal .form-group label {
+  position: absolute;
+  top: 50%;
+  left: 36px; /* Ajustement pour l'icône */
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: var(--primary-white);
+  padding: 0 4px;
+  font-size: 0.9rem; /* Légère réduction */
+  color: var(--dark-gray);
+  transition: all 0.3s;
+}
+
+#garesModal .form-group input:focus + label,
+#garesModal .form-group input:not(:placeholder-shown) + label,
+#garesModal .form-group select:focus + label,
+#garesModal .form-group select:not(:placeholder-shown) + label {
+  top: -6px; /* Réduction de l'espacement */
+  font-size: 0.75rem; /* Légère réduction */
+  color: var(--primary-orange);
+}
+
+#garesModal .form-group .icon {
+  position: absolute;
+  top: 50%;
+  left: 10px; /* Ajustement pour l'icône */
+  transform: translateY(-50%);
+  color: var(--primary-black);
+  font-size: 1rem; /* Légère réduction */
+}
+
+#garesModal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px; /* Réduction de l'espacement */
+}
+
+#garesModal .btn-add,
+#garesModal .btn-update {
+  background-color: var(--primary-orange);
+  color: var(--primary-white);
+  padding: 8px 12px; /* Réduction de l'espacement */
+  border-radius: var(--border-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Réduction de l'espacement */
+  font-size: 0.95rem; /* Légère réduction */
+}
+
+#garesModal .btn-add:hover,
+#garesModal .btn-update:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+#garesModal .btn-cancel {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  padding: 8px 12px; /* Réduction de l'espacement */
+  border-radius: var(--border-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Réduction de l'espacement */
+  font-size: 0.95rem; /* Légère réduction */
+}
+
+#garesModal .btn-cancel:hover {
+  background-color: rgba(26, 26, 26, 0.8);
+}
+
+/* Modal suppression */
+#deleteGaresModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#deleteGaresModal.active {
+  display: flex;
+}
+
+#deleteGaresModal .modal-content {
+  background: var(--primary-white);
+  padding: 16px; /* Réduction de l'espacement */
+  width: 90%;
+  max-width: 480px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+#deleteGaresModal .modal-close {
+  position: absolute;
+  top: 12px; /* Réduction de l'espacement */
+  right: 12px;
+  font-size: 1.3rem; /* Légère réduction */
+  cursor: pointer;
+  color: var(--dark-gray);
+}
+
+#deleteGaresModal h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Réduction de l'espacement */
+  font-size: 1.3rem; /* Légère réduction */
+  margin-bottom: 0.5rem;
+  color: var(--primary-black);
+}
+
+#deleteGaresModal h2 i {
+  color: var(--primary-orange);
+}
+
+#deleteGaresModal p {
+  margin: 0.5rem 0; /* Réduction de l'espacement */
+  color: var(--dark-gray);
+  font-size: 0.95rem; /* Légère réduction */
+}
+
+#deleteGaresModal .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px; /* Réduction de l'espacement */
+}
+
+#cancelDeleteGaresBtn {
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  padding: 8px 12px; /* Réduction de l'espacement */
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: 0.95rem; /* Légère réduction */
+}
+
+#cancelDeleteGaresBtn:hover {
+  background-color: rgba(26, 26, 26, 0.8);
+}
+
+#confirmDeleteGaresBtn {
+  background-color: var(--primary-orange);
+  color: var(--primary-white);
+  padding: 8px 12px; /* Réduction de l'espacement */
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: 0.95rem; /* Légère réduction */
+}
+
+#confirmDeleteGaresBtn:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Table */
+.card {
+  background: var(--primary-white);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.card-header {
+  background: var(--light-gray);
+  padding: 8px; /* Réduction de l'espacement */
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Réduction de l'espacement */
+}
+
+.card-header i {
+  color: var(--primary-orange);
+}
+
+.card-header h2 {
+  font-size: 1rem; /* Réduction */
+  color: var(--primary-black);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--primary-white);
+}
+
+th, td {
+  padding: 6px; /* Réduction de l'espacement */
+  text-align: left;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+th {
+  background: var(--light-gray);
+  font-weight: 500;
+  text-align: left;
+  padding: 8px; /* Réduction de l'espacement */
+}
+
+thead th:nth-child(1) { /* ID - à gauche */
+  width: 10%;
+}
+
+thead th:nth-child(2) { /* NOM - au centre */
+  width: 30%;
+  text-align: center;
+}
+
+thead th:nth-child(3) { /* VILLE - au centre */
+  width: 30%;
+  text-align: center;
+}
+
+thead th:nth-child(4) { /* NUMÉRO - au centre */
+  width: 20%;
+  text-align: center;
+}
+
+thead th:nth-child(5) { /* ACTION - à droite */
+  width: 10%;
+  text-align: right;
+}
+
+tbody td:nth-child(1) { /* ID - à gauche */
+  text-align: left;
+}
+
+tbody td:nth-child(2) { /* NOM - au centre */
+  text-align: center;
+}
+
+tbody td:nth-child(3) { /* VILLE - au centre */
+  text-align: center;
+}
+
+tbody td:nth-child(4) { /* NUMÉRO - au centre */
+  text-align: center;
+}
+
+tbody td:nth-child(5) { /* ACTION - à droite */
+  text-align: right;
+}
+
+.btn-edit {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-orange);
+  font-size: 0.9rem; /* Réduction */
+  padding: 2px;
+  margin-right: 3px; /* Réduction de l'espacement */
+  transition: color 0.3s;
+}
+
+.btn-edit i {
+  font-size: 0.9rem; /* Réduction */
+}
+
+.btn-edit:hover {
+  color: rgba(255, 0, 0, 0.8);
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-black);
+  font-size: 0.9rem; /* Réduction */
+  padding: 2px;
+  transition: color 0.3s;
+}
+
+.btn-delete i {
+  font-size: 0.9rem; /* Réduction */
+}
+
+.btn-delete:hover {
+  color: rgba(26, 26, 26, 0.8);
+}
